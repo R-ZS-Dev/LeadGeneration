@@ -31,6 +31,29 @@
         <!-- toggle and nav items -->
         <!-- ============================================================== -->
         <ul class="navbar-nav float-left me-auto ms-3 ps-1">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 align-self-center">
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">All Users</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-muted">Apps</a></li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">All Users</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- create new -->
+            <!-- ============================================================== -->
+        </ul>
+        <!-- ============================================================== -->
+        <!-- Right side toggle and nav items -->
+        <!-- ============================================================== -->
+        <ul class="navbar-nav float-end">
             <!-- Notification -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
@@ -107,14 +130,6 @@
                 </div>
             </li>
             <!-- End Notification -->
-            <!-- ============================================================== -->
-            <!-- create new -->
-            <!-- ============================================================== -->
-        </ul>
-        <!-- ============================================================== -->
-        <!-- Right side toggle and nav items -->
-        <!-- ============================================================== -->
-        <ul class="navbar-nav float-end">
             <!-- ============================================================== -->
             <!-- User profile and search -->
             <!-- ============================================================== -->

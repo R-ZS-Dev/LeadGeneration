@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SettingsController;
@@ -18,10 +19,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(SettingsController::class)->group(function (){
         Route::post('update-profile', 'updateProfile')->name('settings.updateProfile');
-        Route::post('update-company', 'updateCompany')->name('settings.updateCompany');
+        // Route::post('update-company', 'updateCompany')->name('settings.updateCompany');
         Route::post('update-password', 'updatePassword')->name('settings.updatePassword');
         Route::post('update-email', 'updateEmail')->name('settings.updateEmail');
     });
+
+    Route::post('update-company', [CompanyController::class, 'updateCompany'])->name('settings.updateCompany');
+
         
     // Route::controller(RegisteredUserController::class)->group(function () {
     //     Route::get('/register', function () { return view('register'); })->name('register');

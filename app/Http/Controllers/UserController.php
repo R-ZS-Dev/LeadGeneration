@@ -13,11 +13,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $totalUsers = User::count();
+        $users = User::where('status', 1)->get();
+        $totalUsers = User::where('status', 1)->count();
         return view('all-users', compact('users', 'totalUsers'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -70,7 +70,8 @@ class UserController extends Controller
             return redirect()->route('all-users')->with('error', 'You cannot delete your own account!');
         }
 
-        $user->delete();
+        $user->update(['status' => 0]); // Soft delete by setting status to 0
+
         return redirect()->route('all-users')->with('success', 'User deleted successfully!');
     }
 }

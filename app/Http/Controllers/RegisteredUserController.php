@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -49,6 +50,8 @@ class RegisteredUserController extends Controller
             'phone_number' => $validated['phone_number'] ?? '',
             'address' => $validated['address'] ?? '',
             'role' => $validated['role'],
+            'status' => 1,
+            'remember_token' => Str::random(60),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -59,7 +62,7 @@ class RegisteredUserController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'New user registered successfully!',
-                'redirect_url' => route('all-users') // Set the redirect route
+                'redirect_url' => route('all-users')
             ]);
         }
 

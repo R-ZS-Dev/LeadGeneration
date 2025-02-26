@@ -27,6 +27,8 @@ class User extends Authenticatable
         'address',
         'role',
         'profile_photo',
+        'status',
+        'remember_token',
     ];
 
     /**
@@ -51,4 +53,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function company() {
+        return $this->hasOne(Company::class);
+    }
+    
 }

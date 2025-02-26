@@ -61,7 +61,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <div class="page-breadcrumb">
+            <!-- <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
                         <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">All Users</h4>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -97,14 +97,6 @@
                     <!-- Success Message -->
                     <div id="successMessage" class="alert alert-success" style="display: none;"></div>
 
-                    <div class="row">
-                        <div class="col-lg-12 d-flex justify-content-end">
-                            <button type="button" class="btn waves-effect waves-light btn-outline-primary" data-bs-toggle="modal" data-bs-target="#signup-modal">
-                                <i data-feather="user" class="feather-icon"></i>Register
-                            </button>
-                        </div>
-                    </div>
-
                     <!-- Signup modal content -->
                     <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog"
                         aria-hidden="true">
@@ -113,39 +105,34 @@
 
                                 <div class="modal-body">
                                     <div class="text-center mt-2 mb-4">
-                                        <a href="index.html" class="text-success">
-                                            <span><img class="me-2" src="../assets/images/logo-icon.png"
-                                                    alt="" height="18"><img
-                                                    src="../assets/images/logo-text.png" alt=""
-                                                    height="18"></span>
-                                        </a>
+                                        Register New User
                                     </div>
 
                                     <form id="registerForm" method="POST" action="{{ route('register') }}" class="mt-4">
                                         @csrf
                                         <div class="row">
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-6">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="text" name="first_name" placeholder="first name" value="{{ old('first_name') }}">
+                                                    <input class="form-control" type="text" name="first_name" placeholder="First name" value="{{ old('first_name') }}">
                                                     @error('first_name')
                                                     <small class="text-danger d-block text-start">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-6">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="text" name="last_name" placeholder="last name" value="{{ old('last_name') }}">
+                                                    <input class="form-control" type="text" name="last_name" placeholder="Last name" value="{{ old('last_name') }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="email" name="email" placeholder="email" value="{{ old('email') }}">
+                                                    <input class="form-control" type="email" name="email" placeholder="Email" value="{{ old('email') }}">
                                                     @error('email')
                                                     <small class="text-danger d-block text-start">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-6">
                                                 <div class="form-group mb-3">
                                                     <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
                                                     <small id="password-error" class="text-danger d-block text-start"></small>
@@ -155,9 +142,9 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-6">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="password" name="password_confirmation" id="confirm-password" placeholder="Confirm Password" required>
+                                                    <input class="form-control" type="password" name="password_confirmation" id="confirm-password" placeholder="Confirm password" required>
                                                     <small id="confirm-password-error" class="text-danger d-block text-start"></small>
                                                     @error('password_confirmation')
                                                     <small class="text-danger d-block text-start">{{ $message }}</small>
@@ -179,24 +166,27 @@
                                                     </fieldset>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-6">
                                                 <div class="form-group mb-3">
                                                     <input class="form-control" type="number" name="phone_number" placeholder="phone number" value="{{ old('phone_number') }}">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
-                                                <div class="form-group mb-3">
-                                                    <textarea class="form-control" rows="3" name="address" placeholder="address" value="{{ old('address') }}"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="form-group mb-3 text-start">Role
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-3 text-start">
                                                     <select class="form-select mr-sm-2" name="role" id="inlineFormCustomSelect">
+                                                        <option disabled>Role</option>
                                                         <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                                                         <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="form-group mb-3">
+                                                    <textarea class="form-control" rows="3" name="address" placeholder="Address" value="{{ old('address') }}"></textarea>
+                                                </div>
+                                            </div>
+
                                             <div class="col-lg-12 text-center">
                                                 <button type="submit" class="btn w-100 btn-dark">Register</button>
                                             </div>
@@ -206,11 +196,20 @@
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
+                    </div>
+                    <!-- /.modal -->
 
                     <div class="col-12 mt-2">
                         <div class="card">
                             <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12 d-flex justify-content-end">
+                                        <button type="button" class="btn waves-effect waves-light btn-outline-primary" data-bs-toggle="modal" data-bs-target="#signup-modal">
+                                            <i class="fas fa-plus"></i> Add user
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <!-- Column -->
                                     <div class="col-md-6 col-lg-3 col-xlg-3">
@@ -232,12 +231,14 @@
                                                 <th>Email</th>
                                                 <th>Phone</th>
                                                 <th>Created at</th>
-                                                <th>Delete</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
+
                                         <tbody>
                                             @php $i = 0; @endphp
                                             @foreach($users as $index => $user)
+                                            @if($user->status == 1)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
                                                 <td>{{ $user->first_name }}</td>
@@ -255,6 +256,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
+                                            @endif
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -288,7 +290,8 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
     <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- apps -->

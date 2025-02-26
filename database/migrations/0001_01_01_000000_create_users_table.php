@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->enum('role', ['admin', 'user'])->default('admin');
             $table->string('profile_photo')->default('default.jpg')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

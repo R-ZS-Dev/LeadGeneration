@@ -53,10 +53,17 @@
                     <div class="tab-pane fade show active" id="profile">
                         <form action="{{ route('settings.updateProfile') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="mb-3">
-                                <label class="form-label">Profile Photo</label>
-                                <img src="{{ asset('storage/profile_photos/' . Auth::user()->profile_photo) }}" alt="Profile Photo">
-                                <input type="file" name="profile_photo" class="form-control" accept="image/*">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Profile Photo</label>
+                                        <input type="file" name="profile_photo" class="form-control" accept="image/*">
+                                        @if(Auth::user()->profile_photo)
+                                        <img src="{{ asset('/storage/profile_photos/' . Auth::user()->profile_photo) }}" class="p-2" height="100" width="100" alt="Profile Photo">
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -92,19 +99,71 @@
 
                     <!-- Company Tab -->
                     <div class="tab-pane fade" id="company">
-                        <form action="{{ route('settings.updateCompany') }}" method="POST">
+                        <form action="{{ route('settings.updateCompany') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Company Name</label>
-                                        <input type="text" name="company_name" class="form-control" value="{{ Auth::user()->company_name }}">
+                                        <label class="form-label">Company Logo</label>
+                                        <input type="file" name="company_image" class="form-control" accept="image/*">
+                                        @if(Auth::user()->company->company_image ?? false)
+                                        <img src="{{ asset('storage/company_images/' . Auth::user()->company->company_image) }}" alt="Company Logo" class="mt-2" width="100">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="company_name">Company Name</label>
+                                        <input type="text" id="company_name" name="company_name" class="form-control" value="{{ Auth::user()->company->company_name ?? '' }}">
+                                        @error('company_name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Company Address</label>
-                                        <textarea name="company_address" class="form-control">{{ Auth::user()->company_address }}</textarea>
+                                        <label class="form-label" for="company_email">Company Email</label>
+                                        <input type="email" id="company_email" name="company_email" class="form-control" value="{{ Auth::user()->company->company_email ?? '' }}">
+                                        @error('company_email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="company_phone">Company Phone</label>
+                                        <input type="text" id="company_phone" name="company_phone" class="form-control" value="{{ Auth::user()->company->company_phone ?? '' }}">
+                                        @error('company_phone')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="company_mobile">Company Mobile</label>
+                                        <input type="text" id="company_mobile" name="company_mobile" class="form-control" value="{{ Auth::user()->company->company_mobile ?? '' }}">
+                                        @error('company_mobile')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="company_address">Company Address</label>
+                                        <textarea id="company_address" name="company_address" class="form-control">{{ Auth::user()->company->company_address ?? '' }}</textarea>
+                                        @error('company_address')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -116,18 +175,30 @@
                     <div class="tab-pane fade" id="password">
                         <form action="{{ route('settings.updatePassword') }}" method="POST">
                             @csrf
+
+                            @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
                             <div class="mb-3">
                                 <label class="form-label">Current Password</label>
-                                <input type="password" name="current_password" class="form-control">
+                                <input type="password" name="current_password" class="form-control" required>
+                                @error('current_password') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
+
                             <div class="mb-3">
                                 <label class="form-label">New Password</label>
-                                <input type="password" name="new_password" class="form-control">
+                                <input type="password" name="new_password" class="form-control" required>
+                                @error('new_password') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
+
                             <div class="mb-3">
                                 <label class="form-label">Confirm Password</label>
-                                <input type="password" name="confirm_password" class="form-control">
+                                <input type="password" name="new_password_confirmation" class="form-control" required>
                             </div>
+
                             <button type="submit" class="btn btn-primary">Update Password</button>
                         </form>
                     </div>
