@@ -14,8 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('status', 1)->get();
-        $totalUsers = User::where('status', 1)->count();
-        return view('all-users', compact('users', 'totalUsers'));
+        return view('all-users', compact('users'));
     }
     
     /**
@@ -65,7 +64,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // Prevent logged-in user from deleting themselves
         if (Auth::id() == $id) {
             return redirect()->route('all-users')->with('error', 'You cannot delete your own account!');
         }

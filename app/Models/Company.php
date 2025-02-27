@@ -17,6 +17,7 @@ class Company extends Model
         'company_mobile',
         'company_address',
         'company_image',
+        'fav_photo',
     ];
 
     // Relationship: Each company belongs to a user

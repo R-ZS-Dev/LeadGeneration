@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\EmailSetting;
+use App\Models\Company;
 
 class User extends Authenticatable
 {
@@ -54,8 +56,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function company() {
+    public function company()
+    {
         return $this->hasOne(Company::class);
     }
-    
+
+    public function settings()
+    {
+        return $this->hasOne(EmailSetting::class);
+    }
+
+    public function getProfilePhotoAttribute($value)
+    {
+        return $value ?: 'default.jpg';
+    }
 }

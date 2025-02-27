@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <!-- <a href="{{ route('forget-password') }}" class="text-danger">Forget Password</a> -->
+                                    <a href="{{ route('forget-password') }}" class="text-danger">Forget Password</a>
                                 </div>
                                 <div class="col-lg-12 text-center">
                                     <button type="submit" class="btn w-100 btn-dark">Sign In</a> </button>

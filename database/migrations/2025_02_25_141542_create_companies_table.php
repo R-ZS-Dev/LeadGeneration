@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('company_phone')->nullable();
             $table->string('company_mobile')->nullable();
             $table->text('company_address')->nullable();
-            $table->text('company_image')->nullable();
-
+            $table->string('fav_photo', 255)->nullable()->default('default.jpg');
+            $table->string('company_image', 255)->nullable()->default('default.jpg');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -14,6 +14,18 @@
     <!-- This page css -->
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+
+    <style>
+        /* Align the search bar and pagination to the right */
+        .dataTables_filter {
+            float: right;
+        }
+
+        .dataTables_paginate {
+            float: right;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,27 +71,6 @@
         <!-- ============================================================== -->
         <div class="page-wrapper">
             <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">All Users</h4>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-muted">Apps</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">All Users</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
@@ -88,14 +79,14 @@
                 <!-- ============================================================== -->
                 <!-- basic table -->
                 <div class="row">
-                    @if(session('success'))
+                    <!-- @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
-                    @endif
+                    @endif -->
 
                     <!-- Success Message -->
-                    <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+                    <!-- <div id="successMessage" class="alert alert-success" style="display: none;"></div> -->
 
                     <!-- Signup modal content -->
                     <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog"
@@ -104,8 +95,11 @@
                             <div class="modal-content">
 
                                 <div class="modal-body">
+                                    <div class="text-end">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                    </div>
                                     <div class="text-center mt-2 mb-4">
-                                        Register New User
+                                        Add New User
                                     </div>
 
                                     <form id="registerForm" method="POST" action="{{ route('register') }}" class="mt-4">
@@ -174,7 +168,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-3 text-start">
                                                     <select class="form-select mr-sm-2" name="role" id="inlineFormCustomSelect">
-                                                        <option disabled>Role</option>
+                                                        <option disabled selected>Role</option>
                                                         <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                                                         <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                                                     </select>
@@ -200,28 +194,21 @@
                     <!-- /.modal -->
 
                     <div class="col-12 mt-2">
-                        <div class="card">
+                        <div class="card m-3">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-12 d-flex justify-content-end">
+                                        <!-- <button type="button" class="btn waves-effect waves-light btn-outline-primary" data-bs-toggle="modal" data-bs-target="#signup-modal">
+                                            <i class="fas fa-plus"></i> Add user
+                                        </button> -->
+                                        @if(session('role') === 'admin')
                                         <button type="button" class="btn waves-effect waves-light btn-outline-primary" data-bs-toggle="modal" data-bs-target="#signup-modal">
                                             <i class="fas fa-plus"></i> Add user
                                         </button>
+                                        @endif
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <!-- Column -->
-                                    <div class="col-md-6 col-lg-3 col-xlg-3">
-                                        <div class="card card-hover">
-                                            <div class="p-2 bg-primary text-center">
-                                                <h1 class="font-light text-white">{{ $totalUsers }}</h1>
-                                                <h6 class="text-white">Total Users</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="table-responsive">
+                                <div class="mt-3">
                                     <table id="users-table" class="table table-striped table-bordered no-wrap">
                                         <thead>
                                             <tr>
@@ -230,6 +217,7 @@
                                                 <th>Last Name</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
+                                                <th>Role</th>
                                                 <th>Created at</th>
                                                 <th>Action</th>
                                             </tr>
@@ -239,26 +227,33 @@
                                             @php $i = 0; @endphp
                                             @foreach($users as $index => $user)
                                             @if($user->status == 1)
+                                            @if(Auth::user()->role == 'admin' || $user->role != 'admin')
                                             <tr>
                                                 <td>{{ ++$i }}</td>
                                                 <td>{{ $user->first_name }}</td>
                                                 <td>{{ $user->last_name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->phone_number }}</td>
+                                                <td>{{ $user->role }}</td>
                                                 <td>{{ $user->created_at }}</td>
-                                                <td>
+                                                <td class="text-center">
                                                     @if($index != 0)
-                                                    <form method="POST" action="{{ route('users.destroy', $user->id) }}" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                                    <form method="POST" action="{{ route('users.destroy', $user->id) }}"
+                                                        onsubmit="return confirm('Are you sure you want to delete this user?');">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn waves-effect waves-light btn-outline-danger">Delete</button>
+                                                        <button type="submit" data-action="Delete" data-alert="Are you sure you want to delete this user?" class="btn btn-danger btn-circle">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
                                                     </form>
                                                     @endif
                                                 </td>
                                             </tr>
                                             @endif
+                                            @endif
                                             @endforeach
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>
@@ -314,11 +309,12 @@
         $(document).ready(function() {
             $('#users-table').DataTable({
                 "paging": true, // Enable pagination
-                "lengthChange": true, // Allow user to change the number of records per page
+                "lengthChange": false, // Allow user to change the number of records per page
                 "searching": true, // Enable search functionality
                 "ordering": true, // Enable column sorting
                 "info": true, // Display info like "Showing 1 to 10 of 50 entries"
                 "autoWidth": false // Disable automatic column width adjustment
+
             });
         });
     </script>
@@ -398,7 +394,44 @@
             }
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll("button[type='submit']").forEach(button => {
+                button.addEventListener("click", function(event) {
+                    event.preventDefault(); // Stop form submission until confirmed
+
+                    let form = this.closest("form"); // Get the nearest form
+                    let actionName = this.getAttribute("data-action") || "Confirm Action"; // Get action name
+                    let message = this.getAttribute("data-alert") || "Are you sure you want to proceed?";
+
+                    Swal.fire({
+                        title: `${actionName}`, // Dynamic title
+                        text: message,
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, proceed",
+                        cancelButtonText: "Cancel"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: "Processing...",
+                                text: "Please wait while we update your data.",
+                                icon: "info",
+                                allowOutsideClick: false,
+                                showConfirmButton: false
+                            });
+
+                            setTimeout(() => {
+                                form.submit(); // Submit the form after alert closes
+                            }, 2000); // Adjust delay as needed
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

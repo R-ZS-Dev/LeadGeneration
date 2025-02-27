@@ -13,12 +13,14 @@ class CompanyController extends Controller
     {
         $request->validate([
             'company_name' => 'required|string|max:255',
-            'company_email' => 'required|email|unique:companies,company_email,' . Auth::id() . ',user_id',
+            'company_email' => 'required|email|unique:companies,company_email,' . (Auth::user()->company->id ?? 'NULL') . ',id',
             'company_phone' => 'required|string|max:20',
             'company_mobile' => 'required|string|max:20',
             'company_address' => 'required|string',
             'company_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'fav_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
+        
 
         // Find or create the company record for the logged-in user
         $company = Company::updateOrCreate(
@@ -35,26 +37,46 @@ class CompanyController extends Controller
         // Handle company image upload
         if ($request->hasFile('company_image')) {
             $file = $request->file('company_image');
-        
-            // Get the original filename
-            $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            
-            // Generate a unique filename with time()
-            $fileName = time() . '_' . $originalFileName . '.' . $file->getClientOriginalExtension();
-        
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
             // Delete the old image if it exists
             if ($company->company_image) {
-                Storage::disk('public')->delete('company_images/' . $company->company_image);
+                Storage::disk('public')->delete('uploads/' . $company->company_image);
             }
-        
+
             // Store the new file in the public disk
-            $file->storeAs('company_images', $fileName, 'public');
-        
+            $file->storeAs('uploads', $fileName, 'public');
+
             // Update the database with the new image filename
             $company->update(['company_image' => $fileName]);
+        } else {
+            // Set default image if no image is uploaded and no existing image
+            if (!$company->company_image) {
+                $company->update(['company_image' => 'default.jpg']);
+            }
         }
-        
-        
+
+        // Handle favorite photo upload
+        if ($request->hasFile('fav_photo')) {
+            $favFile = $request->file('fav_photo');
+            $favFileName = time() . '_' . $favFile->getClientOriginalName();
+
+            // Delete the old fav photo if it exists
+            if ($company->fav_photo && $company->fav_photo !== 'default.jpg') {
+                Storage::disk('public')->delete('uploads/' . $company->fav_photo);
+            }
+
+            // Store the new favorite photo
+            $favFile->storeAs('uploads', $favFileName, 'public');
+
+            // Update the database with the new fav photo filename
+            $company->update(['fav_photo' => $favFileName]);
+        } else {
+            // Ensure default fav_photo is set if no image is uploaded and no existing image
+            if (!$company->fav_photo) {
+                $company->update(['fav_photo' => 'default.jpg']);
+            }
+        }
 
         return back()->with('success', 'Company details updated successfully!');
     }

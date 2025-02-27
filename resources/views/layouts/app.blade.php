@@ -11,3 +11,6 @@
 
     <title>{{ $titles[Route::currentRouteName()] ?? 'Default Title' }}</title>
 </head>
+
+
+

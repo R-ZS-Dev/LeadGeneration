@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-// use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -33,27 +32,27 @@ class SettingsController extends Controller
         // Handle the profile photo upload
         if ($request->hasFile('profile_photo')) {
             $file = $request->file('profile_photo');
-
+        
             // Generate unique file name
             $fileName = time() . '.' . $file->getClientOriginalExtension();
-
+        
             // Define the storage path
-            $destinationPath = storage_path('app/public/profile_photos/');
-
-            // Delete old image if it exists
-            if ($user->profile_photo) {
+            $destinationPath = storage_path('app/public/uploads/');
+        
+            // Delete old image if it exists and is not 'default.jpg'
+            if ($user->profile_photo && $user->profile_photo !== 'default.jpg') {
                 $oldImagePath = $destinationPath . $user->profile_photo;
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath); // Remove the old file
                 }
             }
-
+        
             // Move new file to the folder
             $file->move($destinationPath, $fileName);
-
+        
             // Save the new file name to the database
             $user->profile_photo = $fileName;
-        }
+        }        
 
         // Update user details
         $user->first_name = $request->first_name;

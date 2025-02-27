@@ -1,3 +1,4 @@
+
 <nav class="navbar top-navbar navbar-expand-lg">
     <div class="navbar-header" data-logobg="skin6">
         <!-- This is for the sidebar toggle which is visible on mobile only -->
@@ -31,21 +32,7 @@
         <!-- toggle and nav items -->
         <!-- ============================================================== -->
         <ul class="navbar-nav float-left me-auto ms-3 ps-1">
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">All Users</h4>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-muted">Apps</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">All Users</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <x-breadcrumb />
             <!-- ============================================================== -->
             <!-- create new -->
             <!-- ============================================================== -->
@@ -150,7 +137,7 @@
                     <div class="dropdown-divider"></div>
                     <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                         @csrf
-                        <button type="submit" class="dropdown-item" style="border: none; background: none; cursor: pointer;">
+                        <button type="submit" class="dropdown-item" data-action="Confirm logout" data-alert="Are you sure you want to logout?" style="border: none; background: none; cursor: pointer;">
                             <i data-feather="power" class="svg-icon me-2 ms-1"></i>
                             Logout
                         </button>
