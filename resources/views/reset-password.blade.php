@@ -47,29 +47,36 @@
                     <img src="../assets/images/freedashDark.svg" alt="PDS Perfusion">
                 </div>
 
-                <!-- Right Side: Login Form -->
+                <!-- Right Side: Forget Form -->
                 <div class="login-right">
                     <h2 class="login-title">PDS Perfusion</h2>
-                    <h2 class="login-title">Welcome 👋</h2>
-                    <p class="login-subtitle">Please login here</p>
+                    <h2 class="login-title">Reset Password</h2>
+                    <p class="login-subtitle">Please enter your new password here.</p>
 
-                    <form action="{{ route('login') }}" method="POST">
+                    @if(session('success'))
+                    <div class="alert alert-success m-3">{{ session('success') }}</div>
+                    @endif
+
+                    @if($errors->any())
+                    <div class="alert alert-danger m-3">{{ $errors->first() }}</div>
+                    @endif
+
+                    <form action="{{ route('password.update') }}" method="POST">
                         @csrf
-                        <strong for="">Email Address</strong>
-                        <div class="custom-input-group">
-                            <span class="input-icon"><i class="far fa-envelope"></i></span>
-                            <input type="email" name="email" placeholder="abc@example.com" required>
-                        </div>
 
-                        <strong for="">Password</strong>
+                        <input type="hidden" name="token" value="{{ request()->token }}">
+                        <input type="hidden" name="email" value="{{ request()->email }}">
+
+                        <strong for="">New password</strong>
                         <div class="custom-input-group">
                             <span class="input-icon"><i class="icon-lock"></i> </span>
                             <input type="password" name="password" placeholder="•••••" required>
                         </div>
 
-                        <div class="login-links mt-2">
-                            <label><input type="checkbox"> Remember me</label>
-                            <a href="{{ route('forget-password') }}">Forgot Password?</a>
+                        <strong for="">Confirm password</strong>
+                        <div class="custom-input-group">
+                            <span class="input-icon"><i class="icon-lock"></i> </span>
+                            <input type="password" name="password_confirmation" placeholder="•••••" required>
                         </div>
 
                         <button type="submit" class="login-button mt-3">Login</button>

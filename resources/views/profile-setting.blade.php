@@ -57,18 +57,18 @@
                             <form action="{{ route('settings.updateProfile') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row p-4">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-8">
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">First Name</label>
-                                                    <input type="text" name="first_name" class="form-control" value="{{ Auth::user()->first_name }}">
+                                                    <input type="text" name="first_name" class="form-control" value="{{ Auth::user()->first_name }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Last Name</label>
-                                                    <input type="text" name="last_name" class="form-control" value="{{ Auth::user()->last_name }}">
+                                                    <input type="text" name="last_name" class="form-control" value="{{ Auth::user()->last_name }}" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -76,23 +76,23 @@
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Email</label>
-                                                    <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
+                                                    <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Phone</label>
-                                                    <input type="number" name="phone_number" class="form-control" value="{{ Auth::user()->phone_number }}">
+                                                    <input type="number" name="phone_number" class="form-control" value="{{ Auth::user()->phone_number }}" required>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="mb-3 text-center p-3">
                                             <label class="form-label">Profile Photo</label>
 
                                             <!-- Hidden File Input -->
-                                            <input type="file" name="profile_photo" id="profileFileInput" class="d-none" accept="image/*" onchange="previewImage(event, 'profileImagePreview')">
+                                            <input type="file" name="profile_photo" id="profileFileInput" class="d-none" accept="image/*" onchange="previewImage(event, 'profileImagePreview')" required>
 
                                             <!-- Clickable Image Preview -->
                                             <div class="preview-container">
@@ -103,7 +103,7 @@
                                                     onclick="document.getElementById('profileFileInput').click();">
                                             </div>
 
-                                            <small class="text-muted">Upload profile photo in jpeg, png, jpg, gif, webp max-size:2048kb</small>
+                                            <!-- <small class="text-muted">Upload profile photo in jpeg, png, jpg, gif, webp max-size:2048kb</small> -->
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                             <label class="form-label">Company Logo</label>
 
                                             <!-- Hidden File Input -->
-                                            <input type="file" name="company_image" id="fileInput" class="d-none" accept="image/*" onchange="previewImage(event, 'imagePreview')">
+                                            <input type="file" name="company_image" id="fileInput" class="d-none" accept="image/*" onchange="previewImage(event, 'imagePreview')" required>
 
                                             <!-- Clickable Image Preview -->
                                             <div class="preview-container">
@@ -136,14 +136,14 @@
                                                     onclick="document.getElementById('fileInput').click();">
                                             </div>
 
-                                            <small class="text-muted">Upload company logo in jpeg, png, jpg, gif, webp max-size:2048kb</small>
+                                            <!-- <small class="text-muted">Upload company logo in jpeg, png, jpg, gif, webp max-size:2048kb</small> -->
                                         </div>
                                     </div>
 
                                     <!-- Fav Photo Upload -->
                                     <div class="col-lg-6">
                                         <div class="mb-3 text-center p-3">
-                                            <label class="form-label">Favorite Photo</label>
+                                            <label class="form-label">Fav Icon</label>
 
                                             <!-- Hidden File Input -->
                                             <input type="file" name="fav_photo" id="favFileInput" class="d-none" accept="image/*" onchange="previewImage(event, 'favImagePreview')">
@@ -158,7 +158,7 @@
                                                     onclick="document.getElementById('favFileInput').click();">
                                             </div>
 
-                                            <small class="text-muted">Upload favorite photo in jpeg, png, jpg, gif, webp max-size:2048kb</small>
+                                            <!-- <small class="text-muted">Upload favorite photo in jpeg, png, jpg, gif, webp max-size:2048kb</small> -->
                                         </div>
                                     </div>
                                 </div>
@@ -168,14 +168,14 @@
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="company_name">Company Name</label>
-                                            <input type="text" id="company_name" name="company_name" class="form-control" value="{{ Auth::user()->company->company_name ?? '' }}">
+                                            <input type="text" id="company_name" name="company_name" class="form-control" value="{{ Auth::user()->company->company_name ?? '' }}" required>
                                             @error('company_name') <small class="text-danger">{{ $message }}</small> @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="company_email">Company Email</label>
-                                            <input type="email" id="company_email" name="company_email" class="form-control" value="{{ Auth::user()->company->company_email ?? '' }}">
+                                            <input type="email" id="company_email" name="company_email" class="form-control" value="{{ Auth::user()->company->company_email ?? '' }}" required>
                                             @error('company_email') <small class="text-danger">{{ $message }}</small> @enderror
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="company_phone">Company Phone</label>
-                                            <input type="text" id="company_phone" name="company_phone" class="form-control" value="{{ Auth::user()->company->company_phone ?? '' }}">
+                                            <input type="text" id="company_phone" name="company_phone" class="form-control" value="{{ Auth::user()->company->company_phone ?? '' }}" required>
                                             @error('company_phone') <small class="text-danger">{{ $message }}</small> @enderror
                                         </div>
                                     </div>
@@ -193,7 +193,7 @@
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="company_mobile">Company Mobile</label>
-                                            <input type="text" id="company_mobile" name="company_mobile" class="form-control" value="{{ Auth::user()->company->company_mobile ?? '' }}">
+                                            <input type="text" id="company_mobile" name="company_mobile" class="form-control" value="{{ Auth::user()->company->company_mobile ?? '' }}" required>
                                             @error('company_mobile') <small class="text-danger">{{ $message }}</small> @enderror
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label" for="company_address">Company Address</label>
-                                            <textarea id="company_address" name="company_address" class="form-control">{{ Auth::user()->company->company_address ?? '' }}</textarea>
+                                            <textarea id="company_address" name="company_address" class="form-control" required>{{ Auth::user()->company->company_address ?? '' }}</textarea>
                                             @error('company_address') <small class="text-danger">{{ $message }}</small> @enderror
                                         </div>
                                     </div>

@@ -40,29 +40,38 @@
         <!-- ============================================================== -->
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative"
             style="background:url(../assets/images/big/auth-bg.jpg) no-repeat center center;">
-            <div class="auth-box row">
-                <div class="col-lg-12 col-md-12 bg-white">
-                    <div class="p-3">
-                        <div class="text-center">
-                            <img src="../assets/images/big/icon.png" alt="wrapkit">
+
+            <div class="login-wrapper">
+                <!-- Left Side: Logo Section -->
+                <div class="login-left">
+                    <img src="../assets/images/freedashDark.svg" alt="PDS Perfusion">
+                </div>
+
+                <!-- Right Side: Forget Form -->
+                <div class="login-right">
+                    <h2 class="login-title">PDS Perfusion</h2>
+                    <h2 class="login-title">Forgot Password</h2>
+                    <p class="login-subtitle">Enter your registered email address. we’ll send you a code
+                    to reset your password.</p>
+
+                    @if(session('success'))
+                    <div class="alert alert-success m-3">{{ session('success') }}</div>
+                    @endif
+
+                    @if($errors->any())
+                    <div class="alert alert-danger m-3">{{ $errors->first() }}</div>
+                    @endif
+
+                    <form action="{{ route('password.email') }}" method="POST">
+                        @csrf
+                        <strong for="">Email Address</strong>
+                        <div class="custom-input-group">
+                            <span class="input-icon"><i class="far fa-envelope"></i></span>
+                            <input type="email" name="email" placeholder="abc@example.com" required>
                         </div>
-                        <h2 class="mt-3 text-center">Forget Password</h2>
-                        <p class="text-center">Enter your email address</p>
-                        <form class="mt-4">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group mb-3">
-                                        <label class="form-label text-dark" for="uname">Email</label>
-                                        <input class="form-control" id="uname" type="text"
-                                            placeholder="enter your Email">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn w-100 btn-dark"> <a href="">Submit</a> </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+
+                        <button type="submit" class="login-button mt-3">Login</button>
+                    </form>
                 </div>
             </div>
         </div>

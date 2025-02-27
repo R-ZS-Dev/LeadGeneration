@@ -16,7 +16,7 @@ class UserController extends Controller
         $users = User::where('status', 1)->get();
         return view('all-users', compact('users'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      */
@@ -62,13 +62,29 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        // Ensure only authenticated users can delete
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Unauthorized access.');
+        }
+
+        // Get the logged-in user
+        $loggedInUser = Auth::user();
+
+        // Prevent users with "user" role from deleting any record
+        if ($loggedInUser->role === 'user') {
+            return redirect()->route('all-users')->with('error', 'You are not allowed to delete users.');
+        }
+
+        // Find the user to be deleted
         $user = User::findOrFail($id);
 
-        if (Auth::id() == $id) {
+        // Prevent self-deletion
+        if ($loggedInUser->id == $id) {
             return redirect()->route('all-users')->with('error', 'You cannot delete your own account!');
         }
 
-        $user->update(['status' => 0]); // Soft delete by setting status to 0
+        // Perform soft delete (set status to 0)
+        $user->update(['status' => 0]);
 
         return redirect()->route('all-users')->with('success', 'User deleted successfully!');
     }

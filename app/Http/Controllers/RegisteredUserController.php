@@ -58,18 +58,10 @@ class RegisteredUserController extends Controller
 
         if ($user) {
             Auth::login($user);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'New user registered successfully!',
-                'redirect_url' => route('all-users')
-            ]);
+            return redirect()->route('all-users')->with('success', 'New user registered successfully!');
         }
-
-        return response()->json([
-            'success' => false,
-            'message' => 'Something went wrong. Please try again.',
-        ], 500);
+        
+        return redirect()->route('all-users')->with('error', 'Something went wrong. Please try again.');
     }
 
 

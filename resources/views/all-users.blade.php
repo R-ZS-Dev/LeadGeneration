@@ -15,6 +15,7 @@
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <style>
         /* Align the search bar and pagination to the right */
@@ -24,6 +25,48 @@
 
         .dataTables_paginate {
             float: right;
+        }
+
+
+        .gender-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            /* Space between icons */
+        }
+
+        input[name='gender'] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -o-appearance: none;
+            -ms-appearance: none;
+            appearance: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[name='gender']:after {
+            font-family: 'FontAwesome';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 50px;
+            width: 70px;
+            height: 70px;
+            line-height: 100px;
+            content: attr(data-icon);
+            border-radius: 50%;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            color: rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        input[name='gender']:checked:after {
+            box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.4);
+            color: white;
+            background-color: #793268;
         }
     </style>
 </head>
@@ -107,7 +150,7 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="text" name="first_name" placeholder="First name" value="{{ old('first_name') }}">
+                                                    <input class="form-control" type="text" name="first_name" placeholder="First name" value="{{ old('first_name') }}" required>
                                                     @error('first_name')
                                                     <small class="text-danger d-block text-start">{{ $message }}</small>
                                                     @enderror
@@ -115,7 +158,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="text" name="last_name" placeholder="Last name" value="{{ old('last_name') }}">
+                                                    <input class="form-control" type="text" name="last_name" placeholder="Last name" value="{{ old('last_name') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
@@ -147,8 +190,23 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="mb-3 text-start">Gender
-                                                    <fieldset class="radio">
+                                                <div class="mb-3 text-start">
+                                                    <div class="gender-container">
+                                                        <label>
+                                                            <input type="radio" name="gender" value="Male" data-icon="">
+                                                            <div class="text-center">
+                                                                <label for="">Male</label>
+                                                            </div>
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" name="gender" value="Female" data-icon="">
+                                                            <div class="text-center">
+                                                                <label for="">Female</label>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+
+                                                    <!-- <fieldset class="radio">
                                                         <label for="radio1">
                                                             <input type="radio" id="radio1" name="gender" value="Male" {{ old('gender') == 'Male' ? 'checked' : '' }} checked> Male
                                                         </label>
@@ -157,7 +215,7 @@
                                                         <label>
                                                             <input type="radio" name="gender" value="Female" {{ old('gender') == 'female' ? 'checked' : '' }}> Female
                                                         </label>
-                                                    </fieldset>
+                                                    </fieldset> -->
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -182,7 +240,7 @@
                                             </div>
 
                                             <div class="col-lg-12 text-center">
-                                                <button type="submit" class="btn w-100 btn-dark">Register</button>
+                                                <button type="submit" class="btn w-100 btn-dark" data-action="Add new user" data-alert="Are you sure you want to add new user?">Register</button>
                                             </div>
                                         </div>
                                     </form>
@@ -219,7 +277,9 @@
                                                 <th>Phone</th>
                                                 <th>Role</th>
                                                 <th>Created at</th>
+                                                @if(Auth::user()->role === 'admin') {{-- Only show Action column for admins --}}
                                                 <th>Action</th>
+                                                @endif
                                             </tr>
                                         </thead>
 
@@ -236,23 +296,28 @@
                                                 <td>{{ $user->phone_number }}</td>
                                                 <td>{{ $user->role }}</td>
                                                 <td>{{ $user->created_at }}</td>
+
+                                                @if(Auth::user()->role == 'admin') {{-- Only show delete button for admins --}}
                                                 <td class="text-center">
                                                     @if($index != 0)
                                                     <form method="POST" action="{{ route('users.destroy', $user->id) }}"
                                                         onsubmit="return confirm('Are you sure you want to delete this user?');">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" data-action="Delete" data-alert="Are you sure you want to delete this user?" class="btn btn-danger btn-circle">
+                                                        <button type="submit" class="btn btn-danger btn-circle">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                     @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             @endif
                                             @endif
                                             @endforeach
                                         </tbody>
+
+
 
                                     </table>
                                 </div>

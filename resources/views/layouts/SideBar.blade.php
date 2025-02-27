@@ -24,25 +24,20 @@
         </li>
 
         <li class="list-divider"></li>
-        <li class="nav-small-cap"><span class="hide-menu">Config</span></li>
-        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="" aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span class="hide-menu">Hospital</span></a>
+        <li class="nav-small-cap"><span class="hide-menu">Components</span></li>
+        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                    class="hide-menu">Config </span></a>
             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Equipment Groups </span></a> </li>
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Equipment </span></a> </li>
 
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Supply Groups </span></a> </li>
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Supplies </span></a> </li>
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><span class="hide-menu"> Report </span></a> </li>
+                <!-- <li class="sidebar-item"><a href="/" class="sidebar-link"><span class="hide-menu"> Report Review </span></a> </li>
 
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Staff </span></a> </li>
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><span class="hide-menu"> Procedures </span></a> </li>
 
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Report </span></a> </li>
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Report Review </span></a> </li>
-
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Procedures </span></a> </li>
-
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Lab Results </span></a> </li>
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Labs </span></a> </li>
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Lab Ranges </span></a> </li>
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><span class="hide-menu"> Lab Results </span></a> </li>
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><span class="hide-menu"> Labs </span></a> </li>
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><span class="hide-menu"> Lab Ranges </span></a> </li>
 
                 <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> General Events </span></a> </li>
 
@@ -56,13 +51,12 @@
 
                 <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Cardioplegia </span></a> </li>
                 <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Data Devices </span></a> </li>
-                
+
                 <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Registration </span></a> </li>
 
-                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Live Line </span></a> </li>
+                <li class="sidebar-item"><a href="" class="sidebar-link"><span class="hide-menu"> Live Line </span></a> </li> -->
             </ul>
         </li>
-
 
         <li class="list-divider"></li>
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailSettingsController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SettingsController;
@@ -13,10 +14,6 @@ Route::get('/', function () { return view('login'); });
 Route::get('/login', function () {
     return view('login');
 })->name('login');
-
-Route::get('/forget-password', function () {
-    return view('forget-password');
-})->name('forget-password');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -46,10 +43,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('update-company', [CompanyController::class, 'updateCompany'])->name('settings.updateCompany');
 
-    // Route::controller(RegisteredUserController::class)->group(function () {
-    //     Route::get('/register', function () { return view('register'); })->name('register');
-    //     Route::post('/register', 'store')->name('register');
-    // });
+    Route::controller(RegisteredUserController::class)->group(function () {
+        Route::get('/register', function () { return view('register'); })->name('register');
+        Route::post('/register', 'store')->name('register');
+    });
 
     Route::controller(UserController::class)->group(function () {
         Route::get('/all-users', 'index')->name('all-users');
@@ -65,4 +62,12 @@ Route::controller(LoginController::class)->group(function () {
 Route::controller(RegisteredUserController::class)->group(function () {
     Route::get('/register', function () { return view('register'); })->name('register');
     Route::post('/register', 'store')->name('register');
+});
+
+Route::controller(ForgotPasswordController::class)->group(function (){
+    Route::get('/forget-password', 'showForgetPasswordForm')->name('forget-password');
+    Route::post('/forget-password', 'submitForgetPasswordForm')->name('password.email');
+    
+    Route::get('/reset-password', 'showResetPasswordForm')->name('password.reset');
+    Route::post('/reset-password', 'submitResetPasswordForm')->name('password.update');
 });
