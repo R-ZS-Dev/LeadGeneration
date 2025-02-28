@@ -528,5 +528,6 @@ class ConfigController extends Controller
         $pro->save();
         return redirect()->back()->with('success', 'Procedure deleted successfully!');
     }
+    
 
 }

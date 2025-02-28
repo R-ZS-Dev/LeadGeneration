@@ -110,27 +110,79 @@
                                         @csrf
                                         <div class="row">
                                             <!-- Staff Name -->
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group mb-3">
                                                     <input type="text" name="lr_name" class="form-control" placeholder="Lab report name" required >
                                                 </div>
                                             </div>
                                             <!-- First Name -->
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group mb-3">
-                                                    <input type="text" name="lr_abbrivat" class="form-control" placeholder="Lab report abbrivation" required >
+                                                    <input type="text" name="lr_abbrivate" class="form-control" placeholder="Lab report abbrivation" required >
                                                 </div>
                                             </div>
-                                            <!-- Middle Name -->
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-4">
                                                 <div class="form-group mb-3">
-                                                    <textarea name="pro_display" rows="3" class="form-control" placeholder="Display"></textarea>
+                                                    <input type="text" name="unit_of_measure" class="form-control" placeholder="Unit of measurment" required >
                                                 </div>
                                             </div>
-                                            <!-- Last Name -->
+                                            <div class="col-lg-4">
+                                                <div class="form-group form-switch mb-3">
+                                                    <input type="hidden" name="show_unit" value="0">
+                                                    <input type="checkbox" name="show_unit" id="unit" value="1" class="form-check-input" role="switch">
+                                                    <label for="unit" class="form-check-label">Show unit in report</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group mb-3">
+                                                    <input type="number" name="exp_low" class="form-control" placeholder="Expected Low">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group mb-3">
+                                                    <input type="number" name="exp_high" class="form-control" placeholder="Expected High" >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group mb-3">
+                                                    <input type="number" name="maximum" class="form-control" placeholder="Maximum" >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group mb-3">
+                                                    <input type="number" name="high_critical" class="form-control" placeholder="High Critical" >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group mb-3">
+                                                    <input type="number" name="high_warn" class="form-control" placeholder="High Warn" >
+                                                </div>
+                                            </div>
+
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
-                                                    <textarea name="pro_desc" rows="3" class="form-control" placeholder="Description"></textarea>
+                                                    <label for="good_range_from">Good Range</label>
+                                                    <div class="d-flex">
+                                                        <input type="number" name="good_range_from" id="good_range_from" class="form-control me-2" placeholder="From">
+                                                        <span class="align-self-center">to</span>
+                                                        <input type="number" name="good_range_to" id="good_range_to" class="form-control ms-2" placeholder="To">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <div class="form-group mb-3">
+                                                    <input type="text" name="minimum" class="form-control" placeholder="Minimum">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group mb-3">
+                                                    <input type="number" name="low_critical" class="form-control" placeholder="Low Critical" >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group mb-3">
+                                                    <input type="number" name="low_warn" class="form-control" placeholder="Low Warn" >
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
