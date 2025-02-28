@@ -52,7 +52,7 @@ class SettingsController extends Controller
         
             // Save the new file name to the database
             $user->profile_photo = $fileName;
-        }        
+        }
 
         // Update user details
         $user->first_name = $request->first_name;

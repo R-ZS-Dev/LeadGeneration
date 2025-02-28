@@ -6,18 +6,22 @@ use App\Http\Controllers\EmailSettingsController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () { return view('login'); });
+Route::get('/', function () {
+    return view('login');
+});
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/app-chat', function () { return view('app-chat');
+    Route::get('/app-chat', function () {
+        return view('app-chat');
     })->name('app-chat');
     Route::get('/app-calendar', function () {
         return view('app-calendar');
@@ -25,6 +29,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile-setting', function () {
         return view('profile-setting');
     })->name('profile-setting');
+
+    Route::get('/report', function () {
+        return view('report');
+    })->name('report');
+
+    Route::controller(ReportController::class)->group(function () {
+        Route::get('/report', 'index')->name('report'); // Show reports page
+        Route::post('/reports', 'store')->name('reports.store'); // Store new report
+        Route::get('/reports/{id}/edit', 'edit')->name('reports.edit'); // Fetch report for edit
+        Route::post('/reports/{id}/update', 'update')->name('reports.update');
+        Route::delete('/reports/{id}', 'destroy')->name('reports.destroy'); // Delete report
+    });
+    
 
     Route::controller(SettingsController::class)->group(function () {
         Route::post('update-profile', 'updateProfile')->name('settings.updateProfile');
@@ -41,17 +58,23 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
     });
 
-    Route::post('update-company', [CompanyController::class, 'updateCompany'])->name('settings.updateCompany');
+    Route::controller((CompanyController::class))->group(function () {
+        Route::post('update-company', 'updateCompany')->name('settings.updateCompany');
+    });
 
     Route::controller(RegisteredUserController::class)->group(function () {
-        Route::get('/register', function () { return view('register'); })->name('register');
-        Route::post('/register', 'store')->name('register');
+        Route::get('/register', 'register')->name('register'); // Show registration form
+        Route::post('/register', 'store')->name('register.store'); // Handle form submission
     });
-
+    
     Route::controller(UserController::class)->group(function () {
-        Route::get('/all-users', 'index')->name('all-users');
+        Route::get('/all-users', 'index')->name('all-users'); // Show users list
         Route::delete('/users/{id}', 'destroy')->name('users.destroy');
+        Route::get('/users/{id}/edit', 'edit')->name('users.edit');
+        Route::put('/users/{id}', 'update')->name('users.update');
     });
+    
+
 });
 
 Route::controller(LoginController::class)->group(function () {
@@ -60,14 +83,14 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 Route::controller(RegisteredUserController::class)->group(function () {
-    Route::get('/register', function () { return view('register'); })->name('register');
+    Route::get('/register', 'register')->name('register');
     Route::post('/register', 'store')->name('register');
 });
 
-Route::controller(ForgotPasswordController::class)->group(function (){
+Route::controller(ForgotPasswordController::class)->group(function () {
     Route::get('/forget-password', 'showForgetPasswordForm')->name('forget-password');
     Route::post('/forget-password', 'submitForgetPasswordForm')->name('password.email');
-    
+
     Route::get('/reset-password', 'showResetPasswordForm')->name('password.reset');
     Route::post('/reset-password', 'submitResetPasswordForm')->name('password.update');
 });

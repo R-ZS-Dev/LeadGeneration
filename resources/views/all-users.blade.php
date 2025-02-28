@@ -18,22 +18,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <style>
-        /* Align the search bar and pagination to the right */
-        .dataTables_filter {
-            float: right;
+        td {
+            height: 27px;
         }
-
-        .dataTables_paginate {
-            float: right;
-        }
-
 
         .gender-container {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 30px;
-            /* Space between icons */
         }
 
         input[name='gender'] {
@@ -72,31 +65,16 @@
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <header class="topbar" data-navbarbg="skin6">
             @include('layouts.TopNav')
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
@@ -106,86 +84,59 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- basic table -->
                 <div class="row">
-                    <!-- @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                    @endif -->
-
-                    <!-- Success Message -->
-                    <!-- <div id="successMessage" class="alert alert-success" style="display: none;"></div> -->
 
                     <!-- Signup modal content -->
-                    <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog"
-                        aria-hidden="true">
+                    <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-
                                 <div class="modal-body">
                                     <div class="text-end">
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                     </div>
                                     <div class="text-center mt-2 mb-4">
-                                        Add New User
+                                        <h5 id="modal-title">Add New User</h5>
                                     </div>
 
-                                    <form id="registerForm" method="POST" action="{{ route('register') }}" class="mt-4">
+                                    <form id="userForm" method="POST">
                                         @csrf
+                                        <input type="hidden" name="_method" id="form-method" value="POST">
+                                        <input type="hidden" name="user_id" id="user_id">
+
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="text" name="first_name" placeholder="First name" value="{{ old('first_name') }}" required>
-                                                    @error('first_name')
-                                                    <small class="text-danger d-block text-start">{{ $message }}</small>
-                                                    @enderror
+                                                    <label for="">First Name</label>
+                                                    <input class="form-control" type="text" name="first_name" id="first_name" placeholder="First name" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="text" name="last_name" placeholder="Last name" value="{{ old('last_name') }}" required>
+                                                    <label for="">Last Name</label>
+                                                    <input class="form-control" type="text" name="last_name" id="last_name" placeholder="Last name" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="email" name="email" placeholder="Email" value="{{ old('email') }}">
-                                                    @error('email')
-                                                    <small class="text-danger d-block text-start">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group mb-3">
-                                                    <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
-                                                    <small id="password-error" class="text-danger d-block text-start"></small>
-                                                    @error('password')
-                                                    <small class="text-danger d-block text-start">{{ $message }}</small>
-                                                    @enderror
+                                                    <label for="">Email</label>
+                                                    <input class="form-control" type="email" name="email" id="email" placeholder="Email" required>
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-6" id="password-fields">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Password</label>
+                                                    <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+                                                    <small id="password-error" class="text-danger"></small>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6" id="confirm-password-fields">
+                                                <div class="form-group mb-3">
+                                                    <label for="">Confirm Password</label>
                                                     <input class="form-control" type="password" name="password_confirmation" id="confirm-password" placeholder="Confirm password" required>
-                                                    <small id="confirm-password-error" class="text-danger d-block text-start"></small>
-                                                    @error('password_confirmation')
-                                                    <small class="text-danger d-block text-start">{{ $message }}</small>
-                                                    @enderror
+                                                    <small id="confirm-password-error" class="text-danger"></small>
                                                 </div>
                                             </div>
 
@@ -193,61 +144,52 @@
                                                 <div class="mb-3 text-start">
                                                     <div class="gender-container">
                                                         <label>
-                                                            <input type="radio" name="gender" value="Male" data-icon="">
+                                                            <input type="radio" name="gender" value="Male" id="gender-male" data-icon="" required>
                                                             <div class="text-center">
                                                                 <label for="">Male</label>
                                                             </div>
                                                         </label>
                                                         <label>
-                                                            <input type="radio" name="gender" value="Female" data-icon="">
+                                                            <input type="radio" name="gender" value="Female" id="gender-female" data-icon="" required>
                                                             <div class="text-center">
                                                                 <label for="">Female</label>
                                                             </div>
                                                         </label>
                                                     </div>
-
-                                                    <!-- <fieldset class="radio">
-                                                        <label for="radio1">
-                                                            <input type="radio" id="radio1" name="gender" value="Male" {{ old('gender') == 'Male' ? 'checked' : '' }} checked> Male
-                                                        </label>
-                                                    </fieldset>
-                                                    <fieldset class="radio">
-                                                        <label>
-                                                            <input type="radio" name="gender" value="Female" {{ old('gender') == 'female' ? 'checked' : '' }}> Female
-                                                        </label>
-                                                    </fieldset> -->
                                                 </div>
                                             </div>
+
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-3">
-                                                    <input class="form-control" type="number" name="phone_number" placeholder="phone number" value="{{ old('phone_number') }}">
+                                                    <label for="Phone number"></label>
+                                                    <input class="form-control" type="text" name="phone_number" id="phone_number" placeholder="Phone number" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-3 text-start">
-                                                    <select class="form-select mr-sm-2" name="role" id="inlineFormCustomSelect">
+                                                    <label for="">Role</label>
+                                                    <select class="form-select" name="role" id="role" required>
                                                         <option disabled selected>Role</option>
-                                                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                                        <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                                                        <option value="admin">Admin</option>
+                                                        <option value="user">User</option>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
-                                                    <textarea class="form-control" rows="3" name="address" placeholder="Address" value="{{ old('address') }}"></textarea>
+                                                    <textarea class="form-control" rows="3" name="address" id="address" placeholder="Address" required></textarea>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 text-center">
-                                                <button type="submit" class="btn w-100 btn-dark" data-action="Add new user" data-alert="Are you sure you want to add new user?">Register</button>
+                                                <button type="submit" class="btn w-100 btn-dark" id="submit-button">Register</button>
                                             </div>
                                         </div>
                                     </form>
-
                                 </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
+                            </div>
+                        </div>
                     </div>
                     <!-- /.modal -->
 
@@ -256,9 +198,6 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-12 d-flex justify-content-end">
-                                        <!-- <button type="button" class="btn waves-effect waves-light btn-outline-primary" data-bs-toggle="modal" data-bs-target="#signup-modal">
-                                            <i class="fas fa-plus"></i> Add user
-                                        </button> -->
                                         @if(session('role') === 'admin')
                                         <button type="button" class="btn waves-effect waves-light btn-outline-primary" data-bs-toggle="modal" data-bs-target="#signup-modal">
                                             <i class="fas fa-plus"></i> Add user
@@ -298,13 +237,17 @@
                                                 <td>{{ $user->created_at }}</td>
 
                                                 @if(Auth::user()->role == 'admin') {{-- Only show delete button for admins --}}
-                                                <td class="text-center">
+                                                <td class="text-center d-flex">
                                                     @if($index != 0)
+                                                    <button type="button" class="edit-user mx-2 p-0 border" data-bs-toggle="modal" data-bs-target="#signup-modal" data-id="{{ $user->id }}">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+
                                                     <form method="POST" action="{{ route('users.destroy', $user->id) }}"
                                                         onsubmit="return confirm('Are you sure you want to delete this user?');">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-circle">
+                                                        <button type="submit" class="px-1 border">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
@@ -316,9 +259,6 @@
                                             @endif
                                             @endforeach
                                         </tbody>
-
-
-
                                     </table>
                                 </div>
                             </div>
@@ -326,30 +266,11 @@
                     </div>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
             <footer class="footer text-center text-muted">
                 @include('layouts.Footer')
             </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
     <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -385,81 +306,175 @@
     </script>
 
     <script>
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     const form = document.getElementById("userForm");
+        //     const firstName = document.getElementById("first_name");
+        //     const lastName = document.getElementById("last_name");
+        //     const email = document.getElementById("email");
+        //     const password = document.getElementById("password");
+        //     const confirmPassword = document.getElementById("confirm-password");
+        //     const phoneNumber = document.getElementById("phone_number");
+        //     const role = document.getElementById("role");
+        //     const submitButton = document.getElementById("submit-button");
+
+        //     function showError(input, message) {
+        //         let errorElement = input.nextElementSibling;
+        //         if (!errorElement || !errorElement.classList.contains("text-danger")) {
+        //             errorElement = document.createElement("small");
+        //             errorElement.classList.add("text-danger");
+        //             input.parentNode.appendChild(errorElement);
+        //         }
+        //         errorElement.textContent = message;
+        //     }
+
+        //     function clearError(input) {
+        //         let errorElement = input.nextElementSibling;
+        //         if (errorElement && errorElement.classList.contains("text-danger")) {
+        //             errorElement.textContent = "";
+        //         }
+        //     }
+
+        //     function validateEmail(email) {
+        //         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        //         return re.test(email);
+        //     }
+
+        //     function validateForm() {
+        //         let valid = true;
+
+        //         if (firstName.value.trim() === "") {
+        //             showError(firstName, "First name is required");
+        //             valid = false;
+        //         } else {
+        //             clearError(firstName);
+        //         }
+
+        //         if (lastName.value.trim() === "") {
+        //             showError(lastName, "Last name is required");
+        //             valid = false;
+        //         } else {
+        //             clearError(lastName);
+        //         }
+
+        //         if (email.value.trim() !== "" && !validateEmail(email.value.trim())) {
+        //             showError(email, "Invalid email format");
+        //             valid = false;
+        //         } else {
+        //             clearError(email);
+        //         }
+
+        //         if (password.value.trim() !== "" || confirmPassword.value.trim() !== "") {
+        //             if (password.value.trim() !== confirmPassword.value.trim()) {
+        //                 showError(confirmPassword, "Passwords do not match");
+        //                 valid = false;
+        //             } else {
+        //                 clearError(confirmPassword);
+        //             }
+        //         }
+
+        //         return valid;
+        //     }
+
+        //     form.addEventListener("input", function(event) {
+        //         validateForm();
+        //     });
+
+        //     form.addEventListener("submit", function(event) {
+        //         if (!validateForm()) {
+        //             event.preventDefault();
+        //         }
+        //     });
+        // });
+    </script>
+
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             let passwordField = document.getElementById('password');
             let confirmPasswordField = document.getElementById('confirm-password');
             let passwordError = document.getElementById('password-error');
             let confirmPasswordError = document.getElementById('confirm-password-error');
+            let submitButton = document.getElementById('submit-button');
 
             let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-            passwordField.addEventListener('input', function() {
+            function validatePassword() {
                 if (!passwordPattern.test(passwordField.value)) {
                     passwordError.textContent = "Password must have at least 8 characters, an uppercase letter, a lowercase letter, a number, and a special character.";
+                    return false;
                 } else {
                     passwordError.textContent = "";
+                    return true;
                 }
-            });
+            }
 
-            confirmPasswordField.addEventListener('input', function() {
-                confirmPasswordError.textContent = confirmPasswordField.value === passwordField.value ? "" : "Passwords do not match.";
-            });
-
-            document.querySelector('form').addEventListener('submit', function(event) {
-                if (!passwordPattern.test(passwordField.value)) {
-                    event.preventDefault(); // Prevent form submission if password is invalid
-                    passwordError.textContent = "Password does not meet requirements.";
-                }
+            function validateConfirmPassword() {
                 if (confirmPasswordField.value !== passwordField.value) {
-                    event.preventDefault();
                     confirmPasswordError.textContent = "Passwords do not match.";
+                    return false;
+                } else {
+                    confirmPasswordError.textContent = "";
+                    return true;
+                }
+            }
+
+            passwordField.addEventListener('input', validatePassword);
+            confirmPasswordField.addEventListener('input', validateConfirmPassword);
+
+            document.getElementById('userForm').addEventListener('submit', function(event) {
+                let isPasswordValid = validatePassword();
+                let isConfirmPasswordValid = validateConfirmPassword();
+
+                if (!isPasswordValid || !isConfirmPasswordValid) {
+                    event.preventDefault(); // Prevent form submission if validation fails
                 }
             });
         });
-    </script>
+    </script> -->
 
     <script>
         $(document).ready(function() {
-            $("#registerForm").submit(function(e) {
-                e.preventDefault(); // Prevent default form submission
+            $("#userForm").submit(function(e) {
+                let valid = true;
+                $(".text-danger").text(""); // Clear previous errors
 
-                let formData = $(this).serialize(); // Serialize form data
+                // Validate all inputs
+                $("#userForm input, #userForm select, #userForm textarea").each(function() {
+                    let field = $(this);
+                    let value = field.val().trim();
 
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('register') }}",
-                    data: formData,
-                    success: function(response) {
-                        if (response.success) {
-                            // Store success message in sessionStorage
-                            sessionStorage.setItem('successMessage', response.message);
+                    // Ignore hidden fields like CSRF token
+                    if (field.is(":hidden") || field.attr("type") === "hidden") return;
 
-                            // Redirect user to all-users page
-                            window.location.href = response.redirect_url;
+                    // Required fields validation
+                    if (field.prop("required") && value === "") {
+                        field.next(".text-danger").text("This field is required.");
+                        valid = false;
+                    }
+
+                    // Email validation
+                    if (field.attr("type") === "email" && value !== "" &&
+                        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                        field.next(".text-danger").text("Invalid email format.");
+                        valid = false;
+                    }
+
+                    // Password confirmation check
+                    if (field.attr("name") === "password_confirmation") {
+                        if ($("#password").val().trim() !== value) {
+                            field.next(".text-danger").text("Passwords do not match.");
+                            valid = false;
                         }
-                    },
-                    error: function(xhr) {
-                        let errors = xhr.responseJSON.errors;
-                        $(".text-danger").text(""); // Clear previous errors
-
-                        $.each(errors, function(key, value) {
-                            $("input[name=" + key + "]").next(".text-danger").text(value);
-                        });
                     }
                 });
+
+                // If validation fails, prevent submission
+                if (!valid) {
+                    e.preventDefault();
+                }
             });
         });
-
-        // Display success message on all-users page if available
-        $(document).ready(function() {
-            let successMessage = sessionStorage.getItem('successMessage');
-            if (successMessage) {
-                $("#successMessage").text(successMessage).show();
-                sessionStorage.removeItem('successMessage'); // Clear the stored message
-            }
-        });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -494,6 +509,69 @@
                         }
                     });
                 });
+            });
+        });
+    </script> -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".edit-user").forEach(button => {
+                button.addEventListener("click", function() {
+                    let userId = this.getAttribute("data-id");
+
+                    fetch(`/users/${userId}/edit`)
+                        .then(response => response.json())
+                        .then(user => {
+                            document.getElementById("modal-title").innerText = "Edit User";
+                            document.getElementById("userForm").setAttribute("action", `/users/${userId}`);
+                            document.getElementById("form-method").value = "PUT";
+
+                            document.getElementById("user_id").value = user.id;
+                            document.getElementById("first_name").value = user.first_name;
+                            document.getElementById("last_name").value = user.last_name;
+                            document.getElementById("email").value = user.email;
+                            document.getElementById("phone_number").value = user.phone_number;
+                            document.getElementById("address").value = user.address;
+                            document.getElementById("role").value = user.role;
+
+                            // Set gender
+                            if (user.gender === "Male") {
+                                document.getElementById("gender-male").checked = true;
+                            } else if (user.gender === "Female") {
+                                document.getElementById("gender-female").checked = true;
+                            }
+
+                            document.getElementById("submit-button").innerText = "Update";
+
+                            // Hide password fields for edit
+                            document.getElementById("password-fields").style.display = "none";
+                            document.getElementById("confirm-password-fields").style.display = "none";
+                        });
+                });
+            });
+
+            // Reset form when modal is closed
+            document.getElementById("signup-modal").addEventListener("hidden.bs.modal", function() {
+                document.getElementById("modal-title").innerText = "Add New User";
+                document.getElementById("userForm").setAttribute("action", "{{ route('register') }}");
+                document.getElementById("form-method").value = "POST";
+
+                document.getElementById("first_name").value = "";
+                document.getElementById("last_name").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("phone_number").value = "";
+                document.getElementById("address").value = "";
+                document.getElementById("role").value = "";
+
+                // Reset gender
+                document.getElementById("gender-male").checked = false;
+                document.getElementById("gender-female").checked = false;
+
+                document.getElementById("submit-button").innerText = "Register";
+
+                // Show password fields again for new user
+                document.getElementById("password-fields").style.display = "block";
+                document.getElementById("confirm-password-fields").style.display = "block";
             });
         });
     </script>

@@ -6,6 +6,11 @@
             'profile-setting' => 'User Profile',
             'app-chat' => 'Chat',
             'app-calendar' => 'Calendar',
+            'reset-password' => 'Reset Password',
+            'forget-password' => 'Forget Password',
+            'login' => 'Login',
+            'register' => 'Register',
+            'report' => 'Report',
         ];
     @endphp
 

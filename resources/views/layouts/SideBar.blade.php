@@ -30,7 +30,7 @@
                     class="hide-menu">Config </span></a>
             <ul aria-expanded="false" class="collapse  first-level base-level-line">
 
-                <li class="sidebar-item"><a href="/" class="sidebar-link"><span class="hide-menu"> Report </span></a> </li>
+                <li class="sidebar-item"><a href="{{ route('report') }}" class="sidebar-link"><span class="hide-menu"> Report </span></a> </li>
                 <!-- <li class="sidebar-item"><a href="/" class="sidebar-link"><span class="hide-menu"> Report Review </span></a> </li>
 
                 <li class="sidebar-item"><a href="/" class="sidebar-link"><span class="hide-menu"> Procedures </span></a> </li>
