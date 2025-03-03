@@ -1,83 +1,5 @@
-@extends('layouts.app')
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <!-- This page css -->
-    <!-- Custom CSS -->
-    <link href="../dist/css/style.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<style>
-    .is-invalid {
-        border: 1px solid red !important;
-        background-color: #ffe6e6;
-    }
-</style>
-<body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin6">
-            @include('layouts.TopNav')
-        </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar" data-sidebarbg="skin6">
-                <!-- Sidebar navigation-->
-                @include('layouts.SideBar')
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
+@extends('sitemaster.master-layout')
+@section('content')
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -124,7 +46,7 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group form-switch mb-3">
                                                     <input type="hidden" name="spg_active" value="0">
-                                                    <input type="checkbox" role="switch" name="spg_active" id="active"
+                                                    <input type="checkbox" role="switch" name="spg_active" id="active" checked
                                                         value="1" class="form-check-input"
                                                         {{ old('active') ? 'checked' : '' }}
                                                         >
@@ -232,13 +154,13 @@
                                                 <input type="checkbox" role="switch" name="spg_active" id="edit-spgactive"
                                                     value="1" class="form-check-input"
                                                     {{ old('active') ? 'checked' : '' }}
-                                                    style="border: 1px solid black;">
+                                                    >
                                                 <label for="active" class="form-check-label">Active</label>
 
                                             </div>
                                         </div>
                                         <div class="col-lg-12 text-center">
-                                            <button type="submit" class="btn w-100 btn-dark">Edit
+                                            <button type="submit" class="btn w-100 btn-dark">Update
                                                 Supply Group</button>
                                         </div>
                                     </div>
@@ -249,48 +171,8 @@
                     </div><!-- /.modal-dialog -->
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center text-muted">
-                @include('layouts.Footer')
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- apps -->
-    <!-- apps -->
-    <script src="../dist/js/app-style-switcher.js"></script>
-    <script src="../dist/js/feather.min.js"></script>
-    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="../dist/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="../dist/js/custom.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Include jQuery and DataTables CDN -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+           @endsection
+           @section('script')
     <script type="text/javascript">
         $(document).ready(function() {
             $('#users-table').DataTable({
@@ -312,44 +194,6 @@
             editModal.show();
         }
     </script>
-     <script>
-        function confirmDelete(url) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = url; // Redirect to delete route
-                }
-            });
-        }
-        </script>
-           @if (session('success'))
-           <script>
-               const Toast = Swal.mixin({
-                   toast: true,
-                   position: "top-end",
-                   showConfirmButton: false,
-                   timer: 3000,
-                   timerProgressBar: true,
-                   didOpen: (toast) => {
-                       toast.onmouseenter = Swal.stopTimer;
-                       toast.onmouseleave = Swal.resumeTimer;
-                   }
-               });
-
-               Toast.fire({
-                   icon: "success",
-                   title: "{{ session('success') }}"
-               });
-           </script>
-       @endif
-
        <script>
         document.addEventListener("DOMContentLoaded", function () {
             document.addEventListener("submit", function (event) {
@@ -388,8 +232,4 @@
             });
         });
     </script>
-
-
-</body>
-
-</html>
+@endsection

@@ -35,21 +35,21 @@
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
                                             <input type="text" name="lr_name" class="form-control"
-                                                placeholder="Lab report name" required>
+                                                placeholder="Lab Report Name" required>
                                         </div>
                                     </div>
                                     <!-- First Name -->
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
                                             <input type="text" name="lr_abbrivate" maxlength="10" class="form-control"
-                                                placeholder="Lab report abbrivation" required autocomplete="off">
+                                                placeholder="Lab Report Abbrivation" required autocomplete="off">
 
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
                                             <input type="text" name="unit_of_measure" class="form-control"
-                                                placeholder="Unit of measurment" required>
+                                                placeholder="Unit Of Measurment" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -131,7 +131,7 @@
                                         <div class="form-group form-switch mb-3">
                                             <input type="hidden" name="lr_active" value="0">
                                             <input type="checkbox" name="lr_active" id="pro_active" value="1"
-                                                class="form-check-input" role="switch">
+                                                class="form-check-input" checked role="switch">
                                             <label for="pro_active" class="form-check-label">Active</label>
                                         </div>
                                     </div>
@@ -256,20 +256,20 @@
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
                                         <input type="text" name="lr_name" class="form-control"
-                                            placeholder="Lab report name" id="edit_name" required>
+                                            placeholder="Lab Report Name" id="edit_name" required>
                                     </div>
                                 </div>
                                 <!-- First Name -->
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
-                                        <input type="text" name="lr_abbrivat" class="form-control"
-                                        placeholder="Lab report name" id="abbrivate" required>
+                                        <input type="text" name="lr_abbrivate" class="form-control"
+                                        placeholder="Lab Report Abbrivation" id="abbrivate" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
                                         <input type="text" name="unit_of_measure" class="form-control"
-                                            placeholder="Unit of measurment" id="edit_mou" required>
+                                            placeholder="Unit Of Measurment" id="edit_mou" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -357,7 +357,7 @@
                                 </div>
                                 <!-- Submit Button -->
                                 <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn w-100 btn-dark" id="submitBtn">Edit Lab
+                                    <button type="submit" class="btn w-100 btn-dark" id="submitBtn">Update Lab
                                         Results</button>
                                 </div>
                             </div>
@@ -384,13 +384,12 @@
     </script>
     <script>
         function editPro(pro) {
-            console.log("edit_abbrivat:", document.getElementById("edit_abbrivat"));
-
+            console.log(pro);
             abb = pro.lr_abbrivat;
             document.getElementById("lr_id").value = pro.lr_id;
             document.getElementById("edit_name").value = pro.lr_name;
             document.getElementById("abbrivate").value = abb;
-            document.getElementById("edit_mou").value = pro.measure_of_unit;
+            document.getElementById("edit_mou").value = pro.unit_of_measure;
             document.getElementById("edit_explow").value = pro.expected_low;
             document.getElementById("edit_exphigh").value = pro.expected_high;
             document.getElementById("edit_max").value = pro.maximum;

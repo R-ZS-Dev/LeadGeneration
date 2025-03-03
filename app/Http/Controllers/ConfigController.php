@@ -410,6 +410,7 @@ class ConfigController extends Controller
     public function addStaff(Request $request)
     {
         // Validate incoming request data
+        // return $request->all();
         $user = Auth::user();
         $request->validate([
             'st_name' => 'required|string|max:100',
@@ -427,14 +428,14 @@ class ConfigController extends Controller
         $staff->st_phone = $request->st_phone;
         $staff->st_insertby = $user->first_name;
 
-        $staff->anesthesiologist = $request->has('anesthesiologist') ? '1' : '0';
-        $staff->cardiologist = $request->has('cardiologist') ? '1' : '0';
-        $staff->crna = $request->has('crna') ? '1' : '0';
-        $staff->family_md = $request->has('family_md') ? '1' : '0';
-        $staff->perfusionist = $request->has('perfusionist') ? '1' : '0';
-        $staff->physician_assistant = $request->has('physician_assistant') ? '1' : '0';
-        $staff->surgeon = $request->has('surgeon') ? '1' : '0';
-        $staff->st_active = $request->has('st_active') ? '1' : '0';
+        $staff->anesthesiologist = $request->anesthesiologist;
+        $staff->cardiologist = $request->cardiologist;
+        $staff->crna = $request->crna;
+        $staff->family_md = $request->family_md;
+        $staff->perfusionist = $request->perfusionist;
+        $staff->physician_assistant = $request->physician_assistant;
+        $staff->surgeon = $request->surgeon;
+        $staff->st_active = $request->st_active;
         $staff->save();
         return redirect()->back()->with('success', 'Staff member added successfully!');
     }
@@ -456,14 +457,14 @@ class ConfigController extends Controller
         $staff->st_last_name = $request->st_last_name;
         $staff->st_phone = $request->st_phone;
 
-        $staff->anesthesiologist = $request->has('anesthesiologist') ? '1' : '0';
-        $staff->cardiologist = $request->has('cardiologist') ? '1' : '0';
-        $staff->crna = $request->has('crna') ? '1' : '0';
-        $staff->family_md = $request->has('family_md') ? '1' : '0';
-        $staff->perfusionist = $request->has('perfusionist') ? '1' : '0';
-        $staff->physician_assistant = $request->has('physician_assistant') ? '1' : '0';
-        $staff->surgeon = $request->has('surgeon') ? '1' : '0';
-        $staff->st_active = $request->has('st_active') ? '1' : '0';
+        $staff->anesthesiologist = $request->anesthesiologist;
+        $staff->cardiologist = $request->cardiologist;
+        $staff->crna = $request->crna;
+        $staff->family_md = $request->family_md;
+        $staff->perfusionist = $request->perfusionist;
+        $staff->physician_assistant = $request->physician_assistant;
+        $staff->surgeon = $request->surgeon;
+        $staff->st_active = $request->st_active;
         $staff->save();
         return redirect()->back()->with('success', 'Staff member updated successfully!');
     }
@@ -498,7 +499,7 @@ class ConfigController extends Controller
         $procedure->pro_cptcode = $request->pro_cptcode;
         $procedure->pro_display = $request->pro_display;
         $procedure->pro_desc = $request->pro_desc;
-        $procedure->pro_active = $request->has('pro_active') ? '1' : '0';
+        $procedure->pro_active = $request->pro_active;
         $procedure->pro_insertby = $user->first_name;
         $procedure->save();
         return redirect()->back()->with('success','Procedure added successfully.');
@@ -515,7 +516,7 @@ class ConfigController extends Controller
         $procedure->pro_cptcode = $request->pro_cptcode;
         $procedure->pro_display = $request->pro_display;
         $procedure->pro_desc = $request->pro_desc;
-        $procedure->pro_active = $request->has('pro_active') ? '1' : '0';
+        $procedure->pro_active = $request->pro_active;
         $procedure->save();
         return redirect()->back()->with('success','Procedure updated successfully.');
     }
@@ -528,6 +529,6 @@ class ConfigController extends Controller
         $pro->save();
         return redirect()->back()->with('success', 'Procedure deleted successfully!');
     }
-    
+
 
 }

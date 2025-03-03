@@ -124,6 +124,13 @@ Route::middleware(['auth'])->group(function () {
         route::post('/edit-lab-results','editlabResults')->name('edit-lab-results');
         route::get('/delete-lab-results/{id}','deletelabResults')->name('delete-lab-results');
 
+        /* ------------------------------- lab routes ------------------------------- */
+
+        Route::get('/labs', 'viewLab')->name('view-lab');
+        route::post('/add-lab','addLab')->name('add-lab');
+        route::post('/edit-lab','editLab')->name('edit-lab');
+        route::get('/delete-lab/{id}','deleteLab')->name('delete-lab');
+
     });
 
 });
