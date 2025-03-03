@@ -117,4 +117,35 @@ class LabController extends Controller
         }
 
     }
+
+    public function editLab(Request $request)
+    {
+        $id = $request->l_id;
+        // return $request->show_quick_button;
+        try {
+            $lab = Lab::find($id);
+            $lab->l_name = $request->l_name;
+            $lab->l_billcode = $request->l_billcode;
+            $lab->l_reporttitle = $request->l_reporttitle;
+            $lab->l_reportfooter = $request->l_reportfooter;
+            $lab->rowboxes = json_encode($request->rowboxes ?? []);
+            $lab->show_quick_button = $request->show_quick_button;
+            $lab->quick_button_text = $request->quick_button_text;
+            $lab->quickboxes = json_encode($request->quickboxes ?? []);
+            $lab->l_active = $request->l_active;
+            $lab->save();
+            return redirect()->back()->with('success', 'Lab Updated Successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+    public function deleteLab($id)
+    {
+        $lab = Lab::find($id);
+        $lab->status = '0';
+        $lab->close = '0';
+        $lab->save();
+        return redirect()->back()->with('success','Lab Deleted Successfully!');
+    }
 }

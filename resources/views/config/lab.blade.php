@@ -9,77 +9,74 @@
             @endif
 
             @php
-            $quickboxes = [
-                'a_gap' => 'A GAP',
-                'albumin_globulin_ratio' => 'albumin/globulin ratio',
-                'abe' => 'ABE',
-                'activated_clotting_time' => 'Activated Clotting Time',
-                'albumin' => 'Albumin',
-                'alkaline_phosphatase' => 'Alkaline phosphatase',
-                'alanine_aminotransferase' => 'alanine aminotransferase',
-                'aspartate_aminotransferase' => 'aspartate aminotransferase',
-                'be' => 'B.E.',
-                'be_b' => 'BE(B)',
-                'bun_creatinine_ratio' => 'BUN/creatinine ratio',
-                'blood_urea_nitrogen' => 'blood urea nitrogen',
-                'ca_plus_plus' => 'Ca++',
-                'calcium' => 'Calcium',
-                'total_cholesterol' => 'Total cholesterol',
-                'chloride' => 'Chloride',
-                'cohb' => 'COHb',
-                'creatinine' => 'Creatinine',
-                'ctco2' => 'ctCO2',
-                'eco2' => 'ECO2',
-                'egfr' => 'eGFR',
-                'fio2' => 'FIO2',
-                'free_t3' => 'Free T3 (free triiodothyronine)',
-                'free_t4' => 'Free T4 (free thyroxine)',
-                'glob' => 'GLOB',
-                'glu' => 'Glu',
-                'fasting_glucose' => 'Fasting glucose (blood sugar)',
-                'hco3' => 'HCO3',
-                'hco3_minus' => 'HCO3-',
-                'hematocrit_hct' => 'Hematocrit (Hct)',
-                'hdl_cholesterol' => 'HDL (Good) cholesterol',
-                'heparin_bolus' => 'Heparin Bolus Indicated',
-                'heparin_maintenance' => 'Heparin Maintenance Indicated',
-                'heparin_concentration' => 'Heparin Concentration',
-                'hemoglobin_hgb' => 'Hemoglobin (Hgb)',
-                'k_plus' => 'K+',
-                'potassium' => 'Potassium',
-                'lac' => 'Lac',
-                'lactic_acid' => 'Lactic Acid',
-                'ldl_cholesterol' => 'LDL (Bad) cholesterol',
-                'mch' => 'MCH',
-                'mchc' => 'Mean corpuscular hemoglobin concentration (MCHC)',
-                'mcv' => 'Mean corpuscular volume (MCV)',
-                'mpv' => 'Mean Platelet Volume (MPV)',
-                'sodium' => 'Sodium',
-                'paO2' => 'PaO2',
-                'pco2' => 'pCO2',
-                'ph' => 'pH',
-                'phosphorus' => 'Phosphorus',
-                'platelet_count' => 'Platelet count',
-                'rbc_count' => 'RBC (red blood cell) erythrocyte count',
-                'temperature' => 'Temperature',
-                'bilirubin' => 'Bilirubin',
-                'total_t3' => 'Total T3 (total triiodothyronine)',
-                'total_t4' => 'Total T4 (total thyroxine)',
-                'total_protein' => 'Total Protein',
-                'triglycerides' => 'Triglycerides',
-                'tsh' => 'Thyroid-stimulating hormone (TSH)',
-                'vitamin_d' => 'Vitamin D',
-                'wbc_basophils' => 'WBC (white blood cell) differential count Basophils',
-                'wbc_eosinophils' =>
-                    'WBC (white blood cell) differential count Eosinophils',
-                'wbc_lymphocytes' =>
-                    'WBC (white blood cell) differential count Lymphocytes',
-                'wbc_monocytes' => 'WBC (white blood cell) differential count Monocytes',
-                'wbc_neutrophils' =>
-                    'WBC (white blood cell) differential count Neutrophils',
-                'wbc' => 'WBC',
-            ];
-        @endphp
+                $quickboxes = [
+                    'a_gap' => 'A GAP',
+                    'albumin_globulin_ratio' => 'albumin/globulin ratio',
+                    'abe' => 'ABE',
+                    'activated_clotting_time' => 'Activated Clotting Time',
+                    'albumin' => 'Albumin',
+                    'alkaline_phosphatase' => 'Alkaline phosphatase',
+                    'alanine_aminotransferase' => 'alanine aminotransferase',
+                    'aspartate_aminotransferase' => 'aspartate aminotransferase',
+                    'be' => 'B.E.',
+                    'be_b' => 'BE(B)',
+                    'bun_creatinine_ratio' => 'BUN/creatinine ratio',
+                    'blood_urea_nitrogen' => 'blood urea nitrogen',
+                    'ca_plus_plus' => 'Ca++',
+                    'calcium' => 'Calcium',
+                    'total_cholesterol' => 'Total cholesterol',
+                    'chloride' => 'Chloride',
+                    'cohb' => 'COHb',
+                    'creatinine' => 'Creatinine',
+                    'ctco2' => 'ctCO2',
+                    'eco2' => 'ECO2',
+                    'egfr' => 'eGFR',
+                    'fio2' => 'FIO2',
+                    'free_t3' => 'Free T3 (free triiodothyronine)',
+                    'free_t4' => 'Free T4 (free thyroxine)',
+                    'glob' => 'GLOB',
+                    'glu' => 'Glu',
+                    'fasting_glucose' => 'Fasting glucose (blood sugar)',
+                    'hco3' => 'HCO3',
+                    'hco3_minus' => 'HCO3-',
+                    'hematocrit_hct' => 'Hematocrit (Hct)',
+                    'hdl_cholesterol' => 'HDL (Good) cholesterol',
+                    'heparin_bolus' => 'Heparin Bolus Indicated',
+                    'heparin_maintenance' => 'Heparin Maintenance Indicated',
+                    'heparin_concentration' => 'Heparin Concentration',
+                    'hemoglobin_hgb' => 'Hemoglobin (Hgb)',
+                    'k_plus' => 'K+',
+                    'potassium' => 'Potassium',
+                    'lac' => 'Lac',
+                    'lactic_acid' => 'Lactic Acid',
+                    'ldl_cholesterol' => 'LDL (Bad) cholesterol',
+                    'mch' => 'MCH',
+                    'mchc' => 'Mean corpuscular hemoglobin concentration (MCHC)',
+                    'mcv' => 'Mean corpuscular volume (MCV)',
+                    'mpv' => 'Mean Platelet Volume (MPV)',
+                    'sodium' => 'Sodium',
+                    'paO2' => 'PaO2',
+                    'pco2' => 'pCO2',
+                    'ph' => 'pH',
+                    'phosphorus' => 'Phosphorus',
+                    'platelet_count' => 'Platelet count',
+                    'rbc_count' => 'RBC (red blood cell) erythrocyte count',
+                    'temperature' => 'Temperature',
+                    'bilirubin' => 'Bilirubin',
+                    'total_t3' => 'Total T3 (total triiodothyronine)',
+                    'total_t4' => 'Total T4 (total thyroxine)',
+                    'total_protein' => 'Total Protein',
+                    'triglycerides' => 'Triglycerides',
+                    'tsh' => 'Thyroid-stimulating hormone (TSH)',
+                    'vitamin_d' => 'Vitamin D',
+                    'wbc_basophils' => 'WBC (white blood cell) differential count Basophils',
+                    'wbc_eosinophils' => 'WBC (white blood cell) differential count Eosinophils',
+                    'wbc_lymphocytes' => 'WBC (white blood cell) differential count Lymphocytes',
+                    'wbc_monocytes' => 'WBC (white blood cell) differential count Monocytes',
+                    'wbc_neutrophils' => 'WBC (white blood cell) differential count Neutrophils',
+                    'wbc' => 'WBC',
+                ];
+            @endphp
             <!-- Success Message -->
             <div id="successMessage" class="alert alert-success" style="display: none;"></div>
             <!-- Signup modal content -->
@@ -139,7 +136,7 @@
                                             @foreach ($checkboxes as $name => $label)
                                                 <div class="form-check mb-1">
                                                     <input class="form-check-input" type="checkbox" name="rowboxes[]"
-                                                        id="{{ $name }}" value="{{$label }}">
+                                                        id="{{ $name }}" value="{{ $label }}">
                                                     <label class="form-check-label"
                                                         for="{{ $name }}">{{ $label }}</label>
                                                 </div>
@@ -148,8 +145,10 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
-                                            <input class="form-check-input" type="checkbox" name="show_quick_button" id="show_quick_button">
-                                            <label class="form-check-label" for="show_quick_button">Show Quick Button</label>
+                                            <input class="form-check-input" type="checkbox" name="show_quick_button"
+                                                id="show_quick_button">
+                                            <label class="form-check-label" for="show_quick_button">Show Quick
+                                                Button</label>
                                         </div>
                                     </div>
 
@@ -166,12 +165,15 @@
                                             <div class="form-group mb-3">
                                                 <div class="row">
                                                     @foreach ($quickboxes as $name => $label)
-                                                    <div class="col-md-6 col-lg-4"> <!-- XS: 1, MD: 2, LG: 3 -->
-                                                        <div class="form-check mb-1">
-                                                            <input class="form-check-input" type="checkbox" name="quickboxes[]" id="{{ $name }}" value="{{ $label }}">
-                                                            <label class="form-check-label" for="{{ $name }}">{{ $label }}</label>
+                                                        <div class="col-md-6 col-lg-4"> <!-- XS: 1, MD: 2, LG: 3 -->
+                                                            <div class="form-check mb-1">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="quickboxes[]" id="{{ $name }}"
+                                                                    value="{{ $label }}">
+                                                                <label class="form-check-label"
+                                                                    for="{{ $name }}">{{ $label }}</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -186,7 +188,8 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-primary" style="float: right;">Submit</button>
+                                        <button type="submit" class="btn btn-primary"
+                                            style="float: right;">Submit</button>
 
                                     </div>
                                 </div>
@@ -268,8 +271,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-
-                        <form method="POST" action="{{ route('edit-lab-results') }}" class="mt-4">
+                        <form method="POST" action="{{ route('edit-lab') }}" class="mt-4">
                             @csrf
                             <input type="hidden" name="l_id" id="l_id">
                             <div class="row">
@@ -279,14 +281,13 @@
                                         <input type="text" class="form-control" name="l_name" id="name">
                                     </div>
                                 </div>
-
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Billing Code</label>
-                                        <input type="text" class="form-control" maxlength="6" name="l_billcode" id="code">
+                                        <input type="text" class="form-control" maxlength="6" name="l_billcode"
+                                            id="code">
                                     </div>
                                 </div>
-
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Report Title</label>
@@ -296,7 +297,8 @@
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Report Footer</label>
-                                        <textarea class="form-control" name="l_reportfooter" rows="3" id="footer"></textarea >
+                                        <textarea class="form-control" name="l_reportfooter" rows="3"
+                                            id="footer"></textarea>
                                     </div>
                                 </div>
                                 @php
@@ -314,7 +316,7 @@
                                         @foreach ($checkboxes as $name => $label)
                                             <div class="form-check mb-1">
                                                 <input class="form-check-input" type="checkbox" name="rowboxes[]"
-                                                    id="{{ $name }}" value="{{$label }}">
+                                                    id="{{ $name }}" value="{{ $label }}">
                                                 <label class="form-check-label"
                                                     for="{{ $name }}">{{ $label }}</label>
                                             </div>
@@ -322,14 +324,14 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="form-group mb-3">
-                                        <input class="form-check-input" type="checkbox" name="show_quick_button" id="show_quick_button">
+                                    <div class="form-group mb-3">   
+                                            <input type="hidden" name="show_quick_button" value="0">
+                                            <input type="checkbox" name="show_quick_button" id="show_quick_button1" value="1"
+                                                class="form-check-input">
                                         <label class="form-check-label" for="show_quick_button">Show Quick Button</label>
                                     </div>
                                 </div>
-
-
-                                <div id="quick_button_section" style="display: none;">
+                                <div id="quick_button_section1" style="display: none;">
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
                                             <label class="form-label">Quick Button Text</label>
@@ -341,12 +343,15 @@
                                         <div class="form-group mb-3">
                                             <div class="row">
                                                 @foreach ($quickboxes as $name => $label)
-                                                <div class="col-md-6 col-lg-4"> <!-- XS: 1, MD: 2, LG: 3 -->
-                                                    <div class="form-check mb-1">
-                                                        <input class="form-check-input" type="checkbox" name="quickboxes[]" id="{{ $name }}" value="{{ $label }}">
-                                                        <label class="form-check-label" for="{{ $name }}">{{ $label }}</label>
+                                                    <div class="col-md-6 col-lg-4"> <!-- XS: 1, MD: 2, LG: 3 -->
+                                                        <div class="form-check mb-1">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                name="quickboxes[]" id="{{ $name }}"
+                                                                value="{{ $label }}">
+                                                            <label class="form-check-label"
+                                                                for="{{ $name }}">{{ $label }}</label>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -361,7 +366,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-primary" style="float: right;">Update Lab</button>
+                                    <button type="submit" class="btn btn-primary" style="float: right;">Update
+                                        Lab</button>
 
                                 </div>
                             </div>
@@ -388,15 +394,23 @@
     </script>
     <script>
         function editPro(pro) {
-            console.log("edit_abbrivat:", document.getElementById("edit_abbrivat"));
-
-            abb = pro.lr_abbrivat;
-            document.getElementById("l_id").value = pro.lr_id;
-            document.getElementById("l_name").value = pro.l_name;
-            document.getElementById("billing").value = pro.l_billcode;
+            document.getElementById("l_id").value = pro.l_id;
+            document.getElementById("name").value = pro.l_name;
+            document.getElementById("code").value = pro.l_billcode;
             document.getElementById("title").value = pro.l_reporttitle;
             document.getElementById("footer").value = pro.l_reportfooter;
             document.getElementById("edit_active").checked = pro.l_active == 1;
+            document.getElementById("show_quick_button1").checked = pro.show_quick_button == 1;
+            let selectedRowboxes = pro.rowboxes ? JSON.parse(pro.rowboxes) : [];
+            document.querySelectorAll("input[name='rowboxes[]']").forEach((checkbox) => {
+                checkbox.checked = selectedRowboxes.includes(checkbox.value);
+            });
+            let selectedQuickboxes = pro.quickboxes ? JSON.parse(pro.quickboxes) : [];
+            document.querySelectorAll("input[name='quickboxes[]']").forEach((checkbox) => {
+                checkbox.checked = selectedQuickboxes.includes(checkbox.value);
+            });
+            let quickButtonSection = document.getElementById("quick_button_section1");
+            quickButtonSection.style.display = pro.show_quick_button == 1 ? "block" : "none";
 
             var editModal = new bootstrap.Modal(document.getElementById("editHospital"));
             editModal.show();
@@ -444,6 +458,16 @@
     <script>
         document.getElementById('show_quick_button').addEventListener('change', function() {
             var section = document.getElementById('quick_button_section');
+            if (this.checked) {
+                section.style.display = 'block'; // Show section
+            } else {
+                section.style.display = 'none'; // Hide section
+            }
+        });
+    </script>
+    <script>
+        document.getElementById('show_quick_button1').addEventListener('change', function() {
+            var section = document.getElementById('quick_button_section1');
             if (this.checked) {
                 section.style.display = 'block'; // Show section
             } else {
