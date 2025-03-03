@@ -6,7 +6,7 @@
             <!-- ============================================================== -->
             <footer class="footer text-center text-muted">
                 All Rights Reserved by Freedash. Designed and Developed by <a
-                    href="https://adminmart.com/">Adminmart</a>.
+                    href="https://atozcoder.com/" target="_blank">AtoZ Coders</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -23,24 +23,67 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
     <!-- apps -->
     <!-- apps -->
-    <script src="../dist/js/app-style-switcher.js"></script>
-    <script src="../dist/js/feather.min.js"></script>
-    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="../dist/js/sidebarmenu.js"></script>
+    <script src="{{ asset('dist/js/app-style-switcher.js')}}"></script>
+    <script src="{{ asset('dist/js/feather.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
+    <script src="{{ asset('dist/js/sidebarmenu.js')}}"></script>
     <!--Custom JavaScript -->
-    <script src="../dist/js/custom.min.js"></script>
+    <script src="{{ asset('dist/js/custom.min.js')}}"></script>
     <!--This page JavaScript -->
-    <script src="../assets/extra-libs/c3/d3.min.js"></script>
-    <script src="../assets/extra-libs/c3/c3.min.js"></script>
-    <script src="../assets/libs/chartist/dist/chartist.min.js"></script>
-    <script src="../assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="../assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="../assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="../dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <script src="{{ asset('assets/extra-libs/c3/d3.min.js')}}"></script>
+    <script src="{{ asset('assets/extra-libs/c3/c3.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/chartist/dist/chartist.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
+    <script src="{{ asset('assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js')}}"></script>
+    <script src="{{ asset('assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js')}}"></script>
+    <script src="{{ asset('dist/js/pages/dashboards/dashboard1.min.js')}}"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+        function confirmDelete(url) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url; // Redirect to delete route
+                }
+            });
+        }
+    </script>
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+            Toast.fire({
+                icon: "success",
+                title: "{{ session('success') }}"
+            });
+        </script>
+    @endif
+
 </body>
 
 </html>
