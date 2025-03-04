@@ -19,16 +19,21 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        try {
+            $credentials = $request->only('email', 'password');
+            $remember = $request->filled('remember');
 
-        $request->session()->regenerate();
+            if (!Auth::attempt($credentials, $remember)) {
+                return redirect()->back()->with('error', 'Invalid email or password, please try again.');
+            }
 
-        return redirect()->intended(route('dashboard', absolute: false));
+            $request->session()->regenerate();
+            return redirect()->intended(route('dashboard', absolute: false));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
+        }
     }
 
     /**

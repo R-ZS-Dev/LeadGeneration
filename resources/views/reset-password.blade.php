@@ -1,4 +1,4 @@
-@extends('layouts.app')
+
 <!DOCTYPE html>
 <html dir="ltr">
 
