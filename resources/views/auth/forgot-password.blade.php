@@ -40,7 +40,7 @@
                 <p class="login-subtitle">Enter your registered email address. we’ll send you a code
                     to reset your password.</p>
 
-                @if (session('status'))
+                {{-- @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
                     </div>
@@ -51,7 +51,25 @@
                     <div class="alert alert-danger">
                         {{ session('error') }}
                     </div>
-                @endif
+                @endif --}}
+                <!-- Success Message -->
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+<!-- Error Messages -->
+@if ($errors->any())
+<div class="alert alert-danger">
+
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    
+</div>
+@endif
+
 
                 <form action="{{ route('password.email') }}" method="POST">
                     @csrf

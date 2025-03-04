@@ -1,4 +1,5 @@
 @extends('sitemaster.master-layout')
+@section('title','All Labs')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -145,11 +146,11 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
-                                            <input class="form-check-input" type="checkbox" name="show_quick_button"
-                                                id="show_quick_button">
-                                            <label class="form-check-label" for="show_quick_button">Show Quick
-                                                Button</label>
+                                            <input type="hidden" name="show_quick_button" value="0">
+                                            <input type="checkbox" name="show_quick_button" value="1" id="show_quick_button">
+                                            <label class="form-check-label" for="show_quick_button">Show Quick Button</label>
                                         </div>
+
                                     </div>
 
 
@@ -165,7 +166,7 @@
                                             <div class="form-group mb-3">
                                                 <div class="row">
                                                     @foreach ($quickboxes as $name => $label)
-                                                        <div class="col-md-6 col-lg-4"> <!-- XS: 1, MD: 2, LG: 3 -->
+                                                        <div class="col-md-6 col-lg-4">
                                                             <div class="form-check mb-1">
                                                                 <input class="form-check-input" type="checkbox"
                                                                     name="quickboxes[]" id="{{ $name }}"
@@ -228,7 +229,7 @@
                                 <tbody>
                                     @php $i = 0; @endphp
                                     @foreach ($labs as $index => $item)
-                                        <tr>
+                                        <tr id="row-{{ $item->l_id }}">
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $item->l_name }}</td>
                                             <td>{{ $item->l_billcode }}</td>
@@ -247,7 +248,7 @@
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
                                                 <a href="javascript:void(0);"
-                                                    onclick="confirmDelete('{{ route('delete-lab', $item->l_id) }}')"
+                                                    onclick="confirmDelete('{{ route('delete-lab', $item->l_id) }}','{{ $item->l_id }}')"
                                                     class="text-danger">
                                                     <i class="fa-solid fa-trash-can-arrow-up"></i>
                                                 </a>
@@ -324,18 +325,18 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="form-group mb-3">   
+                                    <div class="form-group mb-3">
                                             <input type="hidden" name="show_quick_button" value="0">
                                             <input type="checkbox" name="show_quick_button" id="show_quick_button1" value="1"
                                                 class="form-check-input">
-                                        <label class="form-check-label" for="show_quick_button">Show Quick Button</label>
+                                        <label class="form-check-label" for="show_quick_button1">Show Quick Button</label>
                                     </div>
                                 </div>
                                 <div id="quick_button_section1" style="display: none;">
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label">Quick Button Text</label>
-                                            <input type="text" class="form-control" name="quick_button_text">
+                                            <label class="show_quick_button1">Quick Button Text</label>
+                                            <input type="text" class="form-control" name="quick_button_text" id="quick_button_text1">
                                         </div>
                                     </div>
 
@@ -401,6 +402,8 @@
             document.getElementById("footer").value = pro.l_reportfooter;
             document.getElementById("edit_active").checked = pro.l_active == 1;
             document.getElementById("show_quick_button1").checked = pro.show_quick_button == 1;
+            document.getElementById("quick_button_text1").value = pro.quick_button_text;
+
             let selectedRowboxes = pro.rowboxes ? JSON.parse(pro.rowboxes) : [];
             document.querySelectorAll("input[name='rowboxes[]']").forEach((checkbox) => {
                 checkbox.checked = selectedRowboxes.includes(checkbox.value);

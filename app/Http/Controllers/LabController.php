@@ -38,7 +38,7 @@ class LabController extends Controller
             $lab->low_critical = $request->low_critical;
             $lab->low_warn = $request->low_warn;
             $lab->lr_active = $request->lr_active;
-            $lab->lr_insertby = $user->first_name;
+            $lab->lr_insertby = Auth::user()->name;
             $lab->save();
             return redirect()->back()->with('success', 'Lab Result added successfully.');
         } catch (\Exception $e) {
@@ -105,11 +105,11 @@ class LabController extends Controller
             $lab->l_reporttitle = $request->l_reporttitle;
             $lab->l_reportfooter = $request->l_reportfooter;
             $lab->rowboxes = json_encode($request->rowboxes ?? []);
-            $lab->show_quick_button = $request->has('show_quick_button');
+            $lab->show_quick_button = $request->show_quick_button;
             $lab->quick_button_text = $request->quick_button_text ?? null;
             $lab->quickboxes = json_encode($request->quickboxes ?? []);
             $lab->l_active = $request->l_active;
-            $lab->l_insertby = $user->first_name;
+            $lab->l_insertby = Auth::user()->name;
             $lab->save();
             return redirect()->back()->with('success', 'Lab added successfully.');
         } catch (\Exception $e) {
@@ -121,7 +121,6 @@ class LabController extends Controller
     public function editLab(Request $request)
     {
         $id = $request->l_id;
-        // return $request->show_quick_button;
         try {
             $lab = Lab::find($id);
             $lab->l_name = $request->l_name;

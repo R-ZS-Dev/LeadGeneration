@@ -5,85 +5,100 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::where('status', 1)->get();
+        $users = User::where('status', '1')->where('close','1')->where('role','user')->get();
         return view('all-users', compact('users'));
     }
 
-    public function edit($id)
+    public function addUser(Request $request)
     {
-        if (!Auth::check() || Auth::user()->role !== 'admin') {
-            return response()->json(['error' => 'Unauthorized access.'], 403);
-        }
-
-        $user = User::findOrFail($id);
-        return response()->json($user);
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        if (!Auth::check() || Auth::user()->role !== 'admin') {
-            return redirect()->route('login')->with('error', 'Unauthorized access.');
-        }
-
-        $user = User::findOrFail($id);
-
-        // Validate form data
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'phone_number' => 'nullable|numeric',
-            'address' => 'nullable|string',
-            'gender' => 'required|in:Male,Female',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'gender' => 'required|in:Male,Female,Other',
+            'phoneno' => 'required|string|max:20',
             'role' => 'required|in:admin,user',
-            'password' => 'nullable|min:6|confirmed' // Only validate if provided
+            'address' => 'required|string|max:255',
         ]);
 
-        // Update user details
-        $user->first_name = $validatedData['first_name'];
-        $user->last_name = $validatedData['last_name'];
-        $user->email = $validatedData['email'];
-        $user->phone_number = $validatedData['phone_number'];
-        $user->address = $validatedData['address'];
-        $user->gender = $validatedData['gender'];
-        $user->role = $validatedData['role'];
-
-        // Only update password if it's provided
-        if ($request->filled('password')) {
-            $user->password = bcrypt($request->password);
+        if ($validator->fails()) {
+            return redirect()->back()->with('errors' , $validator->errors(), 422);
         }
-
-        $user->save();
-
-        return redirect()->route('all-users')->with('success', 'User updated successfully!');
+        $user = User::create([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'gender' => $request->gender,
+            'phoneno' => $request->phoneno,
+            'role' => $request->role,
+            'address' => $request->address,
+        ]);
+        return redirect()->back()->with('success','User Added successfully!',201);
     }
 
-    public function destroy($id)
+    public function editUser(Request $request)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Unauthorized access.');
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|in:Male,Female,Other',
+            'phoneno' => 'required|string|max:20',
+            'role' => 'required|in:admin,user',
+            'address' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('errors' , $validator->errors(), 422);
+        }
+        $id = $request->id;
+        $user = User::find($id);
+        $user->update([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'phoneno' => $request->phoneno,
+            'role' => $request->role,
+            'address' => $request->address,
+        ]);
+        return redirect()->back()->with('success','User updated successfully!',201);
+    }
+
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+        $user->status = '0';
+        $user->close = '0';
+        $user->save();
+        return redirect()->back()->with('success','User deleted successfully!');
+    }
+
+    public function checkEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $emailExists = User::where('email', $request->email)->exists();
+
+        if ($emailExists) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This email is already taken.',
+            ]);
         }
 
-        $loggedInUser = Auth::user();
-
-        if ($loggedInUser->role === 'user') {
-            return redirect()->route('all-users')->with('error', 'You are not allowed to delete users.');
-        }
-
-        $user = User::findOrFail($id);
-
-        if ($loggedInUser->id == $id) {
-            return redirect()->route('all-users')->with('error', 'You cannot delete your own account!');
-        }
-
-        $user->update(['status' => 0]);
-
-        return redirect()->route('all-users')->with('success', 'User deleted successfully!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Email is available.',
+        ]);
     }
 }

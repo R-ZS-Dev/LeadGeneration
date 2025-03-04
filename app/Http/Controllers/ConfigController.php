@@ -16,6 +16,7 @@ use Psy\Sudo;
 
 class ConfigController extends Controller
 {
+
     public function viewHospital()
     {
         $hospital = Hospital::where('status', '1')->where('close', '1')->get();
@@ -24,6 +25,8 @@ class ConfigController extends Controller
 
     public function addHospital(Request $request)
     {
+
+        // return $request->all();
         $validated = $request->validate([
             'hos_name' => 'required|string|max:255',
             'zip_code' => 'required|string|max:20',
@@ -31,7 +34,7 @@ class ConfigController extends Controller
             'national_pro_id' => 'required|string|max:255',
             'active' => 'nullable|string',
         ]);
-        $user = Auth::user();
+
 
         Hospital::create([
             'hos_name' => $validated['hos_name'],
@@ -39,7 +42,7 @@ class ConfigController extends Controller
             'region' => $validated['region'],
             'national_pro_id' => $validated['national_pro_id'],
             'active' => $request->active,
-            'hos_insertby' => $user->first_name,
+            'hos_insertby' =>  Auth::user()->name,
 
         ]);
 
@@ -97,7 +100,7 @@ class ConfigController extends Controller
             EquipmentGroup::create([
                 'eqg_name' => $validated['eqg_name'],
                 'eqg_active' => $validated['eqg_active'],
-                'eqg_insertby' => $user->first_name,
+                'eqg_insertby' => Auth::user()->name,
             ]);
 
             return redirect()->back()->with('success', 'Equipment Group added successfully!');
@@ -178,7 +181,7 @@ class ConfigController extends Controller
                 'eq_billingcode' => $validatedData['eq_billingcode'] ?? null,
                 'eq_notes' => $validatedData['eq_notes'] ?? null,
                 'eq_active' => $validatedData['eq_active'],
-                'eq_insertby' => $user->first_name,
+                'eq_insertby' => Auth::user()->name,
             ]);
 
             Log::info('Inserted Equipment ID: ' . $equipment->id);
@@ -252,12 +255,11 @@ class ConfigController extends Controller
             'spg_name' => 'required|string|max:255',
             'spg_active' => 'required|in:0,1',
         ]);
-        $user = Auth::user();
         try {
             SupplyGroup::create([
                 'spg_name' => $validated['spg_name'],
                 'spg_active' => $validated['spg_active'],
-                'spg_insertby' => $user->first_name,
+                'spg_insertby' => Auth::user()->name,
             ]);
 
             return redirect()->back()->with('success', 'Supply Group added successfully!');
@@ -336,7 +338,7 @@ class ConfigController extends Controller
                 'sp_notes' => $validatedData['sp_notes'] ?? null,
                 'sp_groups' => $validatedData['sp_group'],
                 'sp_active' => $validatedData['eq_active'],
-                'sp_insertby' => Auth::user()->first_name ?? 'Unknown',
+                'sp_insertby' => Auth::user()->name,
             ]);
 
             Log::info('Inserted Supply ID: ' . $supply->id);
@@ -426,7 +428,7 @@ class ConfigController extends Controller
         $staff->st_middle_name = $request->st_middle_name;
         $staff->st_last_name = $request->st_last_name;
         $staff->st_phone = $request->st_phone;
-        $staff->st_insertby = $user->first_name;
+        $staff->st_insertby = Auth::user()->name;
 
         $staff->anesthesiologist = $request->anesthesiologist;
         $staff->cardiologist = $request->cardiologist;
@@ -500,7 +502,7 @@ class ConfigController extends Controller
         $procedure->pro_display = $request->pro_display;
         $procedure->pro_desc = $request->pro_desc;
         $procedure->pro_active = $request->pro_active;
-        $procedure->pro_insertby = $user->first_name;
+        $procedure->pro_insertby = Auth::user()->name;
         $procedure->save();
         return redirect()->back()->with('success','Procedure added successfully.');
     }

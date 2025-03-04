@@ -1,4 +1,5 @@
 @extends('sitemaster.master-layout')
+@section('title','All Supply Groups')
 @section('content')
             <div class="container-fluid">
                 <!-- ============================================================== -->
@@ -36,9 +37,10 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Supply Group Name</label>
                                                     <input type="text" name="spg_name" id="eqgname"
                                                         value="{{ old('spg_name') }}" class="form-control"
-                                                        placeholder="Supply group name" required>
+                                                        placeholder="Supply Group Name" required>
 
                                                 </div>
                                             </div>
@@ -93,7 +95,7 @@
                                         <tbody>
                                             @php $i = 0; @endphp
                                             @foreach ($spg as $index => $item)
-                                                <tr>
+                                                <tr id="row-{{ $item->spg_id }}">
                                                     <td>{{ ++$i }}</td>
                                                     <td>{{ $item->spg_name }}</td>
                                                     <td>
@@ -109,7 +111,7 @@
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </a>
 
-                                                        <a href="javascript:void(0);" onclick="confirmDelete('{{ route('delete-supply-group', $item->spg_id) }}')"
+                                                        <a href="javascript:void(0);" onclick="confirmDelete('{{ route('delete-supply-group', $item->spg_id) }}','{{ $item->spg_id }}')"
                                                             class="edit-icon delete-user-btn text-danger">
                                                             <i class="fa-solid fa-trash-can-arrow-up"></i>
                                                          </a>
@@ -141,9 +143,10 @@
                                         <input type="hidden" name="spg_id" id="spg_id">
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
+                                                <label for="">Supply Group Name</label>
                                                 <input type="text" name="spg_name" id="edit-spgname"
                                                     value="{{ old('eqg_name') }}" class="form-control"
-                                                    placeholder="Supply group name" required>
+                                                    placeholder="Supply Group nName" required>
 
                                             </div>
                                         </div>

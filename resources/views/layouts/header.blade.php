@@ -12,6 +12,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <!-- Custom CSS -->
+    <title>@yield('title')</title>
     <link href="{{ asset('assets/extra-libs/c3/c3.min.css')}}" rel="stylesheet">
     <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
     <link href="{{ asset('assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
@@ -21,6 +22,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
     <link href="{{ asset('dist/css/style.min.css')}}" rel="stylesheet">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

@@ -4,10 +4,10 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer text-center text-muted">
+            {{-- <footer class="footer text-center text-muted">
                 All Rights Reserved by Freedash. Designed and Developed by <a
                     href="https://atozcoder.com/" target="_blank">AtoZ Coders</a>.
-            </footer>
+            </footer> --}}
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
@@ -45,23 +45,47 @@
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
     <script>
-        function confirmDelete(url) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = url; // Redirect to delete route
-                }
-            });
-        }
+           function confirmDelete(deleteUrl, rowId) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: deleteUrl,
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            toast: true,
+                            position: "top-end",
+                            icon: "success",
+                            title: "Deleted Successfully!",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true
+                        });
+
+                        // ✅ Smooth fadeOut animation
+                        $("#row-" + rowId).fadeOut(500, function() {
+                            $(this).remove();
+                        });
+                    },
+                    error: function(xhr) {
+                        Swal.fire("Error!", "Something went wrong.", "error");
+                    }
+                });
+            }
+        });
+    }
     </script>
     @if (session('success'))
         <script>
@@ -83,6 +107,30 @@
             });
         </script>
     @endif
+{{--
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let checkbox = document.querySelector(".form-check-input");
+            let label = document.querySelector(".status-label");
+            function updateLabel() {
+                label.textContent = checkbox.checked ? "Active" : "InActive";
+            }
+            updateLabel();
+            checkbox.addEventListener("change", updateLabel);
+        });
+    </script> --}}
+    {{-- <script>
+        function updateLabels() {
+            document.querySelectorAll(".status-switch").forEach(function (checkbox) {
+                let label = checkbox.nextElementSibling; // Get the associated label
+                label.textContent = checkbox.checked ? "Active" : "Inactive"; // Update label text
+            });
+        }
+        window.onload = updateLabels;
+        document.querySelectorAll(".status-switch").forEach(function (checkbox) {
+            checkbox.addEventListener("change", updateLabels);
+        });
+    </script> --}}
 
 </body>
 

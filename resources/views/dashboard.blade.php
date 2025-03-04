@@ -1,10 +1,22 @@
 @extends('sitemaster.master-layout')
+@section('title','Dashboard')
 @section('content')
     <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="row align-items-center mb-2">
+                    <div class="col develop">
+                        DASHBAORD UNDER DEVELOPING PHASE
+                    </div>
+
+                </div>
+
+            </div> <!-- .col-12 -->
+        </div>
         <!-- *************************************************************** -->
         <!-- Start First Cards -->
         <!-- *************************************************************** -->
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-sm-6 col-lg-3">
                 <div class="card border-end">
                     <div class="card-body">
@@ -76,14 +88,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- *************************************************************** -->
         <!-- End First Cards -->
         <!-- *************************************************************** -->
         <!-- *************************************************************** -->
         <!-- Start Sales Charts Section -->
         <!-- *************************************************************** -->
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-4 col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -186,14 +198,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- *************************************************************** -->
         <!-- End Sales Charts Section -->
         <!-- *************************************************************** -->
         <!-- *************************************************************** -->
         <!-- Start Location and Earnings Charts Section -->
         <!-- *************************************************************** -->
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-6 col-lg-8">
                 <div class="card">
                     <div class="card-body">
@@ -275,14 +287,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- *************************************************************** -->
         <!-- End Location and Earnings Charts Section -->
         <!-- *************************************************************** -->
         <!-- *************************************************************** -->
         <!-- Start Top Leader Table -->
         <!-- *************************************************************** -->
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -464,7 +476,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- *************************************************************** -->
         <!-- End Top Leader Table -->
         <!-- *************************************************************** -->
