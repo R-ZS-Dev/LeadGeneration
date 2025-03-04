@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
@@ -38,10 +39,6 @@ Route::middleware('auth')->group(function () {
         });
 
     Route::controller(ConfigController::class)->group(function () {
-
-
-
-        /* ------------------------------- users route ------------------------------ */
 
 
         Route::any('/check-email', [UserController::class, 'checkEmail'])->name('check.email');
@@ -100,6 +97,28 @@ Route::middleware('auth')->group(function () {
         route::post('/edit-lab','editLab')->name('edit-lab');
         route::post('/delete-lab/{id}','deleteLab')->name('delete-lab');
 
+    });
+
+    Route::controller(GeneralController::class)->group(function () {
+        /* ------------------------------- General Event routes ------------------------------- */
+        Route::get('/general-event', 'viewgeneralevents')->name('general-event');
+        route::post('/add-gevent', 'addGevent')->name('add-gevent');
+        route::post('/edit-gevent', 'editGeneralEvent')->name('edit-gevent');
+        // route::get('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
+        Route::delete('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
+
+        /* ------------------------- check list item routes ------------------------ */
+        Route::get('/checklist-item', 'viewClitem')->name('checklist-item');
+        route::post('/add-clitem', 'addClitem')->name('add-clitem');
+        route::post('/edit-clitem', 'editClitem')->name('edit-clitem');
+        route::get('/delete-clitem/{id}', 'deleteClitem')->name('delete-clitem');
+
+        /* ------------------------- check list routes ------------------------ */
+        Route::get('/checklist', 'viewClist')->name('checklist');
+        route::post('/add-clist', 'addClist')->name('add-clist');
+        route::get('/delete-clist/{id}', 'deleteClist')->name('delete-clist');
+        Route::get('/edit-clist/{id}','editClist')->name('edit-clist');
+        Route::post('/update-clist','updateClist')->name('update-clist');
     });
 });
 
