@@ -11,6 +11,9 @@
             'login' => 'Login',
             'register' => 'Register',
             'report' => 'Report',
+            'checklist' => 'Check List',
+            'general-event' => 'General Event',
+            'checklist-item' => 'Check List Item',
             'view-hospital' => 'All Hospitals List',
             'view-equipment-group' => 'All Equipment Groups',
             'view-equipment' => 'All Equipments',
@@ -19,7 +22,6 @@
             'view-staff' => 'All Staff Memebers',
             'view-procedure' => 'All Procedures',
             'view-lab-results' => 'All Lab Reports',
-
         ];
     @endphp
 
