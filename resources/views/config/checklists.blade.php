@@ -159,11 +159,11 @@
                                                 </a>
 
 
-                                                <a href="javascript:void(0);"
+                                                {{-- <a href="javascript:void(0);"
                                                     onclick="confirmDelete('{{ route('delete-clist', $viewClist->c_id) }}')"
                                                     class="edit-icon delete-user-btn text-danger">
                                                     <i class="fa-solid fa-trash-can-arrow-up"></i>
-                                                </a>
+                                                </a> --}}
                                             </td>
                                         </tr>
                                     @endforeach
