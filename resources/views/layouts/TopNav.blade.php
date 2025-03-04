@@ -131,7 +131,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('profile-setting') }}"><i data-feather="settings"
+                    <a class="dropdown-item" href="#"><i data-feather="settings"
                             class="svg-icon me-2 ms-1"></i>
                         Account Setting</a>
                     <div class="dropdown-divider"></div>

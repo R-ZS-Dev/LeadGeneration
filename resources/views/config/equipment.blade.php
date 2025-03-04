@@ -1,4 +1,5 @@
 @extends('sitemaster.master-layout')
+@section('title','All Equipments')
 @section('content')
             <div class="container-fluid">
                 <!-- ============================================================== -->
@@ -35,6 +36,7 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Select Equipment Group</label>
                                                     <select name="eq_type" id="" class="form-select">
                                                         <option value="">Select Equipment Group</option>
                                                         @foreach ($eqg as $item)
@@ -45,37 +47,44 @@
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Manufacturer</label>
                                                     <input type="text" name="eq_manufacturer" class="form-control" id="" placeholder="Manufacturer">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Name</label>
                                                     <input type="text" name="eq_name" class="form-control" id="" placeholder="Name">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Serial No</label>
                                                     <input type="text" name="eq_serial" class="form-control" id="" placeholder="Serial no">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Last Service</label>
                                                     <input type="date" name="eq_lastservice" class="form-control" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" placeholder="Last Service">
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Next Service</label>
                                                     <input type="date" name="eq_nextservice" class="form-control" id="" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" placeholder="Next Service">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Billing Code</label>
                                                     <input type="text" name="eq_billingcode" class="form-control" id="" placeholder="Billing code">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group mb-3">
+                                                    <label for="">Add Notes</label>
                                                     <textarea name="eq_notes" id="" rows="3" placeholder="Add notes" class="form-control">
                                                     </textarea>
                                                 </div>
@@ -134,7 +143,7 @@
                                         <tbody>
                                             @php $i = 0; @endphp
                                             @foreach ($eq as $index => $item)
-                                                <tr>
+                                                <tr id="row-{{ $item->eq_id }}">
                                                     <td>{{ ++$i }}</td>
                                                     <td>{{ $item->equipmentGroup->eqg_name }}</td>
                                                     <td>{{ $item->eq_manufacturer }}</td>
@@ -153,7 +162,7 @@
                                                             href="javascript:void(0);">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </a>
-                                                        <a href="javascript:void(0);" onclick="confirmDelete('{{ route('delete-equipment', $item->eq_id) }}')"
+                                                        <a href="javascript:void(0);" onclick="confirmDelete('{{ route('delete-equipment', $item->eq_id) }}' , '{{ $item->eq_id }}')"
                                                             class="edit-icon delete-user-btn text-danger">
                                                             <i class="fa-solid fa-trash-can-arrow-up"></i>
                                                          </a>
@@ -186,6 +195,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
+                                                <label for="">Select Equipment Group</label>
                                                 <select name="eq_type" id="edit_type" class="form-select">
                                                     <option value="">Select Equipment Group</option>
                                                     @foreach ($eqg as $item)
@@ -196,37 +206,44 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
+                                                <label for="">Manufacturer</label>
                                                 <input type="text" name="eq_manufacturer" class="form-control" id="edit_manufacturer" placeholder="Manufacturer">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
+                                                <label for="">Name</label>
                                                 <input type="text" name="eq_name" class="form-control" id="edit_name" placeholder="Name">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
+                                                <label for="">Serial No</label>
                                                 <input type="text" name="eq_serial" class="form-control" id="edit_serial" placeholder="Serial no">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
+                                                <label for="">Last Service</label>
                                                 <input type="date" name="eq_lastservice" class="form-control" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" placeholder="Last Service" id="edit_lastservice" >
 
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
+                                                <label for="">Next Service</label>
                                                 <input type="date" name="eq_nextservice" class="form-control"  value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" placeholder="Next Service" id="edit_nextservice">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
+                                                <label for="">Billing Code</label>
                                                 <input type="text" name="eq_billingcode" class="form-control" id="edit_billing" placeholder="Billing code">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
+                                                <label for="">Add Notes</label>
                                                 <textarea name="eq_notes" id="edit_notes" rows="3" placeholder="Add notes" class="form-control">
                                                 </textarea>
                                             </div>

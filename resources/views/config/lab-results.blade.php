@@ -1,4 +1,5 @@
 @extends('sitemaster.master-layout')
+@section('title','All Lab Results')
 @section('content')
     <div class="container-fluid">
         <!-- ============================================================== -->
@@ -34,6 +35,7 @@
                                     <!-- Staff Name -->
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
+                                            <label for="">Lab Report Name</label>
                                             <input type="text" name="lr_name" class="form-control"
                                                 placeholder="Lab Report Name" required>
                                         </div>
@@ -41,15 +43,17 @@
                                     <!-- First Name -->
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
-                                            <input type="text" name="lr_abbrivate" maxlength="10" class="form-control"
-                                                placeholder="Lab Report Abbrivation" required autocomplete="off">
+                                            <label for="">Abbrivation</label>
+                                            <input type="text" name="lr_abbrivate" class="form-control"
+                                                placeholder="Lab Report Abbrivation" required maxlength="10">
 
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
-                                            <input type="text" name="unit_of_measure" class="form-control"
-                                                placeholder="Unit Of Measurment" required>
+                                            <label for="">Unit of measurment</label>
+                                                <input type="text"  name="unit_of_measure" class="form-control"
+                                                placeholder="Unit Of Measurment" maxlength="5">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -62,35 +66,41 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">Description</label>
                                             <textarea name="lr_desc" rows="3" class="form-control" placeholder="Description"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
+                                            <label for="">Expected Low</label>
                                             <input type="number" name="exp_low" class="form-control"
                                                 placeholder="Expected Low">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
+                                            <label for="">Expected High</label>
                                             <input type="number" name="exp_high" class="form-control"
                                                 placeholder="Expected High">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
+                                            <label for="">Maximum</label>
                                             <input type="number" name="maximum" class="form-control" placeholder="Maximum"
                                                 maxlength="10">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
+                                            <label for="">High Critical</label>
                                             <input type="number" name="high_critical" class="form-control"
                                                 placeholder="High Critical">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
+                                            <label for="">High Warn</label>
                                             <input type="number" name="high_warn" class="form-control"
                                                 placeholder="High Warn">
                                         </div>
@@ -111,18 +121,21 @@
 
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
+                                            <label for="">Minimum</label>
                                             <input type="text" name="minimum" class="form-control"
                                                 placeholder="Minimum" maxlength="10">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
+                                            <label for="">Low Critical</label>
                                             <input type="number" name="low_critical" class="form-control"
                                                 placeholder="Low Critical">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
+                                            <label for="">Low Warn</label>
                                             <input type="number" name="low_warn" class="form-control"
                                                 placeholder="Low Warn">
                                         </div>
@@ -130,8 +143,8 @@
                                     <div class="col-lg-12">
                                         <div class="form-group form-switch mb-3">
                                             <input type="hidden" name="lr_active" value="0">
-                                            <input type="checkbox" name="lr_active" id="pro_active" value="1"
-                                                class="form-check-input" checked role="switch">
+                                            <input type="checkbox" name="lr_active" id="pro_active" value="1"  checked
+                                                class="form-check-input" role="switch">
                                             <label for="pro_active" class="form-check-label">Active</label>
                                         </div>
                                     </div>
@@ -187,7 +200,7 @@
                                 <tbody>
                                     @php $i = 0; @endphp
                                     @foreach ($results as $index => $item)
-                                        <tr>
+                                        <tr id="row-{{ $item->lr_id }}">
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $item->lr_name }}</td>
                                             <td>{{ $item->lr_abbrivat }}</td>
@@ -223,7 +236,7 @@
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
                                                 <a href="javascript:void(0);"
-                                                    onclick="confirmDelete('{{ route('delete-lab-results', $item->lr_id) }}')"
+                                                    onclick="confirmDelete('{{ route('delete-lab-results', $item->lr_id) }}' , {{ $item->lr_id }})"
                                                     class="text-danger">
                                                     <i class="fa-solid fa-trash-can-arrow-up"></i>
                                                 </a>
@@ -255,6 +268,7 @@
                                 <!-- Staff Name -->
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">Lab Report Name</label>
                                         <input type="text" name="lr_name" class="form-control"
                                             placeholder="Lab Report Name" id="edit_name" required>
                                     </div>
@@ -262,12 +276,14 @@
                                 <!-- First Name -->
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">Abbrivation</label>
                                         <input type="text" name="lr_abbrivate" class="form-control"
                                         placeholder="Lab Report Abbrivation" id="abbrivate" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">Unit Of Measurment</label>
                                         <input type="text" name="unit_of_measure" class="form-control"
                                             placeholder="Unit Of Measurment" id="edit_mou" required>
                                     </div>
@@ -282,35 +298,41 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">Description</label>
                                         <textarea name="lr_desc" rows="3" class="form-control" placeholder="Description" id="edit_desc"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">Expected Low</label>
                                         <input type="number" name="exp_low" class="form-control"
                                             placeholder="Expected Low" id="edit_explow">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">Expected High</label>
                                         <input type="number" name="exp_high" class="form-control"
                                             placeholder="Expected High" id="edit_exphigh">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">Maximum</label>
                                         <input type="number" name="maximum" class="form-control" placeholder="Maximum"
                                             maxlength="10" id="edit_max">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">High Critical</label>
                                         <input type="number" name="high_critical" class="form-control"
                                             placeholder="High Critical" id="edit_highcrit">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">High Warn</label>
                                         <input type="number" name="high_warn" class="form-control"
                                             placeholder="High Warn" id="edit_highwarn">
                                     </div>
@@ -331,18 +353,21 @@
 
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">Minimum</label>
                                         <input type="text" name="minimum" class="form-control" placeholder="Minimum"
                                             maxlength="10" id="edit_min">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">Low Critical</label>
                                         <input type="number" name="low_critical" class="form-control"
                                             placeholder="Low Critical" id="edit_lowcrit">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
+                                        <label for="">Low Warn</label>
                                         <input type="number" name="low_warn" class="form-control"
                                             placeholder="Low Warn" id="edit_lowwarn">
                                     </div>

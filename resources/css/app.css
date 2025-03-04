@@ -1,3 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.develop {
+    color: white;
+    font-weight: bolder;
+    background-color:#793268;
+    border-radius: 10px;
+    font-size: larger;
+    padding: 2%;
+}
+
+
+.gender-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+input[name='gender'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+input[name='gender']:after {
+    font-family: 'FontAwesome';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 50px;
+    width: 70px;
+    height: 70px;
+    line-height: 100px;
+    content: attr(data-icon);
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    color: rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+input[name='gender']:checked:after {
+    box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.4);
+    color: white;
+    background-color: #793268;
+}

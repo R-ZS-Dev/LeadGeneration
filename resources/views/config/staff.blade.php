@@ -1,4 +1,5 @@
 @extends('sitemaster.master-layout')
+@section('title','All Staff Members')
 @section('content')
     <div class="container-fluid">
         <!-- ============================================================== -->
@@ -35,6 +36,7 @@
                                     <!-- Staff Name -->
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">Name</label>
                                             <input type="text" name="st_name" class="form-control"
                                                 placeholder="Name" required>
                                         </div>
@@ -43,6 +45,7 @@
                                     <!-- First Name -->
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">First Name</label>
                                             <input type="text" name="st_first_name" class="form-control"
                                                 placeholder="First Name" required>
                                         </div>
@@ -51,6 +54,7 @@
                                     <!-- Middle Name -->
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">Middle Name (optional)</label>
                                             <input type="text" name="st_middle_name" class="form-control"
                                                 placeholder="Middle Name (Optional)">
                                         </div>
@@ -59,6 +63,7 @@
                                     <!-- Last Name -->
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">Last Name</label>
                                             <input type="text" name="st_last_name" class="form-control"
                                                 placeholder="Last Name" required>
                                         </div>
@@ -67,6 +72,7 @@
                                     <!-- Phone Number -->
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">Phone Number</label>
                                             <input type="text" name="st_phone" class="form-control"
                                                 placeholder="Phone Number" required>
                                         </div>
@@ -146,8 +152,8 @@
                                     <div class="col-lg-12">
                                         <div class="form-group form-switch mb-3">
                                             <input type="hidden" name="st_active" value="0">
-                                            <input type="checkbox" name="st_active" id="st_active" value="1"
-                                                class="form-check-input" role="switch" checked>
+                                            <input type="checkbox" name="st_active" id="st_active" value="1" checked
+                                                class="form-check-input" role="switch" >
                                             <label for="st_active" class="form-check-label">Active</label>
                                         </div>
                                     </div>
@@ -196,7 +202,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($staff as $index => $item)
-                                        <tr>
+                                        <tr id="row-{{ $item->st_id }}">
                                             <td>{{ $item->st_id }}</td>
                                             <td>{{ $item->st_name }}</td>
                                             <td>{{ $item->st_first_name }}</td>
@@ -216,7 +222,7 @@
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
                                                 <a href="javascript:void(0);"
-                                                    onclick="confirmDelete('{{ route('delete-staff', $item->st_id) }}')"
+                                                    onclick="confirmDelete('{{ route('delete-staff', $item->st_id) }}' ,'{{ $item->st_id }}')"
                                                     class="text-danger">
                                                     <i class="fa-solid fa-trash-can-arrow-up"></i>
                                                 </a>
@@ -245,11 +251,10 @@
                             @csrf
                             <input type="hidden" name="st_id" id="st_id">
                             <div class="row">
-
-
                                 <!-- Staff Name -->
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">Name</label>
                                         <input type="text" name="st_name" class="form-control"
                                             placeholder="Full Name" required id="st_name">
                                     </div>
@@ -258,6 +263,7 @@
                                 <!-- First Name -->
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">First Name</label>
                                         <input type="text" name="st_first_name" class="form-control"
                                             placeholder="First Name" required id="st_fn">
                                     </div>
@@ -266,6 +272,7 @@
                                 <!-- Middle Name -->
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">Middle Name (optional)</label>
                                         <input type="text" name="st_middle_name" class="form-control"
                                             placeholder="Middle Name (Optional)" id="st_mn">
                                     </div>
@@ -274,6 +281,7 @@
                                 <!-- Last Name -->
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">Last Name</label>
                                         <input type="text" name="st_last_name" class="form-control"
                                             placeholder="Last Name" required id="st_ln">
                                     </div>
@@ -282,6 +290,7 @@
                                 <!-- Phone Number -->
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">Phone Number</label>
                                         <input type="text" name="st_phone" class="form-control"
                                             placeholder="Phone Number" id="phone" required>
                                     </div>

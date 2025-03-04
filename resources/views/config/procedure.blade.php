@@ -1,4 +1,5 @@
 @extends('sitemaster.master-layout')
+@section('title','All Procedures')
 @section('content')
     <div class="container-fluid">
 
@@ -31,6 +32,7 @@
                                     <!-- Staff Name -->
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">Procedure Name</label>
                                             <input type="text" name="pro_name" class="form-control"
                                                 placeholder="Procedure Name" required>
                                         </div>
@@ -38,6 +40,7 @@
                                     <!-- First Name -->
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">CPT Code</label>
                                             <input type="text" name="pro_cptcode" class="form-control"
                                                 placeholder="CPT Code" maxlength="5"
                                                 oninput="this.value=this.value.replace(/[^0-9]/g,'');">
@@ -46,12 +49,14 @@
                                     <!-- Middle Name -->
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">Display</label>
                                             <textarea name="pro_display" rows="3" class="form-control" placeholder="Display"></textarea>
                                         </div>
                                     </div>
                                     <!-- Last Name -->
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
+                                            <label for="">Description</label>
                                             <textarea name="pro_desc" rows="3" class="form-control" placeholder="Description"></textarea>
                                         </div>
                                     </div>
@@ -103,7 +108,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($pro as $index => $item)
-                                        <tr>
+                                        <tr id="row-{{ $item->pro_id }}">
                                             <td>{{ $item->pro_id }}</td>
                                             <td>{{ $item->pro_name }}</td>
                                             <td>{{ $item->pro_cptcode }}</td>
@@ -122,7 +127,7 @@
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
                                                 <a href="javascript:void(0);"
-                                                    onclick="confirmDelete('{{ route('delete-procedure', $item->pro_id) }}')"
+                                                    onclick="confirmDelete('{{ route('delete-procedure', $item->pro_id) }}' , '{{ $item->pro_id }}')"
                                                     class="text-danger">
                                                     <i class="fa-solid fa-trash-can-arrow-up"></i>
                                                 </a>
@@ -154,6 +159,7 @@
                                 <!-- Staff Name -->
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">Procedure Name</label>
                                         <input type="text" name="pro_name" class="form-control"
                                             placeholder="Procedure Name" required id="edit_proname">
                                     </div>
@@ -161,6 +167,7 @@
                                 <!-- First Name -->
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">CPT Code</label>
                                         <input type="text" name="pro_cptcode" class="form-control"
                                             placeholder="CPT Code" id="edit_cptcode" maxlength="5"
                                             oninput="this.value=this.value.replace(/[^0-9]/g,'');">
@@ -169,12 +176,14 @@
                                 <!-- Middle Name -->
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">Display</label>
                                         <textarea name="pro_display" rows="3" class="form-control" placeholder="Display" id="edit_display"></textarea>
                                     </div>
                                 </div>
                                 <!-- Last Name -->
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
+                                        <label for="">Description</label>
                                         <textarea name="pro_desc" rows="3" class="form-control" placeholder="Description" id="edit_desc"></textarea>
                                     </div>
                                 </div>

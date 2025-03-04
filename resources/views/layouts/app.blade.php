@@ -1,30 +1,36 @@
-<head>
-    @php
-        $titles = [
-            'all-users' => 'All Users List',
-            'dashboard' => 'Dashboard',
-            'profile-setting' => 'User Profile',
-            'app-chat' => 'Chat',
-            'app-calendar' => 'Calendar',
-            'reset-password' => 'Reset Password',
-            'forget-password' => 'Forget Password',
-            'login' => 'Login',
-            'register' => 'Register',
-            'report' => 'Report',
-            'view-hospital' => 'All Hospitals List',
-            'view-equipment-group' => 'All Equipment Groups',
-            'view-equipment' => 'All Equipments',
-            'view-supply-group' => 'All Supply groups',
-            'view-supplies' => 'All Supplies',
-            'view-staff' => 'All Staff Memebers',
-            'view-procedure' => 'All Procedures',
-            'view-lab-results' => 'All Lab Reports',
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        ];
-    @endphp
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <title>{{ $titles[Route::currentRouteName()] ?? 'Default Title' }}</title>
-</head>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
 
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
 
+            <!-- Page Content -->
+            <main>
+                {{ $slot ?? ''}}
+            </main>
+        </div>
+    </body>
+</html>
