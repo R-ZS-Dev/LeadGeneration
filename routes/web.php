@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\EmailSettingsController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
+use App\Models\EmailSetting;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -21,6 +25,24 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/profile-setting', function () {
+        return view('profile-setting');
+    })->name('profile-setting');
+
+    Route::controller(SettingsController::class)->group(function () {
+        Route::post('update-profile', 'updateProfile')->name('settings.updateProfile');
+        Route::post('update-password', 'updatePassword')->name('settings.updatePassword');
+        Route::post('update-email', 'updateEmail')->name('settings.updateEmail');
+    });
+
+    Route::controller(EmailSettingsController::class)->group(function () {
+        Route::get('/email-config', 'showForm')->name('settings.email');
+        Route::post('/email-config', 'updateEmailConfig')->name('settings.updateEmail');
+    });
+
+    Route::controller((CompanyController::class))->group(function () {
+        Route::post('update-company', 'updateCompany')->name('settings.updateCompany');
+    });
 
     Route::controller(ReportController::class)->group(function () {
         Route::get('/report', 'index')->name('report'); // Show reports page
@@ -97,6 +119,13 @@ Route::middleware('auth')->group(function () {
         route::post('/edit-lab','editLab')->name('edit-lab');
         route::post('/delete-lab/{id}','deleteLab')->name('delete-lab');
 
+        /* ---------------------------- lab ranges routes --------------------------- */
+
+        Route::get('/lab-ranges', 'viewLabrange')->name('view-lab-range');
+        route::post('/add-lab-range','addLabrange')->name('add-lab-range');
+        route::post('/edit-lab-range','editLabrange')->name('edit-lab-range');
+        route::post('/delete-lab-range/{id}','deleteLabrange')->name('delete-lab-range');
+
     });
 
     Route::controller(GeneralController::class)->group(function () {
@@ -105,7 +134,7 @@ Route::middleware('auth')->group(function () {
         route::post('/add-gevent', 'addGevent')->name('add-gevent');
         route::post('/edit-gevent', 'editGeneralEvent')->name('edit-gevent');
         // route::get('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
-        Route::delete('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
+        Route::post('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
 
         /* ------------------------- check list item routes ------------------------ */
         Route::get('/checklist-item', 'viewClitem')->name('checklist-item');
@@ -116,7 +145,7 @@ Route::middleware('auth')->group(function () {
         /* ------------------------- check list routes ------------------------ */
         Route::get('/checklist', 'viewClist')->name('checklist');
         route::post('/add-clist', 'addClist')->name('add-clist');
-        route::get('/delete-clist/{id}', 'deleteClist')->name('delete-clist');
+        route::post('/delete-clist/{id}', 'deleteClist')->name('delete-clist');
         Route::get('/edit-clist/{id}','editClist')->name('edit-clist');
         Route::post('/update-clist','updateClist')->name('update-clist');
     });

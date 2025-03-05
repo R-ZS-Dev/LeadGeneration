@@ -146,11 +146,11 @@
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
 
-                                    {{-- <a href="javascript:void(0);"
-                                        onclick="confirmDelete('{{ route('delete-gevent', $showevent->g_id) }}', 'row-{{ $showevent->g_id }}')"
+                                    <a href="javascript:void(0);"
+                                        onclick="confirmDelete('{{ route('delete-gevent', $showevent->g_id) }}', '{{ $showevent->g_id }}')"
                                         class="edit-icon delete-user-btn text-danger">
                                         <i class="fa-solid fa-trash-can-arrow-up"></i>
-                                    </a> --}}
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -309,81 +309,4 @@
     });
 </script>
 
-<script>
-    function confirmDelete(url, rowId) {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: url,
-                    type: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire({
-                                title: 'Deleted!',
-                                text: document.title + ' deleted successfully!',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-
-                            // Fade out the deleted row
-                            $("#" + rowId).fadeOut("slow", function() {
-                                $(this).remove();
-                            });
-                        } else {
-                            Swal.fire(
-                                'Failed!',
-                                'Failed to delete the event.',
-                                'error'
-                            );
-                        }
-                    },
-                    error: function(xhr) {
-                        Swal.fire(
-                            'Error!',
-                            'An error occurred while deleting the event.',
-                            'error'
-                        );
-                    }
-                });
-            }
-        });
-    }
-</script>
-
-<script>
-    // function confirmDelete(url) {
-    //     if (confirm('Are you sure you want to delete this event?')) {
-    //         $.ajax({
-    //             url: url,
-    //             type: 'DELETE',
-    //             data: {
-    //                 _token: '{{ csrf_token() }}'
-    //             },
-    //             success: function(response) {
-    //                 if (response.success) {
-    //                     alert('General Event deleted successfully!');
-    //                     location.reload();
-    //                 } else {
-    //                     alert('Failed to delete the event.');
-    //                 }
-    //             },
-    //             error: function(xhr) {
-    //                 alert('An error occurred while deleting the event.');
-    //             }
-    //         });
-    //     }
-    // }
-</script>
 @endsection
