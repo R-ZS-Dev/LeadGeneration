@@ -49,6 +49,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/add-report', 'addReport')->name('add-report'); // Store new report
         route::post('/edit-report','editReport')->name('edit-report');
         route::any('/delete-report/{id}','deleteReport')->name('delete-report');
+
+        /* -------------------------- report review routes -------------------------- */
+        Route::get('/report-review', 'viewReportReview')->name('report-review');
+        Route::post('/add-report-review', 'addReportReview')->name('add-report-review');
+        route::post('/edit-report-review','editReportReview')->name('edit-report-review');
+        route::any('/delete-report-review/{id}','deleteReportReview')->name('delete-report-review');
     });
 
 

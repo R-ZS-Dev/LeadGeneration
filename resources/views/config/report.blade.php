@@ -1,4 +1,5 @@
 @extends('sitemaster.master-layout')
+@section('title','All Reports')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -185,7 +186,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>

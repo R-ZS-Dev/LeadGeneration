@@ -16,11 +16,12 @@ return new class extends Migration
             $table->id('rep_id');
             $table->integer('rep_userid')->nullable()->collation('utf8mb4_general_ci');
             $table->string('report_name', 100)->collation('utf8mb4_general_ci');
-            $table->text('rep_address1', 500)->collation('utf8mb4_general_ci');
-            $table->text('rep_address2', 500)->nullable()->collation('utf8mb4_general_ci');
+            $table->text('rep_address1')->collation('utf8mb4_general_ci');
+            $table->text('rep_address2')->nullable()->collation('utf8mb4_general_ci');
             $table->text('rep_headimage')->collation('utf8mb4_general_ci');
             $table->text('rep_footimage')->collation('utf8mb4_general_ci');
             $table->enum('rep_active', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
+            $table->string('rr_insertby', 50)->collation('utf8mb4_general_ci');
             $table->enum('status', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->enum('close', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->timestamps();

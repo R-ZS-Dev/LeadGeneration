@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\ReportReviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -105,5 +106,46 @@ class ReportController extends Controller
         $report->rep_active = $request->rep_active;
         $report->save();
         return redirect()->back()->with('success', 'Report updated successfully!');
+    }
+
+    /* --------------------- report review module functions --------------------- */
+
+    public function viewReportReview()
+    {
+        $type = Report::where('status','1')->where('close','1')->get();
+        $report = ReportReviews::where('status','1')->where('close','1')
+        ->with('report')
+        ->get();
+        return view('config.report-reviews',compact('type','report'));
+    }
+
+    public function addReportReview(Request $request)
+    {
+
+    $request->validate([
+        'report_type' => 'nullable|integer',
+        'rr_name' => 'required|string|max:100',
+    ]);
+
+    $reportReview = ReportReviews::create([
+        'report_type' => $request->report_type,
+        'rr_name' => $request->rr_name,
+        'rr_desc' => $request->rr_desc,
+        'rr_active' => $request->rr_active,
+        'rr_insertby' => Auth::user()->name,
+
+    ]);
+
+    return redirect()->back()->with('success','Report Reviews added successfully!');
+
+    }
+
+    public function deleteReportReview($id)
+    {
+        $rep = ReportReviews::find($id);
+        $rep->status = '0';
+        $rep->close = '0';
+        $rep->save();
+        return redirect()->back()->with('success','Report Reviews Deleted Successfully');
     }
 }
