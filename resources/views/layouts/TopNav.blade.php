@@ -125,10 +125,10 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <img src="{{ Auth::user()->profile_photo
+                    {{-- <img src="{{ Auth::user()->profile_photo
                 ? asset('uploads/' . Auth::user()->profile_photo)
                 : asset('uploads/default.jpg') }}" alt="user"
-                        width="40" height="30">
+                        width="40" height="30"> --}}
                     <span class="ms-2 d-none d-lg-inline-block"><span>Hello,</span> <span
                             class="text-dark">{{ Auth::user()->name ?? 'Guest' }}</span> <i data-feather="chevron-down"
                             class="svg-icon"></i></span>

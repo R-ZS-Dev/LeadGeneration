@@ -1,11 +1,11 @@
 @extends('sitemaster.master-layout')
-@section('title','Profile Setting')
+@section('title','Profile Settings')
 @section('content')
 </style>
 <div class="container-fluid">
     <div class="card p-3 m-3">
         <!-- Navigation Tabs -->
-        <ul class="nav nav-tabs" id="settingsTabs">
+        <!-- <ul class="nav nav-tabs" id="settingsTabs">
             <li class="nav-item">
                 <a class="nav-link active" data-bs-toggle="tab" href="#profile">Profile</a>
             </li>
@@ -20,11 +20,41 @@
                 <a class="nav-link" data-bs-toggle="tab" href="#email">Email</a>
             </li>
             @endif
+        </ul> -->
+
+        <ul class="nav p-3" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="btn tabButton active" id="tab1-tab" data-bs-toggle="tab"
+                    data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1"
+                    aria-selected="true">
+                    Profile
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="btn tabButton" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2"
+                    type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                    Company
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="btn tabButton" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3"
+                    type="button" role="tab" aria-controls="tab3" aria-selected="false">
+                    Password
+                </button>
+            </li>
+            @if(Auth::user()->role === 'admin')
+            <li class="nav-item" role="presentation">
+                <button class="btn tabButton" id="tab4-tab" data-bs-toggle="tab" data-bs-target="#tab4"
+                    type="button" role="tab" aria-controls="tab4" aria-selected="false">
+                    Email
+                </button>
+            </li>
+            @endif
         </ul>
 
         <div class="tab-content mt-4">
             <!-- Profile Tab -->
-            <div class="tab-pane fade show active" id="profile">
+            <section id="tab1" class="tab-pane fade show active">
                 <form id="profileSettingsForm" action="{{ route('settings.updateProfile') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row p-4">
@@ -79,10 +109,10 @@
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
-            </div>
+            </section>
 
             <!-- Company Tab -->
-            <div class="tab-pane fade" id="company">
+            <section id="tab2" class="tab-pane fade">
                 <form id="companySettingsForm" action="{{ route('settings.updateCompany') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -171,10 +201,10 @@
                     </div>
                 </form>
 
-            </div>
+            </section>
 
             <!-- Password Tab -->
-            <div class="tab-pane fade" id="password">
+            <section id="tab3" class="tab-pane fade">
                 <form action="{{ route('settings.updatePassword') }}" method="POST" id="passwordForm">
                     @csrf
 
@@ -203,10 +233,10 @@
                     </div>
                 </form>
 
-            </div>
+            </section>
 
             <!-- Email Tab -->
-            <div class="tab-pane fade" id="email">
+            <section id="tab4" class="tab-pane fade">
                 <form id="emailSettingsForm" action="{{ route('settings.updateEmail') }}" method="POST">
                     @csrf
                     <div class="row">
@@ -238,10 +268,10 @@
                     </div>
 
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary" id="submitBtn">Update</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
-            </div>
+            </section>
 
         </div>
     </div>
@@ -454,62 +484,9 @@
         }
     </script>
 
-
-    <script>
-        // document.addEventListener("DOMContentLoaded", function() {
-        //     const currentPassword = document.getElementById("current_password");
-        //     const newPassword = document.getElementById("new_password");
-        //     const confirmPassword = document.getElementById("confirm_password");
-        //     const submitBtn = document.getElementById("submitBtn");
-
-        //     const passwordError = document.getElementById("passwordError");
-        //     const confirmError = document.getElementById("confirmError");
-
-        //     // Password pattern: Minimum 8 characters, at least 1 uppercase, 1 lowercase, 1 number, 1 special character
-        //     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-        //     function validateForm() {
-        //         let isValid = true;
-
-        //         // Enable new password fields only if current password is entered
-        //         if (currentPassword.value.trim() !== "") {
-        //             newPassword.disabled = false;
-        //             confirmPassword.disabled = false;
-        //         } else {
-        //             newPassword.disabled = true;
-        //             confirmPassword.disabled = true;
-        //             isValid = false;
-        //         }
-
-        //         // Validate new password pattern
-        //         if (newPassword.value.trim() !== "" && !passwordPattern.test(newPassword.value.trim())) {
-        //             passwordError.classList.remove("d-none");
-        //             isValid = false;
-        //         } else {
-        //             passwordError.classList.add("d-none");
-        //         }
-
-        //         // Check if passwords match
-        //         if (confirmPassword.value.trim() !== "" && newPassword.value.trim() !== confirmPassword.value.trim()) {
-        //             confirmError.classList.remove("d-none");
-        //             isValid = false;
-        //         } else {
-        //             confirmError.classList.add("d-none");
-        //         }
-
-        //         // Enable submit button only if all conditions are met
-        //         submitBtn.disabled = !isValid;
-        //     }
-
-        //     // Attach event listeners
-        //     currentPassword.addEventListener("input", validateForm);
-        //     newPassword.addEventListener("input", validateForm);
-        //     confirmPassword.addEventListener("input", validateForm);
-        // });
-    </script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("passwordForm"); // Replace with your actual form ID
             const currentPassword = document.getElementById("current_password");
             const newPassword = document.getElementById("new_password");
             const confirmPassword = document.getElementById("confirm_password");
@@ -583,6 +560,13 @@
             // Event Listeners for New Password Validation
             newPassword.addEventListener("input", validateForm);
             confirmPassword.addEventListener("input", validateForm);
+
+            // **Form Submission Event Listener to Show Spinner**
+            form.addEventListener("submit", function(event) {
+                // Disable button and show spinner
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Updating...';
+                submitBtn.disabled = true;
+            });
         });
     </script>
 
@@ -590,11 +574,6 @@
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.getElementById("emailSettingsForm");
             const submitBtn = document.getElementById("submitBtn");
-
-            if (!form || !submitBtn) {
-                console.error("Form or submit button not found!");
-                return;
-            }
 
             form.addEventListener("submit", function(event) {
                 let isValid = true;
@@ -625,17 +604,15 @@
                     return;
                 }
 
-                // Show spinner & disable button
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating...`;
-
-                // Simulate a delay (to let the spinner show) before submission
-                setTimeout(() => {
-                    form.submit(); // Submit the form after spinner appears
-                }, 500); // Adjust time if needed
+                // Disable button and show spinner
+                const submitBtn = form.querySelector("button[type='submit']");
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Updating...';
+                    submitBtn.disabled = true;
+                }
             });
 
-            // Remove validation error when user starts typing
+            // Remove validation error when user types
             form.addEventListener("input", function(event) {
                 if (event.target.classList.contains("is-invalid")) {
                     event.target.classList.remove("is-invalid");
@@ -645,25 +622,59 @@
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Retrieve last active tab from localStorage
-            let activeTab = localStorage.getItem("activeTab");
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     // Retrieve last active tab from localStorage
+        //     let activeTab = localStorage.getItem("activeTab");
 
-            if (activeTab) {
-                // Remove 'active' class from all tabs and tab panes
-                document.querySelectorAll('.nav-link, .tab-pane').forEach(tab => {
-                    tab.classList.remove('active', 'show');
+        //     if (activeTab) {
+        //         // Remove 'active' class from all tabs and tab panes
+        //         document.querySelectorAll('.nav-link, .tab-pane').forEach(tab => {
+        //             tab.classList.remove('active', 'show');
+        //         });
+
+        //         // Activate the stored tab
+        //         document.querySelector(`[href="${activeTab}"]`).classList.add('active');
+        //         document.querySelector(activeTab).classList.add('active', 'show');
+        //     }
+
+        //     // Store clicked tab in localStorage
+        //     document.querySelectorAll('.nav-link').forEach(tab => {
+        //         tab.addEventListener("click", function() {
+        //             localStorage.setItem("activeTab", this.getAttribute("href"));
+        //         });
+        //     });
+        // });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tabButton');
+            const tabContents = document.querySelectorAll('.tab-pane');
+
+            function deactivateTabs() {
+                tabButtons.forEach(button => {
+                    button.classList.remove('active');
+                    button.setAttribute('aria-selected', 'false');
                 });
 
-                // Activate the stored tab
-                document.querySelector(`[href="${activeTab}"]`).classList.add('active');
-                document.querySelector(activeTab).classList.add('active', 'show');
+                tabContents.forEach(content => {
+                    content.classList.remove('show', 'active');
+                });
             }
-
-            // Store clicked tab in localStorage
-            document.querySelectorAll('.nav-link').forEach(tab => {
-                tab.addEventListener("click", function() {
-                    localStorage.setItem("activeTab", this.getAttribute("href"));
+            const activeTab = sessionStorage.getItem('activeTab');
+            if (activeTab) {
+                const activeButton = document.getElementById(activeTab);
+                if (activeButton) {
+                    deactivateTabs();
+                    activeButton.classList.add('active');
+                    activeButton.setAttribute('aria-selected', 'true');
+                    const targetTab = document.querySelector(activeButton.getAttribute('data-bs-target'));
+                    targetTab.classList.add('show', 'active');
+                }
+            }
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    sessionStorage.setItem('activeTab', this.id);
                 });
             });
         });
