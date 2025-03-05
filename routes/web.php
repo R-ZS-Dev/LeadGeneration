@@ -132,7 +132,7 @@ Route::middleware('auth')->group(function () {
         route::post('/delete-lab-range/{id}','deleteLabrange')->name('delete-lab-range');
 
     });
-
+    Route::post('/settings/check-password', [SettingsController::class, 'checkPassword'])->name('settings.checkPassword');
     Route::controller(GeneralController::class)->group(function () {
         /* ------------------------------- General Event routes ------------------------------- */
         Route::get('/general-event', 'viewgeneralevents')->name('general-event');
@@ -153,6 +153,13 @@ Route::middleware('auth')->group(function () {
         route::post('/delete-clist/{id}', 'deleteClist')->name('delete-clist');
         Route::get('/edit-clist/{id}','editClist')->name('edit-clist');
         Route::post('/update-clist','updateClist')->name('update-clist');
+
+         /* ------------------------- checklist groups routes ------------------------ */
+        Route::get('/checklist-group', 'viewCLG')->name('checklist-group');
+        route::post('/add-checklistgroup', 'addCLG')->name('add-checklistgroup');
+        route::post('/delete-checklistgroup/{id}', 'deleteCLG')->name('delete-checklistgroup');
+        route::get('/edit-cgroup/{id}','editCLGroup')->name('edit-cgroup');
+        route::post('/update-cgroup','updateCLGroup')->name('update-cgroup');
     });
 });
 

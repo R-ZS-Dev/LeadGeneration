@@ -1,73 +1,67 @@
 @extends('sitemaster.master-layout')
-@section('title','All General Events')
+@section('title','Check list items')
 @section('content')
 <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- basic table -->
     <div class="row">
+        {{-- @if (session('success'))
+            <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif --}}
+
+    <!-- Success Message -->
     <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+
     <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+
                 <div class="modal-body">
                     <div class="text-center mt-2 mb-4">
                         <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                            <h4 class="mb-0"><b>Add General Event</b></h4>
+                            <h4 class="mb-0"><b>Add Check List Item</b></h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                     </div>
 
-                    <form method="POST" action="{{ route('add-gevent') }}" class="mt-4">
+                    <form method="POST" action="{{ route('add-clitem') }}" class="mt-4">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
-                                    <label for="">Note</label>
-                                    <input type="text" name="note" id="note" value="{{ old('note') }}" class="form-control" placeholder="Note" required>
-                                    @error('note')
+                                    <label for="cl_name">Name</label>
+                                    <input type="text" name="cl_name" id="cl_name" value="{{ old('cl_name') }}" class="form-control" placeholder="Check list item" required>
+                                    @error('cl_name')
                                     <small class="text-danger d-block text-start">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
-                                    <label for="g_description">Description</label>
-                                    <textarea name="g_description" id="g_description" class="form-control" rows="4" placeholder="Enter Description..." required>{{ old('g_description') }}</textarea>
-                                    @error('g_description')
-                                    <small class="text-danger d-block text-start">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group mb-3">
-                                    <label for="g_display">Display</label>
-                                    <textarea name="g_display" id="g_display" class="form-control" rows="4" placeholder="Enter Display..." required>{{ old('g_display') }}</textarea>
-                                    @error('g_display')
+                                    <label for="cl_description">Description</label>
+                                    <textarea name="cl_description" id="cl_description" class="form-control" rows="4" placeholder="Enter Description..." required>{{ old('cl_description') }}</textarea>
+                                    @error('cl_description')
                                     <small class="text-danger d-block text-start">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group form-switch mb-2">
-                                    <input type="hidden" name="g_quick" value="0">
-                                    <input type="checkbox" role="switch" name="g_quick" id="g_quick" checked
+                                    <input type="hidden" name="cl_active" value="0">
+                                    <input type="checkbox" role="switch" name="cl_active" id="cl_active" checked
                                         value="1" class="form-check-input"
-                                        {{ old('g_quick') ? 'checked' : '' }}>
-                                    <label for="g_quick" class="form-check-label">Quick</label>
+                                        {{ old('cl_active') ? 'checked' : '' }}>
+                                    <label for="cl_active" class="form-check-label">Active</label>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group form-switch mb-2">
-                                    <input type="hidden" name="g_active" value="0">
-                                    <input type="checkbox" role="switch" name="g_active" id="g_active" checked
-                                        value="1" class="form-check-input"
-                                        {{ old('g_active') ? 'checked' : '' }}>
-                                    <label for="g_active" class="form-check-label">Active</label>
-                                </div>
-                            </div>
-
                             <div class="col-lg-12 text-center">
                                 <button type="submit" class="btn w-100 btn-dark" id="submitBtn">
-                                    Add general event
+                                    Add Check List Item
                                 </button>
                             </div>
                         </div>
@@ -87,7 +81,7 @@
                         <button type="button"
                             class="btn waves-effect waves-light mb-2 btn-outline-primary"
                             data-bs-toggle="modal" data-bs-target="#signup-modal">
-                            <i class="fas fa-plus"></i> Add Event
+                            <i class="fas fa-plus"></i> Add Item
                         </button>
 
                     </div>
@@ -100,42 +94,32 @@
                                 <th>ID</th>
                                 <th>Note</th>
                                 <th>Description</th>
-                                <th>Display</th>
-                                <th>Quick</th>
                                 <th>Active</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php $i = 0; @endphp
-                            @foreach ($showevents as $index => $showevent)
-                            <tr id="row-{{ $showevent->g_id }}">
+                            @foreach ($viewClitems as $index => $viewClitem)
+                            <tr id="row-{{ $viewClitem->cl_ids }}">
                                 <td>{{ ++$i }}</td>
-                                <td>{{ $showevent->note }}</td>
-                                <td>{{ $showevent->g_description }}</td>
-                                <td>{{ $showevent->g_display }}</td>
+                                <td>{{ $viewClitem->cl_name }}</td>
+                                <td>{{ $viewClitem->cl_description }}</td>
                                 <td>
-                                    @if ($showevent->g_quick == '1')
+                                    @if ($viewClitem->cl_active == '1')
                                     <span class="badge bg-success">Active</span>
                                     @else
                                     <span class="badge bg-danger">Inactive</span>
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($showevent->g_active == '1')
-                                    <span class="badge bg-success">Active</span>
-                                    @else
-                                    <span class="badge bg-danger">Inactive</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a onclick="editGeneralEvent({{ json_encode($showevent) }})"
+                                    <a onclick="editCL({{ json_encode($viewClitem) }})"
                                         href="javascript:void(0);">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
 
                                     <a href="javascript:void(0);"
-                                        onclick="confirmDelete('{{ route('delete-gevent', $showevent->g_id) }}', '{{ $showevent->g_id }}')"
+                                        onclick="confirmDelete('{{ route('delete-clitem', $viewClitem->cl_id) }}', '{{ $viewClitem->cl_ids }}')"
                                         class="edit-icon delete-user-btn text-danger">
                                         <i class="fa-solid fa-trash-can-arrow-up"></i>
                                     </a>
@@ -150,28 +134,28 @@
     </div>
 </div>
 
-{{-- /* --------------------------- edit general modal -------------------------- */ --}}
-<div id="editGeneralEventModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+{{-- /* --------------------------- edit checklist item modal -------------------------- */ --}}
+<div id="editCLModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content ">
             <div class="modal-body ">
                 <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                    <h4 class="mb-0"><b>Edit General Event</b></h4>
+                    <h4 class="mb-0"><b>Edit Checklist Item</b></h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
 
-                <form method="POST" action="{{ route('edit-gevent') }}" class="mt-4">
+                <form method="POST" action="{{ route('edit-clitem') }}" class="mt-4">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
-                            <input type="hidden" name="g_id" id="g_id">
+                            <input type="hidden" name="cl_id" id="cl_id">
                             <div class="form-group mb-3">
-                                <label for="">Note</label>
-                                <input type="text" name="note" id="editnote"
-                                    value="{{ old('note') }}" class="form-control"
+                                <label for="cl_name">Name</label>
+                                <input type="text" name="cl_name" id="editcl_name"
+                                    value="{{ old('cl_name') }}" class="form-control"
                                     placeholder="Name" required>
-                                @error('note')
+                                @error('cl_name')
                                 <small
                                     class="text-danger d-block text-start">{{ $message }}</small>
                                 @enderror
@@ -180,18 +164,9 @@
 
                         <div class="col-lg-12">
                             <div class="form-group mb-3">
-                                <label for="g_description">Description</label>
-                                <textarea name="g_description" id="editg_description" class="form-control" rows="4" placeholder="Enter Description...">{{ old('g_description') }}</textarea>
-                                @error('g_description')
-                                <small class="text-danger d-block text-start">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group mb-3">
-                                <label for="g_display">Display</label>
-                                <textarea name="g_display" id="editg_display" class="form-control" rows="4" placeholder="Enter Display...">{{ old('g_display') }}</textarea>
-                                @error('g_display')
+                                <label for="cl_description">Description</label>
+                                <textarea name="cl_description" id="editcl_description" class="form-control" rows="4" placeholder="Enter Description...">{{ old('cl_description') }}</textarea>
+                                @error('cl_description')
                                 <small class="text-danger d-block text-start">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -199,26 +174,15 @@
 
                         <div class="col-lg-6">
                             <div class="form-group form-switch mb-2">
-                                <input type="hidden" name="g_quick" value="0">
-                                <input type="checkbox" role="switch" name="g_quick" id="editg_quick"
+                                <input type="hidden" name="cl_active" value="0">
+                                <input type="checkbox" role="switch" name="cl_active" id="editcl_active"
                                     value="1" class="form-check-input"
-                                    {{ old('g_quick') ? 'checked' : '' }}>
-                                <label for="editg_quick" class="form-check-label">Quick</label>
+                                    {{ old('cl_active') ? 'checked' : '' }}>
+                                <label for="editcl_active" class="form-check-label">Active</label>
                             </div>
                         </div>
-
-                        <div class="col-lg-6">
-                            <div class="form-group form-switch mb-2">
-                                <input type="hidden" name="g_active" value="0">
-                                <input type="checkbox" role="switch" name="g_active" id="editg_active"
-                                    value="1" class="form-check-input"
-                                    {{ old('g_active') ? 'checked' : '' }}>
-                                <label for="editg_active" class="form-check-label">Active</label>
-                            </div>
-                        </div>
-
                         <div class="col-lg-12 text-center">
-                            <button type="submit" class="btn w-100 btn-dark ">Update general event</button>
+                            <button type="submit" class="btn w-100 btn-dark ">Update Check List Item</button>
                         </div>
                     </div>
                 </form>
@@ -243,17 +207,15 @@
 </script>
 
 <script>
-    function editGeneralEvent(generalEvent) {
-        console.log(generalEvent);
-
-        document.getElementById("g_id").value = generalEvent.g_id;
-        document.getElementById("editnote").value = generalEvent.note;
-        document.getElementById("editg_description").value = generalEvent.g_description;
-        document.getElementById("editg_display").value = generalEvent.g_display;
-        document.getElementById("editg_active").checked = generalEvent.g_active == 1;
-        document.getElementById("editg_quick").checked = generalEvent.g_quick == 1;
+    function editCL(clItem) {
+        console.log(clItem);
+        
+        document.getElementById("cl_id").value = clItem.cl_id;
+        document.getElementById("editcl_name").value = clItem.cl_name;
+        document.getElementById("editcl_description").value = clItem.cl_description;
+        document.getElementById("editcl_active").checked = clItem.cl_active == 1;
         // Show modal
-        var editModal = new bootstrap.Modal(document.getElementById("editGeneralEventModal"));
+        var editModal = new bootstrap.Modal(document.getElementById("editCLModal"));
         editModal.show();
     }
 </script>
@@ -296,5 +258,4 @@
         });
     });
 </script>
-
 @endsection

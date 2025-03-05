@@ -1,4 +1,3 @@
-
 <nav class="navbar top-navbar navbar-expand-lg">
     <div class="navbar-header" data-logobg="skin6">
         <!-- This is for the sidebar toggle which is visible on mobile only -->
@@ -7,10 +6,13 @@
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
-        <div class="navbar-brand">
+        <div class="navbar-brand d-flex justify-content-center align-items-center w-100">
             <!-- Logo icon -->
             <a href="{{ route('dashboard') }}">
-                <img src="../assets/images/freedashDark.svg" alt="" class="img-fluid">
+                <img src="{{ optional(Auth::user()->company)->company_image ? asset('uploads/' . Auth::user()->company->company_image) : asset('uploads/default.jpg') }}"
+                    alt="Company Logo"
+                    class="img-fluid"
+                    style="max-height: 50px;">
             </a>
         </div>
         <!-- ============================================================== -->
@@ -32,7 +34,7 @@
         <!-- toggle and nav items -->
         <!-- ============================================================== -->
         <ul class="navbar-nav float-left me-auto ms-3 ps-1">
-        <x-breadcrumb />
+            <x-breadcrumb />
             <!-- ============================================================== -->
             <!-- create new -->
             <!-- ============================================================== -->
@@ -123,15 +125,17 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <img src="../assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
-                        width="40">
+                    <img src="{{ Auth::user()->profile_photo
+                ? asset('uploads/' . Auth::user()->profile_photo)
+                : asset('uploads/default.jpg') }}" alt="user"
+                        width="40" height="30">
                     <span class="ms-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                            class="text-dark">{{ Auth::user()->first_name ?? 'Guest' }}</span> <i data-feather="chevron-down"
+                            class="text-dark">{{ Auth::user()->name ?? 'Guest' }}</span> <i data-feather="chevron-down"
                             class="svg-icon"></i></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><i data-feather="settings"
+                    <a class="dropdown-item" href="{{ route('profile-setting') }}"><i data-feather="settings"
                             class="svg-icon me-2 ms-1"></i>
                         Account Setting</a>
                     <div class="dropdown-divider"></div>

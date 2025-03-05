@@ -1,4 +1,5 @@
 @extends('sitemaster.master-layout')
+@section('title','All Checklists')
 @section('content')
     <div class="container-fluid">
         <div class="row">
