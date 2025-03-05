@@ -46,10 +46,9 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(ReportController::class)->group(function () {
         Route::get('/report', 'index')->name('report'); // Show reports page
-        Route::post('/reports', 'store')->name('reports.store'); // Store new report
-        Route::get('/reports/{id}/edit', 'edit')->name('reports.edit'); // Fetch report for edit
-        Route::post('/reports/{id}/update', 'update')->name('reports.update');
-        Route::delete('/reports/{id}', 'destroy')->name('reports.destroy'); // Delete report
+        Route::post('/add-report', 'addReport')->name('add-report'); // Store new report
+        route::post('/edit-report','editReport')->name('edit-report');
+        route::any('/delete-report/{id}','deleteReport')->name('delete-report');
     });
 
 

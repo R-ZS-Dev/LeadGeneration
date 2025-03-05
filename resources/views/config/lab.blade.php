@@ -147,7 +147,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
                                             <input type="hidden" name="show_quick_button" value="0">
-                                            <input type="checkbox" name="show_quick_button" value="1" id="show_quick_button">
+                                            <input type="checkbox" name="show_quick_button" value="1" id="show_quick_button" class="form-check-input" >
                                             <label class="form-check-label" for="show_quick_button">Show Quick Button</label>
                                         </div>
 
@@ -302,16 +302,7 @@
                                             id="footer"></textarea>
                                     </div>
                                 </div>
-                                @php
-                                    $checkboxes = [
-                                        'hide_source_row' => 'Hide Source Row',
-                                        'hide_temperature_row' => 'Hide Temperature Row',
-                                        'hide_draw_date_row' => 'Hide Draw Date Row',
-                                        'hide_draw_time_row' => 'Hide Draw Time Row',
-                                        'hide_result_date_row' => 'Hide Result Date Row',
-                                        'hide_result_time_row' => 'Hide Result Time Row',
-                                    ];
-                                @endphp
+
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
                                         @foreach ($checkboxes as $name => $label)

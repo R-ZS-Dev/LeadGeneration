@@ -21,8 +21,8 @@
                         <li class="sidebar-item"><a href="{{ route('view-supply-group') }}" class="sidebar-link"><span class="hide-menu"> Supply Groups </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('view-supplies') }}" class="sidebar-link"><span class="hide-menu"> Supplies </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('view-staff') }}" class="sidebar-link"><span class="hide-menu"> Staff </span></a></li>
-                        {{-- <li class="sidebar-item"><a href="{{ route('report') }}" class="sidebar-link"><span class="hide-menu"> Report </span></a></li>
-                        <li class="sidebar-item"><a href="docs-ui-breadcrumb.html" class="sidebar-link"><span class="hide-menu"> Report Review </span></a></li> --}}
+                        <li class="sidebar-item"><a href="{{ route('report') }}" class="sidebar-link"><span class="hide-menu"> Report </span></a></li>
+                        {{-- <li class="sidebar-item"><a href="docs-ui-breadcrumb.html" class="sidebar-link"><span class="hide-menu"> Report Review </span></a></li> --}}
                         <li class="sidebar-item"><a href="{{ route('view-procedure') }}" class="sidebar-link"><span class="hide-menu"> Procedures </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('view-lab-results') }}" class="sidebar-link"><span class="hide-menu"> Lab Results </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('view-lab') }}" class="sidebar-link"><span class="hide-menu"> Lab </span></a></li>
