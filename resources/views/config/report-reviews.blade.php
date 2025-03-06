@@ -227,8 +227,8 @@
     </script>
 
 
-    <script>
-       document.addEventListener("DOMContentLoaded", function() {
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
         document.addEventListener("submit", function(event) {
             const activeModal = document.querySelector(".modal.show");
             if (!activeModal) return;
@@ -272,5 +272,5 @@
             }
         });
     });
-    </script>
+</script>
 @endsection

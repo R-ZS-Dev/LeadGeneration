@@ -127,14 +127,14 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12 d-flex justify-content-end">
-                                <button type="button" class="btn waves-effect waves-light btn-outline-primary"
+                                <button type="button" class="btn waves-effect waves-light btn-outline-primary mb-2"
                                     data-bs-toggle="modal" data-bs-target="#report-modal">
                                     <i class="fas fa-plus"></i> Add Report
                                 </button>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <table id="reports-table" class="table table-striped table-bordered">
+                        <div class="table-responsive">
+                            <table id="users-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
                                         <th>ID</th>

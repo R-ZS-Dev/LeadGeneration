@@ -116,9 +116,9 @@
                                 <td>{{ $showevent->g_display }}</td>
                                 <td>
                                     @if ($showevent->g_quick == '1')
-                                    <span class="badge bg-success">Active</span>
+                                    <span class="badge bg-success">True</span>
                                     @else
-                                    <span class="badge bg-danger">Inactive</span>
+                                    <span class="badge bg-danger">False</span>
                                     @endif
                                 </td>
                                 <td>

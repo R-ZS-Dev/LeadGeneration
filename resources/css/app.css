@@ -209,3 +209,16 @@ input[name='gender']:checked:after {
 .sidebar-nav #sidebarnav .sidebar-item.selected > .sidebar-link {
     background:  linear-gradient(135deg, #793268, rgb(250, 75, 209));
 }
+.table-responsive::-webkit-scrollbar {
+    width: 6px; /* Vertical scrollbar width */
+    height: 6px; /* Horizontal scrollbar height */
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: #d1d1d1; /* Scrollbar color */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+}

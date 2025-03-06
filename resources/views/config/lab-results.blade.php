@@ -45,7 +45,7 @@
                                         <div class="form-group mb-3">
                                             <label for="">Abbrivation</label>
                                             <input type="text" name="lr_abbrivate" class="form-control"
-                                                placeholder="Lab Report Abbrivation" required maxlength="10">
+                                                placeholder="Lab Report Abbrivation" required maxlength="5">
 
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                         <div class="form-group mb-3">
                                             <label for="">Unit of measurment</label>
                                                 <input type="text"  name="unit_of_measure" class="form-control"
-                                                placeholder="Unit Of Measurment" maxlength="5">
+                                                placeholder="Unit Of Measurment" required maxlength="5">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -122,7 +122,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group mb-3">
                                             <label for="">Minimum</label>
-                                            <input type="text" name="minimum" class="form-control"
+                                            <input type="number" name="minimum" class="form-control"
                                                 placeholder="Minimum" maxlength="10">
                                         </div>
                                     </div>
@@ -354,7 +354,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group mb-3">
                                         <label for="">Minimum</label>
-                                        <input type="text" name="minimum" class="form-control" placeholder="Minimum"
+                                        <input type="number" name="minimum" class="form-control" placeholder="Minimum"
                                             maxlength="10" id="edit_min">
                                     </div>
                                 </div>

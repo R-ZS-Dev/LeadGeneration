@@ -209,7 +209,7 @@
         <div class="modal-content ">
             <div class="modal-body ">
                 <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                    <h4 class="mb-0"><b>Edit Checklist</b></h4>
+                    <h4 class="mb-0"><b>Edit Checklist Group</b></h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -224,7 +224,7 @@
                                 <label for="clg_name">Name</label>
                                 <input type="text" name="clg_name" id="editclg_name"
                                     value="{{ old('clg_name') }}" class="form-control"
-                                    placeholder="Name" required>
+                                    placeholder="Check list name" required>
                                 @error('clg_name')
                                 <small
                                     class="text-danger d-block text-start">{{ $message }}</small>
