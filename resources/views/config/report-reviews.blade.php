@@ -43,9 +43,8 @@
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
                                             <label for="">Name</label>
-                                            <input type="text" name="rr_name" id=""
-                                                value="{{ old('rr_name') }}" class="form-control"
-                                                placeholder="Report Review Name">
+                                            <input type="text" name="rr_name" id="" value="{{ old('rr_name') }}"
+                                                class="form-control" placeholder="Report Review Name">
                                         </div>
                                     </div>
 
@@ -71,9 +70,8 @@
                                             Report Review</button>
                                     </div>
                                 </div>
-                        </div>
                         </form>
-
+                    </div>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -122,9 +120,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{-- <a onclick="editEqg({{ json_encode($item) }})" href="javascript:void(0);">
+                                            <a onclick="editReport({{ json_encode($item) }})" href="javascript:void(0);">
                                                 <i class="fa-solid fa-pen-to-square"></i>
-                                            </a> --}}
+                                            </a>
                                             <a href="javascript:void(0);"
                                                 onclick="confirmDelete('{{ route('delete-report-review', $item->rr_id) }}', '{{ $item->rr_id }}')"
                                                 class="edit-icon delete-user-btn text-danger">
@@ -150,34 +148,52 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <form method="POST" action="{{ route('edit-equipment-group') }}" class="mt-4">
+                    <form method="POST" action="{{ route('edit-report-review') }}" class="mt-4">
                         @csrf
+                        <input type="hidden" name="rr_id" id="rr_id">
                         <div class="row">
-                            <input type="hidden" name="eqg_id" id="eqg_id">
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
-                                    <label for="">Equipment Group Name</label>
-                                    <input type="text" name="eqg_name" id="edit-eqgname" value="{{ old('eqg_name') }}"
-                                        class="form-control" placeholder="Equipment group name" required>
+                                    <label for="">Select Report Type</label>
+                                    <select name="report_type" id="edit_type" class="form-control">
+                                        <option value="">Select Report Type</option>
+                                        @foreach ($type as $item)
+                                            <option value="{{ $item->rep_id }}">{{ $item->report_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group mb-3">
+                                    <label for="">Name</label>
+                                    <input type="text" name="rr_name" id="edit_name" value="{{ old('rr_name') }}"
+                                        class="form-control" placeholder="Report Review Name">
+                                </div>
+                            </div>
 
+                            <div class="col-lg-12">
+                                <div class="form-group mb-3">
+                                    <label for="">Description</label>
+                                    <textarea name="rr_desc" id="edit_desc" rows="3" class="form-control" placeholder="Description"></textarea>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group form-switch mb-3">
-                                    <input type="hidden" name="eqg_active" value="0">
-                                    <input type="checkbox" name="eqg_active" id="edit-eqgactive" value="1"
-                                        class="form-check-input" role="switch" {{ old('active') ? 'checked' : '' }}>
-                                    <label for="active" class="form-check-label">Active</label>
+                                    <input type="hidden" name="rr_active" value="0">
+                                    <input type="checkbox" role="switch" name="rr_active" id="edit-active" checked
+                                        value="1" class="form-check-input"
+                                        {{ old('rr_active') ? 'checked' : '' }}>
+                                    <label for="edit-active" class="form-check-label">Active</label>
 
                                 </div>
                             </div>
                             <div class="col-lg-12 text-center">
-                                <button type="submit" class="btn w-100 btn-dark">Update
-                                    Equipment Group</button>
+                                <button type="submit" class="btn w-100 btn-dark" id="submitBtn">Update
+                                    Report Review</button>
                             </div>
                         </div>
-                    </form>
+                </form>
 
                 </div>
             </div><!-- /.modal-content -->
@@ -199,10 +215,12 @@
         });
     </script>
     <script>
-        function editEqg(eqg) {
-            document.getElementById("eqg_id").value = eqg.eqg_id;
-            document.getElementById("edit-eqgname").value = eqg.eqg_name;
-            document.getElementById("edit-eqgactive").checked = eqg.eqg_active == 1;
+        function editReport(rr) {
+            document.getElementById("rr_id").value = rr.rr_id;
+            document.getElementById("edit_name").value = rr.rr_name;
+            document.getElementById("edit_type").value = rr.report_type;
+            document.getElementById("edit_desc").value = rr.rr_desc;
+            document.getElementById("edit-active").checked = rr.rr_active == 1;
             var editModal = new bootstrap.Modal(document.getElementById("editHospital"));
             editModal.show();
         }
@@ -210,42 +228,49 @@
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.addEventListener("submit", function(event) {
-                const activeModal = document.querySelector(".modal.show");
-                if (!activeModal) return;
+       document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("submit", function(event) {
+            const activeModal = document.querySelector(".modal.show");
+            if (!activeModal) return;
 
-                const form = activeModal.querySelector("form");
-                if (!form) return;
+            const form = activeModal.querySelector("form");
+            if (!form) return;
 
-                const inputs = form.querySelectorAll("input:not([type='hidden'])");
-                const submitBtn = form.querySelector("button[type='submit']");
+            const inputs = form.querySelectorAll("input:not([type='hidden']), select");
+            const submitBtn = form.querySelector("button[type='submit']");
 
-                let isValid = true;
+            let isValid = true;
 
-                inputs.forEach(input => {
-                    if (input.type !== "checkbox" && input.value.trim() === "") {
-                        input.classList.add("is-invalid");
-                        isValid = false;
-                    } else {
-                        input.classList.remove("is-invalid");
-                    }
-                });
-
-                if (!isValid) {
-                    event.preventDefault();
+            inputs.forEach(input => {
+                if (input.type !== "checkbox" && input.value.trim() === "") {
+                    input.classList.add("is-invalid");
+                    isValid = false;
                 } else {
-                    submitBtn.innerHTML =
-                        '<span class="spinner-border spinner-border-sm"></span> Processing...';
-                    submitBtn.disabled = true;
-                }
-            });
-            document.addEventListener("input", function(event) {
-                const input = event.target;
-                if (input.value.trim() !== "") {
                     input.classList.remove("is-invalid");
                 }
             });
+
+            if (!isValid) {
+                event.preventDefault();
+            } else {
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing...';
+                submitBtn.disabled = true;
+            }
         });
+
+        document.addEventListener("input", function(event) {
+            const input = event.target;
+            if (input.value.trim() !== "") {
+                input.classList.remove("is-invalid");
+            }
+        });
+
+        document.addEventListener("change", function(event) {
+            const select = event.target;
+            if (select.tagName === "SELECT" && select.value.trim() !== "") {
+                select.classList.remove("is-invalid");
+            }
+        });
+    });
     </script>
 @endsection
