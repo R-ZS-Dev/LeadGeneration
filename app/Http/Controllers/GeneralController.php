@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Checklist;
+use App\Models\ChecklistGroup;
 use App\Models\CheckListItem;
 use App\Models\GeneralEvent;
 use Illuminate\Http\Request;
@@ -205,4 +206,74 @@ class GeneralController extends Controller
 
         return redirect()->back()->with('success', 'Checklist updated successfully!');
     }
+
+
+    /* ------------------------ CheckList Group functions ----------------------- */
+    public function viewCLG(){
+        $viewClgroups = ChecklistGroup::where('status', '1')->where('close', '1')->get();
+        return view('config.checklist-groups', compact('viewClgroups'));
+    }
+
+    public function addCLG(Request $request)
+    {
+        $validated = $request->validate([
+            'clg_name' => 'required|string|max:100',
+            'clg_description' => 'required|string',
+            'rowboxes' => 'nullable|array',
+            'rowboxes.*' => 'string|max:255',
+        ]);
+        $user = Auth::user();
+
+        ChecklistGroup::create([
+            'clg_name' => $validated['clg_name'],
+            'clg_description' => $validated['clg_description'],
+            'rowboxes' => json_encode($validated['rowboxes'] ?? []),
+            'clg_active' => $request->clg_active,
+            'clg_insertby' => Auth::user()->name,
+        ]);
+
+        return redirect()->back()->with('success', 'Check list group saved successfully!');
+    }
+
+    public function deleteCLG($id)
+    {
+        $clgroup = ChecklistGroup::find($id);
+        $clgroup->close = '0';
+        $clgroup->status = '0';
+        $clgroup->save();
+        return redirect()->back()->with('success', 'Check list group deleted successfully!');
+    }
+
+    public function editCLGroup($id)
+    {
+        if (!$id) {
+            return redirect()->back()->with('error', 'Checklist ID is missing.');
+        }
+        $checklistg = ChecklistGroup::findOrFail($id);
+        return view('edit-cgroup', compact('checklistg'));
+    }
+
+    // Update checklist
+    public function updateCLGroup(Request $request)
+    {
+        $validated = $request->validate([
+            'clg_id' => 'required|exists:checklist_groups,clg_id',
+            'clg_name' => 'required|string|max:100',
+            'clg_description' => 'required|string',
+            'clg_active' => 'nullable|string',
+            'rowboxes' => 'nullable|array',
+            'rowboxes.*' => 'string|max:255',
+        ]);
+
+        $checklist = ChecklistGroup::findOrFail($validated['clg_id']);
+        $checklist->update([
+            'clg_name' => $validated['clg_name'],
+            'clg_description' => $validated['clg_description'],
+            'rowboxes' => json_encode($validated['rowboxes'] ?? []),
+            'clg_active' => $validated['clg_active'] ?? '1',
+        ]);
+
+        return redirect()->back()->with('success', 'Checklist Group updated successfully!');
+    }
+
 }

@@ -20,11 +20,10 @@ class CompanyController extends Controller
             'company_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'fav_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
-        
 
         // Find or create the company record for the logged-in user
         $company = Company::updateOrCreate(
-            ['user_id' => Auth::id()], // Condition to check if the company exists
+            ['user_id' => Auth::id()],
             [
                 'company_name' => $request->company_name,
                 'company_email' => $request->company_email,
@@ -34,49 +33,44 @@ class CompanyController extends Controller
             ]
         );
 
+        $destinationPath = public_path('uploads');
+
         // Handle company image upload
         if ($request->hasFile('company_image')) {
             $file = $request->file('company_image');
-            $fileName = time() . '_' . $file->getClientOriginalName();
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
 
-            // Delete the old image if it exists
-            if ($company->company_image) {
-                Storage::disk('public')->delete('uploads/' . $company->company_image);
+            if ($company->company_image && $company->company_image !== 'default.jpg') {
+                $oldImagePath = $destinationPath . '/' . $company->company_image;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
             }
 
-            // Store the new file in the public disk
-            $file->storeAs('uploads', $fileName, 'public');
+            $file->move($destinationPath, $fileName);
 
-            // Update the database with the new image filename
-            $company->update(['company_image' => $fileName]);
-        } else {
-            // Set default image if no image is uploaded and no existing image
-            if (!$company->company_image) {
-                $company->update(['company_image' => 'default.jpg']);
-            }
+            $company->company_image = $fileName;
         }
 
-        // Handle favorite photo upload
+        // Handle fav icon upload
         if ($request->hasFile('fav_photo')) {
             $favFile = $request->file('fav_photo');
-            $favFileName = time() . '_' . $favFile->getClientOriginalName();
+            $favFileName = time() . '.' . $favFile->getClientOriginalExtension();
 
-            // Delete the old fav photo if it exists
             if ($company->fav_photo && $company->fav_photo !== 'default.jpg') {
-                Storage::disk('public')->delete('uploads/' . $company->fav_photo);
+                $oldFavImagePath = $destinationPath . '/' . $company->fav_photo;
+                if (file_exists($oldFavImagePath)) {
+                    unlink($oldFavImagePath);
+                }
             }
 
-            // Store the new favorite photo
-            $favFile->storeAs('uploads', $favFileName, 'public');
+            $favFile->move($destinationPath, $favFileName);
 
-            // Update the database with the new fav photo filename
-            $company->update(['fav_photo' => $favFileName]);
-        } else {
-            // Ensure default fav_photo is set if no image is uploaded and no existing image
-            if (!$company->fav_photo) {
-                $company->update(['fav_photo' => 'default.jpg']);
-            }
+            $company->fav_photo = $favFileName;
         }
+
+        // Save updated image paths if needed
+        $company->save();
 
         return back()->with('success', 'Company details updated successfully!');
     }

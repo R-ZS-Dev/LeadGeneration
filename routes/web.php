@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\EmailSettingsController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
+use App\Models\EmailSetting;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -21,13 +25,36 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/profile-setting', function () {
+        return view('profile-setting');
+    })->name('profile-setting');
+
+    Route::controller(SettingsController::class)->group(function () {
+        Route::post('update-profile', 'updateProfile')->name('settings.updateProfile');
+        Route::post('update-password', 'updatePassword')->name('settings.updatePassword');
+        Route::post('update-email', 'updateEmail')->name('settings.updateEmail');
+    });
+
+    Route::controller(EmailSettingsController::class)->group(function () {
+        Route::get('/email-config', 'showForm')->name('settings.email');
+        Route::post('/email-config', 'updateEmailConfig')->name('settings.updateEmail');
+    });
+
+    Route::controller((CompanyController::class))->group(function () {
+        Route::post('update-company', 'updateCompany')->name('settings.updateCompany');
+    });
 
     Route::controller(ReportController::class)->group(function () {
         Route::get('/report', 'index')->name('report'); // Show reports page
-        Route::post('/reports', 'store')->name('reports.store'); // Store new report
-        Route::get('/reports/{id}/edit', 'edit')->name('reports.edit'); // Fetch report for edit
-        Route::post('/reports/{id}/update', 'update')->name('reports.update');
-        Route::delete('/reports/{id}', 'destroy')->name('reports.destroy'); // Delete report
+        Route::post('/add-report', 'addReport')->name('add-report'); // Store new report
+        route::post('/edit-report','editReport')->name('edit-report');
+        route::any('/delete-report/{id}','deleteReport')->name('delete-report');
+
+        /* -------------------------- report review routes -------------------------- */
+        Route::get('/report-review', 'viewReportReview')->name('report-review');
+        Route::post('/add-report-review', 'addReportReview')->name('add-report-review');
+        route::post('/edit-report-review','editReportReview')->name('edit-report-review');
+        route::any('/delete-report-review/{id}','deleteReportReview')->name('delete-report-review');
     });
 
 
@@ -97,15 +124,22 @@ Route::middleware('auth')->group(function () {
         route::post('/edit-lab','editLab')->name('edit-lab');
         route::post('/delete-lab/{id}','deleteLab')->name('delete-lab');
 
-    });
+        /* ---------------------------- lab ranges routes --------------------------- */
 
+        Route::get('/lab-ranges', 'viewLabrange')->name('view-lab-range');
+        route::post('/add-lab-range','addLabrange')->name('add-lab-range');
+        route::post('/edit-lab-range','editLabrange')->name('edit-lab-range');
+        route::post('/delete-lab-range/{id}','deleteLabrange')->name('delete-lab-range');
+
+    });
+    Route::post('/settings/check-password', [SettingsController::class, 'checkPassword'])->name('settings.checkPassword');
     Route::controller(GeneralController::class)->group(function () {
         /* ------------------------------- General Event routes ------------------------------- */
         Route::get('/general-event', 'viewgeneralevents')->name('general-event');
         route::post('/add-gevent', 'addGevent')->name('add-gevent');
         route::post('/edit-gevent', 'editGeneralEvent')->name('edit-gevent');
         // route::get('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
-        Route::delete('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
+        Route::post('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
 
         /* ------------------------- check list item routes ------------------------ */
         Route::get('/checklist-item', 'viewClitem')->name('checklist-item');
@@ -116,9 +150,16 @@ Route::middleware('auth')->group(function () {
         /* ------------------------- check list routes ------------------------ */
         Route::get('/checklist', 'viewClist')->name('checklist');
         route::post('/add-clist', 'addClist')->name('add-clist');
-        route::get('/delete-clist/{id}', 'deleteClist')->name('delete-clist');
+        route::post('/delete-clist/{id}', 'deleteClist')->name('delete-clist');
         Route::get('/edit-clist/{id}','editClist')->name('edit-clist');
         Route::post('/update-clist','updateClist')->name('update-clist');
+
+         /* ------------------------- checklist groups routes ------------------------ */
+        Route::get('/checklist-group', 'viewCLG')->name('checklist-group');
+        route::post('/add-checklistgroup', 'addCLG')->name('add-checklistgroup');
+        route::post('/delete-checklistgroup/{id}', 'deleteCLG')->name('delete-checklistgroup');
+        route::get('/edit-cgroup/{id}','editCLGroup')->name('edit-cgroup');
+        route::post('/update-cgroup','updateCLGroup')->name('update-cgroup');
     });
 });
 

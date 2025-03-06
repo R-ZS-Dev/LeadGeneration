@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -13,17 +12,25 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <!-- Custom CSS -->
     <title>@yield('title')</title>
-    <link href="{{ asset('assets/extra-libs/c3/c3.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/extra-libs/c3/c3.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
-    <link href="{{ asset('dist/css/style.min.css')}}" rel="stylesheet">
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
+    @php
+        $cwd = getcwd();
+        $cssName = basename(glob($cwd . '/build/assets/*.css')[0], '.css');
+        $jsName = basename(glob($cwd . '/build/assets/*.js')[0], '.js');
+        $css = asset('build/assets/' . $cssName . '.css');
+        $js = asset('build/assets/' . $jsName . '.js');
+    @endphp
+    <link rel="stylesheet" href="{{ $css }}">
+    <script src="{{ $js }}"></script>
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -74,7 +81,7 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-<div class="page-wrapper">
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->

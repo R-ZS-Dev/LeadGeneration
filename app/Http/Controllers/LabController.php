@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lab;
+use App\Models\LabRanges;
 use App\Models\LabResult;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+use PhpParser\Node\Stmt\Label;
 
 class LabController extends Controller
 {
@@ -81,15 +84,15 @@ class LabController extends Controller
         $result->close = '0';
         $result->status = '0';
         $result->save();
-        return redirect()->back()->with('success','Lab Result Deleted Successfully!');
+        return redirect()->back()->with('success', 'Lab Result Deleted Successfully!');
     }
 
     /* -------------------------- labs module functions ------------------------- */
 
     public function viewLab()
     {
-        $labs = Lab::where('status','1')->where('close','1')->get();
-        return view('config.lab',compact('labs'));
+        $labs = Lab::where('status', '1')->where('close', '1')->get();
+        return view('config.lab', compact('labs'));
     }
 
     public function addLab(Request $request)
@@ -115,7 +118,6 @@ class LabController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
-
     }
 
     public function editLab(Request $request)
@@ -145,6 +147,71 @@ class LabController extends Controller
         $lab->status = '0';
         $lab->close = '0';
         $lab->save();
-        return redirect()->back()->with('success','Lab Deleted Successfully!');
+        return redirect()->back()->with('success', 'Lab Deleted Successfully!');
+    }
+
+    /* ----------------------- lab ranges module functions ---------------------- */
+
+    public function viewLabrange()
+    {
+        $lab = Lab::where('status', '1')->where('close', '1')->get();
+        $result = LabResult::where('status', '1')->where('close', '1')->get();
+        $labrange = LabRanges::where('status','1')->where('close','1')
+        ->with(['lab', 'result'])
+        ->get();
+        return view('config.lab-ranges', compact('lab', 'result' ,'labrange'));
+    }
+
+    public function addLabrange(Request $request)
+    {
+        try {
+            $lab = new LabRanges();
+            $lab->lab_id = $request->lab_id;
+            $lab->lab_result = $request->lab_result;
+            $lab->lrng_sex = $request->lrng_sex;
+            $lab->is_child = $request->is_child;
+            $lab->lrng_source = $request->lrng_source;
+            $lab->lrng_temp = $request->lrng_temp;
+            $lab->lrng_explow = $request->lrng_explow;
+            $lab->lrng_exphigh = $request->lrng_exphigh;
+            $lab->lrng_min = $request->lrng_min;
+            $lab->lrng_max = $request->lrng_max;
+            $lab->lrng_insertby = Auth::user()->name;
+            $lab->save();
+            return redirect()->back()->with('success', 'Lab ranges added successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+    public function editLabrange(Request $request)
+    {
+        $id = $request->lrng_id;
+        try {
+            $lab = LabRanges::find($id);
+            $lab->lab_id = $request->lab_id;
+            $lab->lab_result = $request->lab_result;
+            $lab->lrng_sex = $request->lrng_sex;
+            $lab->is_child = $request->is_child;
+            $lab->lrng_source = $request->lrng_source;
+            $lab->lrng_temp = $request->lrng_temp;
+            $lab->lrng_explow = $request->lrng_explow;
+            $lab->lrng_exphigh = $request->lrng_exphigh;
+            $lab->lrng_min = $request->lrng_min;
+            $lab->lrng_max = $request->lrng_max;
+            $lab->save();
+            return redirect()->back()->with('success', 'Lab updated added successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+    public function deleteLabrange($id)
+    {
+        $lab = LabRanges::find($id);
+        $lab->status = '0';
+        $lab->close = '0';
+        $lab->save();
+        return redirect()->back()->with('success', 'Lab range deleted successfully!');
     }
 }

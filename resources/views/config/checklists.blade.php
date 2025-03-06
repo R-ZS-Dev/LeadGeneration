@@ -1,4 +1,5 @@
 @extends('sitemaster.master-layout')
+@section('title','All Checklists')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -132,7 +133,7 @@
                                 <tbody>
                                     @php $i = 0; @endphp
                                     @foreach ($viewClists as $index => $viewClist)
-                                        <tr>
+                                        <tr id="row-{{ $viewClist->c_id }}">
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $viewClist->l_name }}</td>
                                             <td>{{ $viewClist->l_description }}</td>
@@ -148,10 +149,6 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <!-- <a onclick="editCLitem({{ json_encode($viewClist) }})"
-                                                    href="javascript:void(0);">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a> -->
 
                                                 <a onclick="editCLitem({{ json_encode($viewClist, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) }})"
                                                     href="javascript:void(0);">
@@ -159,11 +156,11 @@
                                                 </a>
 
 
-                                                {{-- <a href="javascript:void(0);"
-                                                    onclick="confirmDelete('{{ route('delete-clist', $viewClist->c_id) }}')"
+                                                <a href="javascript:void(0);"
+                                                    onclick="confirmDelete('{{ route('delete-clist', $viewClist->c_id) }}',{{ $viewClist->c_id }})"
                                                     class="edit-icon delete-user-btn text-danger">
                                                     <i class="fa-solid fa-trash-can-arrow-up"></i>
-                                                </a> --}}
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

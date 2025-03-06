@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Report extends Model
 {
-    use HasFactory, SoftDeletes;
-
+    use HasFactory;
+    protected $primaryKey = 'rep_id';
     protected $fillable = [
-        'user_id', 'report_name', 'address1', 'address2', 'header_image', 'footer_image', 'active', 'status'
+         'report_name', 'rep_address1', 'rep_address2', 'rep_headimage', 'rep_footimage','rep_insertby','active', 'status'
     ];
 }

@@ -28,6 +28,7 @@ class User extends Authenticatable
         'phoneno',
         'password',
         'address',
+        'profile_photo',
         'remember_token',
     ];
 
