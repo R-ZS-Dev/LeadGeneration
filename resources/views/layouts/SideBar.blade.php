@@ -30,13 +30,13 @@
                         <li class="sidebar-item"><a href="{{ route('general-event') }}" class="sidebar-link"><span class="hide-menu"> General Event </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('checklist') }}" class="sidebar-link"><span class="hide-menu"> Checklists </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('checklist-group') }}" class="sidebar-link"><span class="hide-menu"> Checklist Groups </span></a></li>
-                        <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Fluids / Drugs </span></a></li>
-                        <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Fluids / Drugs Mixture</span></a></li>
-                        <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Fluid Locations</span></a></li>
-                        <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Cardioplegia</span></a></li>
+                        {{-- <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Fluids / Drugs </span></a></li>
+                        <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Fluids / Drugs Mixture</span></a></li> --}}
+                        <li class="sidebar-item"><a href="{{ route('fluid-location') }}" class="sidebar-link"><span class="hide-menu"> Fluid Locations</span></a></li>
+                        {{-- <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Cardioplegia</span></a></li>
                         <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Data Devices</span></a></li>
                         <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Registration</span></a></li>
-                        <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Live Line</span></a></li>
+                        <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Live Line</span></a></li> --}}
                     </ul>
         </li>
 

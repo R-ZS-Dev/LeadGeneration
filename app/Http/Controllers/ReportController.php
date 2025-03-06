@@ -140,6 +140,27 @@ class ReportController extends Controller
 
     }
 
+    public function editReportReview(Request $request)
+    {
+
+    $request->validate([
+        'report_type' => 'nullable|integer',
+        'rr_name' => 'required|string|max:100',
+    ]);
+
+    $id = $request->rr_id;
+    $reportReview = ReportReviews::find($id);
+    $reportReview->update([
+        'report_type' => $request->report_type,
+        'rr_name' => $request->rr_name,
+        'rr_desc' => $request->rr_desc,
+        'rr_active' => $request->rr_active,
+    ]);
+
+    return redirect()->back()->with('success','Report Reviews updated successfully!');
+
+    }
+
     public function deleteReportReview($id)
     {
         $rep = ReportReviews::find($id);

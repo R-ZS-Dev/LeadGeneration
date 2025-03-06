@@ -30,6 +30,9 @@ class User extends Authenticatable
         'address',
         'profile_photo',
         'remember_token',
+        'insertby',
+        'status',
+        'close'
     ];
 
     /**

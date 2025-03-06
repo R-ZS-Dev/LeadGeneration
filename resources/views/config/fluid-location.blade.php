@@ -1,5 +1,5 @@
 @extends('sitemaster.master-layout')
-@section('title', 'All Report Reviews')
+@section('title', 'All Fluid Locations')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -20,58 +20,53 @@
                         <div class="modal-body">
                             <div class="text-center mt-2 mb-4">
                                 <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                                    <h4 class="mb-0"><b>Add Report Review</b></h4>
+                                    <h4 class="mb-0"><b>Add Fluid Location</b></h4>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                             </div>
 
-                            <form method="POST" action="{{ route('add-report-review') }}" class="mt-4">
+                            <form method="POST" action="{{ route('add-fluid-location') }}" class="mt-4">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
-                                            <label for="">Select Report Type</label>
-                                            <select name="report_type" id="" class="form-control">
-                                                <option value="">Select Report Type</option>
-                                                @foreach ($type as $item)
-                                                    <option value="{{ $item->rep_id }}">{{ $item->report_name }}</option>
-                                                @endforeach
+                                            <label for="">Fluid Location Name</label>
+                                            <input type="text" name="fl_name" id="" value="{{ old('fl_name') }}"
+                                                class="form-control" placeholder="Fluid Location Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group mb-3">
+                                            <label for="">Fluid Location Type</label>
+                                            <select name="fl_type" id="" class="form-control">
+                                                <option value="">Select Fluid Location Type</option>
+                                                <option value="External">External</option>
+                                                <option value="Patient">Patient</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group mb-3">
-                                            <label for="">Name</label>
-                                            <input type="text" name="rr_name" id="" value="{{ old('rr_name') }}"
-                                                class="form-control" placeholder="Report Review Name">
-                                        </div>
-                                    </div>
 
-                                    <div class="col-lg-12">
-                                        <div class="form-group mb-3">
-                                            <label for="">Description</label>
-                                            <textarea name="rr_desc" id="" rows="3" class="form-control" placeholder="Description"></textarea>
-                                        </div>
-                                    </div>
 
                                     <div class="col-lg-12">
                                         <div class="form-group form-switch mb-3">
-                                            <input type="hidden" name="rr_active" value="0">
-                                            <input type="checkbox" role="switch" name="rr_active" id="active" checked
+                                            <input type="hidden" name="fl_active" value="0">
+                                            <input type="checkbox" role="switch" name="fl_active" id="active" checked
                                                 value="1" class="form-check-input"
-                                                {{ old('rr_active') ? 'checked' : '' }}>
+                                                {{ old('active') ? 'checked' : '' }}>
                                             <label for="active" class="form-check-label">Active</label>
 
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-center">
                                         <button type="submit" class="btn w-100 btn-dark" id="submitBtn">Add
-                                            Report Review</button>
+                                            Fluid Location</button>
                                     </div>
                                 </div>
-                        </form>
-                    </div>
+
+                            </form>
+                        </div>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -85,7 +80,7 @@
 
                             <button type="button" class="btn waves-effect waves-light mb-2 btn-outline-primary"
                                 data-bs-toggle="modal" data-bs-target="#signup-modal">
-                                <i class="fas fa-plus"></i> Add Report Reviews
+                                <i class="fas fa-plus"></i> Add Fluid Location
                             </button>
 
                         </div>
@@ -95,36 +90,33 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Type</th>
                                     <th>Name</th>
-                                    <th>Description</th>
+                                    <th>Type</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $i = 0; @endphp
-                                @foreach ($report as $index => $item)
-                                    <tr id="row-{{ $item->rr_id }}">
+                                @foreach ($fluid as $index => $fl)
+                                    <tr id="row-{{ $fl->fl_id }}">
                                         <td>{{ ++$i }}</td>
-                                        <td>{{ $item->report->report_name }}</td>
-
-                                        <td>{{ $item->rr_name }}</td>
-                                        <td>{{ $item->rr_desc }}</td>
-
+                                        <td>{{ $fl->fl_name }}</td>
+                                        <td>{{ $fl->fl_type }}</td>
                                         <td>
-                                            @if ($item->rr_active == '1')
+                                            @if ($fl->fl_active == '1')
                                                 <span class="badge bg-success">Active</span>
                                             @else
                                                 <span class="badge bg-danger">Inactive</span>
                                             @endif
                                         </td>
                                         <td>
-                                            <a onclick="editReport({{ json_encode($item) }})" href="javascript:void(0);">
+                                            <a onclick="editEqg({{ json_encode($fl) }})" href="javascript:void(0);">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
+
                                             <a href="javascript:void(0);"
-                                                onclick="confirmDelete('{{ route('delete-report-review', $item->rr_id) }}', '{{ $item->rr_id }}')"
+                                                onclick="confirmDelete('{{ route('delete-fluid-location', $fl->fl_id) }}', '{{ $fl->fl_id }}')"
                                                 class="edit-icon delete-user-btn text-danger">
                                                 <i class="fa-solid fa-trash-can-arrow-up"></i>
                                             </a>
@@ -144,56 +136,49 @@
             <div class="modal-content ">
                 <div class="modal-body ">
                     <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                        <h4 class="mb-0"><b>Edit Equipment Group</b></h4>
+                        <h4 class="mb-0"><b>Edit Fluid Location</b></h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
-                    <form method="POST" action="{{ route('edit-report-review') }}" class="mt-4">
+                    <form method="POST" action="{{ route('edit-fluid-location') }}" class="mt-4">
                         @csrf
-                        <input type="hidden" name="rr_id" id="rr_id">
+                        <input type="hidden" name="fl_id" id="fl_id">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
-                                    <label for="">Select Report Type</label>
-                                    <select name="report_type" id="edit_type" class="form-control">
-                                        <option value="">Select Report Type</option>
-                                        @foreach ($type as $item)
-                                            <option value="{{ $item->rep_id }}">{{ $item->report_name }}</option>
-                                        @endforeach
+                                    <label for="">Fluid Location Name</label>
+                                    <input type="text" name="fl_name" id="edit_name" value="{{ old('fl_name') }}"
+                                        class="form-control" placeholder="Fluid Location Name">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group mb-3">
+                                    <label for="">Fluid Location Type</label>
+                                    <select name="fl_type" id="edit_type" class="form-control">
+                                        <option value="">Select Fluid Location Type</option>
+                                        <option value="External">External</option>
+                                        <option value="Patient">Patient</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="form-group mb-3">
-                                    <label for="">Name</label>
-                                    <input type="text" name="rr_name" id="edit_name" value="{{ old('rr_name') }}"
-                                        class="form-control" placeholder="Report Review Name">
-                                </div>
-                            </div>
 
-                            <div class="col-lg-12">
-                                <div class="form-group mb-3">
-                                    <label for="">Description</label>
-                                    <textarea name="rr_desc" id="edit_desc" rows="3" class="form-control" placeholder="Description"></textarea>
-                                </div>
-                            </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group form-switch mb-3">
-                                    <input type="hidden" name="rr_active" value="0">
-                                    <input type="checkbox" role="switch" name="rr_active" id="edit-active" checked
-                                        value="1" class="form-check-input"
-                                        {{ old('rr_active') ? 'checked' : '' }}>
+                                    <input type="hidden" name="fl_active" value="0">
+                                    <input type="checkbox" role="switch" name="fl_active" id="edit-active" checked
+                                        value="1" class="form-check-input" {{ old('active') ? 'checked' : '' }}>
                                     <label for="edit-active" class="form-check-label">Active</label>
 
                                 </div>
                             </div>
                             <div class="col-lg-12 text-center">
                                 <button type="submit" class="btn w-100 btn-dark" id="submitBtn">Update
-                                    Report Review</button>
+                                    Fluid Location</button>
                             </div>
                         </div>
-                </form>
+
+                    </form>
 
                 </div>
             </div><!-- /.modal-content -->
@@ -215,12 +200,11 @@
         });
     </script>
     <script>
-        function editReport(rr) {
-            document.getElementById("rr_id").value = rr.rr_id;
-            document.getElementById("edit_name").value = rr.rr_name;
-            document.getElementById("edit_type").value = rr.report_type;
-            document.getElementById("edit_desc").value = rr.rr_desc;
-            document.getElementById("edit-active").checked = rr.rr_active == 1;
+        function editEqg(fl) {
+            document.getElementById("fl_id").value = fl.fl_id;
+            document.getElementById("edit_name").value = fl.fl_name;
+            document.getElementById("edit_type").value = fl.fl_type;
+            document.getElementById("edit-active").checked = fl.fl_active == 1;
             var editModal = new bootstrap.Modal(document.getElementById("editHospital"));
             editModal.show();
         }
@@ -228,49 +212,42 @@
 
 
     <script>
-       document.addEventListener("DOMContentLoaded", function() {
-        document.addEventListener("submit", function(event) {
-            const activeModal = document.querySelector(".modal.show");
-            if (!activeModal) return;
+        document.addEventListener("DOMContentLoaded", function() {
+            document.addEventListener("submit", function(event) {
+                const activeModal = document.querySelector(".modal.show");
+                if (!activeModal) return;
 
-            const form = activeModal.querySelector("form");
-            if (!form) return;
+                const form = activeModal.querySelector("form");
+                if (!form) return;
 
-            const inputs = form.querySelectorAll("input:not([type='hidden']), select");
-            const submitBtn = form.querySelector("button[type='submit']");
+                const inputs = form.querySelectorAll("input:not([type='hidden'])");
+                const submitBtn = form.querySelector("button[type='submit']");
 
-            let isValid = true;
+                let isValid = true;
 
-            inputs.forEach(input => {
-                if (input.type !== "checkbox" && input.value.trim() === "") {
-                    input.classList.add("is-invalid");
-                    isValid = false;
+                inputs.forEach(input => {
+                    if (input.type !== "checkbox" && input.value.trim() === "") {
+                        input.classList.add("is-invalid");
+                        isValid = false;
+                    } else {
+                        input.classList.remove("is-invalid");
+                    }
+                });
+
+                if (!isValid) {
+                    event.preventDefault();
                 } else {
+                    submitBtn.innerHTML =
+                        '<span class="spinner-border spinner-border-sm"></span> Processing...';
+                    submitBtn.disabled = true;
+                }
+            });
+            document.addEventListener("input", function(event) {
+                const input = event.target;
+                if (input.value.trim() !== "") {
                     input.classList.remove("is-invalid");
                 }
             });
-
-            if (!isValid) {
-                event.preventDefault();
-            } else {
-                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing...';
-                submitBtn.disabled = true;
-            }
         });
-
-        document.addEventListener("input", function(event) {
-            const input = event.target;
-            if (input.value.trim() !== "") {
-                input.classList.remove("is-invalid");
-            }
-        });
-
-        document.addEventListener("change", function(event) {
-            const select = event.target;
-            if (select.tagName === "SELECT" && select.value.trim() !== "") {
-                select.classList.remove("is-invalid");
-            }
-        });
-    });
     </script>
 @endsection

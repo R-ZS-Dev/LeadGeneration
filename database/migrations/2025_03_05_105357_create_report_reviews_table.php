@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('rr_name', 100)->collation('utf8mb4_general_ci');
             $table->text('rr_desc')->collation('utf8mb4_general_ci');
             $table->enum('rr_active', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
+            $table->string('rr_insertby', 40)->collation('utf8mb4_general_ci');
             $table->enum('status', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->enum('close', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->timestamps();
