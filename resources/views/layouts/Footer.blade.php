@@ -45,25 +45,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    // function confirmDelete(url) {
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#d33",
-    //         cancelButtonColor: "#3085d6",
-    //         confirmButtonText: "Yes, delete it!"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             window.location.href = url; // Redirect to delete route
-    //         }
-    //     });
-    // }
-</script>
+    function confirmDelete(deleteUrl, rowId) {
 
-<script>
-    function confirmDelete(url, rowId) {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -75,37 +58,29 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: url,
-                    type: 'DELETE',
+                    url: deleteUrl,
+                    type: "POST",
                     data: {
-                        _token: '{{ csrf_token() }}'
+                        _token: "{{ csrf_token() }}"
                     },
                     success: function(response) {
-                        if (response.success) {
-                            Swal.fire(
-                                'Deleted!',
-                                document.title + ' deleted successfully!',
-                                'success'
-                            );
+                        Swal.fire({
+                            toast: true,
+                            position: "top-end",
+                            icon: "success",
+                            title: "Deleted Successfully!",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true
+                        });
 
-                            // Fade out the deleted row
-                            $("#" + rowId).fadeOut("slow", function() {
-                                $(this).remove();
-                            });
-                        } else {
-                            Swal.fire(
-                                'Failed!',
-                                'Failed to delete the event.',
-                                'error'
-                            );
-                        }
+                        // ✅ Smooth fadeOut animation
+                        $("#row-" + rowId).fadeOut(500, function() {
+                            $(this).remove();
+                        });
                     },
                     error: function(xhr) {
-                        Swal.fire(
-                            'Error!',
-                            'An error occurred while deleting the event.',
-                            'error'
-                        );
+                        Swal.fire("Error!", "Something went wrong.", "error");
                     }
                 });
             }

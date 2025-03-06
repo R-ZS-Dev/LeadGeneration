@@ -1,5 +1,5 @@
 @extends('sitemaster.master-layout')
-@extends('layouts.app')
+@section('title','Check list items')
 @section('content')
 <div class="container-fluid">
     <!-- ============================================================== -->
@@ -101,7 +101,7 @@
                         <tbody>
                             @php $i = 0; @endphp
                             @foreach ($viewClitems as $index => $viewClitem)
-                            <tr>
+                            <tr id="row-{{ $viewClitem->cl_ids }}">
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $viewClitem->cl_name }}</td>
                                 <td>{{ $viewClitem->cl_description }}</td>
@@ -113,13 +113,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a onclick="editCLitem({{ json_encode($viewClitem) }})"
+                                    <a onclick="editCL({{ json_encode($viewClitem) }})"
                                         href="javascript:void(0);">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
 
                                     <a href="javascript:void(0);"
-                                        onclick="confirmDelete('{{ route('delete-clitem', $viewClitem->cl_id) }}')"
+                                        onclick="confirmDelete('{{ route('delete-clitem', $viewClitem->cl_id) }}', '{{ $viewClitem->cl_ids }}')"
                                         class="edit-icon delete-user-btn text-danger">
                                         <i class="fa-solid fa-trash-can-arrow-up"></i>
                                     </a>
@@ -207,7 +207,7 @@
 </script>
 
 <script>
-    function editCLitem(clItem) {
+    function editCL(clItem) {
         console.log(clItem);
         
         document.getElementById("cl_id").value = clItem.cl_id;

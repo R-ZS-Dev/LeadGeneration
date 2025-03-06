@@ -57,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/email-config', 'updateEmailConfig')->name('settings.updateEmail');
     });
 
+    Route::post('/settings/check-password', [SettingsController::class, 'checkPassword'])->name('settings.checkPassword');
+
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
     });
@@ -138,21 +140,27 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/general-event', 'viewgeneralevents')->name('general-event');
         route::post('/add-gevent', 'addGevent')->name('add-gevent');
         route::post('/edit-gevent', 'editGeneralEvent')->name('edit-gevent');
-        // route::get('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
-        Route::delete('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
+        route::post('/delete-gevent/{id}', 'deleteGevent')->name('delete-gevent');
 
         /* ------------------------- check list item routes ------------------------ */
         Route::get('/checklist-item', 'viewClitem')->name('checklist-item');
         route::post('/add-clitem', 'addClitem')->name('add-clitem');
         route::post('/edit-clitem', 'editClitem')->name('edit-clitem');
-        route::get('/delete-clitem/{id}', 'deleteClitem')->name('delete-clitem');
+        route::post('/delete-clitem/{id}', 'deleteClitem')->name('delete-clitem');
 
         /* ------------------------- check list routes ------------------------ */
         Route::get('/checklist', 'viewClist')->name('checklist');
         route::post('/add-clist', 'addClist')->name('add-clist');
-        route::get('/delete-clist/{id}', 'deleteClist')->name('delete-clist');
-        Route::get('/edit-clist/{id}','editClist')->name('edit-clist');
-        Route::post('/update-clist','updateClist')->name('update-clist');
+        route::post('/delete-clist/{id}', 'deleteClist')->name('delete-clist');
+        route::get('/edit-clist/{id}','editClist')->name('edit-clist');
+        route::post('/update-clist','updateClist')->name('update-clist');
+
+        /* ------------------------- checklist groups routes ------------------------ */
+        Route::get('/checklist-group', 'viewCLG')->name('checklist-group');
+        route::post('/add-checklistgroup', 'addCLG')->name('add-checklistgroup');
+        route::post('/delete-checklistgroup/{id}', 'deleteCLG')->name('delete-checklistgroup');
+        route::get('/edit-cgroup/{id}','editCLGroup')->name('edit-cgroup');
+        route::post('/update-cgroup','updateCLGroup')->name('update-cgroup');
     });
 
 });

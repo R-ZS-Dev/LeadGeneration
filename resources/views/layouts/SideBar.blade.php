@@ -43,7 +43,7 @@
                         <li class="sidebar-item"><a href="docs-ui-scrollspy.html" class="sidebar-link"><span class="hide-menu"> Lab Ranges </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('general-event') }}" class="sidebar-link"><span class="hide-menu"> General Event </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('checklist') }}" class="sidebar-link"><span class="hide-menu"> Checklists </span></a></li>
-                        <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Checklist Groups </span></a></li>
+                        <li class="sidebar-item"><a href="{{ route('checklist-group') }}" class="sidebar-link"><span class="hide-menu"> Checklist Groups </span></a></li>
                         <li class="sidebar-item"><a href="{{ route('checklist-item') }}" class="sidebar-link"><span class="hide-menu"> Checklist Items </span></a></li>
                         <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Fluids / Drugs </span></a></li>
                         <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Fluids / Drugs Mixture</span></a></li>

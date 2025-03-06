@@ -1,5 +1,5 @@
 @extends('sitemaster.master-layout')
-@extends('layouts.app')
+@section('title','Check list')
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -118,7 +118,7 @@
                         <tbody>
                             @php $i = 0; @endphp
                             @foreach ($viewClists as $index => $viewClist)
-                            <tr>
+                            <tr id="row-{{ $viewClist->c_id }}">
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $viewClist->l_name }}</td>
                                 <td>{{ $viewClist->l_description }}</td>
@@ -143,7 +143,8 @@
 
 
                                     <a href="javascript:void(0);"
-                                        onclick="confirmDelete('{{ route('delete-clist', $viewClist->c_id) }}')"
+                                        onclick="confirmDelete('{{ route('delete-clist', $viewClist->c_id) }}', '{{ $viewClist->c_id }}')"
+
                                         class="edit-icon delete-user-btn text-danger">
                                         <i class="fa-solid fa-trash-can-arrow-up"></i>
                                     </a>
