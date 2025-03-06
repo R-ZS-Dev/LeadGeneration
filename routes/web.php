@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CardioplegiaController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\EmailSettingsController;
@@ -176,6 +177,13 @@ Route::middleware('auth')->group(function () {
          route::post('/add-fluid-drugs', 'addFluidDrugs')->name('add-fluid-drugs');
          route::post('/edit-fluid-drugs','editFluidDrugs')->name('edit-fluid-drugs');
          route::post('/delete-fluid-drugs/{id}', 'deleteFluidDrugs')->name('delete-fluid-drugs');
+    });
+
+    Route::controller(CardioplegiaController::class)->group(function () {
+        Route::get('/cardioplegias', 'viewCardioplegias')->name('cardioplegias');
+        route::post('/add-cardioplegias', 'addCardioplegias')->name('add-cardioplegias');
+        route::post('/edit-cardioplegias','editCardioplegias')->name('edit-cardioplegias');
+        route::post('/delete-cardioplegias/{id}', 'deleteCardioplegias')->name('delete-cardioplegias');
     });
 });
 

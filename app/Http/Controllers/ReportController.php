@@ -47,7 +47,6 @@ class ReportController extends Controller
         $report->rep_headimage = $headImagePath;
         $report->rep_footimage = $footImagePath;
         $report->rep_active = $request->rep_active;
-
         $report->rep_insertby = Auth::user()->name;
         $report->save();
         return redirect()->back()->with('success', 'Report added successfully!');

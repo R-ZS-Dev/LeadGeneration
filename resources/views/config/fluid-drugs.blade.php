@@ -486,22 +486,11 @@
         </div>
     </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-    </div>
+
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#users-table').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
-    </script>
+
     <script>
         function editDrug(fluidDrug) {
             document.getElementById("fd_id").value = fluidDrug.fd_id;

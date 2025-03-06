@@ -12,7 +12,6 @@
 
             <!-- Success Message -->
             <div id="successMessage" class="alert alert-success" style="display: none;"></div>
-
             <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -96,7 +95,7 @@
                             </thead>
                             <tbody>
                                 @php $i = 0; @endphp
-                                @foreach ($equipments as $index => $eqg)
+                                {{-- @foreach ($equipments as $index => $eqg)
                                     <tr id="row-{{ $eqg->eqg_id }}">
                                         <td>{{ ++$i }}</td>
                                         <td>{{ $eqg->eqg_name }}</td>
@@ -119,7 +118,7 @@
                                             </a>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>
