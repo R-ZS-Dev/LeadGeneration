@@ -24,6 +24,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable()->collation('utf8mb4_general_ci');
             $table->string('password')->collation('utf8mb4_general_ci');
             $table->rememberToken();
+            $table->string('insertby')->collation('utf8mb4_general_ci');
+            $table->enum('status', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
+            $table->enum('close', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->timestamps();
         });
 
