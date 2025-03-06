@@ -170,6 +170,12 @@ Route::middleware('auth')->group(function () {
          route::post('/add-fluid-location', 'addFluidLocation')->name('add-fluid-location');
          route::post('/edit-fluid-location','editFluidLocation')->name('edit-fluid-location');
          route::post('/delete-fluid-location/{id}', 'deleteFluidLocation')->name('delete-fluid-location');
+
+         /* ----------------------- fluid drugs modules routes ----------------------- */
+         Route::get('/fluid-drugs', 'viewFluidDrugs')->name('fluid-drugs');
+         route::post('/add-fluid-drugs', 'addFluidDrugs')->name('add-fluid-drugs');
+         route::post('/edit-fluid-drugs','editFluidDrugs')->name('edit-fluid-drugs');
+         route::post('/delete-fluid-drugs/{id}', 'deleteFluidDrugs')->name('delete-fluid-drugs');
     });
 });
 

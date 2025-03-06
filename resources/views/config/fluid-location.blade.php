@@ -4,12 +4,6 @@
     <div class="container-fluid">
         <div class="row">
 
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-
             <!-- Success Message -->
             <div id="successMessage" class="alert alert-success" style="display: none;"></div>
 
@@ -73,6 +67,16 @@
         </div><!-- /.modal -->
 
         <div class="col-12 mt-2">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-body">
                     <div class="row">
