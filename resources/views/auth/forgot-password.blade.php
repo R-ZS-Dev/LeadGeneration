@@ -31,7 +31,8 @@
         <div class="login-wrapper">
             <!-- Left Side: Logo Section -->
             <div class="login-left">
-                <img src="../assets/images/freedashDark.svg" alt="PDS Perfusion">
+                {{-- <img src="../assets/images/freedashDark.svg" alt="PDS Perfusion"> --}}
+                <h2 class="text-dark"><b>PSD Perfusion</b></h2>
             </div>
 
             <!-- Right Side: Forget Form -->
@@ -53,22 +54,22 @@
                     </div>
                 @endif --}}
                 <!-- Success Message -->
-@if (session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
-<!-- Error Messages -->
-@if ($errors->any())
-<div class="alert alert-danger">
+                <!-- Error Messages -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
 
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    
-</div>
-@endif
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+
+                    </div>
+                @endif
 
 
                 <form action="{{ route('password.email') }}" method="POST">

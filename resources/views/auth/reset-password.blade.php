@@ -25,7 +25,8 @@
         <div class="login-wrapper">
             <!-- Left Side: Logo Section -->
             <div class="login-left">
-                <img src="../assets/images/freedashDark.svg" alt="PDS Perfusion">
+                {{-- <img src="../assets/images/freedashDark.svg" alt="PDS Perfusion"> --}}
+                <h2 class="text-dark"><b>PSD Perfusion</b></h2>
             </div>
 
             <!-- Right Side: Forget Form -->
