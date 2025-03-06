@@ -30,7 +30,7 @@ input[type="number"] {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 80vh;
+    min-height: 80vh; /* Change from height to min-height */
 }
 
 /* Left Side (Branding) */
@@ -129,10 +129,20 @@ input[type="number"] {
 }
 
 /* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .login-wrapper {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .login-wrapper {
         flex-direction: column;
-        max-width: 90%;
+        max-width: 95%;
+        min-height: auto; /* Allow it to expand as needed */
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .login-left {
@@ -143,6 +153,21 @@ input[type="number"] {
     .login-right {
         width: 100%;
         padding: 20px;
+    }
+
+    .custom-input-group input {
+        font-size: 14px; /* Make inputs more readable */
+        padding: 12px 40px;
+    }
+
+    .login-button {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .login-links {
+        flex-direction: column;
+        gap: 10px;
     }
 }
 
