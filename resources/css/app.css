@@ -205,3 +205,7 @@ input[name='gender']:checked:after {
 .image-container-1:hover .edit-button {
     display: block;
 }
+
+.sidebar-nav #sidebarnav .sidebar-item.selected > .sidebar-link {
+    background:  linear-gradient(135deg, #793268, rgb(250, 75, 209));
+}
