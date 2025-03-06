@@ -41,6 +41,7 @@ class UserController extends Controller
             'phoneno' => $request->phoneno,
             'role' => $request->role,
             'address' => $request->address,
+            'insertby' => Auth::user()->name,
         ]);
         return redirect()->back()->with('success','User Added successfully!',201);
     }

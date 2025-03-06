@@ -3,6 +3,7 @@
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\EmailSettingsController;
+use App\Http\Controllers\FluidController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfileController;
@@ -160,6 +161,15 @@ Route::middleware('auth')->group(function () {
         route::post('/delete-checklistgroup/{id}', 'deleteCLG')->name('delete-checklistgroup');
         route::get('/edit-cgroup/{id}','editCLGroup')->name('edit-cgroup');
         route::post('/update-cgroup','updateCLGroup')->name('update-cgroup');
+    });
+
+    Route::controller(FluidController::class)->group(function () {
+
+         /* ---------------------- fluid location module routes ---------------------- */
+         Route::get('/fluid-location', 'viewFluidLocation')->name('fluid-location');
+         route::post('/add-fluid-location', 'addFluidLocation')->name('add-fluid-location');
+         route::post('/edit-fluid-location','editFluidLocation')->name('edit-fluid-location');
+         route::post('/delete-fluid-location/{id}', 'deleteFluidLocation')->name('delete-fluid-location');
     });
 });
 

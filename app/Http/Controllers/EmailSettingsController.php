@@ -31,15 +31,16 @@ class EmailSettingsController extends Controller
         // Assign values from the form
         $settings->mail_from_name = $request->mail_from_name;
         $settings->email = $request->email;
-        $settings->password = Hash::make($request->password);
+        $settings->password = $request->password;
         $settings->port = $request->port;
         $settings->smtp = $request->smtp;
 
         // Save settings
-        $settings->save(); // Use `$settings->save()` instead of `$user->settings()->save($settings)`
+        $settings->save();
 
         return back()->with('success', 'Email configuration updated successfully!');
     }
+
 
 
 
