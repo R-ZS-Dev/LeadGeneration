@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CaseController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\EmailSettingsController;
@@ -132,6 +133,7 @@ Route::middleware('auth')->group(function () {
         route::post('/delete-lab-range/{id}', 'deleteLabrange')->name('delete-lab-range');
     });
     Route::post('/settings/check-password', [SettingsController::class, 'checkPassword'])->name('settings.checkPassword');
+
     Route::controller(GeneralController::class)->group(function () {
         /* ------------------------------- General Event routes ------------------------------- */
         Route::get('/general-event', 'viewgeneralevents')->name('general-event');
@@ -176,6 +178,11 @@ Route::middleware('auth')->group(function () {
         route::post('/delete-FDmixture/{id}', 'deleteFDmixture')->name('delete-FDmixture');
         route::post('/edit-FDmixture', 'editFDmixture')->name('edit-FDmixture');
     });
+
+        /* ----------------------------- Case Module ---------------------------- */
+        Route::controller(CaseController::class)->group(function () {
+        Route::get('/case-staff', 'viewCstaff')->name('case-staff');
+        });
 });
 
 require __DIR__ . '/auth.php';

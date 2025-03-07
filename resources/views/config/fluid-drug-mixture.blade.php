@@ -1,6 +1,55 @@
 @extends('sitemaster.master-layout')
 @section('title','Fluid Drug Mixture')
 @section('content')
+<style>
+    /* Add border below each row */
+.add-modal-table tbody tr {
+    border-bottom: 1px solid #d1d5db; /* Light gray color */
+}
+
+/* Remove border from last row */
+.add-modal-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+    /* Table Headers */
+    table thead th {
+        font-weight: 600;
+        text-align: left;
+        padding: 10px;
+        color: #6b7280;
+        /* Gray tone */
+    }
+
+    /* Table Cells */
+    table tbody td {
+        padding: 12px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    /* Input Fields */
+    table tbody input[type="number"] {
+        width: 100px;
+        text-align: center;
+        border: 1px solid #d1d5db;
+        /* Light gray border */
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    /* Checkboxes */
+    table tbody .form-check-input {
+        width: 18px;
+        height: 18px;
+        border-radius: 3px;
+    }
+
+    /* Match spacing */
+    .form-check-label {
+        margin-left: 8px;
+    }
+</style>
 <div class="container-fluid">
     <!-- ============================================================== -->
     <!-- Start Page Content -->
@@ -138,8 +187,8 @@
                                 "PRBC", "Sodium Bicarbonate", "Sodium Chloride 0.9%", "Ultrafiltration", "Urine Output", "Vancomycin" ];
                                 @endphp
                                 <div class="col-lg-12">
-                                    <table class=" w-100">
-                                        <thead class="">
+                                    <table class="w-100">
+                                        <thead>
                                             <tr>
                                                 <th>Sort Order</th>
                                                 <th>Amount (ml)</th>
@@ -147,27 +196,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($medications as $index => $medication)
+                                            @foreach ($medications as $medication)
                                             <tr>
                                                 <td class="text-center">
                                                     <input type="number" name="sort_order[{{ $medication }}]"
-                                                        class="form-control text-center"
-                                                        style="max-width: 80px;"
-                                                        data-medication="{{ $medication }}"
+                                                        class="form-control text-center same-input"
                                                         value="">
                                                 </td>
                                                 <td class="text-center">
                                                     <input type="number" name="amount[{{ $medication }}]"
-                                                        class="form-control text-center"
-                                                        style="max-width: 100px;"
-                                                        data-medication="{{ $medication }}"
+                                                        class="form-control text-center same-input"
                                                         value="">
                                                 </td>
-
-
                                                 <td>
                                                     <div class="form-check">
-                                                        <input type="checkbox" name="rowboxes[]" value="{{ $medication }}" id="{{ Str::slug($medication, '_') }}" class="form-check-input">
+                                                        <input type="checkbox" name="rowboxes[]" value="{{ $medication }}"
+                                                            id="{{ Str::slug($medication, '_') }}" class="form-check-input same-checkbox">
                                                         <label for="{{ Str::slug($medication, '_') }}" class="form-check-label">{{ $medication }}</label>
                                                     </div>
                                                 </td>
@@ -175,6 +219,8 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+
+
                                 </div>
 
                                 <div class="col-lg-12">
@@ -548,27 +594,56 @@
         //     medicationsList.innerHTML += row;
         // });
 
+        // Object.keys(sortOrder).forEach((medication) => {
+        //     let sortValue = sortOrder[medication] !== null ? sortOrder[medication] : '';
+        //     let amountValue = amount[medication] !== null ? amount[medication] : '';
+        //     let isChecked = rowboxes.includes(medication); // Check if medication is selected
+
+        //     let row = `
+        //     <tr>
+        //         <td class="text-center">
+        //             <input type="number" name="sort_order[${medication}]" id="sort_order_${medication}" 
+        //                 class="form-control text-center" style="max-width: 80px;" 
+        //                 value="${sortValue}">
+        //         </td>
+        //         <td class="text-center">
+        //             <input type="number" name="amount[${medication}]" id="amount_${medication}" 
+        //                 class="form-control text-center" style="max-width: 100px;" 
+        //                 value="${amountValue}">
+        //         </td>
+        //         <td>
+        //             <div class="form-check">
+        //                 <input type="checkbox" name="rowboxes[]" value="${medication}" id="med_${medication}" 
+        //                     class="form-check-input" ${isChecked ? 'checked' : ''}>
+        //                 <label for="med_${medication}" class="form-check-label">${medication}</label>
+        //             </div>
+        //         </td>
+        //     </tr>
+        //     `;
+        //     medicationsList.innerHTML += row;
+        // });
+
         Object.keys(sortOrder).forEach((medication) => {
             let sortValue = sortOrder[medication] !== null ? sortOrder[medication] : '';
             let amountValue = amount[medication] !== null ? amount[medication] : '';
-            let isChecked = rowboxes.includes(medication); // Check if medication is selected
+            let isChecked = rowboxes.includes(medication);
 
             let row = `
             <tr>
                 <td class="text-center">
                     <input type="number" name="sort_order[${medication}]" id="sort_order_${medication}" 
-                        class="form-control text-center" style="max-width: 80px;" 
+                        class="form-control text-center same-input" 
                         value="${sortValue}">
                 </td>
                 <td class="text-center">
                     <input type="number" name="amount[${medication}]" id="amount_${medication}" 
-                        class="form-control text-center" style="max-width: 100px;" 
+                        class="form-control text-center same-input" 
                         value="${amountValue}">
                 </td>
                 <td>
                     <div class="form-check">
                         <input type="checkbox" name="rowboxes[]" value="${medication}" id="med_${medication}" 
-                            class="form-check-input" ${isChecked ? 'checked' : ''}>
+                            class="form-check-input same-checkbox" ${isChecked ? 'checked' : ''}>
                         <label for="med_${medication}" class="form-check-label">${medication}</label>
                     </div>
                 </td>
@@ -576,6 +651,7 @@
             `;
             medicationsList.innerHTML += row;
         });
+
 
         // Show the modal
         var editModal = new bootstrap.Modal(document.getElementById("editFDMixture"));
