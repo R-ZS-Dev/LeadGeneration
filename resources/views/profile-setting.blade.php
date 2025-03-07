@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-dark">Update</button>
                     </div>
                 </form>
             </section>
@@ -197,7 +197,7 @@
                     </div>
 
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-dark">Update</button>
                     </div>
                 </form>
 
@@ -229,7 +229,7 @@
                     </div>
 
                     <div class="text-end">
-                        <button type="submit" id="submitBtn" class="btn btn-primary" disabled>Update Password</button>
+                        <button type="submit" id="submitBtn" class="btn btn-dark" disabled>Update Password</button>
                     </div>
                 </form>
 
@@ -268,7 +268,7 @@
                     </div>
 
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-dark">Update</button>
                     </div>
                 </form>
             </section>

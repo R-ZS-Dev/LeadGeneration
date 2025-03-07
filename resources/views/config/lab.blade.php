@@ -189,8 +189,8 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-primary"
-                                            style="float: right;">Submit</button>
+                                        <button type="submit" class="btn btn-dark w-100"
+                                            style="float: right;">Add Lab</button>
 
                                     </div>
                                 </div>
@@ -358,7 +358,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-primary" style="float: right;">Update
+                                    <button type="submit" class="btn btn-dark" style="float: right;">Update
                                         Lab</button>
 
                                 </div>

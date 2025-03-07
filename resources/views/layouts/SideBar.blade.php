@@ -34,8 +34,8 @@
                         {{-- <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Fluids / Drugs Mixture</span></a></li> --}}
                         <li class="sidebar-item"><a href="{{ route('fluid-location') }}" class="sidebar-link"><span class="hide-menu"> Fluid Locations</span></a></li>
                         <li class="sidebar-item"><a href="{{ route('cardioplegias') }}" class="sidebar-link"><span class="hide-menu"> Cardioplegia</span></a></li>
-                        {{-- <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Data Devices</span></a></li>
-                        <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Registration</span></a></li>
+                        <li class="sidebar-item"><a href="{{ route('data-devices') }}" class="sidebar-link"><span class="hide-menu"> Data Devices</span></a></li>
+                        {{-- <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Registration</span></a></li>
                         <li class="sidebar-item"><a href="docs-ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Live Line</span></a></li> --}}
                     </ul>
         </li>

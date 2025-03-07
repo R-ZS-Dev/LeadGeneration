@@ -119,30 +119,6 @@
         });
     </script>
 @endif
-{{--
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let checkbox = document.querySelector(".form-check-input");
-            let label = document.querySelector(".status-label");
-            function updateLabel() {
-                label.textContent = checkbox.checked ? "Active" : "InActive";
-            }
-            updateLabel();
-            checkbox.addEventListener("change", updateLabel);
-        });
-    </script> --}}
-{{-- <script>
-        function updateLabels() {
-            document.querySelectorAll(".status-switch").forEach(function (checkbox) {
-                let label = checkbox.nextElementSibling; // Get the associated label
-                label.textContent = checkbox.checked ? "Active" : "Inactive"; // Update label text
-            });
-        }
-        window.onload = updateLabels;
-        document.querySelectorAll(".status-switch").forEach(function (checkbox) {
-            checkbox.addEventListener("change", updateLabels);
-        });
-    </script> --}}
 
 </body>
 

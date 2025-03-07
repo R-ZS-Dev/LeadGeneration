@@ -3,6 +3,7 @@
 use App\Http\Controllers\CardioplegiaController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\DataDeviceController;
 use App\Http\Controllers\EmailSettingsController;
 use App\Http\Controllers\FluidController;
 use App\Http\Controllers\GeneralController;
@@ -185,6 +186,14 @@ Route::middleware('auth')->group(function () {
         route::post('/edit-cardioplegias','editCardioplegias')->name('edit-cardioplegias');
         route::post('/delete-cardioplegias/{id}', 'deleteCardioplegias')->name('delete-cardioplegias');
     });
+
+    Route::controller(DataDeviceController::class)->group(function () {
+        Route::get('/data-devices', 'viewDataDevices')->name('data-devices');
+        route::post('/add-data-devices', 'addDataDevices')->name('add-data-devices');
+        route::post('/edit-data-devices','editDataDevices')->name('edit-data-devices');
+        route::post('/delete-data-devices/{id}', 'deleteDataDevices')->name('delete-data-devices');
+    });
+
 });
 
 require __DIR__.'/auth.php';
