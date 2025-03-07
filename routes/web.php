@@ -8,6 +8,7 @@ use App\Http\Controllers\EmailSettingsController;
 use App\Http\Controllers\FluidController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\LabController;
+use App\Http\Controllers\LivelineController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingsController;
@@ -193,6 +194,14 @@ Route::middleware('auth')->group(function () {
         route::post('/edit-data-devices','editDataDevices')->name('edit-data-devices');
         route::post('/delete-data-devices/{id}', 'deleteDataDevices')->name('delete-data-devices');
     });
+
+    Route::controller(LivelineController::class)->group(function () {
+        Route::get('/live-line', 'viewLiveLine')->name('live-line');
+        route::post('/add-live-line', 'addLiveLine')->name('add-live-line');
+        route::post('/edit-live-line','editLiveLine')->name('edit-live-line');
+        route::post('/delete-live-line/{id}', 'deleteLiveLine')->name('delete-live-line');
+    });
+
 
 });
 
