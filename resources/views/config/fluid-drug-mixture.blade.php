@@ -56,7 +56,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group mb-3">
                                         <label for="flm_billcode">Billing code</label>
-                                        <input type="text" name="flm_billcode" class="form-control" maxlength="15" placeholder="Billing code">
+                                        <input type="text" name="flm_billcode" class="form-control" placeholder="Billing code" maxlength="15">
                                     </div>
                                 </div>
 
@@ -101,7 +101,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group mb-3">
                                         <label for="flm_amount">Amount</label>
-                                        <input type="text" name="flm_amount" class="form-control" placeholder="Amount">
+                                        <input type="text" name="flm_amount" class="form-control" placeholder="Amount" maxlength="15">
                                     </div>
                                 </div>
 
@@ -150,11 +150,20 @@
                                             @foreach ($medications as $index => $medication)
                                             <tr>
                                                 <td class="text-center">
-                                                    <input type="number" name="sort_order[{{ $index }}]" class="form-control text-center" style="max-width: 80px;" value="">
+                                                    <input type="number" name="sort_order[{{ $medication }}]"
+                                                        class="form-control text-center"
+                                                        style="max-width: 80px;"
+                                                        data-medication="{{ $medication }}"
+                                                        value="">
                                                 </td>
                                                 <td class="text-center">
-                                                    <input type="number" name="amount[{{ $index }}]" class="form-control text-center" style="max-width: 100px;" value="">
+                                                    <input type="number" name="amount[{{ $medication }}]"
+                                                        class="form-control text-center"
+                                                        style="max-width: 100px;"
+                                                        data-medication="{{ $medication }}"
+                                                        value="">
                                                 </td>
+
 
                                                 <td>
                                                     <div class="form-check">
@@ -228,9 +237,6 @@
                                     <th>Cardioplegia</th>
                                     <th>Row Boxes</th>
                                     <th>Active</th>
-                                    <th>Inserted By</th>
-                                    <th>Status</th>
-                                    <th>Close</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -248,21 +254,43 @@
                                     <td>{{ $mixture->toLocation->fl_type ?? 'N/A' }}</td> <!-- To Location Name -->
                                     <td>{{ $mixture->flm_display }}</td>
                                     <td>{{ $mixture->flm_amount }}</td>
-                                    <td>{{ $mixture->flm_quick ? 'Yes' : 'No' }}</td>
-                                    <td>{{ $mixture->flm_prime ? 'Yes' : 'No' }}</td>
-                                    <td>{{ $mixture->flm_cardioplegia ? 'Yes' : 'No' }}</td>
+
+                                    <td>
+                                        @if ($mixture->flm_quick == '1')
+                                        <span class="badge bg-success">Active</span>
+                                        @else
+                                        <span class="badge bg-danger">Inactive</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($mixture->flm_prime == '1')
+                                        <span class="badge bg-success">Active</span>
+                                        @else
+                                        <span class="badge bg-danger">Inactive</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($mixture->flm_cardioplegia == '1')
+                                        <span class="badge bg-success">Active</span>
+                                        @else
+                                        <span class="badge bg-danger">Inactive</span>
+                                        @endif
+                                    </td>
                                     <td id="truncated-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; cursor: pointer;" onclick="expandText(this)">
                                         {{ implode(', ', json_decode($mixture->rowboxes, true)) }}
                                     </td>
-                                    <td>{{ $mixture->flm_active ? 'Active' : 'Inactive' }}</td>
-                                    <td>{{ $mixture->flm_insertby }}</td>
-                                    <td>{{ $mixture->status }}</td>
-                                    <td>{{ $mixture->close ? 'Closed' : 'Open' }}</td>
                                     <td>
-                                        <a onclick="editFDMForm({{ json_encode($mixture, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) }})"
-                                            href="javascript:void(0);">
+                                        @if ($mixture->flm_active == '1')
+                                        <span class="badge bg-success">Active</span>
+                                        @else
+                                        <span class="badge bg-danger">Inactive</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a onclick='editFDMForm(@json($mixture))' href="javascript:void(0);">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
+
                                         <a href="javascript:void(0);"
                                             onclick="confirmDelete('{{ route('delete-FDmixture', $mixture->flm_id) }}', '{{ $mixture->flm_id }}')"
 
@@ -291,9 +319,9 @@
                             aria-label="Close"></button>
                     </div>
 
-                    <form method="POST" action="{{ route('update-FDmixture') }}" class="mt-4">
+                    <form method="POST" action="{{ route('edit-FDmixture') }}" class="mt-4">
                         @csrf
-                        <input type="hidden" name="flm_id" id="flm_id" value="{{ $fluidDrugMixture->flm_id ?? '' }}">
+                        <input type="hidden" name="flm_id" id="flm_id">
 
                         <div class="row">
                             <!-- Name -->
@@ -324,7 +352,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
                                     <label for="flm_billcode">Billing code</label>
-                                    <input type="text" name="flm_billcode" class="form-control" id="editflm_billcode" value="{{ old('flm_billcode') }}">
+                                    <input type="text" name="flm_billcode" class="form-control" id="editflm_billcode" value="{{ old('flm_billcode') }}" maxlength="15">
                                 </div>
                             </div>
 
@@ -337,39 +365,30 @@
                             </div>
 
                             <!-- From Location -->
-                            <!-- From Location -->
+
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
-                                    <label for="flm_ftype">From</label>
-                                    <select name="flm_ftype" class="form-select">
+                                    <label for="">From</label>
+                                    <select name="flm_ftype" id="editflm_ftype" class="form-select">
                                         <option value="">Select Mixture</option>
                                         @foreach ($fluidLocations as $location)
-                                        <option value="{{ $location->fl_id }}"
-                                            {{ isset($fluidDrugMixture) && $fluidDrugMixture->flm_ftype == $location->fl_id ? 'selected' : '' }}>
-                                            {{ $location->fl_name }}
-                                        </option>
+                                        <option value="{{ $location->fl_id }}">{{ $location->fl_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
 
-                            <!-- To Location -->
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
-                                    <label for="flm_ttype">To</label>
-                                    <select name="flm_ttype" class="form-select">
+                                    <label for="">To</label>
+                                    <select name="flm_ttype" id="editflm_ttype" class="form-select">
                                         <option value="">Select Mix</option>
                                         @foreach ($fluidLocations as $location)
-                                        <option value="{{ $location->fl_id }}"
-                                            {{ isset($fluidDrugMixture) && $fluidDrugMixture->flm_ttype == $location->fl_id ? 'selected' : '' }}>
-                                            {{ $location->fl_type }}
-                                        </option>
+                                        <option value="{{ $location->fl_id }}">{{ $location->fl_type }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-
-
 
                             <!-- Display -->
                             <div class="col-lg-6">
@@ -383,7 +402,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
                                     <label for="flm_amount">Amount</label>
-                                    <input type="text" name="flm_amount" class="form-control" id="editflm_amount" value="{{ old('flm_amount') }}">
+                                    <input type="text" name="flm_amount" class="form-control" id="editflm_amount" value="{{ old('flm_amount') }}" maxlength="15">
                                 </div>
                             </div>
 
@@ -419,61 +438,17 @@
                                     <label for="editflm_cardioplegia" class="form-check-label">Cardioplegia</label>
                                 </div>
                             </div>
-                            -
 
                             <div class="col-lg-12">
-                                <table class=" w-100">
-                                    <thead class="">
+                                <table class="table">
+                                    <thead>
                                         <tr>
-                                            <th>Sort Order</th>
-                                            <th>Amount (ml)</th>
+                                            <th class="text-center">Sort Order</th>
+                                            <th class="text-center">Amount</th>
                                             <th>Medication</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-
-                                        @php
-                                        // Decode JSON data safely
-                                        $selectedMedications = json_decode($checklistg->rowboxes ?? '[]', true);
-                                        $sortOrderData = json_decode($checklistg->sort_order ?? '{}', true);
-                                        $amountData = json_decode($checklistg->amount ?? '{}', true);
-
-                                        // Ensure they are valid arrays
-                                        if (!is_array($selectedMedications)) {
-                                        $selectedMedications = [];
-                                        }
-                                        if (!is_array($sortOrderData)) {
-                                        $sortOrderData = [];
-                                        }
-                                        if (!is_array($amountData)) {
-                                        $amountData = [];
-                                        }
-                                        @endphp
-
-                                        @foreach ($medications as $medication)
-                                        <tr>
-                                            <td class="text-center">
-                                                <input type="number" name="sort_order[{{ $medication }}]" class="form-control text-center"
-                                                    value="{{ old('sort_order.' . $medication, $sortOrderData[$medication] ?? '') }}">
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="number" name="amount[{{ $medication }}]" class="form-control text-center"
-                                                    value="{{ old('amount.' . $medication, $amountData[$medication] ?? '') }}">
-                                            </td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input type="checkbox" name="rowboxes[]" value="{{ $medication }}"
-                                                        class="form-check-input"
-                                                        {{ in_array($medication, (array) $selectedMedications) ? 'checked' : '' }}>
-                                                    <label class="form-check-label">{{ $medication }}</label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-
-
-                                    </tbody>
-
+                                    <tbody id="medicationsList"></tbody>
                                 </table>
                             </div>
 
@@ -515,105 +490,139 @@
 </script>
 <script>
     function editFDMForm(FDMdata) {
-    console.log("Received FDMdata:", FDMdata);
+        console.log(FDMdata);
 
-    // Set values in the form
-    document.getElementById("flm_id").value = FDMdata.flm_id || '';
-    document.getElementById("editflm_name").value = FDMdata.flm_name || '';
-    document.getElementById("editflm_cname").value = FDMdata.flm_cname || '';
-    document.getElementById("editflm_desc").value = FDMdata.flm_desc || '';
-    document.getElementById("editflm_billcode").value = FDMdata.flm_billcode || '';
-    document.getElementById("editflm_dname").value = FDMdata.flm_dname || '';
-    document.getElementById("editflm_display").value = FDMdata.flm_display || '';
-    document.getElementById("editflm_amount").value = FDMdata.flm_amount || '';
+        // Fill the basic input fields
+        document.getElementById("flm_id").value = FDMdata.flm_id || '';
+        document.getElementById("editflm_name").value = FDMdata.flm_name || '';
+        document.getElementById("editflm_cname").value = FDMdata.flm_cname || '';
+        document.getElementById("editflm_desc").value = FDMdata.flm_desc || '';
+        document.getElementById("editflm_billcode").value = FDMdata.flm_billcode || '';
+        document.getElementById("editflm_dname").value = FDMdata.flm_dname || '';
+        document.getElementById("editflm_display").value = FDMdata.flm_display || '';
+        document.getElementById("editflm_amount").value = FDMdata.flm_amount || '';
+        document.getElementById("editflm_ftype").value = FDMdata.flm_ftype || '';
+        document.getElementById("editflm_ttype").value = FDMdata.flm_ttype || '';
+        document.getElementById("editflm_quick").checked = FDMdata.flm_quick == 1;
+        document.getElementById("editflm_prime").checked = FDMdata.flm_prime == 1;
+        document.getElementById("editflm_cardioplegia").checked = FDMdata.flm_cardioplegia == 1;
+        document.getElementById("editflm_active").checked = FDMdata.flm_active == 1;
 
-    // Checkboxes
-    document.getElementById("editflm_quick").checked = FDMdata.flm_quick == 1;
-    document.getElementById("editflm_prime").checked = FDMdata.flm_prime == 1;
-    document.getElementById("editflm_cardioplegia").checked = FDMdata.flm_cardioplegia == 1;
-    document.getElementById("editflm_active").checked = FDMdata.flm_active == 1;
+        // Populate Medications Table
+        let medicationsList = document.getElementById("medicationsList");
+        medicationsList.innerHTML = ""; // Clear previous data
 
-    // Parse rowboxes safely
-    let selectedBoxes = [];
-    try {
-        selectedBoxes = Array.isArray(FDMdata.rowboxes) ? FDMdata.rowboxes : JSON.parse(FDMdata.rowboxes || '[]');
-    } catch (error) {
-        console.error("Error parsing rowboxes:", error);
+        console.log(FDMdata.sort_order);
+        let sortOrder = JSON.parse(FDMdata.sort_order || '{}');
+        let amount = JSON.parse(FDMdata.amount || '{}');
+        let rowboxes = JSON.parse(FDMdata.rowboxes || '[]');
+        // ✅ Check if medications exist and is an array
+        // console.log("Parsed Sort Order:", sortOrder);
+        // console.log("Parsed Amount:", amount);
+        // console.log("Parsed Rowboxes:", rowboxes);
+
+        // Clear previous entries
+
+        // ✅ Loop through medications and populate the table
+        // Object.keys(sortOrder).forEach((medication, index) => {
+        //     let sortValue = sortOrder[medication] !== null ? sortOrder[medication] : '';
+        //     let amountValue = amount[medication] !== null ? amount[medication] : '';
+        //     let isChecked = rowboxes.includes(medication); // Check if medication is selected
+
+        //     let row = `
+        //     <tr>
+        //         <td class="text-center">
+        //             <input type="number" name="sort_order[${index}]" id="sort_order_${index}" class="form-control text-center" style="max-width: 80px;" value="${sortValue}">
+        //         </td>
+        //         <td class="text-center">
+        //             <input type="number" name="amount[${index}]" id="amount_${index}" class="form-control text-center" style="max-width: 100px;" value="${amountValue}">
+        //         </td>
+        //         <td>
+        //             <div class="form-check">
+        //                 <input type="checkbox" name="rowboxes[]" value="${medication}" id="med_${index}" class="form-check-input" ${isChecked ? 'checked' : ''}>
+        //                 <label for="med_${index}" class="form-check-label">${medication}</label>
+        //             </div>
+        //         </td>
+        //     </tr>
+        // `;
+        //     medicationsList.innerHTML += row;
+        // });
+
+        Object.keys(sortOrder).forEach((medication) => {
+            let sortValue = sortOrder[medication] !== null ? sortOrder[medication] : '';
+            let amountValue = amount[medication] !== null ? amount[medication] : '';
+            let isChecked = rowboxes.includes(medication); // Check if medication is selected
+
+            let row = `
+            <tr>
+                <td class="text-center">
+                    <input type="number" name="sort_order[${medication}]" id="sort_order_${medication}" 
+                        class="form-control text-center" style="max-width: 80px;" 
+                        value="${sortValue}">
+                </td>
+                <td class="text-center">
+                    <input type="number" name="amount[${medication}]" id="amount_${medication}" 
+                        class="form-control text-center" style="max-width: 100px;" 
+                        value="${amountValue}">
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input type="checkbox" name="rowboxes[]" value="${medication}" id="med_${medication}" 
+                            class="form-check-input" ${isChecked ? 'checked' : ''}>
+                        <label for="med_${medication}" class="form-check-label">${medication}</label>
+                    </div>
+                </td>
+            </tr>
+            `;
+            medicationsList.innerHTML += row;
+        });
+
+        // Show the modal
+        var editModal = new bootstrap.Modal(document.getElementById("editFDMixture"));
+        editModal.show();
     }
-
-    // Select checkboxes
-    document.querySelectorAll("input[name='rowboxes[]']").forEach((checkbox) => {
-        checkbox.checked = selectedBoxes.includes(checkbox.value);
-    });
-
-    // Parse sort_order and amount safely
-    let sortOrderData = {};
-    let amountData = {};
-
-    try {
-        sortOrderData = typeof FDMdata.sort_order === 'string' ? JSON.parse(FDMdata.sort_order) : FDMdata.sort_order || {};
-        amountData = typeof FDMdata.amount === 'string' ? JSON.parse(FDMdata.amount) : FDMdata.amount || {};
-    } catch (error) {
-        console.error("Error parsing sort_order or amount:", error);
-        sortOrderData = {};
-        amountData = {};
-    }
-
-    // Populate sort order and amount fields
-    document.querySelectorAll("input[name^='sort_order']").forEach((input) => {
-        let medication = input.name.match(/\[(.*?)\]/)[1]; // Extract key
-        input.value = sortOrderData[medication] || '';
-    });
-
-    document.querySelectorAll("input[name^='amount']").forEach((input) => {
-        let medication = input.name.match(/\[(.*?)\]/)[1];
-        input.value = amountData[medication] || '';
-    });
-
-    // Show the modal
-    var editModal = new bootstrap.Modal(document.getElementById("editFDMixture"));
-    editModal.show();
-}
-
 </script>
+
+
+
 <script>
-    // document.addEventListener("DOMContentLoaded", function() {
-    //     document.addEventListener("submit", function(event) {
-    //         const activeModal = document.querySelector(".modal.show");
-    //         if (!activeModal) return;
+    document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("submit", function(event) {
+            const activeModal = document.querySelector(".modal.show");
+            if (!activeModal) return;
 
-    //         const form = activeModal.querySelector("form");
-    //         if (!form) return;
+            const form = activeModal.querySelector("form");
+            if (!form) return;
 
-    //         const inputs = form.querySelectorAll("input:not([type='hidden'])");
-    //         const submitBtn = form.querySelector("button[type='submit']");
+            const inputs = form.querySelectorAll("input:not([type='hidden'])");
+            const submitBtn = form.querySelector("button[type='submit']");
 
-    //         let isValid = true;
+            let isValid = true;
 
-    //         inputs.forEach(input => {
-    //             if (input.type !== "checkbox" && input.value.trim() === "") {
-    //                 input.classList.add("is-invalid");
-    //                 isValid = false;
-    //             } else {
-    //                 input.classList.remove("is-invalid");
-    //             }
-    //         });
+            // inputs.forEach(input => {
+            //     if (input.type !== "checkbox" && input.value.trim() === "") {
+            //         input.classList.add("is-invalid");
+            //         isValid = false;
+            //     } else {
+            //         input.classList.remove("is-invalid");
+            //     }
+            // });
 
-    //         if (!isValid) {
-    //             event.preventDefault();
-    //         } else {
-    //             submitBtn.innerHTML =
-    //                 '<span class="spinner-border spinner-border-sm"></span> Processing...';
-    //             submitBtn.disabled = true;
-    //         }
-    //     });
-    //     document.addEventListener("input", function(event) {
-    //         const input = event.target;
-    //         if (input.value.trim() !== "") {
-    //             input.classList.remove("is-invalid");
-    //         }
-    //     });
-    // });
+            if (!isValid) {
+                event.preventDefault();
+            } else {
+                submitBtn.innerHTML =
+                    '<span class="spinner-border spinner-border-sm"></span> Processing...';
+                submitBtn.disabled = true;
+            }
+        });
+        // document.addEventListener("input", function(event) {
+        //     const input = event.target;
+        //     if (input.value.trim() !== "") {
+        //         input.classList.remove("is-invalid");
+        //     }
+        // });
+    });
 </script>
 
 <script>

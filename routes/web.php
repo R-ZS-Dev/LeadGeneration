@@ -174,8 +174,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/fluid-drug-mixture', 'viewFDMixture')->name('fluid-drug-mixture');
         route::post('/add-fdmixture', 'addFDMixture')->name('add-fdmixture');
         route::post('/delete-FDmixture/{id}', 'deleteFDmixture')->name('delete-FDmixture');
-        Route::post('/update-FDmixture', 'updateFDMixture')->name('update-FDmixture');
-        route::post('/update-cgroup', 'updateCLGroup')->name('update-cgroup');
+        route::post('/edit-FDmixture', 'editFDmixture')->name('edit-FDmixture');
     });
 });
 
