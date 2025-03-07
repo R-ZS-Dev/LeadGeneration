@@ -18,4 +18,14 @@ class FluidLocations extends Model
         'status',
         'close',
     ];
+
+     public function fluidDrugMixturesFrom()
+     {
+         return $this->hasMany(FluidDrugMixture::class, 'fl_name', 'flm_id');
+     }
+ 
+     public function fluidDrugMixturesTo()
+     {
+         return $this->hasMany(FluidDrugMixture::class, 'fl_type', 'flm_id');
+     }
 }
