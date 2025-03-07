@@ -40,12 +40,15 @@
                 @endif
 
                 <!-- Custom error message (if you need to pass it explicitly in the controller) -->
-                @if (session('error'))
+                @if ($errors->any())
                     <div class="alert alert-danger">
-                        {{ session('error') }}
+
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+
                     </div>
                 @endif
-
                 <form method="POST" action="{{ route('password.store') }}">
                     @csrf
                     <!-- Password Reset Token -->
