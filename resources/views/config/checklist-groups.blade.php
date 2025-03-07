@@ -95,7 +95,7 @@
                                     <div class="form-group mb-2">
                                         @foreach ($checkboxes1 as $checkbox)
                                         <label>
-                                            <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}"> {{ $checkbox }}
+                                            <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}" class="form-check-input"> {{ $checkbox }}
                                         </label><br>
                                         @endforeach
                                     </div>
@@ -103,10 +103,10 @@
 
                                 <!-- Second Column (60%) -->
                                 <div class="col-md-6">
-                                    <div class="form-group mb-2">
+                                    <div class="form-group-inp mb-2">
                                         @foreach ($checkboxes2 as $checkbox)
                                         <label>
-                                            <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}"> {{ $checkbox }}
+                                            <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}" class="form-check-input"> {{ $checkbox }}
                                         </label><br>
                                         @endforeach
                                     </div>
@@ -259,7 +259,7 @@
                                 <div class="form-group mb-2">
                                     @foreach ($checkboxes1 as $checkbox)
                                     <label>
-                                        <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}"
+                                        <input type="checkbox" class="form-check-input" name="rowboxes[]" value="{{ $checkbox }}"
                                             {{ in_array($checkbox, $selectedBoxes ?? []) ? 'checked' : '' }}>
                                         {{ $checkbox }}
                                     </label><br>
@@ -273,7 +273,7 @@
                                 <div class="form-group mb-2">
                                     @foreach ($checkboxes2 as $checkbox)
                                     <label>
-                                        <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}"
+                                        <input type="checkbox" class="form-check-input" name="rowboxes[]" value="{{ $checkbox }}"
                                             {{ in_array($checkbox, $selectedBoxes ?? []) ? 'checked' : '' }}>
                                         {{ $checkbox }}
                                     </label><br>

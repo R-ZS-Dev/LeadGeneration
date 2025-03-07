@@ -476,18 +476,6 @@
 </div>
 @endsection
 @section('script')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#users-table').DataTable({
-            "paging": true, // Enable pagination
-            "lengthChange": true, // Allow user to change the number of records per page
-            "searching": true, // Enable search functionality
-            "ordering": true, // Enable column sorting
-            "info": true, // Display info like "Showing 1 to 10 of 50 entries"
-            "autoWidth": false // Disable automatic column width adjustment
-        });
-    });
-</script>
 <script>
     function editFDMForm(FDMdata) {
         console.log(FDMdata);
@@ -556,18 +544,18 @@
             let row = `
             <tr>
                 <td class="text-center">
-                    <input type="number" name="sort_order[${medication}]" id="sort_order_${medication}" 
-                        class="form-control text-center" style="max-width: 80px;" 
+                    <input type="number" name="sort_order[${medication}]" id="sort_order_${medication}"
+                        class="form-control text-center" style="max-width: 80px;"
                         value="${sortValue}">
                 </td>
                 <td class="text-center">
-                    <input type="number" name="amount[${medication}]" id="amount_${medication}" 
-                        class="form-control text-center" style="max-width: 100px;" 
+                    <input type="number" name="amount[${medication}]" id="amount_${medication}"
+                        class="form-control text-center" style="max-width: 100px;"
                         value="${amountValue}">
                 </td>
                 <td>
                     <div class="form-check">
-                        <input type="checkbox" name="rowboxes[]" value="${medication}" id="med_${medication}" 
+                        <input type="checkbox" name="rowboxes[]" value="${medication}" id="med_${medication}"
                             class="form-check-input" ${isChecked ? 'checked' : ''}>
                         <label for="med_${medication}" class="form-check-label">${medication}</label>
                     </div>

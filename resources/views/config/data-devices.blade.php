@@ -298,7 +298,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 text-center">
-                                <button type="submit" class="btn w-100 btn-dark" id="submitBtn">Update
+                                <button type="submit" class="btn btn-dark" id="submitBtn">Update
                                     Data Device</button>
 
                                 <button type="button" class="btn btn-dark" id="" disabled>Start Collect</button>

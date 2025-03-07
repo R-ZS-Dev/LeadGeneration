@@ -24,7 +24,8 @@ class ReportController extends Controller
             'report_name' => 'required|string|max:255',
             'address1' => 'required|string|max:255',
         ]);
-
+        $headImagePath = null;
+        $footImagePath = null;
         if ($request->hasFile('rep_headimage')) {
             $file = $request->file('rep_headimage');
             $timestamp = now()->format('YmdHis');

@@ -346,7 +346,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
                                     <label for="edit-fd_units">Units</label>
-                                    <input type="text" name="fd_unit" id="edit-fd_units" class="form-control"
+                                    <input type="text" name="fd_unit" id="edit-fd_units" class="form-control" maxlength="5"
                                         placeholder="Units">
                                 </div>
                             </div>
@@ -356,11 +356,11 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <input type="text" name="fd_confrom" id="edit-fd_confrom"
-                                                class="form-control" placeholder="Concentration Per">
+                                                class="form-control" placeholder="Concentration Per" maxlength="10">
                                         </div>
                                         <div class="col-6">
                                             <input type="text" name="fd_conto" id="edit-fd_conto"
-                                                class="form-control" placeholder="Concentration ML">
+                                                class="form-control" placeholder="Concentration ML" maxlength="10">
                                         </div>
                                     </div>
                                 </div>

@@ -246,8 +246,7 @@
                                 <div class="form-group mb-3">
                                     <label for="">Blood Part</label>
                                     <input type="text" name="card_blood" id="edit-blood"
-                                        value="{{ old('card_blood') }}" class="form-control"
-                                        placeholder="Blood Part"
+                                        value="{{ old('card_blood') }}" class="form-control" placeholder="Blood Part"
                                         oninput="this.value=this.value.replace(/[^0-9]/g,'')";>
                                 </div>
                             </div>
@@ -272,8 +271,7 @@
                                 <div class="form-group mb-3">
                                     <label for="">Temperature</label>
                                     <input type="text" name="card_temp" id="edit-temp"
-                                        value="{{ old('card_temp') }}" class="form-control"
-                                        placeholder="Temperature"
+                                        value="{{ old('card_temp') }}" class="form-control" placeholder="Temperature"
                                         oninput="this.value=this.value.replace(/[^0-9]/g,'')";>
                                 </div>
                             </div>
@@ -281,8 +279,7 @@
                                 <div class="form-group mb-3">
                                     <label for="">Display</label>
                                     <input type="text" name="card_display" id="edit-display"
-                                        value="{{ old('card_display') }}" class="form-control"
-                                        placeholder="Display">
+                                        value="{{ old('card_display') }}" class="form-control" placeholder="Display">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -298,24 +295,22 @@
                                 <div class="form-group mb-3">
                                     <label for="">CPG Type</label>
                                     <input type="text" name="card_cpgtype" id="edit-cpgtype"
-                                        value="{{ old('card_cpgtype') }}" class="form-control"
-                                        placeholder="CPG Type">
+                                        value="{{ old('card_cpgtype') }}" class="form-control" placeholder="CPG Type">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group form-switch mb-3">
                                     <input type="hidden" name="card_quick" value="0">
-                                    <input type="checkbox" role="switch" name="card_quick" id="edit-quick"
-                                        checked value="1" class="form-check-input"
-                                        {{ old('card_quick') ? 'checked' : '' }}>
+                                    <input type="checkbox" role="switch" name="card_quick" id="edit-quick" checked
+                                        value="1" class="form-check-input" {{ old('card_quick') ? 'checked' : '' }}>
                                     <label for="edit-quick" class="form-check-label">Quick</label>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group form-switch mb-3">
                                     <input type="hidden" name="card_active" value="0">
-                                    <input type="checkbox" role="switch" name="card_active" id="edit-active"
-                                        checked value="1" class="form-check-input"
+                                    <input type="checkbox" role="switch" name="card_active" id="edit-active" checked
+                                        value="1" class="form-check-input"
                                         {{ old('card_active') ? 'checked' : '' }}>
                                     <label for="edit-active" class="form-check-label">Active</label>
                                 </div>
