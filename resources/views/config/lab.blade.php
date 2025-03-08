@@ -147,14 +147,14 @@
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
                                             <input type="hidden" name="show_quick_button" value="0">
-                                            <input type="checkbox" name="show_quick_button" value="1" id="show_quick_button" class="form-check-input" >
+                                            <input type="checkbox" name="show_quick_button" value="1" id="show_quick_button" class="form-check-input">
                                             <label class="form-check-label" for="show_quick_button">Show Quick Button</label>
                                         </div>
 
                                     </div>
 
 
-                                    <div id="quick_button_section" style="display: none;">
+                                    <div id="quick_button_section" style="">
                                         <div class="col-lg-12">
                                             <div class="form-group mb-3">
                                                 <label class="form-label">Quick Button Text</label>
@@ -189,8 +189,8 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-primary"
-                                            style="float: right;">Submit</button>
+                                        <button type="submit" class="btn btn-dark w-100"
+                                            style="float: right;">Add Lab</button>
 
                                     </div>
                                 </div>
@@ -358,7 +358,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-primary" style="float: right;">Update
+                                    <button type="submit" class="btn btn-dark" style="float: right;">Update
                                         Lab</button>
 
                                 </div>
@@ -372,18 +372,7 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#users-table').DataTable({
-                "paging": true, // Enable pagination
-                "lengthChange": true, // Allow user to change the number of records per page
-                "searching": true, // Enable search functionality
-                "ordering": true, // Enable column sorting
-                "info": true, // Display info like "Showing 1 to 10 of 50 entries"
-                "autoWidth": false // Disable automatic column width adjustment
-            });
-        });
-    </script>
+
     <script>
         function editPro(pro) {
             document.getElementById("l_id").value = pro.l_id;

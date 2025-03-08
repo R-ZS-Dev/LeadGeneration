@@ -24,7 +24,8 @@ class ReportController extends Controller
             'report_name' => 'required|string|max:255',
             'address1' => 'required|string|max:255',
         ]);
-
+        $headImagePath = null;
+        $footImagePath = null;
         if ($request->hasFile('rep_headimage')) {
             $file = $request->file('rep_headimage');
             $timestamp = now()->format('YmdHis');
@@ -47,7 +48,6 @@ class ReportController extends Controller
         $report->rep_headimage = $headImagePath;
         $report->rep_footimage = $footImagePath;
         $report->rep_active = $request->rep_active;
-
         $report->rep_insertby = Auth::user()->name;
         $report->save();
         return redirect()->back()->with('success', 'Report added successfully!');

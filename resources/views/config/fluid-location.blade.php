@@ -4,12 +4,6 @@
     <div class="container-fluid">
         <div class="row">
 
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-
             <!-- Success Message -->
             <div id="successMessage" class="alert alert-success" style="display: none;"></div>
 
@@ -73,6 +67,16 @@
         </div><!-- /.modal -->
 
         <div class="col-12 mt-2">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -187,18 +191,7 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#users-table').DataTable({
-                "paging": true, // Enable pagination
-                "lengthChange": true, // Allow user to change the number of records per page
-                "searching": true, // Enable search functionality
-                "ordering": true, // Enable column sorting
-                "info": true, // Display info like "Showing 1 to 10 of 50 entries"
-                "autoWidth": false // Disable automatic column width adjustment
-            });
-        });
-    </script>
+
     <script>
         function editEqg(fl) {
             document.getElementById("fl_id").value = fl.fl_id;

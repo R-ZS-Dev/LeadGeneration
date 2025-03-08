@@ -93,6 +93,15 @@
             </div><!-- /.modal -->
 
             <div class="col-12 mt-2">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -232,18 +241,7 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#users-table').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
-    </script>
+
     <script>
         function editHospital(hospital) {
             document.getElementById("hos_id").value = hospital.hos_id;

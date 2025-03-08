@@ -21,7 +21,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
-    @php
+    {{-- @php
         $cwd = getcwd();
         $cssName = basename(glob($cwd . '/build/assets/*.css')[0], '.css');
         $jsName = basename(glob($cwd . '/build/assets/*.js')[0], '.js');
@@ -29,8 +29,8 @@
         $js = asset('build/assets/' . $jsName . '.js');
     @endphp
     <link rel="stylesheet" href="{{ $css }}">
-    <script src="{{ $js }}"></script>
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    <script src="{{ $js }}"></script> --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

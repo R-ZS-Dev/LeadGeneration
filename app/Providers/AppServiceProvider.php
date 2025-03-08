@@ -24,8 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             $company = Company::first();
-            $favicon = $company->fav_photo;
-
+            $favicon = $company && $company->fav_photo ? $company->fav_photo : 'default.jpg';
             $view->with([
                 'favicon' => $favicon,
             ]);

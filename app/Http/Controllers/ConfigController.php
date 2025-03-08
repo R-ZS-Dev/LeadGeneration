@@ -28,7 +28,7 @@ class ConfigController extends Controller
 
         // return $request->all();
         $validated = $request->validate([
-            'hos_name' => 'required|string|max:255',
+         'hos_name' => 'required|string|max:255|unique:hospitals,hos_name',
             'zip_code' => 'required|string|max:20',
             'region' => 'required|string|max:255',
             'national_pro_id' => 'required|string|max:255',
@@ -92,9 +92,10 @@ class ConfigController extends Controller
     public function addEquipmentGroup(Request $request)
     {
         $validated = $request->validate([
-            'eqg_name' => 'required|string|max:255',
+            'eqg_name' => 'required|string|max:255|unique:equipment_groups,eqg_name',
             'eqg_active' => 'required|in:0,1',
         ]);
+
         $user = Auth::user();
         try {
             EquipmentGroup::create([
@@ -252,7 +253,7 @@ class ConfigController extends Controller
     public function addSupplyGroup(Request $request)
     {
         $validated = $request->validate([
-            'spg_name' => 'required|string|max:255',
+            'spg_name' => 'required|string|max:255|unique:supply_groups,spg_name',
             'spg_active' => 'required|in:0,1',
         ]);
         try {
@@ -493,9 +494,8 @@ class ConfigController extends Controller
         // return $request->all();
         $user = Auth::user();
         $request->validate([
-            'pro_name' => 'required|string|max:100',
+            'pro_name' => 'required|string|max:100|unique:procedures,pro_name',
         ]);
-
         $procedure = new Procedures();
         $procedure->pro_name = $request->pro_name;
         $procedure->pro_cptcode = $request->pro_cptcode;

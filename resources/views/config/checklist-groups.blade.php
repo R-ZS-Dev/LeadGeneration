@@ -13,7 +13,7 @@
     <div id="successMessage" class="alert alert-success" style="display: none;"></div>
 
     <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
 
                 <div class="modal-body">
@@ -83,15 +83,37 @@
                             ];
                             @endphp
 
-                            <div class="col-lg-12">Groups
-                                <div class="form-group mb-2">
-                                    @foreach ($checkboxes as $checkbox)
-                                    <label>
-                                        <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}"> {{ $checkbox }}
-                                    </label><br>
-                                    @endforeach
+                            @php
+                            $firstColumnCount = ceil(count($checkboxes) * 0.47);
+                            $checkboxes1 = array_slice($checkboxes, 0, $firstColumnCount);
+                            $checkboxes2 = array_slice($checkboxes, $firstColumnCount);
+                            @endphp
+
+                            <div class="row">
+                                <!-- First Column (40%) -->
+                                <div class="col-md-6">
+                                    <div class="form-group mb-2">
+                                        @foreach ($checkboxes1 as $checkbox)
+                                        <label>
+                                            <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}" class="form-check-input"> {{ $checkbox }}
+                                        </label><br>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <!-- Second Column (60%) -->
+                                <div class="col-md-6">
+                                    <div class="form-group-inp mb-2">
+                                        @foreach ($checkboxes2 as $checkbox)
+                                        <label>
+                                            <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}" class="form-check-input"> {{ $checkbox }}
+                                        </label><br>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
+
+
 
                             <div class="col-lg-6">
                                 <div class="form-group form-switch mb-2">
@@ -183,11 +205,11 @@
 
 {{-- /* --------------------------- edit checklist modal -------------------------- */ --}}
 <div id="editCLG" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content ">
             <div class="modal-body ">
                 <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                    <h4 class="mb-0"><b>Edit Checklist</b></h4>
+                    <h4 class="mb-0"><b>Edit Checklist Group</b></h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -202,7 +224,7 @@
                                 <label for="clg_name">Name</label>
                                 <input type="text" name="clg_name" id="editclg_name"
                                     value="{{ old('clg_name') }}" class="form-control"
-                                    placeholder="Name" required>
+                                    placeholder="Check list name" required>
                                 @error('clg_name')
                                 <small
                                     class="text-danger d-block text-start">{{ $message }}</small>
@@ -221,55 +243,45 @@
                         </div>
 
                         @php
-                        $checkboxes = [
-                        "Anesthetic gas scavenge line operational", "Hoses leak-free", "Flow meter/gas blender operational",
-                        "Source and appropriate connections of gas(es) confirmed", "Gas line(s) and filter connections secure",
-                        "Gas exhaust unobstructed", "Alarms operational, audible and engaged", "Alarms reengaged",
-                        "Allergies checked", "Anesthetic vaporizer correct", "Anesthetic vaporizer", "Announce bypass terminated",
-                        "Anticoagulant tested and reported", "Appropriate lines claimed / shunts closed", "Arterial and venous lines clamped",
-                        "Arterial circuit bubble free before transfusing perfusate", "Arterial filter / bubble trap debubbled",
-                        "Backup full oxygen tank with flow meter available", "Batteries charged and operational",
-                        "Blood bank number confirmed", "Blood products available", "Blood type / antibodies confirmed",
-                        "Cardiotomy / hardshell venous reservoir(s) vented", "Cardiotomy positive-pressure relief valve present",
-                        "Cell salvage device", "Chart reviewed", "Circuit/patient temperature probes placed", "Components debubbled",
-                        "Components checked for package integrity/expiration", "Connections / stopcocks / caps secure",
-                        "Devices securely attached to console", "Drugs available and properly labeled",
-                        "Duplicate circuit components / hardware available", "Emergency lighting / flashlight available",
-                        "Equipment clean", "Flow meter in correct direction and calibration",
-                        "Flow rate indicator correct for patient and/or tubing size", "Gas flow confirmed",
-                        "Hand cranks available", "Heart lung machine - Air bubble detector(s)", "Heart lung machine - Blood flow sensors",
-                        "Heart lung machine - Low Level alarm", "Heart lung machine - Pressure monitors", "Heart lung machine - Pumps",
-                        "Heart lung machine - Temperature monitors", "Heart lung machine - Timers", "Heat exchanger(s) leak-tested",
-                        "Heater/Cooler", "Heparin time and dose confirmed", "Holders secure", "IABP", "Ice available",
-                        "Inline sensors calibrated", "Leak free after pressurization", "Medical record number confirmed",
-                        "Negative-pressure relief valve unobstructed", "No tubing kinks noted", "Occlusion(s) set",
-                        "One way valve(s) in correct direction", "Oxygen analyzer calibrated", "Oxygen analyzer",
-                        "Oxygen Blender / Flow Meter", "Patency of arterial line / cannula confirmed", "Patient identity confirmed",
-                        "Power cord(s) connection(s) secure", "Pressure transducers / monitors calibrated and on proper scales",
-                        "Procedure confirmed", "Pump head rotation smooth and quiet", "Pump suction(s) off", "Rollers rotate freely",
-                        "Sampling syringes / laboratory tubes available", "Servoregulated connections tested",
-                        "Servoregulation connections secure", "Shunt(s) closed", "Solution(s) checked", "Solutions available",
-                        "Speed controls operational", "System debubbled and operational", "System leak-free after pressurization",
-                        "Temperature range(s) tested and operational", "Tubing clamps available", "Tubing direction traced and correct",
-                        "Vacuum regulator operational", "VAD device", "Vaporizer operational and filled", "Venous assist off / cardiotomy / venous reservoirs vented",
-                        "Venous line occluder(s) calibrated and tested", "Vent(s) clamped / removed", "Vent(s) tested",
-                        "Water lines unobstructed", "Water source(s) connected and operational"
-                        ];
                         $selectedBoxes = json_decode($checklistg->rowboxes ?? '[]', true);
                         @endphp
 
-                        <div class="col-lg-12">
-                            <label>Groups</label>
-                            <div class="form-group mb-2">
-                                @foreach ($checkboxes as $checkbox)
-                                <label>
-                                    <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}"
-                                        {{ in_array($checkbox, $selectedBoxes) ? 'checked' : '' }}>
-                                    {{ $checkbox }}
-                                </label><br>
-                                @endforeach
+                        @php
+                        $firstColumnCount = ceil(count($checkboxes) * 0.47);
+                        $checkboxes1 = array_slice($checkboxes, 0, $firstColumnCount);
+                        $checkboxes2 = array_slice($checkboxes, $firstColumnCount);
+                        @endphp
+
+                        <div class="row">
+                            <!-- First Column (40%) -->
+                            <div class="col-md-6">
+                                <label>Groups (40%)</label>
+                                <div class="form-group mb-2">
+                                    @foreach ($checkboxes1 as $checkbox)
+                                    <label>
+                                        <input type="checkbox" class="form-check-input" name="rowboxes[]" value="{{ $checkbox }}"
+                                            {{ in_array($checkbox, $selectedBoxes ?? []) ? 'checked' : '' }}>
+                                        {{ $checkbox }}
+                                    </label><br>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- Second Column (60%) -->
+                            <div class="col-md-6">
+                                <label>Groups (60%)</label>
+                                <div class="form-group mb-2">
+                                    @foreach ($checkboxes2 as $checkbox)
+                                    <label>
+                                        <input type="checkbox" class="form-check-input" name="rowboxes[]" value="{{ $checkbox }}"
+                                            {{ in_array($checkbox, $selectedBoxes ?? []) ? 'checked' : '' }}>
+                                        {{ $checkbox }}
+                                    </label><br>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
+
 
 
                         <div class="col-lg-6">
@@ -293,19 +305,6 @@
 </div>
 @endsection
 @section('script')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#users-table').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-        });
-    });
-</script>
-
 <script>
     function editCLGroup(clItem) {
         console.log(clItem);

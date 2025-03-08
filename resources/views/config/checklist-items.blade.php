@@ -193,23 +193,11 @@
 </div>
 @endsection
 @section('script')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#users-table').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-        });
-    });
-</script>
 
 <script>
     function editCL(clItem) {
         console.log(clItem);
-        
+
         document.getElementById("cl_id").value = clItem.cl_id;
         document.getElementById("editcl_name").value = clItem.cl_name;
         document.getElementById("editcl_description").value = clItem.cl_description;

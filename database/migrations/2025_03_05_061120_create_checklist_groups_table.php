@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('clg_id');
             $table->string('clg_name',100)->collation('utf8mb4_general_ci');
             $table->text('clg_description')->nullable()->collation('utf8mb4_general_ci');
-            $table->json('rowboxes')->nullable()->collation('utf8mb4_general_ci');
+            $table->json('rowboxes')->nullable();
             $table->enum('clg_active', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->string('clg_insertby',40)->collation('utf8mb4_general_ci');
             $table->enum('close', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');

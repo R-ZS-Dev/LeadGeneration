@@ -294,19 +294,7 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#users-table').DataTable({
-                "paging": true, // Enable pagination
-                "lengthChange": false, // Allow user to change the number of records per page
-                "searching": true, // Enable search functionality
-                "ordering": true, // Enable column sorting
-                "info": true, // Display info like "Showing 1 to 10 of 50 entries"
-                "autoWidth": false // Disable automatic column width adjustment
 
-            });
-        });
-    </script>
     <script>
         function editUser(user) {
             document.getElementById("id").value = user.id;
@@ -318,11 +306,6 @@
             document.getElementById("edit_role").value = user.role;
             document.getElementById("gender-female1").checked = (user.gender === 'Female');
             document.getElementById("gender-male1").checked = (user.gender === 'Male');
-
-
-
-
-
             var editModal = new bootstrap.Modal(document.getElementById("editHospital"));
             editModal.show();
         }

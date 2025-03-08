@@ -127,14 +127,14 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12 d-flex justify-content-end">
-                                <button type="button" class="btn waves-effect waves-light btn-outline-primary"
+                                <button type="button" class="btn waves-effect waves-light btn-outline-primary mb-2"
                                     data-bs-toggle="modal" data-bs-target="#report-modal">
                                     <i class="fas fa-plus"></i> Add Report
                                 </button>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <table id="reports-table" class="table table-striped table-bordered">
+                        <div class="table-responsive">
+                            <table id="users-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -310,19 +310,7 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#users-table').DataTable({
-                "paging": true, // Enable pagination
-                "lengthChange": false, // Allow user to change the number of records per page
-                "searching": true, // Enable search functionality
-                "ordering": true, // Enable column sorting
-                "info": true, // Display info like "Showing 1 to 10 of 50 entries"
-                "autoWidth": false // Disable automatic column width adjustment
-
-            });
-        });
-    </script>
+ 
     <script>
         function editReport(rep) {
             // console.log(res);
