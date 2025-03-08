@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CardioplegiaController;
+use App\Http\Controllers\CaseController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DataDeviceController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\FluidController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\LivelineController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingsController;
@@ -210,6 +212,13 @@ Route::middleware('auth')->group(function () {
         route::post('/add-live-line', 'addLiveLine')->name('add-live-line');
         route::post('/edit-live-line','editLiveLine')->name('edit-live-line');
         route::post('/delete-live-line/{id}', 'deleteLiveLine')->name('delete-live-line');
+    });
+
+    Route::controller(CaseController::class)->group(function () {
+        Route::get('/case', 'viewCase')->name('view-case');
+        Route::post('/add-patient', 'addPatient')->name('add-patient');
+        Route::post('/add-patient-history', 'addPatientHistory')->name('add-patient-history');
+
     });
 
 

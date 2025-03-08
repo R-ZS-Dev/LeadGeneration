@@ -226,5 +226,11 @@ input[name='gender']:checked:after {
     color: #793268;
 }
 
+.tabButton.active {
+    background-color:#793268;
+    color: #fff;
+}
+
+
 
 
