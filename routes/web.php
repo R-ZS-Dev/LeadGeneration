@@ -182,7 +182,18 @@ Route::middleware('auth')->group(function () {
         /* ----------------------------- Case Module ---------------------------- */
         Route::controller(CaseController::class)->group(function () {
         Route::get('/case-staff', 'viewCstaff')->name('case-staff');
-        });
+        route::post('/add-casestaff', 'addCaseStaff')->name('add-casestaff');
+        route::post('/edit-casestaff', 'editcasestaff')->name('edit-casestaff');
+        route::post('/delete-casestaff/{id}', 'deletecasestaff')->name('delete-casestaff');
+
+        /* ---------------------- Case Equipment module routes ---------------------- */
+        Route::get('/case-equipment', 'viewCEquipment')->name('case-equipment');
+        route::post('/add-caseequipment', 'addCEquipment')->name('add-caseequipment');
+        route::post('/edit-caseequipment', 'editCEquipment')->name('edit-caseequipment');
+        route::post('/delete-caseequipment/{id}', 'deleteCaseEquipment')->name('delete-caseequipment');        
+    });
+
+    
 });
 
 require __DIR__ . '/auth.php';

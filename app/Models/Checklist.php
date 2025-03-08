@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Checklist extends Model
 {
-    //
     protected $primaryKey = 'c_id';
     protected $fillable = [
         'l_name',

@@ -3,14 +3,15 @@
 @section('content')
 <style>
     /* Add border below each row */
-.add-modal-table tbody tr {
-    border-bottom: 1px solid #d1d5db; /* Light gray color */
-}
+    .add-modal-table tbody tr {
+        border-bottom: 1px solid #d1d5db;
+        /* Light gray color */
+    }
 
-/* Remove border from last row */
-.add-modal-table tbody tr:last-child {
-    border-bottom: none;
-}
+    /* Remove border from last row */
+    .add-modal-table tbody tr:last-child {
+        border-bottom: none;
+    }
 
     /* Table Headers */
     table thead th {
@@ -567,65 +568,19 @@
         // console.log("Parsed Amount:", amount);
         // console.log("Parsed Rowboxes:", rowboxes);
 
-        // Clear previous entries
+        let medications = [
+            "Additive Volume", "Adenosine", "Albumin 25% 100ml", "Albumin 25% 50ml",
+            "Albumin 5% 250ml", "Albumin 5% 500ml", "Aminocaproic Acid", "Amiodarone", "Calcium Chloride",
+            "Cefazolin", "Cefuroxime", "Cell Saver In", "Cell Saver RBC", "Dextrose-50%", "Estimated Blood Loss",
+            "FFP", "Furosemide", "Glutamate/Aspartate Reperfuse", "Heparin", "Insulin Regular", "Isoflurane",
+            "Lidocaine 2%", "Magnesium Sulfate", "Mannitol 20%", "Mannitol 25%", "Methylprednisolone", "Normosol",
+            "PHENYLephrine in 0. 9% NaCI PREMIX", "Phenylephrine", "Plasmalyte", "Plegisol", "Potassium Chloride",
+            "PRBC", "Sodium Bicarbonate", "Sodium Chloride 0.9%", "Ultrafiltration", "Urine Output", "Vancomycin"
+        ];
 
-        // ✅ Loop through medications and populate the table
-        // Object.keys(sortOrder).forEach((medication, index) => {
-        //     let sortValue = sortOrder[medication] !== null ? sortOrder[medication] : '';
-        //     let amountValue = amount[medication] !== null ? amount[medication] : '';
-        //     let isChecked = rowboxes.includes(medication); // Check if medication is selected
-
-        //     let row = `
-        //     <tr>
-        //         <td class="text-center">
-        //             <input type="number" name="sort_order[${index}]" id="sort_order_${index}" class="form-control text-center" style="max-width: 80px;" value="${sortValue}">
-        //         </td>
-        //         <td class="text-center">
-        //             <input type="number" name="amount[${index}]" id="amount_${index}" class="form-control text-center" style="max-width: 100px;" value="${amountValue}">
-        //         </td>
-        //         <td>
-        //             <div class="form-check">
-        //                 <input type="checkbox" name="rowboxes[]" value="${medication}" id="med_${index}" class="form-check-input" ${isChecked ? 'checked' : ''}>
-        //                 <label for="med_${index}" class="form-check-label">${medication}</label>
-        //             </div>
-        //         </td>
-        //     </tr>
-        // `;
-        //     medicationsList.innerHTML += row;
-        // });
-
-        // Object.keys(sortOrder).forEach((medication) => {
-        //     let sortValue = sortOrder[medication] !== null ? sortOrder[medication] : '';
-        //     let amountValue = amount[medication] !== null ? amount[medication] : '';
-        //     let isChecked = rowboxes.includes(medication); // Check if medication is selected
-
-        //     let row = `
-        //     <tr>
-        //         <td class="text-center">
-        //             <input type="number" name="sort_order[${medication}]" id="sort_order_${medication}" 
-        //                 class="form-control text-center" style="max-width: 80px;" 
-        //                 value="${sortValue}">
-        //         </td>
-        //         <td class="text-center">
-        //             <input type="number" name="amount[${medication}]" id="amount_${medication}" 
-        //                 class="form-control text-center" style="max-width: 100px;" 
-        //                 value="${amountValue}">
-        //         </td>
-        //         <td>
-        //             <div class="form-check">
-        //                 <input type="checkbox" name="rowboxes[]" value="${medication}" id="med_${medication}" 
-        //                     class="form-check-input" ${isChecked ? 'checked' : ''}>
-        //                 <label for="med_${medication}" class="form-check-label">${medication}</label>
-        //             </div>
-        //         </td>
-        //     </tr>
-        //     `;
-        //     medicationsList.innerHTML += row;
-        // });
-
-        Object.keys(sortOrder).forEach((medication) => {
-            let sortValue = sortOrder[medication] !== null ? sortOrder[medication] : '';
-            let amountValue = amount[medication] !== null ? amount[medication] : '';
+        medications.forEach((medication) => {
+            let sortValue = sortOrder[medication] !== undefined ? sortOrder[medication] : '';
+            let amountValue = amount[medication] !== undefined ? amount[medication] : '';
             let isChecked = rowboxes.includes(medication);
 
             let row = `
@@ -651,6 +606,7 @@
             `;
             medicationsList.innerHTML += row;
         });
+
 
 
         // Show the modal

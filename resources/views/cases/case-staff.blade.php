@@ -2,10 +2,6 @@
 @section('title','Case staff')
 @section('content')
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <!-- basic table -->
     <div class="row">
 
         @if (session('error'))
@@ -30,7 +26,7 @@
                             </div>
                         </div>
 
-                        <form method="POST" action="" class="mt-4">
+                        <form method="POST" action="{{ route('add-casestaff') }}" class="mt-4">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12">
@@ -38,13 +34,20 @@
                                         <label for="">Select Surgeon</label>
                                         <select name="surgeon" class="form-select">
                                             <option value="">Select Surgeon</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
+
 
                                     <div class="form-group mb-3">
                                         <label for="">Select 2nd Surgeon</label>
                                         <select name="second_surgeon" class="form-select">
                                             <option value="">Select 2nd Surgeon</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -52,6 +55,9 @@
                                         <label for="">Select PA/1st Assistant</label>
                                         <select name="pa_first_assistant" class="form-select">
                                             <option value="">Select PA/1st Assistant</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -59,6 +65,9 @@
                                         <label for="">Select Anesthesiologist</label>
                                         <select name="anesthesiologist" class="form-select">
                                             <option value="">Select Anesthesiologist</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -66,6 +75,9 @@
                                         <label for="">Select CRNA/RES</label>
                                         <select name="crna_res" class="form-select">
                                             <option value="">Select CRNA/RES</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -73,6 +85,9 @@
                                         <label for="">Select Cardiologist</label>
                                         <select name="cardiologist" class="form-select">
                                             <option value="">Select Cardiologist</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -80,6 +95,9 @@
                                         <label for="">Select Family MD</label>
                                         <select name="family_md" class="form-select">
                                             <option value="">Select Family MD</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -87,13 +105,22 @@
                                         <label for="">Select Perfusionist</label>
                                         <select name="perfusionist" class="form-select">
                                             <option value="">Select Perfusionist</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label for="">Select Perfusionist Category</label>
                                         <select name="perfusionist_category" class="form-select">
-                                            <option value="">Select Perfusionist Category</option>
+                                            <option>Select Perfusionist Category</option>
+                                            <option value="1P Cardiopulmonary Bypass (CPB), Primary">1P Cardiopulmonary Bypass (CPB), Primary</option>
+                                            <option value="2P Instructor CPB, Primary">2P Instructor CPB, Primary</option>
+                                            <option value="3P Extra-Corporeal Membrane Oxygenation (ECMO), Primary">3P Extra-Corporeal Membrane Oxygenation (ECMO), Primary</option>
+                                            <option value="4P Isolated Limb/Organ Perfusion, Primary">4P Isolated Limb/Organ Perfusion, Primary</option>
+                                            <option value="5P Veno-Venous of Left Heart Bypass, Primary">5P Veno-Venous of Left Heart Bypass, Primary</option>
+                                            <option value="6P Ventricular Assist Device (VAD), Primary">6P Ventricular Assist Device (VAD), Primary</option>
                                         </select>
                                     </div>
 
@@ -101,6 +128,9 @@
                                         <label for="">Select Perfusionist Status</label>
                                         <select name="perfusionist_status" class="form-select">
                                             <option value="">Select Perfusionist Status</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -108,20 +138,31 @@
                                         <label for="">Select 2nd Perfusionist</label>
                                         <select name="second_perfusionist" class="form-select">
                                             <option value="">Select 2nd Perfusionist</option>
+                                            @foreach($staffs as $staff)
+                                            <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label for="">Select 2nd Perfusionist Category</label>
                                         <select name="second_perfusionist_category" class="form-select">
-                                            <option value="">Select 2nd Perfusionist Category</option>
+                                            <option>Select 2nd Perfusionist Category</option>
+                                            <option value="1S CPB, First Assistant, Secondary">1S CPB, First Assistant, Secondary</option>
+                                            <option value="25 Ex Vivo, Secondary">25 Ex Vivo, Secondary</option>
+                                            <option value="35 Intraperitoneal Hyperthermic Chemoperfusion or Intrapleural Hyperthermic Chemoperfusion (HIPEC), Secondary">
+                                                35 Intraperitoneal Hyperthermic Chemoperfusion or Intrapleural Hyperthermic Chemoperfusion (HIPEC), Secondary
+                                            </option>
+                                            <option value="45 Cardiopulmonary Bypass (CPB) Standby Procedures, Secondary">
+                                                45 Cardiopulmonary Bypass (CPB) Standby Procedures, Secondary
+                                            </option>
+                                            <option value="5S High Fidelity Perfusion Simulation (HFPS), Secondary">5S High Fidelity Perfusion Simulation (HFPS), Secondary</option>
                                         </select>
                                     </div>
 
                                 </div>
                                 <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn w-100 btn-dark" id="submitBtn">Add
-                                        Supply</button>
+                                    <button type="submit" class="btn w-100 btn-dark" id="submitBtn">Add Supply</button>
                                 </div>
                             </div>
                         </form>
@@ -167,35 +208,36 @@
                             </thead>
                             <tbody>
                                 @php $i = 0; @endphp
-                                <tr>
+                                @foreach($caseStaffs as $caseStaff)
+                                <tr id="row-{{ $caseStaff->cs_id }}">
                                     <td>{{ ++$i }}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $caseStaff->surgeonDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->secondSurgeonDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->paFirstAssistantDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->anesthesiologistDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->crnaResDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->cardiologistDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->familyMdDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->perfusionistDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->perfusionist_category ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->perfusionistStatusDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->secondPerfusionistDetail->st_name ?? 'N/A' }}</td>
+                                    <td>{{ $caseStaff->second_perfusionist_category ?? 'N/A' }}</td>
                                     <td>
-                                        <a onclick="editButtonCstaff()"
+                                        <a onclick="editButtonCstaff({{ json_encode($caseStaff) }})"
                                             href="javascript:void(0);">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
 
 
                                         <a href="javascript:void(0);"
-                                            onclick="confirmDelete()"
-
+                                            onclick="confirmDelete('{{ route('delete-casestaff', $caseStaff->cs_id) }}' , '{{$caseStaff->cs_id}}')"
                                             class="edit-icon delete-user-btn text-danger">
                                             <i class="fa-solid fa-trash-can-arrow-up"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -214,94 +256,149 @@
                             aria-label="Close"></button>
                     </div>
 
-                    <form method="POST" action="" class="mt-4">
+                    <form method="POST" action="{{ route('edit-casestaff') }}" class="mt-4">
                         @csrf
-                        <input type="hidden" name="sp_id" id="sp_id">
+                        <input type="hidden" name="cs_id" id="cs_id">
                         <div class="row">
 
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
                                     <label for="">Select Surgeon</label>
                                     <select name="surgeon" id="edit_surgeon" class="form-select">
-                                        <option value="">Select Surgeon</option>
-                                        <option value=""></option>
+                                        <option>Select Surgeon</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select 2nd Surgeon</label>
-                                    <select name="second_surgeon" class="form-select">
+                                    <select name="second_surgeon" id="edit_second_surgeon" class="form-select">
                                         <option value="">Select 2nd Surgeon</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select PA/1st Assistant</label>
-                                    <select name="pa_first_assistant" class="form-select">
+                                    <select name="pa_first_assistant" id="edit_pa_first_assistant" class="form-select">
                                         <option value="">Select PA/1st Assistant</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select Anesthesiologist</label>
-                                    <select name="anesthesiologist" class="form-select">
+                                    <select name="anesthesiologist" id="edit_anesthesiologist" class="form-select">
                                         <option value="">Select Anesthesiologist</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select CRNA/RES</label>
-                                    <select name="crna_res" class="form-select">
+                                    <select name="crna_res" id="edit_crna_res" class="form-select">
                                         <option value="">Select CRNA/RES</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select Cardiologist</label>
-                                    <select name="cardiologist" class="form-select">
+                                    <select name="cardiologist" id="edit_cardiologist" class="form-select">
                                         <option value="">Select Cardiologist</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select Family MD</label>
-                                    <select name="family_md" class="form-select">
+                                    <select name="family_md" id="edit_family_md" class="form-select">
                                         <option value="">Select Family MD</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select Perfusionist</label>
-                                    <select name="perfusionist" class="form-select">
+                                    <select name="perfusionist" id="edit_perfusionist" class="form-select">
                                         <option value="">Select Perfusionist</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select Perfusionist Category</label>
-                                    <select name="perfusionist_category" class="form-select">
+                                    <select name="perfusionist_category" id="edit_perfusionist_category" class="form-select">
                                         <option value="">Select Perfusionist Category</option>
+                                        <option value="1P Cardiopulmonary Bypass (CPB), Primary" {{ $caseStaff->perfusionist_category == "1P Cardiopulmonary Bypass (CPB), Primary" ? 'selected' : '' }}>1P Cardiopulmonary Bypass (CPB), Primary</option>
+                                        <option value="2P Instructor CPB, Primary" {{ $caseStaff->perfusionist_category == "2P Instructor CPB, Primary" ? 'selected' : '' }}>2P Instructor CPB, Primary</option>
+                                        <option value="3P Extra-Corporeal Membrane Oxygenation (ECMO), Primary" {{ $caseStaff->perfusionist_category == "3P Extra-Corporeal Membrane Oxygenation (ECMO), Primary" ? 'selected' : '' }}>3P Extra-Corporeal Membrane Oxygenation (ECMO), Primary</option>
+                                        <option value="4P Isolated Limb/Organ Perfusion, Primary" {{ $caseStaff->perfusionist_category == "4P Isolated Limb/Organ Perfusion, Primary" ? 'selected' : '' }}>4P Isolated Limb/Organ Perfusion, Primary</option>
+                                        <option value="5P Veno-Venous of Left Heart Bypass, Primary" {{ $caseStaff->perfusionist_category == "5P Veno-Venous of Left Heart Bypass, Primary" ? 'selected' : '' }}>5P Veno-Venous of Left Heart Bypass, Primary</option>
+                                        <option value="6P Ventricular Assist Device (VAD), Primary" {{ $caseStaff->perfusionist_category == "6P Ventricular Assist Device (VAD), Primary" ? 'selected' : '' }}>6P Ventricular Assist Device (VAD), Primary</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select Perfusionist Status</label>
-                                    <select name="perfusionist_status" class="form-select">
+                                    <select name="perfusionist_status" id="edit_perfusionist_status" class="form-select">
                                         <option value="">Select Perfusionist Status</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select 2nd Perfusionist</label>
-                                    <select name="second_perfusionist" class="form-select">
+                                    <select name="second_perfusionist" id="edit_second_perfusionist" class="form-select">
                                         <option value="">Select 2nd Perfusionist</option>
+                                        @foreach($staffs as $staff)
+                                        <option value="{{ $staff->st_id }}">{{ $staff->st_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="">Select 2nd Perfusionist Category</label>
-                                    <select name="second_perfusionist_category" class="form-select">
+                                    <select name="second_perfusionist_category" id="edit_second_perfusionist_category" class="form-select">
                                         <option value="">Select 2nd Perfusionist Category</option>
+                                        <option value="1S CPB, First Assistant, Secondary"
+                                            {{ ($caseStaff->second_perfusionist_category ?? '') == '1S CPB, First Assistant, Secondary' ? 'selected' : '' }}>
+                                            1S CPB, First Assistant, Secondary
+                                        </option>
+                                        <option value="25 Ex Vivo, Secondary"
+                                            {{ ($caseStaff->second_perfusionist_category ?? '') == '25 Ex Vivo, Secondary' ? 'selected' : '' }}>
+                                            25 Ex Vivo, Secondary
+                                        </option>
+                                        <option value="35 Intraperitoneal Hyperthermic Chemoperfusion or Intrapleural Hyperthermic Chemoperfusion (HIPEC), Secondary"
+                                            {{ ($caseStaff->second_perfusionist_category ?? '') == '35 Intraperitoneal Hyperthermic Chemoperfusion or Intrapleural Hyperthermic Chemoperfusion (HIPEC), Secondary' ? 'selected' : '' }}>
+                                            35 Intraperitoneal Hyperthermic Chemoperfusion or Intrapleural Hyperthermic Chemoperfusion (HIPEC), Secondary
+                                        </option>
+                                        <option value="45 Cardiopulmonary Bypass (CPB) Standby Procedures, Secondary"
+                                            {{ ($caseStaff->second_perfusionist_category ?? '') == '45 Cardiopulmonary Bypass (CPB) Standby Procedures, Secondary' ? 'selected' : '' }}>
+                                            45 Cardiopulmonary Bypass (CPB) Standby Procedures, Secondary
+                                        </option>
+                                        <option value="5S High Fidelity Perfusion Simulation (HFPS), Secondary"
+                                            {{ ($caseStaff->second_perfusionist_category ?? '') == '5S High Fidelity Perfusion Simulation (HFPS), Secondary' ? 'selected' : '' }}>
+                                            5S High Fidelity Perfusion Simulation (HFPS), Secondary
+                                        </option>
                                     </select>
                                 </div>
 
@@ -335,7 +432,18 @@
 <script>
     function editButtonCstaff(caseStaff) {
         document.getElementById("cs_id").value = caseStaff.cs_id;
-        document.getElementById("edit_type").value = sp.sp_type;
+        document.getElementById("edit_surgeon").value = caseStaff.surgeon;
+        document.getElementById("edit_second_surgeon").value = caseStaff.second_surgeon;
+        document.getElementById("edit_pa_first_assistant").value = caseStaff.pa_first_assistant;
+        document.getElementById("edit_anesthesiologist").value = caseStaff.anesthesiologist;
+        document.getElementById("edit_crna_res").value = caseStaff.crna_res;
+        document.getElementById("edit_cardiologist").value = caseStaff.cardiologist;
+        document.getElementById("edit_family_md").value = caseStaff.family_md;
+        document.getElementById("edit_perfusionist").value = caseStaff.perfusionist;
+        document.getElementById("edit_perfusionist_category").value = caseStaff.perfusionist_category;
+        document.getElementById("edit_perfusionist_status").value = caseStaff.perfusionist_status;
+        document.getElementById("edit_second_perfusionist").value = caseStaff.second_perfusionist;
+        document.getElementById("edit_second_perfusionist_category").value = caseStaff.second_perfusionist_category;
 
         var editModal = new bootstrap.Modal(document.getElementById("editCaseStaff"));
         editModal.show();
