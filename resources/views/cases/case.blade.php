@@ -44,7 +44,12 @@
                                 Equipment
                             </button>
                         </li>
-
+                        <li class="nav-item" role="presentation">
+                            <button class="btn tabButton" id="tab7-tab" data-bs-toggle="tab" data-bs-target="#tab7"
+                                type="button" role="tab" aria-controls="tab7" aria-selected="false">
+                                Procedures
+                            </button>
+                        </li>
                     </ul>
 
                     @php

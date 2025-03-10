@@ -218,6 +218,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/case', 'viewCase')->name('view-case');
         Route::post('/add-patient', 'addPatient')->name('add-patient');
         Route::post('/add-patient-history', 'addPatientHistory')->name('add-patient-history');
+        Route::get('/procedure', 'caseProcedure')->name('case-procedure');
 
     });
 

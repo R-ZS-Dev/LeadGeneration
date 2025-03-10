@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Hospital;
 use App\Models\Patient;
 use App\Models\PatientHistory;
+use App\Models\Procedures;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +18,11 @@ class CaseController extends Controller
         return view('cases.case', compact('hospital','patient'));
     }
 
+    public function caseProcedure()
+    {
+        $procedure = Procedures::where('status','1')->where('close','1')->get();
+        return view('cases.procedure',compact('procedure'));
+    }
     /* -------------------------- add pateint function -------------------------- */
 
     public function addPatient(Request $request)
