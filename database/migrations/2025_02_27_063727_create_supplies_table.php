@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('supplies', function (Blueprint $table) {
             $table->id('sp_id');
-            $table->unsignedBigInteger('sp_type')->collation('utf8mb4_general_ci');
+            $table->string('sp_type')->collation('utf8mb4_general_ci');
             $table->string('sp_manufacturer',100)->collation('utf8mb4_general_ci');
             $table->string('sp_name',100)->collation('utf8mb4_general_ci');
             $table->string('sp_lotno',50)->collation('utf8mb4_general_ci');
@@ -27,11 +27,6 @@ return new class extends Migration
             $table->enum('close', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->enum('status', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->timestamps();
-            $table->foreign('sp_type')
-            ->references('spg_id')
-            ->on('supply_groups')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
         });
         DB::statement("ALTER TABLE supplies COLLATE utf8mb4_general_ci");
     }

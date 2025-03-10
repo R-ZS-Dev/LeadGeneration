@@ -39,9 +39,16 @@
                                                     <label for="">Select Equipment Group</label>
                                                     <select name="eq_type" id="" class="form-select">
                                                         <option value="">Select Equipment Group</option>
-                                                        @foreach ($eqg as $item)
+                                                        {{-- @foreach ($eqg as $item)
                                                         <option value="{{ $item->eqg_id }}">{{ $item->eqg_name }}</option>
-                                                        @endforeach
+                                                        @endforeach --}}
+                                                        <option value="Heart Lung Machine">Heart Lung MAchine</option>
+                                                        <option value="Cell Saver">Cell Saver</option>
+                                                        <option value="Arterial Pump">Arterial Pump</option>
+                                                        <option value="Cardioplegia Pump">Cardioplegia Pump</option>
+                                                        <option value="Pump">Pump</option>
+                                                        <option value="Heater Cooler">Heater Cooler</option>
+                                                        <option value="HMS">HMS</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -145,7 +152,7 @@
                                             @foreach ($eq as $index => $item)
                                                 <tr id="row-{{ $item->eq_id }}">
                                                     <td>{{ ++$i }}</td>
-                                                    <td>{{ $item->equipmentGroup->eqg_name }}</td>
+                                                    <td>{{ $item->eq_type }}</td>
                                                     <td>{{ $item->eq_manufacturer }}</td>
                                                     <td>{{ $item->eq_name }}</td>
                                                     <td>{{ $item->eq_lastservice }}</td>
@@ -198,9 +205,13 @@
                                                 <label for="">Select Equipment Group</label>
                                                 <select name="eq_type" id="edit_type" class="form-select">
                                                     <option value="">Select Equipment Group</option>
-                                                    @foreach ($eqg as $item)
-                                                    <option value="{{ $item->eqg_id }}">{{ $item->eqg_name }}</option>
-                                                    @endforeach
+                                                    <option value="Heart Lung Machine">Heart Lung MAchine</option>
+                                                    <option value="Cell Saver">Cell Saver</option>
+                                                    <option value="Arterial Pump">Arterial Pump</option>
+                                                    <option value="Cardioplegia Pump">Cardioplegia Pump</option>
+                                                    <option value="Pump">Pump</option>
+                                                    <option value="Heater Cooler">Heater Cooler</option>
+                                                    <option value="HMS">HMS</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -273,7 +284,7 @@
             </div>
 @endsection
 @section('script')
-  
+
     <script>
         function editEqg(eq) {
             document.getElementById("eq_id").value = eq.eq_id;
