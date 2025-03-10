@@ -1,4 +1,4 @@
-@extends('sitemaster.master-layout')
+{{-- @extends('sitemaster.master-layout')
 @section('title', 'All Cases')
 @section('content')
     <div class="container-fluid">
@@ -41,19 +41,33 @@
                         <li class="nav-item" role="presentation">
                             <button class="btn tabButton" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3"
                                 type="button" role="tab" aria-controls="tab3" aria-selected="false">
-                                Equipment
+                                Staff
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="btn tabButton" id="tab7-tab" data-bs-toggle="tab" data-bs-target="#tab7"
-                                type="button" role="tab" aria-controls="tab7" aria-selected="false">
-                                Procedures
+                            <button class="btn tabButton" id="tab4-tab" data-bs-toggle="tab" data-bs-target="#tab4"
+                                type="button" role="tab" aria-controls="tab4" aria-selected="false">
+                                Equipment
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="btn tabButton" id="tab5-tab" data-bs-toggle="tab" data-bs-target="#tab5"
+                                type="button" role="tab" aria-controls="tab5" aria-selected="false">
+                                Supplies
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="btn tabButton" id="tab6-tab" data-bs-toggle="tab" data-bs-target="#tab6"
+                                type="button" role="tab" aria-controls="tab6" aria-selected="false">
+                                Coronary Artery ByPasses
                             </button>
                         </li>
                     </ul>
                     <div class="tab-content mt-4">
-                        <!-- Profile Tab -->
-                        <section id="tab1" class="tab-pane fade show active">
+                        <!-- Profile Tab --> --}}
+                        {{-- <section id="tab1" class="tab-pane fade show active"> --}}
                             <div class="row p-4">
                                 <div class="col-lg-12">
                                     <div class="row">
@@ -1377,7 +1391,8 @@
                                                 <div class="form-check">
                                                     <input type="radio" class="form-check-input" name="ascesnding"
                                                         value="Not Reported" id="ascesnding_ex">
-                                                    <label class="form-check-label" for="ascesnding_ex">Not Reported</label>
+                                                    <label class="form-check-label" for="ascesnding_ex">Not
+                                                        Reported</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -1388,12 +1403,17 @@
                                                 <span class="title-label">If Yes</span>
                                                 <label for="">Assessment of Aorta Disease</label>
 
-                                                <select name="assess_aorta_disease" id="" class="form-select">
+                                                <select name="assess_aorta_disease" id=""
+                                                    class="form-select">
                                                     <option value="">Select Assessment of aorta disease</option>
-                                                    <option value="Normal aorta/ No minimal plaque">Normal aorta/ No minimal plaque</option>
-                                                    <option value="Extensive intimal thickening">Extensive intimal thickening</option>
-                                                    <option value="Protruding Atheroma < 5 mm">Protruding Atheroma < 5 mm</option>
-                                                    <option value="Protruding Atheroma >= 5 mm">Protruding Atheroma >= 5 mm</option>
+                                                    <option value="Normal aorta/ No minimal plaque">Normal aorta/ No
+                                                        minimal plaque</option>
+                                                    <option value="Extensive intimal thickening">Extensive intimal
+                                                        thickening</option>
+                                                    <option value="Protruding Atheroma < 5 mm">Protruding Atheroma < 5
+                                                            mm</option>
+                                                    <option value="Protruding Atheroma >= 5 mm">Protruding Atheroma >= 5
+                                                        mm</option>
                                                     <option value="Mobile plagues">Mobile plagues</option>
                                                     <option value="Not Documented">Not Documented</option>
                                                 </select>
@@ -1458,48 +1478,60 @@
                                                         <div class="row">
                                                             <div class="col-md-4 ">
                                                                 <div class="form-check">
-                                                                    <input type="radio" class="form-check-input" name="intraoppro"
-                                                                        value="Yes" id="intraoppro_yes">
-                                                                    <label class="form-check-label" for="intraoppro_yes">Yes</label>
+                                                                    <input type="radio" class="form-check-input"
+                                                                        name="intraoppro" value="Yes"
+                                                                        id="intraoppro_yes">
+                                                                    <label class="form-check-label"
+                                                                        for="intraoppro_yes">Yes</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-check">
-                                                                    <input type="radio" class="form-check-input" name="intraoppro"
-                                                                        value="Yes" id="intraoppro_no">
-                                                                    <label class="form-check-label" for="intraoppro_no">No</label>
+                                                                    <input type="radio" class="form-check-input"
+                                                                        name="intraoppro" value="Yes"
+                                                                        id="intraoppro_no">
+                                                                    <label class="form-check-label"
+                                                                        for="intraoppro_no">No</label>
                                                                 </div>
                                                             </div>
 
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-12 mt-3 mb-3">
+                                                    <div class="title-box">
+                                                        <span class="title-label">If Yes</span>
+                                                        <div class="form-group mb-3">
+                                                            <label for="">Red Blood Cell Units</label>
+                                                            <input type="text" name="red_blood_cell"
+                                                                id="" class="form-control">
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <label for="">Fresh Frozen Plasma Units</label>
+                                                            <input type="text" name="fresh_frozen"
+                                                                id="" class="form-control">
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <label for="">Platelet Units</label>
+                                                            <input type="text" name="platelet_unit"
+                                                                id="" class="form-control">
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <label for="">Cryoprecipitate Units</label>
+                                                            <input type="text" name="crypo_unit"
+                                                                id="" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                        {{-- </section> --}}
 
-                        <!-- Company Tab -->
-                        <section id="tab2" class="tab-pane fade">
-
-
-                        </section>
-
-                        <!-- Password Tab -->
-                        <section id="tab3" class="tab-pane fade">
-
-
-                        </section>
-
-                        <!-- Email Tab -->
-                        <section id="tab4" class="tab-pane fade">
-
-                        </section>
-
-
-
+{{--
 
                     </div>
                 </div>
@@ -1511,4 +1543,4 @@
 @section('script')
 
     <script></script>
-@endsection
+@endsection --}}
