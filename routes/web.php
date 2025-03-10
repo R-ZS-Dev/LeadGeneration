@@ -193,7 +193,44 @@ Route::middleware('auth')->group(function () {
         route::post('/delete-caseequipment/{id}', 'deleteCaseEquipment')->name('delete-caseequipment');        
     });
 
+<<<<<<< Updated upstream
     
+=======
+    Route::controller(DataDeviceController::class)->group(function () {
+        Route::get('/data-devices', 'viewDataDevices')->name('data-devices');
+        route::post('/add-data-devices', 'addDataDevices')->name('add-data-devices');
+        route::post('/edit-data-devices','editDataDevices')->name('edit-data-devices');
+        route::post('/delete-data-devices/{id}', 'deleteDataDevices')->name('delete-data-devices');
+    });
+
+    Route::controller(LivelineController::class)->group(function () {
+        Route::get('/live-line', 'viewLiveLine')->name('live-line');
+        route::post('/add-live-line', 'addLiveLine')->name('add-live-line');
+        route::post('/edit-live-line','editLiveLine')->name('edit-live-line');
+        route::post('/delete-live-line/{id}', 'deleteLiveLine')->name('delete-live-line');
+    });
+
+    Route::controller(CaseController::class)->group(function () {
+        Route::get('/case', 'viewCase')->name('view-case');
+        Route::post('/add-patient', 'addPatient')->name('add-patient');
+        Route::post('/add-patient-history', 'addPatientHistory')->name('add-patient-history');
+
+        /* ----------------------------- Case Module ---------------------------- */
+        Route::get('/case', 'viewCase')->name('view-case');
+        route::post('/add-casestaff', 'addCaseStaff')->name('add-casestaff');
+        route::post('/edit-casestaff', 'editcasestaff')->name('edit-casestaff');
+        route::post('/delete-casestaff/{id}', 'deletecasestaff')->name('delete-casestaff');
+
+        /* ---------------------- Case Equipment module routes ---------------------- */
+        Route::get('/case', 'viewCase')->name('view-case');
+        // Route::get('/case-equipment', 'viewCEquipment')->name('case-equipment');
+        route::post('/add-caseequipment', 'addCEquipment')->name('add-caseequipment');
+        route::post('/edit-caseequipment', 'editCEquipment')->name('edit-caseequipment');
+        route::post('/delete-caseequipment/{id}', 'deleteCaseEquipment')->name('delete-caseequipment');  
+    });
+
+
+>>>>>>> Stashed changes
 });
 
 require __DIR__ . '/auth.php';
