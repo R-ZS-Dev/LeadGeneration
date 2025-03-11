@@ -250,6 +250,20 @@ input[name='gender']:checked:after {
     font-size: 12px;
     font-weight: bold;
 }
+.custom-border-box-text {
+    position: relative;
+    padding: 10px 20px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.custom-label-text {
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    background: white;
+    padding: 0 10px;
+}
 
 
 

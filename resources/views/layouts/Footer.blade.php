@@ -56,6 +56,30 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#users-table1').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#users-table2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
+    });
+</script>
 <script>
 
     function confirmDelete(deleteUrl, rowId) {

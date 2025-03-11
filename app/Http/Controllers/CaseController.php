@@ -297,6 +297,29 @@ class CaseController extends Controller
         return redirect()->back()->with('success', 'Case Supply Added Successfully!');
     }
 
+    public function editCaseSupply(Request $request)
+    {
+
+        $id = $request->csu_id;
+        $edit_csu = CaseSupply::find($id);
+        try {
+            $edit_csu->csu_group = $request->csu_group;
+            $edit_csu->csu_type = $request->csu_type;
+            $edit_csu->csu_manufacturer = $request->csu_manufacturer;
+            $edit_csu->csu_name = $request->csu_name;
+            $edit_csu->csu_lot_number = $request->csu_lot_number;
+            $edit_csu->csu_ex_date = $request->csu_ex_date;
+            $edit_csu->csu_billing_code = $request->csu_billing_code;
+            $edit_csu->csu_number_used = $request->csu_number_used;
+            $edit_csu->csu_note = $request->csu_note;
+            $edit_csu->cs_insertby = Auth::user()->name;
+            $edit_csu->save();
+            return redirect()->back()->with('success', 'Case equipment updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
     public function deleteCaseSupply($id)
     {
         $result = CaseSupply::find($id);
