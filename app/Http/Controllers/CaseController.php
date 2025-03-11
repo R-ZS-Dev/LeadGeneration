@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CaseEquipment;
 use App\Models\CaseStaff;
 use App\Models\CaseSupply;
+use App\Models\CoronaryArteryBypass;
 use App\Models\Equipment;
 use App\Models\EquipmentGroup;
 use App\Models\Hospital;
@@ -28,7 +29,9 @@ class CaseController extends Controller
         $caseEquipments = CaseEquipment::where('status', '1')->where('close', '1')->get();
         $supplyGroups = SupplyGroup::where('status', '1')->where('close', '1')->get();
         $caseSupplys = CaseSupply::where('status', '1')->where('close', '1')->get();
-        $procedure = Procedures::where('status','1')->where('close','1')->get();
+        $procedure = Procedures::where('status', '1')->where('close', '1')->get();
+        $del_cabs = CoronaryArteryBypass::where('status', '1')->where('close', '1')->get();
+
 
         $caseStaffs = CaseStaff::with([
             'surgeonDetail',
@@ -45,12 +48,12 @@ class CaseController extends Controller
             ->where('close', '1')
             ->get();
 
-        return view('cases.case', compact('hospital', 'patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys' ,'procedure'));
+        return view('cases.case', compact('hospital', 'patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys', 'procedure', 'del_cabs'));
     }
     public function caseProcedure()
     {
-        $procedure = Procedures::where('status','1')->where('close','1')->get();
-        return view('cases.procedure',compact('procedure'));
+        $procedure = Procedures::where('status', '1')->where('close', '1')->get();
+        return view('cases.procedure-modals', compact('procedure'));
     }
     /* -------------------------- add pateint function -------------------------- */
 
@@ -129,15 +132,11 @@ class CaseController extends Controller
         $history->ph_allergies = $request->ph_allergies;
         $history->ph_insertby = Auth::user()->name;
         $history->save();
-        if($history)
-        {
-            return redirect()->back()->with('success','Patient History Added Successfully!');
-        }else
-        {
-            return redirect()->back()->with('error','Faild to add patient history!');
-
+        if ($history) {
+            return redirect()->back()->with('success', 'Patient History Added Successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Faild to add patient history!');
         }
-
     }
 
 
@@ -327,5 +326,51 @@ class CaseController extends Controller
         $result->status = '0';
         $result->save();
         return redirect()->back()->with('success', 'Case supply deleted Successfully!');
+    }
+    /* ---------------- Coronary Artery ByPasses module functions --------------- */
+    public function addCABypasses(Request $request)
+    {
+        // dd($request->all());
+
+        $request->validate([
+            'pet_id' => 'required',
+            'cab_arterial' => 'required|string|max:255',
+        ]);
+
+        $cab_bypass = new CoronaryArteryBypass();
+        $cab_bypass->pet_id = $request->pet_id;
+
+        $cab_bypass->cab_arterial = $request->cab_arterial;
+        $cab_bypass->cab_venous = $request->cab_venous;
+        $cab_bypass->cab_htechniques = $request->cab_htechniques;
+        $cab_bypass->cab_htime = $request->cab_htime;
+        $cab_bypass->cab_ima_options = $request->cab_ima_options;
+        $cab_bypass->cab_ima_anastomoses = $request->cab_ima_anastomoses;
+        $cab_bypass->cab_ima_htechniques = $request->cab_ima_htechniques;
+        $cab_bypass->cab_ima_preson = $request->cab_ima_preson;
+        $cab_bypass->cab_radial_arteries = $request->cab_radial_arteries;
+        $cab_bypass->cab_radial_distal = $request->cab_radial_distal;
+        $cab_bypass->cab_radial_time = $request->cab_radial_time;
+        $cab_bypass->cab_distal_anastomoses = $request->cab_distal_anastomoses;
+        $cab_bypass->cab_proximal = $request->cab_proximal;
+        $cab_bypass->cab_ins_distal = $request->cab_ins_distal;
+        $cab_bypass->cab_ins_proximal = $request->cab_ins_proximal;
+        $cab_bypass->cab_ins_conduit = $request->cab_ins_conduit;
+        $cab_bypass->cab_ins_position = $request->cab_ins_position;
+        $cab_bypass->cab_ins_end = $request->cab_ins_end;
+
+        $cab_bypass->note = $request->note;
+        $cab_bypass->cab_insertby = Auth::user()->name;
+        $cab_bypass->save();
+        return redirect()->back()->with('success', 'Coronary Artery Bypass Added Successfully!');
+    }
+
+    public function deleteCABypasses($id)
+    {
+        $del_cab = CoronaryArteryBypass::find($id);
+        $del_cab->close = '0';
+        $del_cab->status = '0';
+        $del_cab->save();
+        return redirect()->back()->with('success', 'Coronary Artery Bypass deleted Successfully!');
     }
 }

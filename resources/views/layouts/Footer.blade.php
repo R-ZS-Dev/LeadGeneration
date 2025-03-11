@@ -80,9 +80,22 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#users-table3').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
+    });
+</script>
 <script>
 
     function confirmDelete(deleteUrl, rowId) {
+        console.log(rowId);
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
