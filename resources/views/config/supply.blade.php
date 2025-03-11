@@ -1,5 +1,5 @@
 @extends('sitemaster.master-layout')
-@section('title','All Supplies')
+@section('title', 'All Supplies')
 @section('content')
     <div class="container-fluid">
         <!-- ============================================================== -->
@@ -8,11 +8,6 @@
         <!-- basic table -->
         <div class="row">
 
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
 
             <!-- Success Message -->
             <div id="successMessage" class="alert alert-success" style="display: none;"></div>
@@ -36,11 +31,32 @@
                                     <div class="col-lg-12">
                                         <div class="form-group mb-3">
                                             <label for="">Select Supply Group</label>
-                                            <select name="sp_type" id="" class="form-select">
+                                            <select name="sp_type" id="" class="form-select" required>
                                                 <option value="">Select Supply Group</option>
-                                                @foreach ($spg as $item)
+                                                {{-- @foreach ($spg as $item)
                                                     <option value="{{ $item->spg_id }}">{{ $item->spg_name }}</option>
-                                                @endforeach
+                                                @endforeach --}}
+                                                <option value="Ballon">Ballon</option>
+                                                <option value="Ballon Kit">Ballon Kit</option>
+                                                <option value="Cell Saver Bowl">Cell Saver Bowl</option>
+                                                <option value="Oxygenator">Oxygenator</option>
+                                                <option value="Arterial Filter">Arterial Filter</option>
+                                                <option value="Inline Sat. Sensor">Inline Sat. Sensor</option>
+                                                <option value="Pump Pack">Pump Pack</option>
+                                                <option value="Cardioplegia Devlivery">Cardioplegia Devlivery</option>
+                                                <option value="Cardiotomay">Cardiotomy</option>
+                                                <option value="Hemoconcentrator">Hemoconcentrator</option>
+                                                <option value="Inline PO2 Sensor">Inline PO2 Senso</option>
+                                                <option value="Arterial Cannula">Arterial Cannula</option>
+                                                <option value="Left Vent Catheter">Left Vent Catheter</option>
+                                                <option value="Sump/Vent">Sump/Vent</option>
+                                                <option value="Multiple Perf Set">Multiple Perf Set</option>
+                                                <option value="Venous Cannula">Venous Cannula</option>
+                                                <option value="Aortic Vent">Aortic Vent</option>
+                                                <option value="Suction Tubing">Suction Tubing</option>
+                                                <option value="Femoral Venous">Femoral Venous</option>
+                                                <option value="Cell Saver Cardiotomy">Cell Saver Cardiotomy</option>
+                                                <option value="Biomedicus">Biomedicus</option>
                                             </select>
                                         </div>
                                     </div>
@@ -89,22 +105,23 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <div class="form-group form-switch mb-3">
-
-                                            <input type="hidden" name="sp_group" value="0">
-                                            <input type="checkbox" role="switch" name="sp_group" id="group"
-                                                value="1" class="form-check-input" {{ old('group') ? 'checked' : '' }}>
-                                            <label for="group" class="form-check-label">Group OR 1</label>
-                                        </div>
+                                        <label for="" class="mb-2">Select Group</label>
+                                        @foreach ($spg as $item)
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" name="spg_ids[]"
+                                                    value="{{ $item->spg_id }}" id="spg_{{ $item->spg_id }}">
+                                                <label class="form-check-label"
+                                                    for="spg_{{ $item->spg_id }}">{{ $item->spg_name }}</label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                     <div class="col-lg-12">
-                                        <div class="form-group form-switch mb-3">
+                                        <div class="form-group form-switch mt-2 mb-3">
                                             <input type="hidden" name="eq_active" value="0">
-                                            <input type="checkbox" role="switch" name="eq_active" id="active" checked
-                                                value="1" class="form-check-input"
+                                            <input type="checkbox" role="switch" name="eq_active" id="active"
+                                                checked value="1" class="form-check-input"
                                                 {{ old('active') ? 'checked' : '' }}>
                                             <label for="active" class="form-check-label">Active</label>
-
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-center">
@@ -120,6 +137,12 @@
             </div><!-- /.modal -->
 
             <div class="col-12 mt-2">
+
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -151,7 +174,7 @@
                                     @foreach ($sp as $index => $item)
                                         <tr id="row-{{ $item->sp_id }}">
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $item->SupplyGroup->spg_name }}</td>
+                                            <td>{{ $item->sp_type }}</td>
                                             <td>{{ $item->sp_manufacturer }}</td>
                                             <td>{{ $item->sp_name }}</td>
                                             <td>{{ $item->sp_lotno }}</td>
@@ -206,9 +229,27 @@
                                         <label for="">Select Supply Group</label>
                                         <select name="sp_type" id="edit_type" class="form-select">
                                             <option value="">Select Supply Group</option>
-                                            @foreach ($spg as $item)
-                                                <option value="{{ $item->spg_id }}">{{ $item->spg_name }}</option>
-                                            @endforeach
+                                            <option value="Ballon">Ballon</option>
+                                            <option value="Ballon Kit">Ballon Kit</option>
+                                            <option value="Cell Saver Bowl">Cell Saver Bowl</option>
+                                            <option value="Oxygenator">Oxygenator</option>
+                                            <option value="Arterial Filter">Arterial Filter</option>
+                                            <option value="Inline Sat. Sensor">Inline Sat. Sensor</option>
+                                            <option value="Pump Pack">Pump Pack</option>
+                                            <option value="Cardioplegia Devlivery">Cardioplegia Devlivery</option>
+                                            <option value="Cardiotomay">Cardiotomy</option>
+                                            <option value="Hemoconcentrator">Hemoconcentrator</option>
+                                            <option value="Inline PO2 Sensor">Inline PO2 Senso</option>
+                                            <option value="Arterial Cannula">Arterial Cannula</option>
+                                            <option value="Left Vent Catheter">Left Vent Catheter</option>
+                                            <option value="Sump/Vent">Sump/Vent</option>
+                                            <option value="Multiple Perf Set">Multiple Perf Set</option>
+                                            <option value="Venous Cannula">Venous Cannula</option>
+                                            <option value="Aortic Vent">Aortic Vent</option>
+                                            <option value="Suction Tubing">Suction Tubing</option>
+                                            <option value="Femoral Venous">Femoral Venous</option>
+                                            <option value="Cell Saver Cardiotomy">Cell Saver Cardiotomy</option>
+                                            <option value="Biomedicus">Biomedicus</option>
                                         </select>
                                     </div>
                                 </div>
@@ -258,13 +299,15 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="form-group form-switch mb-3">
-
-                                        <input type="hidden" name="sp_group" value="0">
-                                        <input type="checkbox" role="switch" name="sp_group" id="edit-group"
-                                            value="1" class="form-check-input" {{ old('group') ? 'checked' : '' }}>
-                                        <label for="edit-group" class="form-check-label">Group OR 1</label>
-                                    </div>
+                                    <label for="" class="mb-2">Select Group</label>
+                                    @foreach ($spg as $item)
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" name="spg_ids[]"
+                                                value="{{ $item->spg_id }}" id="spg_{{ $item->spg_id }}">
+                                            <label class="form-check-label"
+                                                for="spg_{{ $item->spg_id }}">{{ $item->spg_name }}</label>
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group form-switch mb-3">
@@ -289,9 +332,10 @@
     </div>
 @endsection
 @section('script')
- 
+
     <script>
         function editEqg(sp) {
+            console.log(sp.sp_groups);
             document.getElementById("sp_id").value = sp.sp_id;
             document.getElementById("edit_type").value = sp.sp_type;
             document.getElementById("edit_manufacturer").value = sp.sp_manufacturer;
@@ -300,8 +344,10 @@
             document.getElementById("edit_billing").value = sp.sp_billingcode;
             document.getElementById("edit_notes").value = sp.sp_notes;
             document.getElementById("edit-active").checked = sp.sp_active == 1;
-            document.getElementById("edit-group").checked = sp.sp_groups == 1;
-
+            let selectedIds = sp.sp_groups ? sp.sp_groups.split(',') : [];
+            document.querySelectorAll('input[name="spg_ids[]"]').forEach(checkbox => {
+                checkbox.checked = selectedIds.includes(checkbox.value);
+            });
             var editModal = new bootstrap.Modal(document.getElementById("editHospital"));
             editModal.show();
         }

@@ -231,6 +231,40 @@ input[name='gender']:checked:after {
     color: #fff;
 }
 
+.title-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 100%;
+
+}
+
+.title-label {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: #fff;
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.custom-border-box-text {
+    position: relative;
+    padding: 10px 20px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.custom-label-text {
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    background: white;
+    padding: 0 10px;
+}
+
 
 
 

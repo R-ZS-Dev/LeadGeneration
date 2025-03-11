@@ -160,7 +160,7 @@ class ConfigController extends Controller
         $user = Auth::user();
 
         $validatedData = $request->validate([
-            'eq_type' => 'required|integer',
+            'eq_type' => 'required|string',
             'eq_manufacturer' => 'required|string|max:100',
             'eq_name' => 'required|string|max:100',
             'eq_serial' => 'required|string|max:50',
@@ -198,10 +198,8 @@ class ConfigController extends Controller
     public function editEquipment(Request $request)
     {
         // return $request->all();
-
-
         $validatedData = $request->validate([
-            'eq_type' => 'required|integer',
+            'eq_type' => 'required|string',
             'eq_manufacturer' => 'required|string|max:100',
             'eq_name' => 'required|string|max:100',
             'eq_serial' => 'required|string|max:50',
@@ -316,18 +314,18 @@ class ConfigController extends Controller
     public function addSupplies(Request $request)
 
     {
+        // return $request->all();
         $validatedData = $request->validate([
-            'sp_type' => 'required|integer',
+            'sp_type' => 'required|string',
             'sp_manufacturer' => 'required|string|max:100',
             'sp_name' => 'required|string|max:100',
             'sp_lotno' => 'required|string|max:50',
             'sp_expdate' => 'required|date',
             'sp_billingcode' => 'nullable|string|max:50',
             'sp_notes' => 'nullable|string',
-            'sp_group' => 'required|in:0,1',
             'eq_active' => 'required|in:0,1',
         ]);
-
+        $spgIdsString = implode(',', $request->spg_ids ?? []);
         try {
             $supply = Supply::create([
                 'sp_type' => $validatedData['sp_type'],
@@ -337,12 +335,10 @@ class ConfigController extends Controller
                 'sp_expdate' => $validatedData['sp_expdate'],
                 'sp_billingcode' => $validatedData['sp_billingcode'] ?? null,
                 'sp_notes' => $validatedData['sp_notes'] ?? null,
-                'sp_groups' => $validatedData['sp_group'],
+                'sp_groups' => $spgIdsString,
                 'sp_active' => $validatedData['eq_active'],
                 'sp_insertby' => Auth::user()->name,
             ]);
-
-            Log::info('Inserted Supply ID: ' . $supply->id);
 
             return redirect()->back()->with('success', 'Supply Added successfully!');
 
@@ -350,7 +346,7 @@ class ConfigController extends Controller
         } catch (\Exception $e) {
             Log::error('Supply creation failed: ' . $e->getMessage());
 
-            return redirect()->back()->with('success', 'Faild to add Supply!');
+            return redirect()->back()->with('error', 'Faild to add Supply!');
 
         }
     }
@@ -358,18 +354,19 @@ class ConfigController extends Controller
     public function editSupplies(Request $request)
     {
         $validatedData = $request->validate([
-            'sp_type' => 'required|integer',
+            'sp_type' => 'required|string',
             'sp_manufacturer' => 'required|string|max:100',
             'sp_name' => 'required|string|max:100',
             'sp_lotno' => 'required|string|max:50',
             'sp_expdate' => 'required|date',
             'sp_billingcode' => 'nullable|string|max:50',
             'sp_notes' => 'nullable|string',
-            'sp_group' => 'required|in:0,1',
             'eq_active' => 'required|in:0,1',
         ]);
        $id = $request->sp_id;
         $sp = Supply::findOrFail($id);
+        $spgIdsString = implode(',', $request->spg_ids ?? []);
+
         try {
             $sp->update([
                 'sp_type' => $validatedData['sp_type'],
@@ -379,7 +376,7 @@ class ConfigController extends Controller
                 'sp_expdate' => $validatedData['sp_expdate'],
                 'sp_billingcode' => $validatedData['sp_billingcode'] ?? null,
                 'sp_notes' => $validatedData['sp_notes'] ?? null,
-                'sp_groups' => $validatedData['sp_group'],
+                'sp_groups' => $spgIdsString,
                 'sp_active' => $validatedData['eq_active'],
             ]);
             return redirect()->back()->with('success', 'Supply updated successfully!');
@@ -388,7 +385,7 @@ class ConfigController extends Controller
         } catch (\Exception $e) {
             Log::error('Supply creation failed: ' . $e->getMessage());
 
-            return redirect()->back()->with('success', 'Faild to update Supply!');
+            return redirect()->back()->with('error', 'Faild to update Supply!');
 
         }
     }

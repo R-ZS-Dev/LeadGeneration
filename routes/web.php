@@ -218,6 +218,26 @@ Route::middleware('auth')->group(function () {
         Route::get('/case', 'viewCase')->name('view-case');
         Route::post('/add-patient', 'addPatient')->name('add-patient');
         Route::post('/add-patient-history', 'addPatientHistory')->name('add-patient-history');
+        Route::get('/procedure', 'caseProcedure')->name('case-procedure');
+
+        /* ------------------------------- case staff ------------------------------- */
+
+        Route::get('/case-staff', 'viewCstaff')->name('case-staff');
+        route::post('/add-casestaff', 'addCaseStaff')->name('add-casestaff');
+        route::post('/edit-casestaff', 'editcasestaff')->name('edit-casestaff');
+        route::post('/delete-casestaff/{id}', 'deletecasestaff')->name('delete-casestaff');
+
+        /* ---------------------- Case Equipment module routes ---------------------- */
+        Route::get('/case-equipment', 'viewCEquipment')->name('case-equipment');
+        route::post('/add-caseequipment', 'addCEquipment')->name('add-caseequipment');
+        route::post('/edit-caseequipment', 'editCEquipment')->name('edit-caseequipment');
+        route::post('/delete-caseequipment/{id}', 'deleteCaseEquipment')->name('delete-caseequipment');
+
+        /* ---------------------- Case Supply module routes ---------------------- */
+        route::post('/case-caseSupply', 'viewCase')->name('case-caseSupply');
+        route::post('/add-caseSupply', 'addCaseSupply')->name('add-caseSupply');
+        route::post('/edit-caseSupply', 'editCaseSupply')->name('edit-caseSupply');
+        route::post('/delete-caseSupply/{id}', 'deleteCaseSupply')->name('delete-caseSupply');
 
     });
 

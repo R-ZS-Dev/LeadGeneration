@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('equipments', function (Blueprint $table) {
             $table->id('eq_id');
-            $table->unsignedBigInteger('eq_type')->collation('utf8mb4_general_ci');
+            $table->string('eq_type')->collation('utf8mb4_general_ci');
             $table->string('eq_manufacturer',100)->collation('utf8mb4_general_ci');
             $table->string('eq_name',100)->collation('utf8mb4_general_ci');
             $table->string('eq_serial',50)->collation('utf8mb4_general_ci');
@@ -27,11 +27,6 @@ return new class extends Migration
             $table->enum('close', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->enum('status', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
             $table->timestamps();
-            $table->foreign('eq_type')
-            ->references('eqg_id')
-            ->on('equipment_groups')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
         });
         DB::statement("ALTER TABLE equipments COLLATE utf8mb4_general_ci");
 
