@@ -89,7 +89,6 @@
         <div class="row">
             <div class="col-lg-12 mb-3">
                 <div class="row">
-
                     <div class="col-lg-5">
                         <label for="">Robot Use</label>
                     </div>
@@ -97,14 +96,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="robot_use" value="yes"
+                                    <input type="radio" class="form-check-input yes" name="robot_use" value="yes"
                                         id="robot_yes" {{ old('robot_use') == 'yes' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="robot_yes">Yes</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="robot_use" value="no"
+                                    <input type="radio" class="form-check-input no" name="robot_use" value="no"
                                         id="robot_no" {{ old('robot_use') == 'no' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="robot_no">No</label>
                                 </div>
@@ -114,7 +113,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="robot-use" style="display: none;">
             <div class="col-lg-12 mb-3">
                 <div class="title-box">
                     <span class="title-label">If Yes</span>
@@ -647,7 +646,7 @@
             </div>
             <div class="col-lg-4 col-md-6 form-group mb-3">
                 <label for="">CPB Utilization:</label>
-                <select name="cpb_utilize" id="" class="form-select">
+                <select name="cpb_utilize" id="cpb_utilize_select" class="form-select">
                     <option value="">Select Utlization</option>
                     <option value="None">None</option>
                     <option value="Combination">Combination</option>
@@ -657,7 +656,7 @@
         </div>
 
         <hr>
-        <div class="row">
+        <div class="row" id="if-combine" style="display: none;">
             <div class="col-lg-12 mt-2 mb-3">
                 <div class="title-box">
                     <span class="title-label">If Combination</span>
@@ -678,7 +677,7 @@
                                 <label class="form-check-label" for="com_unplan">Unplanned</label>
                             </div>
                         </div>
-                        <div class="col-lg-12 mt-2 mb-3">
+                        <div class="col-lg-12 mt-2 mb-3" id="com-unplan" style="display: none;">
                             <div class="title-box">
                                 <span class="title-label">If Unplanned</span>
                                 <label for="">Unplanned Reason</label>
@@ -705,7 +704,7 @@
             </div>
 
         </div>
-        <div class="row">
+        <div class="row" id="if-combine-full" style="display: none;">
             <div class="col-lg-12 mt-2 mb-3">
                 <div class="title-box">
                     <span class="title-label">If Combination or Full</span>
@@ -1007,25 +1006,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="curcular_arrest"
-                                        value="No" id="arrest_no">
-                                    <label class="form-check-label" for="arrest_no">No</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="curcular_arrest"
+                                    <input type="radio" class="form-check-input" name="circular_arrest"
                                         value="Yes" id="arrest_yes">
                                     <label class="form-check-label" for="arrest_yes">Yes</label>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="circular_arrest"
+                                        value="No" id="arrest_no">
+                                    <label class="form-check-label" for="arrest_no">No</label>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="arrest" style="display: none;">
             <div class="col-lg-12 mt-2 mb-3">
                 <div class="title-box">
                     <span class="title-label">If Yes</span>
@@ -1065,7 +1065,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-12 mt-2 mb-3">
+                    <div class="col-lg-12 mt-2 mb-3" style="display: none" id="cerebral-perfus">
                         <div class="title-box">
                             <span class="title-label">If Yes</span>
                             <div class="col-lg-12 form-group mb-3">
@@ -1117,7 +1117,7 @@
         <div class="row form-group mb-3">
             <div class="col-lg-12">
                 <label for="">Aortic Occlusion</label>
-                <select name="aortic_occl" class="form-select" id="">
+                <select name="aortic_occl" class="form-select" id="aortic_occl_select">
                     <option value="">Select Aortic Occlusion</option>
                     <option value="None-beating heart">None-beating heart</option>
                     <option value="None-fibrillating heart">None-fibrillating heart</option>
@@ -1126,7 +1126,7 @@
                 </select>
             </div>
         </div>
-        <div class="row form-group mb-3">
+        <div class="row form-group mb-3" id="not-none" style="display: none;">
             <div class="col-lg-12 mt-2 mb-3">
                 <div class="title-box">
                     <span class="title-label">If Not None</span>
@@ -1141,7 +1141,7 @@
         <div class="row form-group mb-3">
             <div class="col-lg-12">
                 <label for="">Cardioplegia Delivery</label>
-                <select name="cardio_deliver" id="" class="form-select">
+                <select name="cardio_deliver" id="select-cardio" class="form-select">
                     <option value="">Select Cardioplegia Delivery</option>
                     <option value="None">None</option>
                     <option value="Antegrade">Antegrade</option>
@@ -1150,7 +1150,7 @@
                 </select>
             </div>
         </div>
-        <div class="row form-group mb-3">
+        <div class="row form-group mb-3" id="cardio-not-none" style="display:none;">
             <div class="col-lg-12 mt-2 mb-3">
                 <div class="title-box">
                     <span class="title-label">If Not None</span>
@@ -1238,7 +1238,7 @@
                 </div>
             </div>
         </div>
-        <div class="row form-group mb-2">
+        <div class="row form-group mb-2" id="ascending-yes" style="display: none">
             <div class="col-lg-12 mt-2 mb-3">
                 <div class="title-box">
                     <span class="title-label">If Yes</span>
@@ -1295,7 +1295,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-check">
-                        <input type="radio" class="form-check-input" name="intraop" value="Yes"
+                        <input type="radio" class="form-check-input" name="intraop" value="No"
                             id="intraop_no">
                         <label class="form-check-label" for="intraop_no">No</label>
                     </div>
@@ -1303,7 +1303,7 @@
 
             </div>
         </div>
-        <div class="row form-group mb-2">
+        <div class="row form-group mb-2" id="intrapo-no" style="display: none;">
             <div class="col-lg-12 mt-2 mb-3">
                 <div class="title-box">
                     <span class="title-label">If No</span>
@@ -1333,7 +1333,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12 mt-3 mb-3">
+                    <div class="col-lg-12 mt-3 mb-3" id="intrapo-blood" style="display: none;">
                         <div class="title-box">
                             <span class="title-label">If Yes</span>
                             <div class="form-group mb-3">
@@ -1355,7 +1355,199 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+        </div>
+        <div class="row form-group mb-3">
+            <div class="col-lg-12">
+                <label for="">Intraop Clothing Factors</label>
+                <select name="clothing_factor" id="" class="form-select">
+                    <option value="">Select Intraop Clothing Factor</option>
+                    <option value="Yes, Factor Vlla">Yes, Factor Vlla</option>
+                    <option value="Yes, FEIB">Yes, FEIB</option>
+                    <option value="Yes, Composite">Yes, Composite</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="">
+                Intraop Antifibrinolytic Medication: Epsilon Amino-Caproic Acid
+            </label>
+            <div class="row  mb-3 mt-3">
+                <div class="col-md-4 ">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="intraop_antifi" value="Yes"
+                            id="intraopantifi_yes">
+                        <label class="form-check-label" for="intraopantifi_yes">Yes</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="intraop_antifi" value="Yes"
+                            id="intraopantifi_no">
+                        <label class="form-check-label" for="intraopantifi_no">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="">
+                Intraoperative TEE Performed post procedure
+            </label>
+            <div class="row  mb-3 mt-3">
+                <div class="col-md-4 ">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="intraop_tee" value="Yes"
+                            id="intraoptee_yes">
+                        <label class="form-check-label" for="intraoptee_yes">Yes</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="intraop_tee" value="Yes"
+                            id="intraoptee_no">
+                        <label class="form-check-label" for="intraoptee_no">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group mb-3" id="tee-yes" style="display: none;">
+            <div class="col-lg-12 mt-3 mb-3">
+                <div class="title-box">
+                    <span class="title-label">If Yes</span>
+                    <div class="row form-group mb-3">
+                        <div class="col-lg-12">
+                            <label for="">High level aortic insufficient found</label>
+                        <select name="aortic_insufi" id="" class="form-select">
+                            <option value="">Select high level aortic insufficient found</option>
+                            <option value="None">None</option>
+                            <option value="Trace/Trivial">Trace/Trivial</option>
+                            <option value="Mild">Mild</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="Severe">Severe</option>
+                            <option value="Not Reported">Not Reported</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="row form-group mb-3">
+                       <div class="col-lg-12">
+                        <label for="">High level mitral insufficient found</label>
+                        <select name="mitral_insufi" id="" class="form-select">
+                            <option value="">Select high level mitral insufficient found</option>
+                            <option value="None">None</option>
+                            <option value="Trace/Trivial">Trace/Trivial</option>
+                            <option value="Mild">Mild</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="Severe">Severe</option>
+                            <option value="Not Reported">Not Reported</option>
+                        </select>
+                       </div>
+                    </div>
+                    <div class="row form-group mb-3">
+                        <div class="col-lg-12">
+                            <label for="">High level tricuspid insufficient found</label>
+                        <select name="tricuspid_insufi" id="" class="form-select">
+                            <option value="">Select high level tricuspid insufficient found</option>
+                            <option value="None">None</option>
+                            <option value="Trace/Trivial">Trace/Trivial</option>
+                            <option value="Mild">Mild</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="Severe">Severe</option>
+                            <option value="Not Reported">Not Reported</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="row form-group mb-3">
+                        <div class="col-lg-12">
+                            <label for="">Ejection Fraction post procedure</label>
+                        <select name="ejection_fract" id="" class="form-select">
+                            <option value="">Select ejection fraction post procedure</option>
+                            <option value="Unchanged">Unchanged</option>
+                            <option value="Increased">Increased</option>
+                            <option value="Decreased">Decreased</option>
+                            <option value="Not Reported">Not Reported</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="">
+                Combine Cardiac surgery and PCI performed
+            </label>
+            <div class="row  mb-3 mt-3">
+                <div class="col-md-4 ">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="cardiac_pci" value="Yes"
+                            id="cardiacpci_yes">
+                        <label class="form-check-label" for="cardiacpci_yes">Yes</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="cardiac_pci" value="No"
+                            id="cardiacpci_no">
+                        <label class="form-check-label" for="cardiacpci_no">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group mb-3" id="cardiac-pci" style="display: none;">
+            <div class="col-lg-12 mt-3 mb-3">
+                <div class="title-box">
+                    <span class="title-label">If Yes</span>
+                    <div class="row form-group mb-3">
+                        <div class="col-lg-12">
+                            <label for="">Combined Procedures</label>
+                        <select name="combine_pro" id="" class="form-select">
+                            <option value="">Select combined procedures</option>
+                            <option value="PCI + CAD">PCI + CAD</option>
+                            <option value="PCI + Valve">PCI + Valve</option>
+                            <option value="PCI + Aortic">PCI + Aortic</option>
+                            <option value="PCI + Other">PCI + Other</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="row form-group mb-3">
+                       <div class="col-lg-12">
+                        <label for="">Status</label>
+                        <select name="proced_status" id="" class="form-select">
+                            <option value="">Select Status</option>
+                            <option value="Conurrent - same setting">Concurrent - same setting</option>
+                            <option value="Staged - PCI followed by surgery">Staged - PCI followed by surgery</option>
+                            <option value="Staged - surgery followed by PCI"></option>
+                        </select>
+                       </div>
+                    </div>
+                    <div class="row form-group mb-3">
+                        <div class="col-lg-12">
+                            <label for="">PCI procedure</label>
+                        <select name="pci_procedure" id="" class="form-select">
+                            <option value="">Select PCI procedure</option>
+                            <option value="Stent">Stent</option>
+                            <option value="Angioplasty and stent">Angioplasty and stent</option>
+                            <option value="Attempted PCI">Attempted PCI</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="row form-group mb-3">
+                        <div class="col-lg-12 mt-3 mb-3">
+                            <div class="title-box">
+                                <span class="title-label">If Yes</span>
+                                <label for="">Stent Type</label>
+                                <select name="stent_type" id="" class="form-select">
+                                    <option value="">Select Stent Type</option>
+                                    <option value="Bare Metal">Bare Metal</option>
+                                    <option value="Drug-eluting">Drug-eluting</option>
+                                    <option value="Bioresorbable">Bioresorbable</option>
+                                    <option value="Multiple">Multiple</option>
+                                    <option value="Not Documented">Not Documented</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

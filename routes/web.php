@@ -239,6 +239,12 @@ Route::middleware('auth')->group(function () {
         route::post('/edit-caseSupply', 'editCaseSupply')->name('edit-caseSupply');
         route::post('/delete-caseSupply/{id}', 'deleteCaseSupply')->name('delete-caseSupply');
 
+        /* ---------------------- Coronary Artery Bypasses module routes ---------------------- */
+        // route::get('/case-cabypasses', 'viewCase')->name('case-cabypasses');
+        route::post('/add-cabypasses', 'addCABypasses')->name('add-cabypasses');
+        route::post('/edit-cabypasses', 'editCABypasses')->name('edit-cabypasses');
+        route::post('/delete-cabypasses/{id}', 'deleteCABypasses')->name('delete-cabypasses');
+
     });
 
 
