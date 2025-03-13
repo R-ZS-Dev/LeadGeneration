@@ -301,6 +301,261 @@ $("input[name='pulomnicimplnt']").change(function () {
     togglepulmonicperimp();
 });
 
+/* -------------------------- other 4 forms script -------------------------- */
+function apsgYesDiv() {
+    if ($("#apsg_use_yes").is(":checked")) {
+        $("#apsg-use").slideDown();
+    } else {
+        $("#apsg-use").slideUp();
+    }
+}
+apsgYesDiv();
+$("input[name='apsg_use']").change(function() {
+    apsgYesDiv();
+});
+
+function mlcdocIfYesDiv() {
+    if ($("#mlc_doc_Yes").is(":checked")) {
+        $("#radio-frequency").slideDown();
+    } else {
+        $("#radio-frequency").slideUp();
+    }
+}
+mlcdocIfYesDiv();
+$("input[name='mlc_doc']").change(function() {
+    mlcdocIfYesDiv();
+});
+
+function toggleBipolarDiv() {
+    if ($("#radio_frequency_yes").is(":checked")) {
+        $("#rf_bipolar_div").slideDown();
+    } else {
+        $("#rf_bipolar_div").slideUp();
+    }
+}
+toggleBipolarDiv();
+
+$("input[name='radio_frequency']").change(function() {
+    toggleBipolarDiv();
+});
+//
+function toggleSSRDiv() {
+    if ($("#ss_res").is(":checked")) {
+        $("#ssr_div").slideDown();
+    } else {
+        $("#ssr_div").slideUp();
+    }
+}
+toggleSSRDiv();
+
+$("input[name='ss_res']").change(function() {
+    toggleSSRDiv();
+});
+
+//
+function toggleComplicationDiv() {
+    if ($("#crma_dev").is(":checked") || $("#crma_devyes").is(":checked")) {
+        $("#complication_div").slideDown();
+    } else {
+        $("#complication_div").slideUp();
+    }
+}
+toggleComplicationDiv();
+
+$("input[name='crma_dev']").change(function() {
+    toggleComplicationDiv();
+});
+
+// Intra-Aortic Balloon Pump
+function toggleIABPDiv() {
+    if ($("#iab_pump").is(":checked")) {
+        $("#iabp_div").slideDown();
+    } else {
+        $("#iabp_div").slideUp();
+    }
+}
+toggleIABPDiv();
+
+$("input[name='iab_pump']").change(function() {
+    toggleIABPDiv();
+});
+
+
+// Catheter Based Assist Device Used
+function toggleCBADDiv() {
+    if ($("#cbad_use").is(":checked")) {
+        $("#cbad_div").slideDown(); // Show div
+    } else {
+        $("#cbad_div").slideUp(); // Hide div
+    }
+}
+
+toggleCBADDiv();
+
+$("input[name='cbad_use']").change(function() {
+    toggleCBADDiv();
+});
+
+
+// ECMO
+function toggleECMODiv() {
+    var selectedValue = $("#ecmo-select").val();
+
+    if (selectedValue === "Veno-venous" ||
+        selectedValue === "Veno-arterial" ||
+        selectedValue === "Veno-venous converted to Veno-arterial") {
+        $("#ecmo-div").slideDown();
+    } else {
+        $("#ecmo-div").slideUp();
+    }
+}
+toggleECMODiv();
+
+$("#ecmo-select").change(function() {
+    toggleECMODiv();
+});
+
+
+
+// Was patient admitted with VAD
+function toggleVADMainDiv() {
+    if ($("#wpa_vad").is(":checked")) {
+        $("#vad_maindiv").slideDown();
+    } else {
+        $("#vad_maindiv").slideUp();
+    }
+}
+toggleVADMainDiv();
+
+$("input[name='wpa_vad']").change(function() {
+    toggleVADMainDiv();
+});
+
+function togglePreviousVADDivs() {
+    if ($("#peda_vad").is(":checked")) {
+        $("#if_vad_yes").slideDown();
+        $("#if_vad_yes_during").slideUp();
+    } else if ($("#peda_vadyes").is(":checked")) {
+        $("#if_vad_yes_during").slideDown();
+        $("#if_vad_yes").slideUp();
+    } else {
+        $("#if_vad_yes, #if_vad_yes_during").slideUp();
+    }
+}
+togglePreviousVADDivs();
+
+$("input[name='peda_vad']").change(function() {
+    togglePreviousVADDivs();
+});
+
+
+
+// Ventricular Assist Device Implanted during this hospitalization
+function toggleVADDiv() {
+    if ($("#vadid_hos").is(":checked")) {
+        $("#vadid_hos_maindiv").slideDown();
+    } else {
+        $("#vadid_hos_maindiv").slideUp();
+    }
+}
+toggleVADDiv();
+
+$("input[name='vadid_hos']").change(function() {
+    toggleVADDiv();
+});
+
+$(document).ready(function() {
+    function toggleVADExplantedDivs() {
+        let selectedValue = $("input[name='vadidh_vad_exp']:checked").val();
+
+        if (selectedValue === "Yes, not during this procedure") {
+            $("#vadidh_if_no").slideDown();
+            $("#vadidh_if_yes").slideUp();
+        } else if (selectedValue === "1, during this procedure") {
+            $("#vadidh_if_yes").slideDown();
+            $("#vadidh_if_no").slideUp();
+        } else {
+            $("#vadidh_if_yes, #vadidh_if_no").slideUp();
+        }
+    }
+
+    toggleVADExplantedDivs();
+
+    $("input[name='vadidh_vad_exp']").change(toggleVADExplantedDivs);
+});
+
+
+
+// 2nd
+$(document).ready(function() {
+    function toggleSecondDeviceFields() {
+        if ($("#sec_di").is(":checked")) {
+            $("#second_device_fields").slideDown(); // Show extra fields
+        } else {
+            $("#second_device_fields").slideUp(); // Hide extra fields
+        }
+    }
+    toggleSecondDeviceFields();
+
+    $("input[name='sec_di']").change(function() {
+        toggleSecondDeviceFields();
+    });
+});
+
+$(document).ready(function() {
+    function toggleSecVADDivs() {
+        let selectedValue = $("input[name='sec_vad_expl']:checked").val();
+
+        if (selectedValue === "Yes, not during this procedure") {
+            $("#sec_if_yes").slideDown();
+            $("#sec_if_yes_during").slideUp();
+        } else if (selectedValue === "Yes, during this procedure") {
+            $("#sec_if_yes_during").slideDown();
+            $("#sec_if_yes").slideUp();
+        } else {
+            $("#sec_if_yes_during, #sec_if_yes").slideUp();
+        }
+    }
+    toggleSecVADDivs();
+
+    $("input[name='sec_vad_expl']").change(toggleSecVADDivs);
+});
+
+//3rd
+function toggleTimingDiv() {
+    if ($("#th_dev_imp").is(":checked")) {
+        $("#timing_div").slideDown();
+    } else {
+        $("#timing_div").slideUp();
+    }
+}
+toggleTimingDiv();
+
+$("input[name='th_dev_imp']").change(function() {
+    toggleTimingDiv();
+});
+
+$(document).ready(function() {
+    function toggleVADDivs() {
+        let selectedValue = $("input[name='th_vad_expla']:checked").val();
+
+        if (selectedValue === "Yes, not during this procedure") {
+            $("#if_yes_not_during").slideDown();
+            $("#if_yes_during").slideUp();
+        } else if (selectedValue === "Yes, during this procedure") {
+            $("#if_yes_during").slideDown();
+            $("#if_yes_not_during").slideUp();
+        } else {
+            $("#if_yes_during, #if_yes_not_during").slideUp();
+        }
+    }
+    toggleVADDivs();
+
+    $("input[name='th_vad_expla']").change(toggleVADDivs);
+});
+
+/* ------------------------- end of other 4 scripts ------------------------- */
+
 const selectElement = document.getElementById("cpb_utilize_select");
 const combinationDetails = document.getElementById("if-combine");
 const combinationMulti = document.getElementById("if-combine-full");

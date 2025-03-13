@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\CaseEquipment;
+use App\Models\CaseProcedures;
 use App\Models\CaseStaff;
 use App\Models\CaseSupply;
 use App\Models\CoronaryArteryBypass;
 use App\Models\Equipment;
 use App\Models\EquipmentGroup;
 use App\Models\Hospital;
+use App\Models\NonCardic;
 use App\Models\Patient;
 use App\Models\PatientHistory;
 use App\Models\Procedures;
 use App\Models\Staff;
 use App\Models\SupplyGroup;
+use App\Models\ValveSurgery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +25,7 @@ class CaseController extends Controller
     public function viewCase()
     {
         $hospital = Hospital::where('status', '1')->where('close', '1')->get();
+        $patients = Patient::where('status', '1')->where('close', '1')->get();
         $patient = Patient::where('status', '1')->where('close', '1')->get();
         $staffs = Staff::where('status', '1')->where('close', '1')->get();
         $equipmentGroups = EquipmentGroup::where('status', '1')->where('close', '1')->get();
@@ -48,7 +52,7 @@ class CaseController extends Controller
             ->where('close', '1')
             ->get();
 
-        return view('cases.case', compact('hospital', 'patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys', 'procedure', 'del_cabs'));
+        return view('cases.case', compact('hospital', 'patients','patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys', 'procedure', 'del_cabs'));
     }
     public function caseProcedure()
     {
@@ -113,6 +117,7 @@ class CaseController extends Controller
         $patient->discharge_date = $request->discharge_date;
         $patient->pat_insertby = Auth::user()->name;
         $patient->save();
+        session(['pat_id' => $patient->pat_id]);
         return redirect()->back()->with('success', 'Patient Added Successfully!');
     }
 
@@ -372,5 +377,36 @@ class CaseController extends Controller
         $del_cab->status = '0';
         $del_cab->save();
         return redirect()->back()->with('success', 'Coronary Artery Bypass deleted Successfully!');
+    }
+
+
+    /* -------------------- case procedure insertion function ------------------- */
+
+    public function addcaseProcedure(Request $request)
+    {
+        // return $request->all();
+        $case = CaseProcedures::create([
+            'casep_insertby' => Auth::user()->name, // Assign logged-in user's name
+        ] + $request->all());
+        return redirect()->back()->with('success','Procedure added successfully!');
+    }
+
+    public function addvalveProcedure(Request $request)
+    {
+        $case = ValveSurgery::create($request->all());
+        return redirect()->back()->with('success','Valve Surgery added successfully!');
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Valve Surgery added successfully!',
+        //     'data' => $case
+        // ]);
+    }
+
+    public function addNoncardicProcedure(Request $request)
+    {
+        // return $request->all();
+        NonCardic::create($request->all());
+        return redirect()->back()->with('success','Non Cardic added successfully!');
+
     }
 }
