@@ -253,8 +253,8 @@
                             </label>
 
                             <label>
-                                <input type="radio" name="cab_ins_end" value="0" id="cab_ins_side" checked>
-                                <span>Side to Side</span>
+                                <input type="radio" name="cab_ins_end" value="0" id="cab_ins_no" checked>
+                                <span>No</span>
                             </label>
                         </div>
 

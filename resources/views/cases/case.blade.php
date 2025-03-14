@@ -3,14 +3,15 @@
 @section('content')
     <div class="container-fluid">
         <style>
+            .nav {
+                flex-wrap: nowrap;
+                /* Prevent wrapping */
+            }
 
-    .nav {
-        flex-wrap: nowrap; /* Prevent wrapping */
-    }
-    .nav-item {
-        flex-shrink: 0; /* Prevent shrinking */
-    }
-
+            .nav-item {
+                flex-shrink: 0;
+                /* Prevent shrinking */
+            }
         </style>
         <!-- ============================================================== -->
         <!-- Start Page Content -->
@@ -29,7 +30,8 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <ul class="nav p-3" id="myTab" role="tablist" style="white-space: nowrap; display: flex; overflow-x: auto;">
+                    <ul class="nav p-3" id="myTab" role="tablist"
+                        style="white-space: nowrap; display: flex; overflow-x: auto;">
                         <li class="nav-item" role="presentation">
                             <button class="btn tabButton active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1"
                                 type="button" role="tab" aria-controls="tab1" aria-selected="true">
@@ -319,11 +321,11 @@
                                         <select name="ph_userid" id="" class="form-control" required>
                                             <option value="">Select Patient</option>
                                             @foreach ($patient as $item)
-                                            <option value="{{ $item->pat_id }}"
-                                                {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
-                                                {{ $item->first_name }}
-                                            </option>
-                                        @endforeach
+                                                <option value="{{ $item->pat_id }}"
+                                                    {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
+                                                    {{ $item->first_name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-lg-12 form-group mb-3">
@@ -378,6 +380,19 @@
                                                         class="mt-4">
                                                         @csrf
                                                         <div class="row">
+                                                            <div class="col-lg-12 form-group mb-3">
+                                                                <label for="pet_id">Select Patient</label>
+                                                                <select name="pet_id" id="pet_id"
+                                                                    class="form-control" required>
+                                                                    <option value="">Select Patient</option>
+                                                                    @foreach ($patient as $item)
+                                                                        <option value="{{ $item->pat_id }}"
+                                                                            {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
+                                                                            {{ $item->first_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
                                                             <div class="col-lg-12">
                                                                 <div class="form-group mb-3">
                                                                     <label for="">Select Surgeon</label>
@@ -385,7 +400,8 @@
                                                                         <option value="">Select Surgeon</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -397,7 +413,8 @@
                                                                         <option value="">Select 2nd Surgeon</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -409,7 +426,8 @@
                                                                         </option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -421,7 +439,8 @@
                                                                         </option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -432,7 +451,8 @@
                                                                         <option value="">Select CRNA/RES</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -443,7 +463,8 @@
                                                                         <option value="">Select Cardiologist</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -454,7 +475,8 @@
                                                                         <option value="">Select Family MD</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -465,7 +487,8 @@
                                                                         <option value="">Select Perfusionist</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -510,7 +533,8 @@
                                                                         </option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -523,7 +547,8 @@
                                                                         </option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -673,7 +698,19 @@
                                                     @csrf
                                                     <input type="hidden" name="cs_id" id="cs_id">
                                                     <div class="row">
-
+                                                        <div class="col-lg-12 form-group mb-3">
+                                                            <label for="pet_id">Select Patient</label>
+                                                            <select name="pet_id" id="editpet_id" class="form-control"
+                                                                required>
+                                                                <option value="">Select Patient</option>
+                                                                @foreach ($patient as $item)
+                                                                    <option value="{{ $item->pat_id }}"
+                                                                        {{ isset($caseStaff) && $caseStaff->pet_id == $item->pat_id ? 'selected' : '' }}>
+                                                                        {{ $item->first_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-3">
                                                                 <label for="">Select Surgeon</label>
@@ -682,7 +719,8 @@
                                                                     <option>Select Surgeon</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -694,7 +732,8 @@
                                                                     <option value="">Select 2nd Surgeon</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -706,7 +745,8 @@
                                                                     <option value="">Select PA/1st Assistant</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -718,7 +758,8 @@
                                                                     <option value="">Select Anesthesiologist</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -730,7 +771,8 @@
                                                                     <option value="">Select CRNA/RES</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -742,7 +784,8 @@
                                                                     <option value="">Select Cardiologist</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -754,7 +797,8 @@
                                                                     <option value="">Select Family MD</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -766,7 +810,8 @@
                                                                     <option value="">Select Perfusionist</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -820,7 +865,8 @@
                                                                     </option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -832,7 +878,8 @@
                                                                     <option value="">Select 2nd Perfusionist</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -932,8 +979,10 @@
                                                                     class="form-control" required>
                                                                     <option value="">Select Patient</option>
                                                                     @foreach ($patient as $item)
-                                                                        <option value="{{ $item->pat_id }}">
-                                                                            {{ $item->first_name }}</option>
+                                                                        <option value="{{ $item->pat_id }}"
+                                                                            {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
+                                                                            {{ $item->first_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -1100,13 +1149,8 @@
                                                                         {{ $groupName ? $groupName->eqg_name : 'N/A' }}
                                                                     </td>
                                                                     <td>{{ $equipment->e_name }}</td>
-                                                                    <td>@php
-                                                                        $groupName = $equipmentGroups
-                                                                            ->where('eqg_id', $equipment->e_type)
-                                                                            ->first();
-                                                                    @endphp
-                                                                        {{ $groupName ? $groupName->eqg_name : 'N/A' }}
-                                                                    </td>
+
+                                                                    <td>{{ $equipment->e_type }}</td>
                                                                     <td>{{ $equipment->e_manufacturer }}</td>
                                                                     <td>{{ $equipment->serial_number }}</td>
                                                                     <td>{{ $equipment->last_service_date }}</td>
@@ -1158,7 +1202,7 @@
                                                                 <option value="">Select Patient</option>
                                                                 @foreach ($patient as $item)
                                                                     <option value="{{ $item->pat_id }}"
-                                                                        {{ isset($caseStaff) && $caseStaff->pet_id == $item->pat_id ? 'selected' : '' }}>
+                                                                        {{ isset($equipment) && $equipment->pet_id == $item->pat_id ? 'selected' : '' }}>
                                                                         {{ $item->first_name }}
                                                                     </option>
                                                                 @endforeach
@@ -1314,18 +1358,18 @@
                                                                     class="form-control" required>
                                                                     <option value="">Select Patient</option>
                                                                     @foreach ($patient as $item)
-        <option value="{{ $item->pat_id }}"
-            {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
-            {{ $item->first_name }}
-        </option>
-    @endforeach
+                                                                        <option value="{{ $item->pat_id }}"
+                                                                            {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
+                                                                            {{ $item->first_name }}
+                                                                        </option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                             <div class="col-lg-12">
                                                                 <strong>Add groups of Supplies for Case</strong>
                                                                 <div class="form-group mb-3">
                                                                     <label for="">Group</label>
-                                                                    <select name="csu_group" class="form-select">
+                                                                    <select name="csu_group" class="form-select" required>
                                                                         <option value="">Select Group</option>
                                                                         @foreach ($supplyGroups as $group)
                                                                             <option value="{{ $group->spg_id }}">
@@ -1525,7 +1569,7 @@
                                                                 <option value="">Select Patient</option>
                                                                 @foreach ($patient as $item)
                                                                     <option value="{{ $item->pat_id }}"
-                                                                        {{ isset($caseStaff) && $caseStaff->pet_id == $item->pat_id ? 'selected' : '' }}>
+                                                                        {{ isset($supply) && $supply->pet_id == $item->pat_id ? 'selected' : '' }}>
                                                                         {{ $item->first_name }}
                                                                     </option>
                                                                 @endforeach
@@ -1586,8 +1630,9 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-3">
                                                                 <label for="">Name</label>
-                                                                <input type="text" name="csu_name" id="editcsu_name"
-                                                                    class="form-control" placeholder="Name">
+                                                                <input type="text" name="csu_name"
+                                                                    id="editcsu_name" class="form-control"
+                                                                    placeholder="Name">
                                                             </div>
                                                         </div>
 
@@ -1673,14 +1718,13 @@
                                                 <td>{{ $cab->cab_ins_distal ?? 'N/A' }}</td>
                                                 <td>{{ $cab->cab_ins_proximal ?? 'N/A' }}</td>
                                                 <td>{{ $cab->cab_ins_conduit ?? 'N/A' }}</td>
-                                                <td>{{ $cab->cab_ins_position == 1 ? 'End to Side' : 'Side to Side' }}
-                                                </td>
-                                                <td>{{ $cab->cab_ins_end ?? 'N/A' }}</td>
+                                                <td>{{ $cab->cab_ins_position == 1 ? 'End to Side' : ($cab->cab_ins_position == 0 ? 'Side to Side' : 'N/A') }}</td>
+                                        <td>{{ $cab->cab_ins_end == 1 ? 'Yes' : ($cab->cab_ins_end == 0 ? 'No' : 'N/A') }}</td>
                                                 <td>{{ $cab->note ?? 'N/A' }}</td>
                                                 <td>
-                                                    <a onclick="editCLitem($cab)" href="javascript:void(0);">
+                                                    {{-- <a onclick="editCLitem($cab)" href="javascript:void(0);">
                                                         <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
+                                                    </a> --}}
                                                     <a href="javascript:void(0);"
                                                         onclick="confirmDelete('{{ route('delete-cabypasses', $cab->cab_id) }}', {{ $cab->cab_id }})"
                                                         class="edit-icon delete-user-btn text-danger">
@@ -1713,6 +1757,7 @@
     <script>
         function editsupplyBtn(caseSupply) {
             document.getElementById("csu_id").value = caseSupply.csu_id;
+            document.getElementById("editpet_id").value = caseSupply.pet_id;
             document.getElementById("editcsu_group").value = caseSupply.csu_group;
             document.getElementById("editcsu_type").value = caseSupply.csu_type;
             document.getElementById("editcsu_manufacturer").value = caseSupply.csu_manufacturer;
@@ -1745,7 +1790,7 @@
 
             // **Auto-fill Manufacturer**
             document.getElementById("e_manufacturer").value = selectedOption.getAttribute("data-manufacturer") ||
-            "";
+                "";
 
             // **Auto-select Type and Show Only eq_type (not eq_name)**
             let eTypeSelect = document.querySelector("select[name='e_type']");
@@ -1833,7 +1878,7 @@
                 let selectedValue = this.value.trim(); // Get selected value
 
                 let primaryReasonSelect = document.getElementById(
-                "primaryReasonSelect"); // Second select box
+                    "primaryReasonSelect"); // Second select box
                 let imaDetailsDiv = document.getElementById("imaDetailsDiv"); // Div for IMA details
 
                 // Handling "Indicate Primary Reason" select box
@@ -1958,7 +2003,7 @@
             var primaryReasonDiv = $('#primaryReasonSelect').closest('.custom-border-box-text');
             var imaDetailsDiv = $('#imaDetailsDiv');
             var distalAnastomosesInput = imaDetailsDiv.find(
-            'input'); // "Total # of Distal Anastomoses done using IMA grafts"
+                'input'); // "Total # of Distal Anastomoses done using IMA grafts"
             var harvestTechniqueSelect = imaDetailsDiv.find('select'); // "IMA Harvest Technique"
             var primaryReasonSelect = $('#primaryReasonSelect');
 
@@ -2065,13 +2110,13 @@
             document.getElementById("cardiacfib_no").checked = true; // Modal close hone par "No" select karein
         });
     </script>
-<script>
-    document.querySelector("select[name='aortic_proce']").addEventListener("change", function() {
-        if (this.value.startsWith("Yes")) { // Yes se start hone wale options check karega
-            $("#aorticModal").modal("show"); // Modal open karega
-        }
-    });
-</script>
+    <script>
+        document.querySelector("select[name='aortic_proce']").addEventListener("change", function() {
+            if (this.value.startsWith("Yes")) { // Yes se start hone wale options check karega
+                $("#aorticModal").modal("show"); // Modal open karega
+            }
+        });
+    </script>
 
 
 
