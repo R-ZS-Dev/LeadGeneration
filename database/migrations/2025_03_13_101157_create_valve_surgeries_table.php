@@ -27,7 +27,7 @@ return new class extends Migration
             $table->enum('secexplant_devic', ['Yes', 'No'])->default('No')->collation('utf8mb4_general_ci');
             $table->string('secexp_model')->nullable()->collation('utf8mb4_general_ci');
             $table->string('secexp_uid')->nullable()->collation('utf8mb4_general_ci');
-            $table->text('aortic_valve_pro')->default('No')->collation('utf8mb4_general_ci');
+            $table->text('aortic_valve_pro')->collation('utf8mb4_general_ci');
             $table->string('perform')->nullable()->collation('utf8mb4_general_ci');
             $table->string('aortic_performed')->nullable()->collation('utf8mb4_general_ci');
             $table->enum('transcat', ['Yes', 'No'])->default('No')->collation('utf8mb4_general_ci');

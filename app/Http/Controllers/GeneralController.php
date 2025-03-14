@@ -141,7 +141,9 @@ class GeneralController extends Controller
     public function viewClist()
     {
         $viewClists = Checklist::where('status', '1')->where('close', '1')->get();
-        return view('config.checklists', compact('viewClists'));
+        $viewCLGroups = ChecklistGroup::where('status', '1')->where('close', '1')->get();
+
+        return view('config.checklists', compact('viewClists', 'viewCLGroups'));
     }
 
     public function deleteClist($id)
@@ -211,7 +213,9 @@ class GeneralController extends Controller
     /* ------------------------ CheckList Group functions ----------------------- */
     public function viewCLG(){
         $viewClgroups = ChecklistGroup::where('status', '1')->where('close', '1')->get();
-        return view('config.checklist-groups', compact('viewClgroups'));
+        $viewClitems = CheckListItem::where('status', '1')->where('close', '1')->get();
+
+        return view('config.checklist-groups', compact('viewClgroups', 'viewClitems'));
     }
 
     public function addCLG(Request $request)

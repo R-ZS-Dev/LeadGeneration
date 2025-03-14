@@ -257,6 +257,22 @@ Route::middleware('auth')->group(function () {
         route::post('/add-aortic-procedure', 'addAorticProcedure')->name('add-aortic-procedure');
         route::post('/add-cardic-dev', 'addCardicAssistDev')->name('add-cardic-dev');
 
+        /* ---------------------- Case General Events module routes ---------------------- */
+        route::get('/general-event', 'viewCGEvent')->name('general-event');
+        route::post('/add-general-event', 'addCGEvent')->name('add-general-event');
+        route::post('/delete-general-event/{id}', 'deleteCGEvent')->name('delete-general-event');
+        route::post('/edit-general-event', 'editCGEvent')->name('edit-general-event');
+
+        /* ---------------------- Case General Events module routes ---------------------- */
+        route::get('/check-list', 'viewCList')->name('check-list');
+        route::post('/add-check-list', 'addCList')->name('add-check-list');
+        route::post('/delete-check-list/{id}', 'deleteCList')->name('delete-check-list');
+        route::post('/edit-check-list', 'editCList')->name('edit-check-list');
+
+        // Route::get('/get-rowboxes', 'getRowboxes')->name('get.rowboxes');
+
+        Route::get('/get-rowboxes-groups', 'getRowboxesWithGroups')->name('get.rowboxes.groups');
+        
     });
 
 

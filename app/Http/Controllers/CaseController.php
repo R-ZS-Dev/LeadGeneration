@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\AtrialFibrillation;
 use App\Models\CardicAssistDevice;
 use App\Models\CaseEquipment;
+use App\Models\CaseGeneralEvent;
 use App\Models\CaseProcedures;
 use App\Models\CaseStaff;
 use App\Models\CaseSupply;
+use App\Models\Checklist;
+use App\Models\ChecklistGroup;
 use App\Models\CoronaryArteryBypass;
 use App\Models\Equipment;
 use App\Models\EquipmentGroup;
+use App\Models\GeneralEvent;
 use App\Models\Hospital;
 use App\Models\NonCardic;
 use App\Models\OtherAorticLocation;
@@ -56,7 +60,7 @@ class CaseController extends Controller
             ->where('close', '1')
             ->get();
 
-        return view('cases.case', compact('hospital', 'patients','patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys', 'procedure', 'del_cabs'));
+        return view('cases.case', compact('hospital', 'patients', 'patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys', 'procedure', 'del_cabs'));
     }
     public function caseProcedure()
     {
@@ -396,13 +400,13 @@ class CaseController extends Controller
         $case = CaseProcedures::create([
             'casep_insertby' => Auth::user()->name, // Assign logged-in user's name
         ] + $request->all());
-        return redirect()->back()->with('success','Procedure added successfully!');
+        return redirect()->back()->with('success', 'Procedure added successfully!');
     }
 
     public function addvalveProcedure(Request $request)
     {
         $case = ValveSurgery::create($request->all());
-        return redirect()->back()->with('success','Valve Surgery added successfully!');
+        return redirect()->back()->with('success', 'Valve Surgery added successfully!');
         // return response()->json([
         //     'status' => 'success',
         //     'message' => 'Valve Surgery added successfully!',
@@ -414,8 +418,7 @@ class CaseController extends Controller
     {
         // return $request->all();
         NonCardic::create($request->all());
-        return redirect()->back()->with('success','Non Cardic added successfully!');
-
+        return redirect()->back()->with('success', 'Non Cardic added successfully!');
     }
 
     public function addOtherCarPro(Request $request)
@@ -569,5 +572,85 @@ class CaseController extends Controller
         $ca_dev->cad_insertby = Auth::user()->name;
         $ca_dev->save();
         return redirect()->back()->with('success', 'Cardic Assist Devices Added Successfully!');
+    }
+
+    // Case General Event
+    public function viewCGEvent()
+    {
+        $patients = Patient::where('status', '1')->where('close', '1')->get();
+        $cgevents = GeneralEvent::where('status', '1')->where('close', '1')->get();
+        $caseGeneralEvents = CaseGeneralEvent::where('status', '1')->where('close', '1')->with('note')->get();
+
+        return view('cases.general-events', compact('patients', 'cgevents', 'caseGeneralEvents'));
+    }
+
+    public function addCGEvent(Request $request)
+    {
+        $request->validate([
+            'pat_id' => 'required'
+        ]);
+        $case_ge = new CaseGeneralEvent();
+        $case_ge->pat_id = $request->pat_id;
+        $case_ge->cge_date = $request->cge_date;
+        $case_ge->cge_time = $request->cge_time;
+        $case_ge->cge_note = $request->cge_note;
+        $case_ge->cge_insertby = Auth::user()->name;
+        $case_ge->save();
+        return redirect()->back()->with('success', 'Case General Event Added Successfully!');
+    }
+
+    public function deleteCGEvent($id)
+    {
+        $del_cge = CaseGeneralEvent::find($id);
+        $del_cge->close = '0';
+        $del_cge->status = '0';
+        $del_cge->save();
+        return redirect()->back()->with('success', 'Case General Event deleted Successfully!');
+    }
+
+    public function editCGEvent(Request $request)
+    {
+        $id = $request->cge_id;
+        $ed_cge = CaseGeneralEvent::find($id);
+        try {
+            $ed_cge->pat_id = $request->pat_id;
+            $ed_cge->cge_date = $request->cge_date;
+            $ed_cge->cge_time = $request->cge_time;
+            $ed_cge->cge_note = $request->cge_note;
+            $ed_cge->save();
+            return redirect()->back()->with('success', 'Case General Event updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+    // Case CheckList
+    public function viewCList()
+    {
+        $patients = Patient::where('status', '1')->where('close', '1')->get();
+        $cchecklists = Checklist::where('status', '1')->where('close', '1')->get();
+        $ccheckgroup = ChecklistGroup::where('status', '1')->where('close', '1')->get();
+
+        return view('cases.check-list', compact('patients', 'cchecklists', 'ccheckgroup'));
+    }
+
+    public function getRowboxesWithGroups(Request $request)
+    {
+        $checklist = Checklist::find($request->c_id);
+        $groups = ChecklistGroup::where('status', '1')->where('close', '1')->get();
+        $formattedGroups = [];
+
+        foreach ($groups as $group) {
+            $formattedGroups[] = [
+                'clg_name' => $group->clg_name,
+                'rowboxes' => json_decode($group->rowboxes) // JSON to array
+            ];
+        }
+
+        return response()->json([
+            'success' => true,
+            'rowboxes' => $checklist ? json_decode($checklist->rowboxes) : [],
+            'groups' => $formattedGroups
+        ]);
     }
 }

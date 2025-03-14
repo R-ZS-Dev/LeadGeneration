@@ -46,74 +46,20 @@
                                     @enderror
                                 </div>
                             </div>
-                            @php
-                            $checkboxes = [
-                            "Anesthetic gas scavenge line operational", "Hoses leak-free", "Flow meter/gas blender operational",
-                            "Source and appropriate connections of gas(es) confirmed", "Gas line(s) and filter connections secure",
-                            "Gas exhaust unobstructed", "Alarms operational, audible and engaged", "Alarms reengaged",
-                            "Allergies checked", "Anesthetic vaporizer correct", "Anesthetic vaporizer", "Announce bypass terminated",
-                            "Anticoagulant tested and reported", "Appropriate lines claimed / shunts closed", "Arterial and venous lines clamped",
-                            "Arterial circuit bubble free before transfusing perfusate", "Arterial filter / bubble trap debubbled",
-                            "Backup full oxygen tank with flow meter available", "Batteries charged and operational",
-                            "Blood bank number confirmed", "Blood products available", "Blood type / antibodies confirmed",
-                            "Cardiotomy / hardshell venous reservoir(s) vented", "Cardiotomy positive-pressure relief valve present",
-                            "Cell salvage device", "Chart reviewed", "Circuit/patient temperature probes placed", "Components debubbled",
-                            "Components checked for package integrity/expiration", "Connections / stopcocks / caps secure",
-                            "Devices securely attached to console", "Drugs available and properly labeled",
-                            "Duplicate circuit components / hardware available", "Emergency lighting / flashlight available",
-                            "Equipment clean", "Flow meter in correct direction and calibration",
-                            "Flow rate indicator correct for patient and/or tubing size", "Gas flow confirmed",
-                            "Hand cranks available", "Heart lung machine - Air bubble detector(s)", "Heart lung machine - Blood flow sensors",
-                            "Heart lung machine - Low Level alarm", "Heart lung machine - Pressure monitors", "Heart lung machine - Pumps",
-                            "Heart lung machine - Temperature monitors", "Heart lung machine - Timers", "Heat exchanger(s) leak-tested",
-                            "Heater/Cooler", "Heparin time and dose confirmed", "Holders secure", "IABP", "Ice available",
-                            "Inline sensors calibrated", "Leak free after pressurization", "Medical record number confirmed",
-                            "Negative-pressure relief valve unobstructed", "No tubing kinks noted", "Occlusion(s) set",
-                            "One way valve(s) in correct direction", "Oxygen analyzer calibrated", "Oxygen analyzer",
-                            "Oxygen Blender / Flow Meter", "Patency of arterial line / cannula confirmed", "Patient identity confirmed",
-                            "Power cord(s) connection(s) secure", "Pressure transducers / monitors calibrated and on proper scales",
-                            "Procedure confirmed", "Pump head rotation smooth and quiet", "Pump suction(s) off", "Rollers rotate freely",
-                            "Sampling syringes / laboratory tubes available", "Servoregulated connections tested",
-                            "Servoregulation connections secure", "Shunt(s) closed", "Solution(s) checked", "Solutions available",
-                            "Speed controls operational", "System debubbled and operational", "System leak-free after pressurization",
-                            "Temperature range(s) tested and operational", "Tubing clamps available", "Tubing direction traced and correct",
-                            "Vacuum regulator operational", "VAD device", "Vaporizer operational and filled", "Venous assist off / cardiotomy / venous reservoirs vented",
-                            "Venous line occluder(s) calibrated and tested", "Vent(s) clamped / removed", "Vent(s) tested",
-                            "Water lines unobstructed", "Water source(s) connected and operational"
-                            ];
-                            @endphp
-
-                            @php
-                            $firstColumnCount = ceil(count($checkboxes) * 0.47);
-                            $checkboxes1 = array_slice($checkboxes, 0, $firstColumnCount);
-                            $checkboxes2 = array_slice($checkboxes, $firstColumnCount);
-                            @endphp
 
                             <div class="row">
-                                <!-- First Column (40%) -->
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group mb-2">
-                                        @foreach ($checkboxes1 as $checkbox)
-                                        <label>
-                                            <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}" class="form-check-input"> {{ $checkbox }}
-                                        </label><br>
-                                        @endforeach
-                                    </div>
-                                </div>
-
-                                <!-- Second Column (60%) -->
-                                <div class="col-md-6">
-                                    <div class="form-group-inp mb-2">
-                                        @foreach ($checkboxes2 as $checkbox)
-                                        <label>
-                                            <input type="checkbox" name="rowboxes[]" value="{{ $checkbox }}" class="form-check-input"> {{ $checkbox }}
-                                        </label><br>
-                                        @endforeach
+                                        <div class="form-check mb-1">
+                                            @foreach($viewClitems as $item)
+                                            @php $checkboxId = 'checkbox_' . $item->cl_name; @endphp
+                                            <input type="checkbox" id="{{ $checkboxId }}" name="rowboxes[]" value="{{ $item->cl_name }}" class="form-check-input">
+                                            <label class="form-check-label" for="{{ $checkboxId }}">{{ $item->cl_name }}</label>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-
 
                             <div class="col-lg-6">
                                 <div class="form-group form-switch mb-2">
@@ -180,7 +126,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a onclick="editCLGroup({{ json_encode($viewClgroup, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) }})"
+                                    <a onclick="editCLGroup({{ json_encode($viewClgroup)}})"
                                         href="javascript:void(0);">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
@@ -242,47 +188,19 @@
                             </div>
                         </div>
 
-                        @php
-                        $selectedBoxes = json_decode($checklistg->rowboxes ?? '[]', true);
-                        @endphp
-
-                        @php
-                        $firstColumnCount = ceil(count($checkboxes) * 0.47);
-                        $checkboxes1 = array_slice($checkboxes, 0, $firstColumnCount);
-                        $checkboxes2 = array_slice($checkboxes, $firstColumnCount);
-                        @endphp
-
                         <div class="row">
-                            <!-- First Column (40%) -->
-                            <div class="col-md-6">
-                                <label>Groups (40%)</label>
+                            <div class="col-md-12">
                                 <div class="form-group mb-2">
-                                    @foreach ($checkboxes1 as $checkbox)
-                                    <label>
-                                        <input type="checkbox" class="form-check-input" name="rowboxes[]" value="{{ $checkbox }}"
-                                            {{ in_array($checkbox, $selectedBoxes ?? []) ? 'checked' : '' }}>
-                                        {{ $checkbox }}
-                                    </label><br>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <!-- Second Column (60%) -->
-                            <div class="col-md-6">
-                                <label>Groups (60%)</label>
-                                <div class="form-group mb-2">
-                                    @foreach ($checkboxes2 as $checkbox)
-                                    <label>
-                                        <input type="checkbox" class="form-check-input" name="rowboxes[]" value="{{ $checkbox }}"
-                                            {{ in_array($checkbox, $selectedBoxes ?? []) ? 'checked' : '' }}>
-                                        {{ $checkbox }}
-                                    </label><br>
-                                    @endforeach
+                                    <div class="form-check mb-1">
+                                        @foreach($viewClitems as $item)
+                                        @php $checkboxId = 'checkbox_' . $item->cl_name; @endphp
+                                        <input type="checkbox" id="{{ $checkboxId }}" name="rowboxes[]" value="{{ $item->cl_name }}" class="form-check-input">
+                                        <label class="form-check-label" for="{{ $checkboxId }}">{{ $item->cl_name }}</label>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
 
                         <div class="col-lg-6">
                             <div class="form-group form-switch mb-2">
@@ -307,7 +225,7 @@
 @section('script')
 <script>
     function editCLGroup(clItem) {
-        console.log(clItem);
+        console.log("Editing Checklist Group:", clItem);
 
         // Populate form fields
         document.getElementById("clg_id").value = clItem.clg_id;
@@ -315,27 +233,20 @@
         document.getElementById("editclg_description").value = clItem.clg_description;
         document.getElementById("editclg_active").checked = clItem.clg_active == 1;
 
-        // Parse rowboxes safely (ensure it's an array)
-        let selectedBoxes = [];
-        if (clItem.rowboxes) {
-            try {
-                selectedBoxes = JSON.parse(clItem.rowboxes);
-            } catch (error) {
-                console.error("Error parsing rowboxes:", error);
-            }
-        }
+        // ✅ Decode `rowboxes` JSON
+        let selectedRowboxes = clItem.rowboxes ? JSON.parse(clItem.rowboxes) : [];
 
-        // Select all checkboxes and update based on stored values
-        let checkboxes = document.querySelectorAll("input[name='rowboxes[]']");
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = selectedBoxes.includes(checkbox.value);
+        // ✅ Uncheck all checkboxes first
+        document.querySelectorAll("input[name='rowboxes[]']").forEach((checkbox) => {
+            checkbox.checked = selectedRowboxes.includes(checkbox.value);
         });
 
-        // Show modal
+        // ✅ Show modal
         var editModal = new bootstrap.Modal(document.getElementById("editCLG"));
         editModal.show();
     }
 </script>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {

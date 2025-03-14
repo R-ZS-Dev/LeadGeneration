@@ -44,6 +44,8 @@
                             class="hide-menu"> Checklists </span></a></li>
                 <li class="sidebar-item"><a href="{{ route('checklist-group') }}" class="sidebar-link"><span
                             class="hide-menu"> Checklist Groups </span></a></li>
+                <li class="sidebar-item"><a href="{{ route('checklist-item') }}" class="sidebar-link"><span
+                            class="hide-menu"> Checklist Items </span></a></li>
                 <li class="sidebar-item"><a href="{{ route('fluid-location') }}" class="sidebar-link"><span
                             class="hide-menu"> Fluid Locations</span></a></li>
                 <li class="sidebar-item"><a href="{{ route('fluid-drugs') }}" class="sidebar-link"><span
@@ -63,13 +65,17 @@
         </li>
 
         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-            <i class="fa-solid fa-suitcase-medical"></i>
-            <span class="hide-menu">New Case </span></a>
+                <i class="fa-solid fa-suitcase-medical"></i>
+                <span class="hide-menu">New Case </span></a>
             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                 <li class="sidebar-item"><a href="{{ route('view-case') }}" class="sidebar-link"><span
                             class="hide-menu"> Case </span></a></li>
                 <li class="sidebar-item"><a href="{{ route('case-procedure') }}" class="sidebar-link"><span
-                                class="hide-menu"> Case Procedure </span></a></li>
+                            class="hide-menu"> Case Procedure </span></a></li>
+                <li class="sidebar-item"><a href="{{ route('general-event') }}" class="sidebar-link"><span
+                            class="hide-menu"> General Event </span></a></li>
+                <li class="sidebar-item"><a href="{{ route('check-list') }}" class="sidebar-link"><span
+                            class="hide-menu"> Check List </span></a></li>
             </ul>
         </li>
 
