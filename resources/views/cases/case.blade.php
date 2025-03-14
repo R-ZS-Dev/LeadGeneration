@@ -9,7 +9,7 @@
             }
 
             .nav-item {
-                /* flex-shrink: 0; */
+                 flex-shrink: 0;
                 /* Prevent shrinking */
             }
         </style>
