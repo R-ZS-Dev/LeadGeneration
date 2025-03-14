@@ -68,8 +68,8 @@
             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                 <li class="sidebar-item"><a href="{{ route('view-case') }}" class="sidebar-link"><span
                             class="hide-menu"> Case </span></a></li>
-                <li class="sidebar-item"><a href="{{ route('case-procedure') }}" class="sidebar-link"><span
-                                class="hide-menu"> Case Procedure </span></a></li>
+                <li class="sidebar-item"><a href="{{ route('case-fluid-drugs') }}" class="sidebar-link"><span
+                                class="hide-menu"> Fluid / Drugs</span></a></li>
             </ul>
         </li>
 

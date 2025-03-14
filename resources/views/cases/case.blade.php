@@ -7,6 +7,10 @@
                 flex-wrap: nowrap;
                 /* Prevent wrapping */
             }
+label input {
+    position: absolute;
+    left: -9999px;
+}
 
             .nav-item {
                  flex-shrink: 0;

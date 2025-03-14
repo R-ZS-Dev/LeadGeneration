@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\AtrialFibrillation;
 use App\Models\CardicAssistDevice;
 use App\Models\CaseEquipment;
+use App\Models\Casefluiddrugs;
 use App\Models\CaseProcedures;
 use App\Models\CaseStaff;
 use App\Models\CaseSupply;
+use Illuminate\Support\Str;
 use App\Models\CoronaryArteryBypass;
 use App\Models\Equipment;
 use App\Models\EquipmentGroup;
+use App\Models\FluidDrugs;
+use App\Models\FluidLocations;
 use App\Models\Hospital;
 use App\Models\NonCardic;
 use App\Models\OtherAorticLocation;
@@ -56,7 +60,7 @@ class CaseController extends Controller
             ->where('close', '1')
             ->get();
 
-        return view('cases.case', compact('hospital', 'patients','patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys', 'procedure', 'del_cabs'));
+        return view('cases.case', compact('hospital', 'patients', 'patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys', 'procedure', 'del_cabs'));
     }
     public function caseProcedure()
     {
@@ -396,13 +400,13 @@ class CaseController extends Controller
         $case = CaseProcedures::create([
             'casep_insertby' => Auth::user()->name, // Assign logged-in user's name
         ] + $request->all());
-        return redirect()->back()->with('success','Procedure added successfully!');
+        return redirect()->back()->with('success', 'Procedure added successfully!');
     }
 
     public function addvalveProcedure(Request $request)
     {
         $case = ValveSurgery::create($request->all());
-        return redirect()->back()->with('success','Valve Surgery added successfully!');
+        return redirect()->back()->with('success', 'Valve Surgery added successfully!');
         // return response()->json([
         //     'status' => 'success',
         //     'message' => 'Valve Surgery added successfully!',
@@ -414,8 +418,7 @@ class CaseController extends Controller
     {
         // return $request->all();
         NonCardic::create($request->all());
-        return redirect()->back()->with('success','Non Cardic added successfully!');
-
+        return redirect()->back()->with('success', 'Non Cardic added successfully!');
     }
 
     public function addOtherCarPro(Request $request)
@@ -569,5 +572,40 @@ class CaseController extends Controller
         $ca_dev->cad_insertby = Auth::user()->name;
         $ca_dev->save();
         return redirect()->back()->with('success', 'Cardic Assist Devices Added Successfully!');
+    }
+
+    /* ----------------------- case fluid drugs functions ----------------------- */
+
+    public function viewCaseFluidDrugs()
+    {
+        $fluid = FluidDrugs::where('status', '1')->where('close', '1')->get();
+        $location = FluidLocations::where('status', '1')->where('close', '1')->get();
+        $pat_id = session('pat_id');
+        $cfluid = Casefluiddrugs::where('cfuild_userid', $pat_id)
+        ->with('fluid')
+        ->get();
+        $amount = 0;
+        $drug = 0;
+        foreach ($cfluid as $item) {
+            if (Str::contains(strtolower($item->cfluid_drugname), 'albumin')) {
+                $amount += $item->fluid->fd_conto; // Albumin walon ka fd_conto amount me sum hoga
+            } else {
+                $drug += $item->fluid->fd_conto; // Baqi sb ka fd_conto drug array me store hoga
+            }
+        }
+        // dd($amount, $drug);
+        // $albumin
+        return view('cases.fluid-drugs', compact('fluid', 'location','cfluid','drug','amount'));
+    }
+
+    public function addCaseFluiddrugs(Request $request)
+    {
+        // return $request->all();
+        $pat_id = session('pat_id');
+        Casefluiddrugs::create([
+            'cfuild_userid' =>$pat_id,
+            'cfluid_insertby' => Auth::user()->name,
+        ] + $request->all());
+        return redirect()->back()->with('success', 'Fluid/Drugs added successfully!');
     }
 }

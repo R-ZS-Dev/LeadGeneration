@@ -371,14 +371,6 @@ input[name='gender']:checked:after {
 
  */
 
-label {
-    display: flex;
-    cursor: pointer;
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 0.375em;
-}
 
 /* Accessible outline (optional) */
 /* Uncomment if needed */
@@ -388,14 +380,14 @@ label:focus-within {
 }
 */
 
+.ft{
+    float: right;
+}
+
 :root {
     --primary-color: #793268;
     --text-color: #fff;
     --background-color: rgba(255, 255, 255, 0.90);
-}
-label input {
-    position: absolute;
-    left: -9999px;
 }
 
 label input:checked + span {

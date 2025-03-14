@@ -257,6 +257,13 @@ Route::middleware('auth')->group(function () {
         route::post('/add-aortic-procedure', 'addAorticProcedure')->name('add-aortic-procedure');
         route::post('/add-cardic-dev', 'addCardicAssistDev')->name('add-cardic-dev');
 
+        /* ------------------------- fluid and drugs routes ------------------------- */
+
+        route::get('/case-fluid-drugs', 'viewCaseFluidDrugs')->name('case-fluid-drugs');
+        route::post('/add-case-fluiddrugs', 'addCaseFluiddrugs')->name('add-case-fluiddrugs');
+
+
+
     });
 
 
