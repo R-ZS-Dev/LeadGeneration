@@ -2,6 +2,17 @@
 @section('title', 'All Cases')
 @section('content')
     <div class="container-fluid">
+        <style>
+            .nav {
+                flex-wrap: nowrap;
+                /* Prevent wrapping */
+            }
+
+            .nav-item {
+                flex-shrink: 0;
+                /* Prevent shrinking */
+            }
+        </style>
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
@@ -19,7 +30,8 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <ul class="nav p-3" id="myTab" role="tablist">
+                    <ul class="nav p-3" id="myTab" role="tablist"
+                        style="white-space: nowrap; display: flex; overflow-x: auto;">
                         <li class="nav-item" role="presentation">
                             <button class="btn tabButton active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1"
                                 type="button" role="tab" aria-controls="tab1" aria-selected="true">
@@ -231,25 +243,39 @@
                                         </div>
 
                                         <div class="row">
-
-                                            <div class="col-lg-4">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Sex</label>
-                                                    <div>
-                                                        <input type="radio" name="sex" value="Male" checked> Male
-                                                        <input type="radio" name="sex" value="Female"> Female
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Is this a Child?</label>
-                                                    <div>
-                                                        <input type="radio" name="is_child" value="yes"> Yes
-                                                        <input type="radio" name="is_child" value="no" checked> No
+                                                    <div class="d-lg-flex">
+                                                        <label class="me-2">
+                                                            <input type="radio" name="is_child" value="Yes" />
+                                                            <span>Yes</span>
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" name="is_child" value="No"
+                                                                checked />
+                                                            <span>No</span>
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Sex</label>
+                                                    <div class="d-flex">
+                                                        <label class="me-2">
+                                                            <input type="radio" name="sex" value="Male"
+                                                                checked />
+                                                            <span>Male</span>
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" name="sex" value="Female" />
+                                                            <span>Female</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
 
                                         </div>
 
@@ -295,7 +321,10 @@
                                         <select name="ph_userid" id="" class="form-control" required>
                                             <option value="">Select Patient</option>
                                             @foreach ($patient as $item)
-                                                <option value="{{ $item->pat_id }}">{{ $item->first_name }}</option>
+                                                <option value="{{ $item->pat_id }}"
+                                                    {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
+                                                    {{ $item->first_name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -351,6 +380,19 @@
                                                         class="mt-4">
                                                         @csrf
                                                         <div class="row">
+                                                            <div class="col-lg-12 form-group mb-3">
+                                                                <label for="pet_id">Select Patient</label>
+                                                                <select name="pet_id" id="pet_id"
+                                                                    class="form-control" required>
+                                                                    <option value="">Select Patient</option>
+                                                                    @foreach ($patient as $item)
+                                                                        <option value="{{ $item->pat_id }}"
+                                                                            {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
+                                                                            {{ $item->first_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
                                                             <div class="col-lg-12">
                                                                 <div class="form-group mb-3">
                                                                     <label for="">Select Surgeon</label>
@@ -358,7 +400,8 @@
                                                                         <option value="">Select Surgeon</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -370,7 +413,8 @@
                                                                         <option value="">Select 2nd Surgeon</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -382,7 +426,8 @@
                                                                         </option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -394,7 +439,8 @@
                                                                         </option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -405,7 +451,8 @@
                                                                         <option value="">Select CRNA/RES</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -416,7 +463,8 @@
                                                                         <option value="">Select Cardiologist</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -427,7 +475,8 @@
                                                                         <option value="">Select Family MD</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -438,7 +487,8 @@
                                                                         <option value="">Select Perfusionist</option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -483,7 +533,8 @@
                                                                         </option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -496,7 +547,8 @@
                                                                         </option>
                                                                         @foreach ($staffs as $staff)
                                                                             <option value="{{ $staff->st_id }}">
-                                                                                {{ $staff->st_name }}</option>
+                                                                                {{ $staff->st_name }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -646,7 +698,19 @@
                                                     @csrf
                                                     <input type="hidden" name="cs_id" id="cs_id">
                                                     <div class="row">
-
+                                                        <div class="col-lg-12 form-group mb-3">
+                                                            <label for="pet_id">Select Patient</label>
+                                                            <select name="pet_id" id="editpet_id" class="form-control"
+                                                                required>
+                                                                <option value="">Select Patient</option>
+                                                                @foreach ($patient as $item)
+                                                                    <option value="{{ $item->pat_id }}"
+                                                                        {{ isset($caseStaff) && $caseStaff->pet_id == $item->pat_id ? 'selected' : '' }}>
+                                                                        {{ $item->first_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-3">
                                                                 <label for="">Select Surgeon</label>
@@ -655,7 +719,8 @@
                                                                     <option>Select Surgeon</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -667,7 +732,8 @@
                                                                     <option value="">Select 2nd Surgeon</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -679,7 +745,8 @@
                                                                     <option value="">Select PA/1st Assistant</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -691,7 +758,8 @@
                                                                     <option value="">Select Anesthesiologist</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -703,7 +771,8 @@
                                                                     <option value="">Select CRNA/RES</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -715,7 +784,8 @@
                                                                     <option value="">Select Cardiologist</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -727,7 +797,8 @@
                                                                     <option value="">Select Family MD</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -739,7 +810,8 @@
                                                                     <option value="">Select Perfusionist</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -793,7 +865,8 @@
                                                                     </option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -805,7 +878,8 @@
                                                                     <option value="">Select 2nd Perfusionist</option>
                                                                     @foreach ($staffs as $staff)
                                                                         <option value="{{ $staff->st_id }}">
-                                                                            {{ $staff->st_name }}</option>
+                                                                            {{ $staff->st_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -865,46 +939,272 @@
                         </section>
 
 
-                    <!-- Case Equipment Tab -->
-                    <section id="tab4" class="tab-pane fade">
-                        <div class="container-fluid">
-                            <div class="row">
+                        <!-- Case Equipment Tab -->
+                        <section id="tab4" class="tab-pane fade">
+                            <div class="container-fluid">
+                                <div class="row">
 
-                                @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                                @endif
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
 
-                                <!-- Success Message -->
-                                <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+                                    <!-- Success Message -->
+                                    <div id="successMessage" class="alert alert-success" style="display: none;"></div>
 
-                                <!-- Signup modal content -->
-                                <div id="signup-modals" class="modal fade" tabindex="-1" role="dialog"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <div class="text-center mt-2 mb-4">
-                                                    <div
-                                                        class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                                                        <h4 class="mb-0"><b>Add Equipment</b></h4>
-                                                        <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <!-- Signup modal content -->
+                                    <div id="signup-modals" class="modal fade" tabindex="-1" role="dialog"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="text-center mt-2 mb-4">
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                                                            <h4 class="mb-0"><b>Add Equipment</b></h4>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                    </div>
+
+                                                    <form method="POST" action="{{ route('add-caseequipment') }}"
+                                                        class="mt-4">
+                                                        @csrf
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12 form-group mb-3">
+                                                                <label for="pet_id">Select Patient</label>
+                                                                <select name="pet_id" id="pet_id"
+                                                                    class="form-control" required>
+                                                                    <option value="">Select Patient</option>
+                                                                    @foreach ($patient as $item)
+                                                                        <option value="{{ $item->pat_id }}"
+                                                                            {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
+                                                                            {{ $item->first_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <strong>Add group of Equipment for Case</strong>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Group</label>
+                                                                    <select name="e_group" class="form-select">
+                                                                        <option value="">Select Group</option>
+                                                                        @foreach ($equipmentGroups as $group)
+                                                                            <option value="{{ $group->eqg_id }}">
+                                                                                {{ $group->eqg_name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <strong>Add/Edit/Remove Equipment</strong>
+                                                                <select name="e_configure" class="form-select mb-3"
+                                                                    id="equipmentSelect">
+                                                                    <option value="">Select Equipment</option>
+                                                                    @foreach ($equipments as $equipment)
+                                                                        <option value="{{ $equipment->eq_id }}"
+                                                                            data-name="{{ $equipment->eq_name }}"
+                                                                            data-serial="{{ $equipment->eq_serial }}"
+                                                                            data-lastservice="{{ $equipment->eq_lastservice }}"
+                                                                            data-nextservice="{{ $equipment->eq_nextservice }}"
+                                                                            data-billingcode="{{ $equipment->eq_billingcode }}"
+                                                                            data-notes="{{ $equipment->eq_notes }}"
+                                                                            data-manufacturer="{{ $equipment->eq_manufacturer }}"
+                                                                            data-type="{{ $equipment->eq_type }}">
+                                                                            {{-- Yahan Manufacturer Ki Jagah Type Show Hoga --}}
+                                                                            {{ $equipment->eq_type }} -
+                                                                            {{ $equipment->eq_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Type</label>
+                                                                    <select name="e_type" class="form-select">
+                                                                        <option value="">Select Type</option>
+                                                                        @foreach ($equipmentGroups as $group)
+                                                                            <option value="{{ $equipment->eq_type }}">
+                                                                                {{ $group->eq_type }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Manufacturer</label>
+                                                                    <input type="text" name="e_manufacturer"
+                                                                        class="form-control" id="e_manufacturer"
+                                                                        placeholder="Manufacturer">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Name</label>
+                                                                    <input type="text" name="e_name"
+                                                                        class="form-control" id="e_name"
+                                                                        placeholder="Name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Serial Number</label>
+                                                                    <input type="text" name="serial_number"
+                                                                        class="form-control" id="serial_number"
+                                                                        placeholder="Serial Number">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Last Service Date</label>
+                                                                    <input type="date" name="last_service_date"
+                                                                        class="form-control" id="last_service_date"
+                                                                        placeholder="Last Service Date">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Next Service Date</label>
+                                                                    <input type="date" name="next_service_date"
+                                                                        class="form-control" id="next_service_date"
+                                                                        placeholder="Next Service Date">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Billing Code</label>
+                                                                    <input type="text" name="billing_code"
+                                                                        class="form-control" id="billing_code"
+                                                                        placeholder="Billing Code">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Note</label>
+                                                                    <textarea class="form-control" id="note" name="note" rows="4"></textarea>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 text-center">
+                                                                <button type="submit" class="btn w-100 btn-dark"
+                                                                    id="submitBtn">Add Equipment</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+
+                                    <div class="col-12 mt-2">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12 d-flex justify-content-end">
+
+                                                        <button type="button"
+                                                            class="btn waves-effect waves-light mb-2 btn-outline-primary"
+                                                            data-bs-toggle="modal" data-bs-target="#signup-modals">
+                                                            <i class="fas fa-plus"></i> Add Equipment
+                                                        </button>
+
                                                     </div>
                                                 </div>
+                                                <div class="table-responsive">
+                                                    <table id="users-table1"
+                                                        class="table table-striped table-bordered no-wrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Group</th>
+                                                                <th>Equipment Name</th>
+                                                                <th>Type</th>
+                                                                <th>Manufacturer</th>
+                                                                <th>Serial Number</th>
+                                                                <th>Last Service Date</th>
+                                                                <th>Next Service Date</th>
+                                                                <th>Billing Code</th>
+                                                                <th>Note</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php $j = 0; @endphp
+                                                            @foreach ($caseEquipments as $equipment)
+                                                                <tr id="row-{{ $equipment->ce_id }}">
+                                                                    <td>{{ ++$j }}</td>
+                                                                    <td>@php
+                                                                        $groupName = $equipmentGroups
+                                                                            ->where('eqg_id', $equipment->e_group)
+                                                                            ->first();
+                                                                    @endphp
+                                                                        {{ $groupName ? $groupName->eqg_name : 'N/A' }}
+                                                                    </td>
+                                                                    <td>{{ $equipment->e_name }}</td>
 
-                                                <form method="POST" action="{{ route('add-caseequipment') }}"
+                                                                    <td>{{ $equipment->e_type }}</td>
+                                                                    <td>{{ $equipment->e_manufacturer }}</td>
+                                                                    <td>{{ $equipment->serial_number }}</td>
+                                                                    <td>{{ $equipment->last_service_date }}</td>
+                                                                    <td>{{ $equipment->next_service_date }}</td>
+                                                                    <td>{{ $equipment->billing_code }}</td>
+                                                                    <td>{{ $equipment->note }}</td>
+                                                                    <td>
+                                                                        <a onclick="editCEquipment({{ json_encode($equipment) }})"
+                                                                            href="javascript:void(0);">
+                                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                                        </a>
+                                                                        <a href="javascript:void(0);"
+                                                                            class="edit-icon delete-user-btn text-danger"
+                                                                            onclick="confirmDelete('{{ route('delete-caseequipment', $equipment->ce_id) }}', '{{ $equipment->ce_id }}')">
+                                                                            <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- /* --------------------------- edit Equipment modal -------------------------- */ --}}
+                                <div id="editCaseEqu" class="modal fade" tabindex="-1" role="dialog"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content ">
+                                            <div class="modal-body ">
+                                                <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                                                    <h4 class="mb-0"><b>Edit Equipment</b></h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+
+                                                <form method="POST" action="{{ route('edit-caseequipment') }}"
                                                     class="mt-4">
                                                     @csrf
+                                                    <input type="hidden" name="ce_id" id="ce_id">
 
                                                     <div class="row">
                                                         <div class="col-lg-12 form-group mb-3">
                                                             <label for="pet_id">Select Patient</label>
-                                                            <select name="pet_id" id="pet_id" class="form-control" required>
+                                                            <select name="pet_id" id="editpet_id" class="form-control"
+                                                                required>
                                                                 <option value="">Select Patient</option>
                                                                 @foreach ($patient as $item)
-                                                                <option value="{{ $item->pat_id }}">{{ $item->first_name }}</option>
+                                                                    <option value="{{ $item->pat_id }}"
+                                                                        {{ isset($equipment) && $equipment->pet_id == $item->pat_id ? 'selected' : '' }}>
+                                                                        {{ $item->first_name }}
+                                                                    </option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -912,35 +1212,36 @@
                                                             <strong>Add group of Equipment for Case</strong>
                                                             <div class="form-group mb-3">
                                                                 <label for="">Group</label>
-                                                                <select name="e_group" class="form-select">
+                                                                <select name="e_group" id="edite_group"
+                                                                    class="form-select">
                                                                     <option value="">Select Group</option>
                                                                     @foreach ($equipmentGroups as $group)
-                                                                    <option value="{{ $group->eqg_id }}">
-                                                                        {{ $group->eqg_name }}
-                                                                    </option>
+                                                                        <option value="{{ $group->eqg_id }}">
+                                                                            {{ $group->eqg_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
+
                                                         <div class="col-lg-12">
                                                             <strong>Add/Edit/Remove Equipment</strong>
                                                             <select name="e_configure" class="form-select mb-3"
-                                                                id="equipmentSelect">
+                                                                id="edite_configure">
                                                                 <option value="">Select Equipment</option>
                                                                 @foreach ($equipments as $equipment)
-                                                                <option value="{{ $equipment->eq_id }}"
-                                                                    data-name="{{ $equipment->eq_name }}"
-                                                                    data-serial="{{ $equipment->eq_serial }}"
-                                                                    data-lastservice="{{ $equipment->eq_lastservice }}"
-                                                                    data-nextservice="{{ $equipment->eq_nextservice }}"
-                                                                    data-billingcode="{{ $equipment->eq_billingcode }}"
-                                                                    data-notes="{{ $equipment->eq_notes }}"
-                                                                    data-manufacturer="{{ $equipment->eq_manufacturer }}"
-                                                                    data-type="{{ $equipment->eq_type }}">
-                                                                    {{-- Yahan Manufacturer Ki Jagah Type Show Hoga --}}
-                                                                    {{ $equipment->eq_type }} -
-                                                                    {{ $equipment->eq_name }}
-                                                                </option>
+                                                                    <option value="{{ $equipment->eq_id }}"
+                                                                        data-name="{{ $equipment->eq_name }}"
+                                                                        data-serial="{{ $equipment->eq_serial }}"
+                                                                        data-lastservice="{{ $equipment->eq_lastservice }}"
+                                                                        data-nextservice="{{ $equipment->eq_nextservice }}"
+                                                                        data-billingcode="{{ $equipment->eq_billingcode }}"
+                                                                        data-notes="{{ $equipment->eq_notes }}"
+                                                                        data-manufacturer="{{ $equipment->eq_manufacturer }}"
+                                                                        data-type="{{ $equipment->eq_type }}">
+                                                                        {{ $equipment->eq_type }} -
+                                                                        {{ $equipment->eq_name }}
+                                                                    </option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -948,38 +1249,37 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-3">
                                                                 <label for="">Type</label>
-                                                                <select name="e_type" class="form-select">
+                                                                <select name="e_type" id="edite_type"
+                                                                    class="form-select">
                                                                     <option value="">Select Type</option>
-                                                                    @foreach ($equipmentGroups as $group)
-                                                                    <option value="{{ $equipment->eq_type }}">
-                                                                        {{ $group->eq_type }}
-                                                                    </option>
+                                                                    @foreach ($equipments as $equipment)
+                                                                        <option value="{{ $equipment->eq_type }}">
+                                                                            {{ $equipment->eq_type }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-3">
                                                                 <label for="">Manufacturer</label>
                                                                 <input type="text" name="e_manufacturer"
-                                                                    class="form-control" id="e_manufacturer"
+                                                                    class="form-control" id="edite_manufacturer"
                                                                     placeholder="Manufacturer">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-3">
                                                                 <label for="">Name</label>
-                                                                <input type="text" name="e_name"
-                                                                    class="form-control" id="e_name"
-                                                                    placeholder="Name">
+                                                                <input type="text" name="e_name" class="form-control"
+                                                                    id="edite_name" placeholder="Name">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-3">
                                                                 <label for="">Serial Number</label>
                                                                 <input type="text" name="serial_number"
-                                                                    class="form-control" id="serial_number"
+                                                                    class="form-control" id="eserial_number"
                                                                     placeholder="Serial Number">
                                                             </div>
                                                         </div>
@@ -987,7 +1287,7 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="">Last Service Date</label>
                                                                 <input type="date" name="last_service_date"
-                                                                    class="form-control" id="last_service_date"
+                                                                    class="form-control" id="elast_service_date"
                                                                     placeholder="Last Service Date">
                                                             </div>
                                                         </div>
@@ -995,7 +1295,7 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="">Next Service Date</label>
                                                                 <input type="date" name="next_service_date"
-                                                                    class="form-control" id="next_service_date"
+                                                                    class="form-control" id="enext_service_date"
                                                                     placeholder="Next Service Date">
                                                             </div>
                                                         </div>
@@ -1003,20 +1303,20 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="">Billing Code</label>
                                                                 <input type="text" name="billing_code"
-                                                                    class="form-control" id="billing_code"
+                                                                    class="form-control" id="ebilling_code"
                                                                     placeholder="Billing Code">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-3">
                                                                 <label for="">Note</label>
-                                                                <textarea class="form-control" id="note" name="note" rows="4"></textarea>
+                                                                <textarea class="form-control" id="enote" name="note" rows="4"></textarea>
 
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12 text-center">
-                                                            <button type="submit" class="btn w-100 btn-dark"
-                                                                id="submitBtn">Add Equipment</button>
+                                                            <button type="submit" class="btn w-100 btn-dark">Update
+                                                                Equipment</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -1024,266 +1324,254 @@
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
+                                </div>
+                            </div>
+                        </section>
 
-                                <div class="col-12 mt-2">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-12 d-flex justify-content-end">
+                        <!-- Supplies Tab -->
+                        <section id="tab5" class="tab-pane fade">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <!-- Supply modal content -->
+                                    <div id="ssignup-modal" class="modal fade" tabindex="-1" role="dialog"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="text-center mt-2 mb-4">
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                                                            <h4 class="mb-0"><b>Add Supplies</b></h4>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                    </div>
 
-                                                    <button type="button"
-                                                        class="btn waves-effect waves-light mb-2 btn-outline-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#signup-modals">
-                                                        <i class="fas fa-plus"></i> Add Equipment
-                                                    </button>
+                                                    <form method="POST" action="{{ route('add-caseSupply') }}"
+                                                        class="mt-4">
+                                                        @csrf
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12 form-group mb-3">
+                                                                <label for="pet_id">Select Patient</label>
+                                                                <select name="pet_id" id="pet_id"
+                                                                    class="form-control" required>
+                                                                    <option value="">Select Patient</option>
+                                                                    @foreach ($patient as $item)
+                                                                        <option value="{{ $item->pat_id }}"
+                                                                            {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
+                                                                            {{ $item->first_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <strong>Add groups of Supplies for Case</strong>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Group</label>
+                                                                    <select name="csu_group" class="form-select" required>
+                                                                        <option value="">Select Group</option>
+                                                                        @foreach ($supplyGroups as $group)
+                                                                            <option value="{{ $group->spg_id }}">
+                                                                                {{ $group->spg_name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <strong>Add/Edit/Remove Supplies</strong>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Type</label>
+                                                                    <select name="csu_type" class="form-select">
+                                                                        <option value="">Select Type</option>
+                                                                        <option value="Antegrade Cannula">Antegrade Cannula
+                                                                        </option>
+                                                                        <option value="Aortic Vent">Aortic Vent</option>
+                                                                        <option value="Arterial Cannula">Arterial Cannula
+                                                                        </option>
+                                                                        <option value="Biomedicus">Biomedicus</option>
+                                                                        <option value="Cell Saver Cardiotomy">Cell Saver
+                                                                            Cardiotomy</option>
+                                                                        <option value="Femoral Venous">Femoral Venous
+                                                                        </option>
+                                                                        <option value="Left Vent Catheter">Left Vent
+                                                                            Catheter</option>
+                                                                        <option value="Multiple Perf Set">Multiple Perf Set
+                                                                        </option>
+                                                                        <option value="Suction Tubing">Suction Tubing
+                                                                        </option>
+                                                                        <option value="Sump/Vent">Sump/Vent</option>
+                                                                        <option value="Venous Cannula">Venous Cannula
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Manufacturer</label>
+                                                                    <input type="text" name="csu_manufacturer"
+                                                                        class="form-control" placeholder="Manufacturer">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Name</label>
+                                                                    <input type="text" name="csu_name"
+                                                                        class="form-control" placeholder="Name">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Lot Number</label>
+                                                                    <input type="text" name="csu_lot_number"
+                                                                        class="form-control" placeholder="Lot Number">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Expiration Date</label>
+                                                                    <input type="date" name="csu_ex_date"
+                                                                        class="form-control">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Billing Code</label>
+                                                                    <input type="text" name="csu_billing_code"
+                                                                        class="form-control" placeholder="Billing Code">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Number Used</label>
+                                                                    <input type="text" name="csu_number_used"
+                                                                        class="form-control" placeholder="Number Used">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="">Note</label>
+                                                                    <textarea class="form-control" name="csu_note" placeholder="Note" rows="4"></textarea>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12 text-center">
+                                                                <button type="submit" class="btn w-100 btn-dark"
+                                                                    id="submitBtn">Add Supply</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
 
                                                 </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table id="users-table1"
-                                                    class="table table-striped table-bordered no-wrap">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>ID</th>
-                                                            <th>Group</th>
-                                                            <th>Equipment Name</th>
-                                                            <th>Type</th>
-                                                            <th>Manufacturer</th>
-                                                            <th>Serial Number</th>
-                                                            <th>Last Service Date</th>
-                                                            <th>Next Service Date</th>
-                                                            <th>Billing Code</th>
-                                                            <th>Note</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @php $j = 0; @endphp
-                                                        @foreach ($caseEquipments as $equipment)
-                                                        <tr id="row-{{ $equipment->ce_id }}">
-                                                            <td>{{ ++$j }}</td>
-                                                            <td>@php
-                                                                $groupName = $equipmentGroups
-                                                                ->where('eqg_id', $equipment->e_group)
-                                                                ->first();
-                                                                @endphp
-                                                                {{ $groupName ? $groupName->eqg_name : 'N/A' }}
-                                                            </td>
-                                                            <td>{{ $equipment->e_name }}</td>
-                                                            <td>@php
-                                                                $groupName = $equipmentGroups
-                                                                ->where('eqg_id', $equipment->e_type)
-                                                                ->first();
-                                                                @endphp
-                                                                {{ $groupName ? $groupName->eqg_name : 'N/A' }}
-                                                            </td>
-                                                            <td>{{ $equipment->e_manufacturer }}</td>
-                                                            <td>{{ $equipment->serial_number }}</td>
-                                                            <td>{{ $equipment->last_service_date }}</td>
-                                                            <td>{{ $equipment->next_service_date }}</td>
-                                                            <td>{{ $equipment->billing_code }}</td>
-                                                            <td>{{ $equipment->note }}</td>
-                                                            <td>
-                                                                <a onclick="editCEquipment({{ json_encode($equipment) }})"
-                                                                    href="javascript:void(0);">
-                                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0);"
-                                                                    class="edit-icon delete-user-btn text-danger"
-                                                                    onclick="confirmDelete('{{ route('delete-caseequipment', $equipment->ce_id) }}', '{{ $equipment->ce_id }}')">
-                                                                    <i class="fa-solid fa-trash-can-arrow-up"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+
+                                    <div class="col-12 mt-2">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12 d-flex justify-content-end">
+
+                                                        <button type="button"
+                                                            class="btn waves-effect waves-light mb-2 btn-outline-primary"
+                                                            data-bs-toggle="modal" data-bs-target="#ssignup-modal">
+                                                            <i class="fas fa-plus"></i> Add Supply
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table id="users-table2"
+                                                        class="table table-striped table-bordered no-wrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Group</th>
+                                                                <th>Type</th>
+                                                                <th>Manufacturer</th>
+                                                                <th>Name</th>
+                                                                <th>Lot Number</th>
+                                                                <th>Expiration Date</th>
+                                                                <th>Billing Code</th>
+                                                                <th>Number Used</th>
+                                                                <th>Note</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php $k = 0; @endphp
+                                                            @foreach ($caseSupplys as $supply)
+                                                                <tr id="row-{{ $supply->csu_id }}">
+                                                                    <td>{{ ++$k }}</td>
+                                                                    <td>{{ $supply->supplyGroup->spg_name ?? 'N/A' }}</td>
+                                                                    <td>{{ $supply->csu_type }}</td>
+                                                                    <td>{{ $supply->csu_manufacturer }}</td>
+                                                                    <td>{{ $supply->csu_name }}</td>
+                                                                    <td>{{ $supply->csu_lot_number }}</td>
+                                                                    <td>{{ $supply->csu_ex_date }}</td>
+                                                                    <td>{{ $supply->csu_billing_code }}</td>
+                                                                    <td>{{ $supply->csu_number_used }}</td>
+                                                                    <td>{{ $supply->csu_note }}</td>
+                                                                    <td>
+                                                                        <a onclick="editsupplyBtn({{ json_encode($supply) }})"
+                                                                            href="javascript:void(0);">
+                                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                                        </a>
+                                                                        <a href="javascript:void(0);"
+                                                                            class="edit-icon delete-user-btn text-danger"
+                                                                            onclick="confirmDelete('{{ route('delete-caseSupply', $supply->csu_id) }}', '{{ $supply->csu_id }}')">
+                                                                            <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {{-- /* --------------------------- edit Equipment modal -------------------------- */ --}}
-                            <div id="editCaseEqu" class="modal fade" tabindex="-1" role="dialog"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content ">
-                                        <div class="modal-body ">
-                                            <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                                                <h4 class="mb-0"><b>Edit Equipment</b></h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-
-                                            <form method="POST" action="{{ route('edit-caseequipment') }}"
-                                                class="mt-4">
-                                                @csrf
-                                                <input type="hidden" name="ce_id" id="ce_id">
-
-                                                <div class="row">
-                                                    <div class="col-lg-12 form-group mb-3">
-                                                        <label for="pet_id">Select Patient</label>
-                                                        <select name="pet_id" id="editpet_id" class="form-control" required>
-                                                            <option value="">Select Patient</option>
-                                                            @foreach ($patient as $item)
-                                                            <option value="{{ $item->pat_id }}"
-                                                                {{ (isset($caseStaff) && $caseStaff->pet_id == $item->pat_id) ? 'selected' : '' }}>
-                                                                {{ $item->first_name }}
-                                                            </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <strong>Add group of Equipment for Case</strong>
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Group</label>
-                                                            <select name="e_group" id="edite_group"
-                                                                class="form-select">
-                                                                <option value="">Select Group</option>
-                                                                @foreach ($equipmentGroups as $group)
-                                                                <option value="{{ $group->eqg_id }}">
-                                                                    {{ $group->eqg_name }}
-                                                                </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <strong>Add/Edit/Remove Equipment</strong>
-                                                        <select name="e_configure" class="form-select mb-3"
-                                                            id="edite_configure">
-                                                            <option value="">Select Equipment</option>
-                                                            @foreach ($equipments as $equipment)
-                                                            <option value="{{ $equipment->eq_id }}"
-                                                                data-name="{{ $equipment->eq_name }}"
-                                                                data-serial="{{ $equipment->eq_serial }}"
-                                                                data-lastservice="{{ $equipment->eq_lastservice }}"
-                                                                data-nextservice="{{ $equipment->eq_nextservice }}"
-                                                                data-billingcode="{{ $equipment->eq_billingcode }}"
-                                                                data-notes="{{ $equipment->eq_notes }}"
-                                                                data-manufacturer="{{ $equipment->eq_manufacturer }}"
-                                                                data-type="{{ $equipment->eq_type }}">
-                                                                {{ $equipment->eq_type }} -
-                                                                {{ $equipment->eq_name }}
-                                                            </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Type</label>
-                                                            <select name="e_type" id="edite_type"
-                                                                class="form-select">
-                                                                <option value="">Select Type</option>
-                                                                @foreach ($equipments as $equipment)
-                                                                <option value="{{ $equipment->eq_type }}">
-                                                                    {{ $equipment->eq_type }}
-                                                                </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Manufacturer</label>
-                                                            <input type="text" name="e_manufacturer"
-                                                                class="form-control" id="edite_manufacturer"
-                                                                placeholder="Manufacturer">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Name</label>
-                                                            <input type="text" name="e_name" class="form-control"
-                                                                id="edite_name" placeholder="Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Serial Number</label>
-                                                            <input type="text" name="serial_number"
-                                                                class="form-control" id="eserial_number"
-                                                                placeholder="Serial Number">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Last Service Date</label>
-                                                            <input type="date" name="last_service_date"
-                                                                class="form-control" id="elast_service_date"
-                                                                placeholder="Last Service Date">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Next Service Date</label>
-                                                            <input type="date" name="next_service_date"
-                                                                class="form-control" id="enext_service_date"
-                                                                placeholder="Next Service Date">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Billing Code</label>
-                                                            <input type="text" name="billing_code"
-                                                                class="form-control" id="ebilling_code"
-                                                                placeholder="Billing Code">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Note</label>
-                                                            <textarea class="form-control" id="enote" name="note" rows="4"></textarea>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12 text-center">
-                                                        <button type="submit" class="btn w-100 btn-dark">Update
-                                                            Equipment</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Supplies Tab -->
-                    <section id="tab5" class="tab-pane fade">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <!-- Supply modal content -->
-                                <div id="ssignup-modal" class="modal fade" tabindex="-1" role="dialog"
+                                {{-- /* --------------------------- edit Case modal -------------------------- */ --}}
+                                <div id="editCaseSupply" class="modal fade" tabindex="-1" role="dialog"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <div class="text-center mt-2 mb-4">
-                                                    <div
-                                                        class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                                                        <h4 class="mb-0"><b>Add Supplies</b></h4>
-                                                        <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
+                                        <div class="modal-content ">
+                                            <div class="modal-body ">
+                                                <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                                                    <h4 class="mb-0"><b>Edit Supply</b></h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                                 </div>
 
-                                                <form method="POST" action="{{ route('add-caseSupply') }}"
+                                                <form method="POST" action="{{ route('edit-caseSupply') }}"
                                                     class="mt-4">
                                                     @csrf
+                                                    <input type="hidden" name="csu_id" id="csu_id">
 
                                                     <div class="row">
                                                         <div class="col-lg-12 form-group mb-3">
                                                             <label for="pet_id">Select Patient</label>
-                                                            <select name="pet_id" id="pet_id" class="form-control" required>
+                                                            <select name="pet_id" id="editpet_id" class="form-control"
+                                                                required>
                                                                 <option value="">Select Patient</option>
                                                                 @foreach ($patient as $item)
-                                                                <option value="{{ $item->pat_id }}">{{ $item->first_name }}</option>
+                                                                    <option value="{{ $item->pat_id }}"
+                                                                        {{ isset($supply) && $supply->pet_id == $item->pat_id ? 'selected' : '' }}>
+                                                                        {{ $item->first_name }}
+                                                                    </option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -1291,12 +1579,13 @@
                                                             <strong>Add groups of Supplies for Case</strong>
                                                             <div class="form-group mb-3">
                                                                 <label for="">Group</label>
-                                                                <select name="csu_group" class="form-select">
+                                                                <select name="csu_group" id="editcsu_group"
+                                                                    class="form-select">
                                                                     <option value="">Select Group</option>
                                                                     @foreach ($supplyGroups as $group)
-                                                                    <option value="{{ $group->spg_id }}">
-                                                                        {{ $group->spg_name }}
-                                                                    </option>
+                                                                        <option value="{{ $group->spg_id }}">
+                                                                            {{ $group->spg_name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -1306,7 +1595,8 @@
                                                             <strong>Add/Edit/Remove Supplies</strong>
                                                             <div class="form-group mb-3">
                                                                 <label for="">Type</label>
-                                                                <select name="csu_type" class="form-select">
+                                                                <select name="csu_type" id="editcsu_type"
+                                                                    class="form-select">
                                                                     <option value="">Select Type</option>
                                                                     <option value="Antegrade Cannula">Antegrade Cannula
                                                                     </option>
@@ -1316,17 +1606,14 @@
                                                                     <option value="Biomedicus">Biomedicus</option>
                                                                     <option value="Cell Saver Cardiotomy">Cell Saver
                                                                         Cardiotomy</option>
-                                                                    <option value="Femoral Venous">Femoral Venous
+                                                                    <option value="Femoral Venous">Femoral Venous</option>
+                                                                    <option value="Left Vent Catheter">Left Vent Catheter
                                                                     </option>
-                                                                    <option value="Left Vent Catheter">Left Vent
-                                                                        Catheter</option>
                                                                     <option value="Multiple Perf Set">Multiple Perf Set
                                                                     </option>
-                                                                    <option value="Suction Tubing">Suction Tubing
-                                                                    </option>
+                                                                    <option value="Suction Tubing">Suction Tubing</option>
                                                                     <option value="Sump/Vent">Sump/Vent</option>
-                                                                    <option value="Venous Cannula">Venous Cannula
-                                                                    </option>
+                                                                    <option value="Venous Cannula">Venous Cannula</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -1335,7 +1622,8 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="">Manufacturer</label>
                                                                 <input type="text" name="csu_manufacturer"
-                                                                    class="form-control" placeholder="Manufacturer">
+                                                                    id="editcsu_manufacturer" class="form-control"
+                                                                    placeholder="Manufacturer">
                                                             </div>
                                                         </div>
 
@@ -1343,7 +1631,8 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="">Name</label>
                                                                 <input type="text" name="csu_name"
-                                                                    class="form-control" placeholder="Name">
+                                                                    id="editcsu_name" class="form-control"
+                                                                    placeholder="Name">
                                                             </div>
                                                         </div>
 
@@ -1351,7 +1640,8 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="">Lot Number</label>
                                                                 <input type="text" name="csu_lot_number"
-                                                                    class="form-control" placeholder="Lot Number">
+                                                                    id="editcsu_lot_number" class="form-control"
+                                                                    placeholder="Lot Number">
                                                             </div>
                                                         </div>
 
@@ -1359,7 +1649,7 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="">Expiration Date</label>
                                                                 <input type="date" name="csu_ex_date"
-                                                                    class="form-control">
+                                                                    id="editcsu_ex_date" class="form-control">
                                                             </div>
                                                         </div>
 
@@ -1367,7 +1657,8 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="">Billing Code</label>
                                                                 <input type="text" name="csu_billing_code"
-                                                                    class="form-control" placeholder="Billing Code">
+                                                                    id="editcsu_billing_code" class="form-control"
+                                                                    placeholder="Billing Code">
                                                             </div>
                                                         </div>
 
@@ -1375,553 +1666,77 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="">Number Used</label>
                                                                 <input type="text" name="csu_number_used"
-                                                                    class="form-control" placeholder="Number Used">
+                                                                    id="editcsu_number_used" class="form-control"
+                                                                    placeholder="Number Used">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-3">
                                                                 <label for="">Note</label>
-                                                                <textarea class="form-control" name="csu_note" placeholder="Note" rows="4"></textarea>
-
+                                                                <textarea class="form-control" id="editcsu_note" name="csu_note" placeholder="Note" rows="4"></textarea>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-lg-12 text-center">
                                                             <button type="submit" class="btn w-100 btn-dark"
-                                                                id="submitBtn">Add Supply</button>
+                                                                id="submitBtn">Update Supply</button>
                                                         </div>
                                                     </div>
                                                 </form>
 
+
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
-
-                                <div class="col-12 mt-2">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-12 d-flex justify-content-end">
-
-                                                    <button type="button"
-                                                        class="btn waves-effect waves-light mb-2 btn-outline-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#ssignup-modal">
-                                                        <i class="fas fa-plus"></i> Add Supply
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table id="users-table2"
-                                                    class="table table-striped table-bordered no-wrap">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>ID</th>
-                                                            <th>Group</th>
-                                                            <th>Type</th>
-                                                            <th>Manufacturer</th>
-                                                            <th>Name</th>
-                                                            <th>Lot Number</th>
-                                                            <th>Expiration Date</th>
-                                                            <th>Billing Code</th>
-                                                            <th>Number Used</th>
-                                                            <th>Note</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @php $k = 0; @endphp
-                                                        @foreach ($caseSupplys as $supply)
-                                                        <tr id="row-{{ $supply->csu_id }}">
-                                                            <td>{{ ++$k }}</td>
-                                                            <td>{{ $supply->supplyGroup->spg_name ?? 'N/A' }}</td>
-                                                            <td>{{ $supply->csu_type }}</td>
-                                                            <td>{{ $supply->csu_manufacturer }}</td>
-                                                            <td>{{ $supply->csu_name }}</td>
-                                                            <td>{{ $supply->csu_lot_number }}</td>
-                                                            <td>{{ $supply->csu_ex_date }}</td>
-                                                            <td>{{ $supply->csu_billing_code }}</td>
-                                                            <td>{{ $supply->csu_number_used }}</td>
-                                                            <td>{{ $supply->csu_note }}</td>
-                                                            <td>
-                                                                <a onclick="editsupplyBtn({{ json_encode($supply) }})"
-                                                                    href="javascript:void(0);">
-                                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0);"
-                                                                    class="edit-icon delete-user-btn text-danger"
-                                                                    onclick="confirmDelete('{{ route('delete-caseSupply', $supply->csu_id) }}', '{{ $supply->csu_id }}')">
-                                                                    <i class="fa-solid fa-trash-can-arrow-up"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                            {{-- /* --------------------------- edit Case modal -------------------------- */ --}}
-                            <div id="editCaseSupply" class="modal fade" tabindex="-1" role="dialog"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content ">
-                                        <div class="modal-body ">
-                                            <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                                                <h4 class="mb-0"><b>Edit Supply</b></h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
+                        </section>
 
-                                            <form method="POST" action="{{ route('edit-caseSupply') }}"
-                                                class="mt-4">
-                                                @csrf
-                                                <input type="hidden" name="csu_id" id="csu_id">
-
-                                                <div class="row">
-                                                    <div class="col-lg-12 form-group mb-3">
-                                                        <label for="pet_id">Select Patient</label>
-                                                        <select name="pet_id" id="editpet_id" class="form-control" required>
-                                                            <option value="">Select Patient</option>
-                                                            @foreach ($patient as $item)
-                                                            <option value="{{ $item->pat_id }}"
-                                                                {{ (isset($caseStaff) && $caseStaff->pet_id == $item->pat_id) ? 'selected' : '' }}>
-                                                                {{ $item->first_name }}
-                                                            </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <strong>Add groups of Supplies for Case</strong>
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Group</label>
-                                                            <select name="csu_group" id="editcsu_group"
-                                                                class="form-select">
-                                                                <option value="">Select Group</option>
-                                                                @foreach ($supplyGroups as $group)
-                                                                <option value="{{ $group->spg_id }}">
-                                                                    {{ $group->spg_name }}
-                                                                </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <strong>Add/Edit/Remove Supplies</strong>
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Type</label>
-                                                            <select name="csu_type" id="editcsu_type"
-                                                                class="form-select">
-                                                                <option value="">Select Type</option>
-                                                                <option value="Antegrade Cannula">Antegrade Cannula
-                                                                </option>
-                                                                <option value="Aortic Vent">Aortic Vent</option>
-                                                                <option value="Arterial Cannula">Arterial Cannula
-                                                                </option>
-                                                                <option value="Biomedicus">Biomedicus</option>
-                                                                <option value="Cell Saver Cardiotomy">Cell Saver
-                                                                    Cardiotomy</option>
-                                                                <option value="Femoral Venous">Femoral Venous</option>
-                                                                <option value="Left Vent Catheter">Left Vent Catheter
-                                                                </option>
-                                                                <option value="Multiple Perf Set">Multiple Perf Set
-                                                                </option>
-                                                                <option value="Suction Tubing">Suction Tubing</option>
-                                                                <option value="Sump/Vent">Sump/Vent</option>
-                                                                <option value="Venous Cannula">Venous Cannula</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Manufacturer</label>
-                                                            <input type="text" name="csu_manufacturer"
-                                                                id="editcsu_manufacturer" class="form-control"
-                                                                placeholder="Manufacturer">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Name</label>
-                                                            <input type="text" name="csu_name" id="editcsu_name"
-                                                                class="form-control" placeholder="Name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Lot Number</label>
-                                                            <input type="text" name="csu_lot_number"
-                                                                id="editcsu_lot_number" class="form-control"
-                                                                placeholder="Lot Number">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Expiration Date</label>
-                                                            <input type="date" name="csu_ex_date"
-                                                                id="editcsu_ex_date" class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Billing Code</label>
-                                                            <input type="text" name="csu_billing_code"
-                                                                id="editcsu_billing_code" class="form-control"
-                                                                placeholder="Billing Code">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Number Used</label>
-                                                            <input type="text" name="csu_number_used"
-                                                                id="editcsu_number_used" class="form-control"
-                                                                placeholder="Number Used">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group mb-3">
-                                                            <label for="">Note</label>
-                                                            <textarea class="form-control" id="editcsu_note" name="csu_note" placeholder="Note" rows="4"></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12 text-center">
-                                                        <button type="submit" class="btn w-100 btn-dark"
-                                                            id="submitBtn">Update Supply</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-
-
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Coronary Artery Tab -->
-                    <section id="tab6" class="tab-pane fade">
-                        <form action="{{ route('add-cabypasses') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
-                                <div class="col-lg-12 form-group mb-3">
-                                    <label for="pet_id">Select Patient</label>
-                                    <select name="pet_id" id="pet_id" class="form-control" required>
-                                        <option value="">Select Patient</option>
-                                        @foreach ($patient as $item)
-                                        <option value="{{ $item->pat_id }}">{{ $item->first_name }}</option>
+                        <!-- Coronary Artery Tab -->
+                        <section id="tab6" class="tab-pane fade">
+                            @include('cases.coronary')
+                            <div class="table-responsive mt-3">
+                                <table id="users-table3" class="table table-striped table-bordered no-wrap">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Distal</th>
+                                            <th>Proximal</th>
+                                            <th>Conduit</th>
+                                            <th>DistalPosition</th>
+                                            <th>Endarterectomy</th>
+                                            <th>Note</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php $j = 0; @endphp
+                                        @foreach ($del_cabs as $cab)
+                                            <tr id="row-{{ $cab->cab_id }}">
+                                                <td>{{ ++$j }}</td>
+                                                <td>{{ $cab->cab_ins_distal ?? 'N/A' }}</td>
+                                                <td>{{ $cab->cab_ins_proximal ?? 'N/A' }}</td>
+                                                <td>{{ $cab->cab_ins_conduit ?? 'N/A' }}</td>
+                                                <td>{{ $cab->cab_ins_position == 1 ? 'End to Side' : ($cab->cab_ins_position == 0 ? 'Side to Side' : 'N/A') }}</td>
+                                        <td>{{ $cab->cab_ins_end == 1 ? 'Yes' : ($cab->cab_ins_end == 0 ? 'No' : 'N/A') }}</td>
+                                                <td>{{ $cab->note ?? 'N/A' }}</td>
+                                                <td>
+                                                    {{-- <a onclick="editCLitem($cab)" href="javascript:void(0);">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a> --}}
+                                                    <a href="javascript:void(0);"
+                                                        onclick="confirmDelete('{{ route('delete-cabypasses', $cab->cab_id) }}', {{ $cab->cab_id }})"
+                                                        class="edit-icon delete-user-btn text-danger">
+                                                        <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Number of Distal Anastomoses with Arterial
-                                            Conduits</label>
-                                        <input type="text" name="cab_arterial" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Number of Distal Anastomoses with Venous
-                                            Conduits</label>
-                                        <input type="number" name="cab_venous" id="numberInput" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="custom-border-box-text position-relative">
-                                        <div class="custom-label-text">If > 0</div>
-                                        <div class="col-lg-12 form-group">
-                                            <label class="text-dark" for="">Vein Harvest Technique</label>
-                                            <select id="veinSelect" name="cab_htechniques" class="form-control" disabled>
-                                                <option value="">Select an option</option>
-                                                <option value="Endoscopic">Endoscopic</option>
-                                                <option value="Direct Vision (open)">Direct Vision (open)</option>
-                                                <option value="Both">Both</option>
-                                                <option value="Cryopreserved">Cryopreserved</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-12 mt-4">
-                                            <div class="custom-border-box-text position-relative">
-                                                <div class="custom-label-text ">If Endoscopic, Direct Vision (open), or
-                                                    Both</div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Start Time</label>
-                                                    <input type="time" name="cab_htime" id="veinPrepTime" class="form-control"
-                                                        value="{{ now()->format('H:i') }}" disabled>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div class="col-lg-12 form-group mt-3">
-                                        <label for="" class="text-dark">Internal Mammary Artery used for
-                                            Grafts</label>
-                                        <select id="imaSelect" name="cab_ima_options" class="form-control">
-                                            <option value="">Select an option</option>
-                                            <option value="Left IMA">1. Left IMA</option>
-                                            <option value="Right IMA">2. Right IMA</option>
-                                            <option value="Both IMAS">3. Both IMAS</option>
-                                            <option value="No IMA">4. No IMA</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="custom-border-box-text position-relative mt-4">
-                                        <div class="custom-label-text">If No IMA</div>
-                                        <div class="col-lg-12 form-group">
-                                            <label for="" class="text-dark">Indicate Primary Reason</label>
-                                            <select id="primaryReasonSelect" name="cab_ima_preson" class="form-control" disabled>
-                                                <option value="">Select an option</option>
-                                                <option value="Subclavian stenosis">2. Subclavian stenosis</option>
-                                                <option value="Previous cardiac or thoracic surgery">3. Previous cardiac or thoracic surgery</option>
-                                                <option value="Previous mediastinal radiation">4. Previous mediastinal radiation</option>
-                                                <option value="Emergent or salvage procedure">5. Emergent or salvage procedure</option>
-                                                <option value="No LAD disease">6. No LAD disease</option>
-                                                <option value="Other">7. Other</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div id="imaDetailsDiv" class="custom-border-box-text position-relative mt-4" style="display: none;">
-                                        <div class="custom-label-text">If Left, Right or Both IMAs</div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Total # of Distal Anastomoses done using IMA grafts</label>
-                                                <input type="text" name="cab_ima_anastomoses" id="distalAnastomosesInput" class="form-control" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 form-group mb-3">
-                                            <label class="text-dark">IMA Harvest Technique</label>
-                                            <select id="harvestTechniqueSelect" name="cab_ima_htechniques" class="form-control" disabled>
-                                                <option value="">Select an option</option>
-                                                <option value="Direct Vision">2. Direct Vision (open)</option>
-                                                <option value="Thoracoscopy">3. Thoracoscopy</option>
-                                                <option value="Combination">4. Combination</option>
-                                                <option value="Robotic Assisted">5. Robotic Assisted</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-lg-12 mt-4">
-                                    <div class="mb-3">
-                                        <label class="form-label">Number of Radial Arteries Used for Grafts</label>
-                                        <input type="text" name="cab_radial_arteries" id="radialArteriesInput" class="form-control"
-                                            value="">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="custom-border-box-text position-relative mt-4" id="radialArterySection">
-                                        <div class="custom-label-text">If > 0</div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Number of Radial Artery Distal Anastomoses</label>
-                                                <input type="text" name="cab_radial_distal" id="distalAnastomoses" class="form-control"
-                                                    value="" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 form-group mb-3">
-                                            <label for="" class="text-dark">Radial Distal Anastomoses Harvest
-                                                Technique</label>
-                                            <select id="harvestTechnique" name="cab_distal_hanastomoses" class="form-control" disabled>
-                                                <option value="">Select an option</option>
-                                                <option value="Endoscopic">1. Endoscopic</option>
-                                                <option value="Direct Vision (open)">2. Direct Vision (open)</option>
-                                                <option value="Both">3. Both</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Radial Artery Harvest and Prep Time</label>
-                                                <input type="time" id="prepTime" name="cab_radial_time" class="form-control"
-                                                    value="{{ now()->format('H:i') }}" disabled>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 mt-4">
-                                    <div class="mb-3">
-                                        <label class="form-label">Number Other Arterial Distal Anastomoses
-                                            Used</label>
-                                        <input type="text" name="cab_distal_anastomoses" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 form-group mb-3">
-                                    <label for="" class="text-dark">Proximal Technique</label>
-                                    <select name="cab_proximal" id="" class="form-control">
-                                        <option value="">Select an option</option>
-                                        <option value="Single Cross Clamp">1. Single Cross Clamp</option>
-                                        <option value="Partial Occlusion Clamp">2. Partial Occlusion Clamp</option>
-                                        <option value="Anastomotic Assist Device">3. Anastomotic Assist Device</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div id="imaDetailsDiv" class="custom-border-box-text mt-4">
-                                        <div class="custom-label-text">Insertion Editor</div>
-                                        <div class="col-lg-12 form-group mb-3">
-                                            <label class="text-dark">Distal Insertion Site Current</label>
-                                            <select name="cab_ins_distal" class="form-control">
-                                                <option value="">Select an option</option>
-                                                <option value="RCA">1 RCA</option>
-                                                <option value="Acute Marginal (AM)">2 Acute Marginal (AM)</option>
-                                                <option value="Posterior Descending (PDA)">3 Posterior Descending (PDA)
-                                                </option>
-                                                <option value="Posterolateral (PLB)">4 Posterolateral (PLB)</option>
-                                                <option value="Prox LAD">5 Prox LAD</option>
-                                                <option value="Mid LAD">6 Mid LAD</option>
-                                                <option value="Distal LAD">7 Distal LAD</option>
-                                                <option value="Diagonal 1">8 Diagonal 1</option>
-                                                <option value="Diagonal 2">9 Diagonal 2</option>
-                                                <option value="Ramus">10 Ramus</option>
-                                                <option value="Obtuse Marginal 1">11 Obtuse Marginal 1</option>
-                                                <option value="Obtuse Marginal 2">12 Obtuse Marginal 2</option>
-                                                <option value="Obtuse Marginal 3">13 Obtuse Marginal 3</option>
-                                                <option value="Other">14 Other</option>
-                                                <option value="Left Main">15 Left Main</option>
-                                                <option value="Diagonal 3">16 Diagonal 3</option>
-                                                <option value="Circumflex">17 Circumflex</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-12 form-group mb-3">
-                                            <label class="text-dark">Proximal Site Current</label>
-                                            <select name="cab_ins_proximal" class="form-control">
-                                                <option value="">Select an option</option>
-                                                <option value="In Situ Mammary">1. In Situ Mammary</option>
-                                                <option value="Ascending aorta">2. Ascending aorta</option>
-                                                <option value="Descending aorta">3. Descending aorta</option>
-                                                <option value="Subclavian artery">4. Subclavian artery</option>
-                                                <option value="Innominate artery">5. Innominate artery</option>
-                                                <option value="T-graft off SVG">6. T-graft off SVG</option>
-                                                <option value="T-graft off Radial">7. T-graft off Radial</option>
-                                                <option value="T-graft off LIMA">8. T-graft off LIMA</option>
-                                                <option value="T-graft off RIMA">9. T-graft off RIMA</option>
-                                                <option value="Natural Y vein graft">10. Natural Y vein graft</option>
-                                                <option value="Other">11. Other</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-12 form-group mb-3">
-                                            <label class="text-dark">Conduit Current</label>
-                                            <select name="cab_ins_conduit" class="form-control">
-                                                <option value="">Select an option</option>
-                                                <option value="1 Vein graft">1 Vein graft</option>
-                                                <option value="2 In Situ LIMA">2 In Situ LIMA</option>
-                                                <option value="3 In Situ RIMA">3 In Situ RIMA</option>
-                                                <option value="4 Free IMA">4 Free IMA</option>
-                                                <option value="5 Radial artery">5 Radial artery</option>
-                                                <option value="6 Other arteries, homograft">6 Other arteries, homograft
-                                                </option>
-                                                <option value="7 Synthetic graft">7 Synthetic graft</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <label class="form-label">Distal Position Current</label>
-                                            <div class="d-flex">
-                                                <div class="form-check">
-                                                    <input type="radio" id="endToSide" name="cab_ins_position" value="1" class="form-check-input">
-                                                    <label class="form-check-label" for="endToSide">End to Side</label>
-                                                </div>
-                                                <div class="form-check ms-3">
-                                                    <input type="radio" id="sideToSide" name="cab_ins_position" value="0" class="form-check-input">
-                                                    <label class="form-check-label" for="sideToSide">Side to Side</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <label class="form-label">Endarterectomy Current</label>
-                                            <div class="d-flex">
-                                                <div class="form-check">
-                                                    <input type="radio" id="cab_ins" name="cab_ins_end" value="1" class="form-check-input">
-                                                    <label class="form-check-label" for="cab_ins">Yes</label>
-                                                </div>
-                                                <div class="form-check ms-3">
-                                                    <input type="radio" id="cab_ins" name="cab_ins_end" value="0" class="form-check-input">
-                                                    <label class="form-check-label" for="cab_ins">Side to Side</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Note</label>
-                                                <textarea class="form-control" name="note" rows="4"></textarea>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="text-end mt-3">
-                                <button type="submit" class="btn btn-dark">Add Coronary Artery ByPasses</button>
-                            </div>
-                        </form>
-
-                        <div class="table-responsive mt-3">
-                            <table id="users-table3" class="table table-striped table-bordered no-wrap">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Distal</th>
-                                        <th>Proximal</th>
-                                        <th>Conduit</th>
-                                        <th>DistalPosition</th>
-                                        <th>Endarterectomy</th>
-                                        <th>Note</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php $j = 0; @endphp
-                                    @foreach($del_cabs as $cab)
-                                    <tr id="row-{{ $cab->cab_id }}">
-                                        <td>{{ ++$j }}</td>
-                                        <td>{{ $cab->cab_ins_distal ?? 'N/A' }}</td>
-                                        <td>{{ $cab->cab_ins_proximal ?? 'N/A' }}</td>
-                                        <td>{{ $cab->cab_ins_conduit ?? 'N/A' }}</td>
-                                        <td>{{ $cab->cab_ins_position == 1 ? 'End to Side' : 'Side to Side' }}</td>
-                                        <td>{{ $cab->cab_ins_end ?? 'N/A' }}</td>
-                                        <td>{{ $cab->note ?? 'N/A' }}</td>
-                                        <td>
-                                            <a onclick="editCLitem($cab)" href="javascript:void(0);">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <a href="javascript:void(0);"
-                                                onclick="confirmDelete('{{ route('delete-cabypasses', $cab->cab_id) }}', {{ $cab->cab_id }})"
-                                                class="edit-icon delete-user-btn text-danger">
-                                                <i class="fa-solid fa-trash-can-arrow-up"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
+                        </section>
 
                         {{-- procedure section  --}}
 
@@ -1938,289 +1753,371 @@
     </div>
 @endsection
 @section('script')
-<script src="{{ asset('dist/js/caseprocedure.min.js') }}"></script>
-<script>
-    function editsupplyBtn(caseSupply) {
-        document.getElementById("csu_id").value = caseSupply.csu_id;
-        document.getElementById("editcsu_group").value = caseSupply.csu_group;
-        document.getElementById("editcsu_type").value = caseSupply.csu_type;
-        document.getElementById("editcsu_manufacturer").value = caseSupply.csu_manufacturer;
-        document.getElementById("editcsu_name").value = caseSupply.csu_name;
-        document.getElementById("editcsu_lot_number").value = caseSupply.csu_lot_number;
-        document.getElementById("editcsu_ex_date").value = caseSupply.csu_ex_date;
-        document.getElementById("editcsu_billing_code").value = caseSupply.csu_billing_code;
-        document.getElementById("editcsu_number_used").value = caseSupply.csu_number_used;
-        document.getElementById("editcsu_note").value = caseSupply.csu_note;
+    <script src="{{ asset('dist/js/caseprocedure.min.js') }}"></script>
+    <script>
+        function editsupplyBtn(caseSupply) {
+            document.getElementById("csu_id").value = caseSupply.csu_id;
+            document.getElementById("editpet_id").value = caseSupply.pet_id;
+            document.getElementById("editcsu_group").value = caseSupply.csu_group;
+            document.getElementById("editcsu_type").value = caseSupply.csu_type;
+            document.getElementById("editcsu_manufacturer").value = caseSupply.csu_manufacturer;
+            document.getElementById("editcsu_name").value = caseSupply.csu_name;
+            document.getElementById("editcsu_lot_number").value = caseSupply.csu_lot_number;
+            document.getElementById("editcsu_ex_date").value = caseSupply.csu_ex_date;
+            document.getElementById("editcsu_billing_code").value = caseSupply.csu_billing_code;
+            document.getElementById("editcsu_number_used").value = caseSupply.csu_number_used;
+            document.getElementById("editcsu_note").value = caseSupply.csu_note;
 
-        // Show the modal
-        var editModal = new bootstrap.Modal(document.getElementById("editCaseSupply"));
-        editModal.show();
-    }
-</script>
-
-
-<script>
-    document.getElementById("equipmentSelect").addEventListener("change", function() {
-        let selectedOption = this.options[this.selectedIndex];
-
-        document.getElementById("e_name").value = selectedOption.getAttribute("data-name") || "";
-        document.getElementById("serial_number").value = selectedOption.getAttribute("data-serial") || "";
-        document.getElementById("last_service_date").value = selectedOption.getAttribute("data-lastservice") || "";
-        document.getElementById("next_service_date").value = selectedOption.getAttribute("data-nextservice") || "";
-        document.getElementById("billing_code").value = selectedOption.getAttribute("data-billingcode") || "";
-        document.getElementById("note").value = selectedOption.getAttribute("data-notes") || "";
-
-        // **Auto-fill Manufacturer**
-        document.getElementById("e_manufacturer").value = selectedOption.getAttribute("data-manufacturer") || "";
-
-        // **Auto-select Type and Show Only eq_type (not eq_name)**
-        let eTypeSelect = document.querySelector("select[name='e_type']");
-        if (eTypeSelect) {
-            let equipmentType = selectedOption.getAttribute("data-type") || "";
-
-            // Remove all previous options except the first one (default)
-            eTypeSelect.innerHTML = '<option value="">Select Type</option>';
-
-            // Add only the selected equipment's type
-            if (equipmentType) {
-                let newOption = document.createElement("option");
-                newOption.value = equipmentType;
-                newOption.textContent = equipmentType; // Show Only eq_type Instead of eq_name
-                newOption.selected = true;
-                eTypeSelect.appendChild(newOption);
-            }
+            // Show the modal
+            var editModal = new bootstrap.Modal(document.getElementById("editCaseSupply"));
+            editModal.show();
         }
-    });
-</script>
+    </script>
 
-<script>
-    function editCEquipment(caseE) {
-        document.getElementById("ce_id").value = caseE.ce_id;
-        document.getElementById("edite_group").value = caseE.e_group;
-        document.getElementById("edite_configure").value = caseE.e_configure;
-        document.getElementById("edite_type").value = caseE.e_type;
-        document.getElementById("edite_manufacturer").value = caseE.e_manufacturer;
-        document.getElementById("edite_name").value = caseE.e_name;
-        document.getElementById("eserial_number").value = caseE.serial_number;
-        document.getElementById("elast_service_date").value = caseE.last_service_date;
-        document.getElementById("enext_service_date").value = caseE.next_service_date;
-        document.getElementById("ebilling_code").value = caseE.billing_code;
-        document.getElementById("enote").value = caseE.note;
 
-        var editModal = new bootstrap.Modal(document.getElementById("editCaseEqu"));
-        editModal.show();
-    }
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Function to enable/disable elements based on input value
-        function toggleElement(inputId, targetIds) {
-            let inputValue = parseInt(document.getElementById(inputId).value, 10);
-            targetIds.forEach(targetId => {
-                let element = document.getElementById(targetId);
-                if (element) {
-                    if (inputValue > 0) {
-                        element.removeAttribute("disabled");
-                    } else {
-                        element.setAttribute("disabled", "true");
+    <script>
+        document.getElementById("equipmentSelect").addEventListener("change", function() {
+            let selectedOption = this.options[this.selectedIndex];
+
+            document.getElementById("e_name").value = selectedOption.getAttribute("data-name") || "";
+            document.getElementById("serial_number").value = selectedOption.getAttribute("data-serial") || "";
+            document.getElementById("last_service_date").value = selectedOption.getAttribute("data-lastservice") ||
+                "";
+            document.getElementById("next_service_date").value = selectedOption.getAttribute("data-nextservice") ||
+                "";
+            document.getElementById("billing_code").value = selectedOption.getAttribute("data-billingcode") || "";
+            document.getElementById("note").value = selectedOption.getAttribute("data-notes") || "";
+
+            // **Auto-fill Manufacturer**
+            document.getElementById("e_manufacturer").value = selectedOption.getAttribute("data-manufacturer") ||
+                "";
+
+            // **Auto-select Type and Show Only eq_type (not eq_name)**
+            let eTypeSelect = document.querySelector("select[name='e_type']");
+            if (eTypeSelect) {
+                let equipmentType = selectedOption.getAttribute("data-type") || "";
+
+                // Remove all previous options except the first one (default)
+                eTypeSelect.innerHTML = '<option value="">Select Type</option>';
+
+                // Add only the selected equipment's type
+                if (equipmentType) {
+                    let newOption = document.createElement("option");
+                    newOption.value = equipmentType;
+                    newOption.textContent = equipmentType; // Show Only eq_type Instead of eq_name
+                    newOption.selected = true;
+                    eTypeSelect.appendChild(newOption);
+                }
+            }
+        });
+    </script>
+
+    <script>
+        function editCEquipment(caseE) {
+            document.getElementById("ce_id").value = caseE.ce_id;
+            document.getElementById("edite_group").value = caseE.e_group;
+            document.getElementById("edite_configure").value = caseE.e_configure;
+            document.getElementById("edite_type").value = caseE.e_type;
+            document.getElementById("edite_manufacturer").value = caseE.e_manufacturer;
+            document.getElementById("edite_name").value = caseE.e_name;
+            document.getElementById("eserial_number").value = caseE.serial_number;
+            document.getElementById("elast_service_date").value = caseE.last_service_date;
+            document.getElementById("enext_service_date").value = caseE.next_service_date;
+            document.getElementById("ebilling_code").value = caseE.billing_code;
+            document.getElementById("enote").value = caseE.note;
+
+            var editModal = new bootstrap.Modal(document.getElementById("editCaseEqu"));
+            editModal.show();
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to enable/disable elements based on input value
+            function toggleElement(inputId, targetIds) {
+                let inputValue = parseInt(document.getElementById(inputId).value, 10);
+                targetIds.forEach(targetId => {
+                    let element = document.getElementById(targetId);
+                    if (element) {
+                        if (inputValue > 0) {
+                            element.removeAttribute("disabled");
+                        } else {
+                            element.setAttribute("disabled", "true");
+                        }
                     }
+                });
+            }
+
+            // Enable/Disable 'veinSelect' based on 'numberInput'
+            document.getElementById("numberInput").addEventListener("input", function() {
+                toggleElement("numberInput", ["veinSelect"]);
+            });
+
+            // Enable/Disable radial artery-related fields based on 'radialArteriesInput'
+            document.getElementById("radialArteriesInput").addEventListener("input", function() {
+                toggleElement("radialArteriesInput", ["distalAnastomoses", "harvestTechnique", "prepTime"]);
+            });
+
+            // Enable/Disable 'Vein Harvest and Prep Time' based on selected value in 'veinSelect'
+            document.getElementById("veinSelect").addEventListener("change", function() {
+                let selectedValue = this.value.trim(); // Get selected option value
+                let veinPrepInput = document.getElementById("veinPrepTime"); // Find input field
+
+                if (selectedValue === "Endoscopic" || selectedValue === "Direct Vision (open)" ||
+                    selectedValue === "Both") {
+                    veinPrepInput.removeAttribute("disabled");
+                } else {
+                    veinPrepInput.setAttribute("disabled", "true");
                 }
             });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("imaSelect").addEventListener("change", function() {
+                let selectedValue = this.value.trim(); // Get selected value
+
+                let primaryReasonSelect = document.getElementById(
+                    "primaryReasonSelect"); // Second select box
+                let imaDetailsDiv = document.getElementById("imaDetailsDiv"); // Div for IMA details
+
+                // Handling "Indicate Primary Reason" select box
+                if (selectedValue === "No IMA") {
+                    primaryReasonSelect.removeAttribute("disabled"); // Enable
+                    imaDetailsDiv.style.opacity = "0.5"; // Make it semi-transparent
+                    imaDetailsDiv.style.pointerEvents = "none"; // Disable interactions
+                } else {
+                    primaryReasonSelect.setAttribute("disabled", "true"); // Disable
+                    imaDetailsDiv.style.opacity = "1"; // Fully visible
+                    imaDetailsDiv.style.pointerEvents = "auto"; // Enable interactions
+                }
+            });
+        });
+    </script>
+
+    <!-- for Case Staff -->
+    <script>
+        function editButtonCstaff(caseStaff) {
+            document.getElementById("cs_id").value = caseStaff.cs_id;
+            document.getElementById("editpet_id").value = caseStaff.pet_id;
+            document.getElementById("edit_surgeon").value = caseStaff.surgeon;
+            document.getElementById("edit_second_surgeon").value = caseStaff.second_surgeon;
+            document.getElementById("edit_pa_first_assistant").value = caseStaff.pa_first_assistant;
+            document.getElementById("edit_anesthesiologist").value = caseStaff.anesthesiologist;
+            document.getElementById("edit_crna_res").value = caseStaff.crna_res;
+            document.getElementById("edit_cardiologist").value = caseStaff.cardiologist;
+            document.getElementById("edit_family_md").value = caseStaff.family_md;
+            document.getElementById("edit_perfusionist").value = caseStaff.perfusionist;
+            document.getElementById("edit_perfusionist_category").value = caseStaff.perfusionist_category;
+            document.getElementById("edit_perfusionist_status").value = caseStaff.perfusionist_status;
+            document.getElementById("edit_second_perfusionist").value = caseStaff.second_perfusionist;
+            document.getElementById("edit_second_perfusionist_category").value = caseStaff.second_perfusionist_category;
+
+            var editModal = new bootstrap.Modal(document.getElementById("editCaseStaff"));
+            editModal.show();
         }
+    </script>
 
-        // Enable/Disable 'veinSelect' based on 'numberInput'
-        document.getElementById("numberInput").addEventListener("input", function() {
-            toggleElement("numberInput", ["veinSelect"]);
-        });
-
-        // Enable/Disable radial artery-related fields based on 'radialArteriesInput'
-        document.getElementById("radialArteriesInput").addEventListener("input", function() {
-            toggleElement("radialArteriesInput", ["distalAnastomoses", "harvestTechnique", "prepTime"]);
-        });
-
-        // Enable/Disable 'Vein Harvest and Prep Time' based on selected value in 'veinSelect'
-        document.getElementById("veinSelect").addEventListener("change", function() {
-            let selectedValue = this.value.trim(); // Get selected option value
-            let veinPrepInput = document.getElementById("veinPrepTime"); // Find input field
-
-            if (selectedValue === "Endoscopic" || selectedValue === "Direct Vision (open)" || selectedValue === "Both") {
-                veinPrepInput.removeAttribute("disabled");
+    <!-- For expand lengthy table td -->
+    <script>
+        function expandText(td) {
+            if (td.style.maxWidth === '200px') {
+                td.style.maxWidth = 'none';
+                td.style.whiteSpace = 'normal'; // Allow text to wrap
             } else {
-                veinPrepInput.setAttribute("disabled", "true");
-            }
-        });
-    });
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("imaSelect").addEventListener("change", function() {
-            let selectedValue = this.value.trim(); // Get selected value
-
-            let primaryReasonSelect = document.getElementById("primaryReasonSelect"); // Second select box
-            let imaDetailsDiv = document.getElementById("imaDetailsDiv"); // Div for IMA details
-
-            // Handling "Indicate Primary Reason" select box
-            if (selectedValue === "No IMA") {
-                primaryReasonSelect.removeAttribute("disabled"); // Enable
-                imaDetailsDiv.style.opacity = "0.5"; // Make it semi-transparent
-                imaDetailsDiv.style.pointerEvents = "none"; // Disable interactions
-            } else {
-                primaryReasonSelect.setAttribute("disabled", "true"); // Disable
-                imaDetailsDiv.style.opacity = "1"; // Fully visible
-                imaDetailsDiv.style.pointerEvents = "auto"; // Enable interactions
-            }
-        });
-    });
-</script>
-
-<!-- for Case Staff -->
-<script>
-    function editButtonCstaff(caseStaff) {
-        document.getElementById("cs_id").value = caseStaff.cs_id;
-        document.getElementById("editpet_id").value = caseStaff.pet_id;
-        document.getElementById("edit_surgeon").value = caseStaff.surgeon;
-        document.getElementById("edit_second_surgeon").value = caseStaff.second_surgeon;
-        document.getElementById("edit_pa_first_assistant").value = caseStaff.pa_first_assistant;
-        document.getElementById("edit_anesthesiologist").value = caseStaff.anesthesiologist;
-        document.getElementById("edit_crna_res").value = caseStaff.crna_res;
-        document.getElementById("edit_cardiologist").value = caseStaff.cardiologist;
-        document.getElementById("edit_family_md").value = caseStaff.family_md;
-        document.getElementById("edit_perfusionist").value = caseStaff.perfusionist;
-        document.getElementById("edit_perfusionist_category").value = caseStaff.perfusionist_category;
-        document.getElementById("edit_perfusionist_status").value = caseStaff.perfusionist_status;
-        document.getElementById("edit_second_perfusionist").value = caseStaff.second_perfusionist;
-        document.getElementById("edit_second_perfusionist_category").value = caseStaff.second_perfusionist_category;
-
-        var editModal = new bootstrap.Modal(document.getElementById("editCaseStaff"));
-        editModal.show();
-    }
-</script>
-
-<!-- For expand lengthy table td -->
-<script>
-    function expandText(td) {
-        if (td.style.maxWidth === '200px') {
-            td.style.maxWidth = 'none';
-            td.style.whiteSpace = 'normal'; // Allow text to wrap
-        } else {
-            td.style.maxWidth = '200px';
-            td.style.whiteSpace = 'nowrap'; // Prevent text from wrapping
-        }
-    }
-</script>
-
-
-<!-- Coronary Artery ByPass scritping for display and hide, enable and disable start -->
-<script>
-    $(document).ready(function() {
-        let numberInput = $("#numberInput");
-        let veinSelect = $("#veinSelect");
-        let veinPrepTime = $("#veinPrepTime");
-        let customBox = $(".custom-border-box-text.position-relative").first();
-        let innerBox = $(".custom-border-box-text.position-relative").last();
-
-        // Initially hide the sections
-        customBox.hide();
-        innerBox.hide();
-
-        function toggleVisibility() {
-            if (numberInput.val() > 0) {
-                customBox.stop(true, true).slideDown();
-                veinSelect.prop("disabled", false);
-            } else {
-                customBox.stop(true, true).slideUp();
-                veinSelect.prop("disabled", true);
-                veinPrepTime.prop("disabled", true);
+                td.style.maxWidth = '200px';
+                td.style.whiteSpace = 'nowrap'; // Prevent text from wrapping
             }
         }
+    </script>
 
-        function toggleVeinPrepTime() {
-            let selectedValue = veinSelect.val();
-            if (selectedValue === "Endoscopic" || selectedValue === "Direct Vision (open)" || selectedValue === "Both") {
-                innerBox.stop(true, true).slideDown();
-                veinPrepTime.prop("disabled", false);
-            } else {
-                innerBox.stop(true, true).slideUp();
-                veinPrepTime.prop("disabled", true);
+
+    <!-- Coronary Artery ByPass scritping for display and hide, enable and disable start -->
+    <script>
+        $(document).ready(function() {
+            let numberInput = $("#numberInput");
+            let veinSelect = $("#veinSelect");
+            let veinPrepTime = $("#veinPrepTime");
+            let customBox = $(".custom-border-box-text.position-relative").first();
+            let innerBox = $(".custom-border-box-text.position-relative").last();
+            customBox.hide();
+            innerBox.hide();
+
+            function toggleVisibility() {
+                if (numberInput.val() > 0) {
+                    customBox.stop(true, true).slideDown();
+                    veinSelect.prop("disabled", false);
+                } else {
+                    customBox.stop(true, true).slideUp();
+                    veinSelect.prop("disabled", true);
+                    veinPrepTime.prop("disabled", true);
+                }
             }
-        }
 
-        numberInput.on("input", toggleVisibility);
-        veinSelect.on("change", toggleVeinPrepTime);
+            function toggleVeinPrepTime() {
+                let selectedValue = veinSelect.val();
+                if (selectedValue === "Endoscopic" || selectedValue === "Direct Vision (open)" || selectedValue ===
+                    "Both") {
+                    innerBox.stop(true, true).slideDown();
+                    veinPrepTime.prop("disabled", false);
+                } else {
+                    innerBox.stop(true, true).slideUp();
+                    veinPrepTime.prop("disabled", true);
+                }
+            }
 
-        // Initial state check
-        toggleVisibility();
-        toggleVeinPrepTime();
-    });
-</script>
+            numberInput.on("input", toggleVisibility);
+            veinSelect.on("change", toggleVeinPrepTime);
 
-<script>
-    $(document).ready(function() {
-        var section = $('#radialArterySection');
+            // Initial state check
+            toggleVisibility();
+            toggleVeinPrepTime();
+        });
+    </script>
 
-        // Initially hide section using script
-        section.hide();
+    <script>
+        $(document).ready(function() {
+            var section = $('#radialArterySection');
 
-        $('#radialArteriesInput').on('input', function() {
-            var value = $(this).val();
-            if (value > 0) {
-                section.stop(true, true).slideDown();
-                $('#distalAnastomoses, #harvestTechnique, #prepTime').prop('disabled', false);
-            } else {
-                section.stop(true, true).slideUp();
-                $('#distalAnastomoses, #harvestTechnique, #prepTime').prop('disabled', true);
+            // Initially hide section using script
+            section.hide();
+
+            $('#radialArteriesInput').on('input', function() {
+                var value = $(this).val();
+                if (value > 0) {
+                    section.stop(true, true).slideDown();
+                    $('#distalAnastomoses, #harvestTechnique, #prepTime').prop('disabled', false);
+                } else {
+                    section.stop(true, true).slideUp();
+                    $('#distalAnastomoses, #harvestTechnique, #prepTime').prop('disabled', true);
+                }
+            });
+
+            // Initial check in case of pre-filled value
+            $('#radialArteriesInput').trigger('input');
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var primaryReasonDiv = $('#primaryReasonSelect').closest('.custom-border-box-text');
+            var imaDetailsDiv = $('#imaDetailsDiv');
+            var distalAnastomosesInput = imaDetailsDiv.find(
+                'input'); // "Total # of Distal Anastomoses done using IMA grafts"
+            var harvestTechniqueSelect = imaDetailsDiv.find('select'); // "IMA Harvest Technique"
+            var primaryReasonSelect = $('#primaryReasonSelect');
+
+            // Initially hide both sections and disable fields
+            primaryReasonDiv.hide();
+            imaDetailsDiv.hide();
+            distalAnastomosesInput.prop('disabled', true);
+            harvestTechniqueSelect.prop('disabled', true);
+            primaryReasonSelect.prop('disabled', true);
+
+            $('#imaSelect').on('change', function() {
+                var selectedValue = $(this).val();
+
+                // If No IMA condition
+                if (selectedValue === "No IMA") {
+                    primaryReasonDiv.stop(true, true).slideDown();
+                    primaryReasonSelect.prop('disabled', false);
+                } else {
+                    primaryReasonDiv.stop(true, true).slideUp();
+                    primaryReasonSelect.prop('disabled', true);
+                }
+
+                // If Left, Right, or Both IMAs condition
+                if (selectedValue === "Left IMA" || selectedValue === "Right IMA" || selectedValue ===
+                    "Both IMAS") {
+                    imaDetailsDiv.stop(true, true).slideDown();
+                    distalAnastomosesInput.prop('disabled', false);
+                    harvestTechniqueSelect.prop('disabled', false);
+                } else {
+                    imaDetailsDiv.stop(true, true).slideUp();
+                    distalAnastomosesInput.prop('disabled', true);
+                    harvestTechniqueSelect.prop('disabled', true);
+                }
+            });
+
+            // Initial check in case of pre-selected value
+            $('#imaSelect').trigger('change');
+        });
+    </script>
+    <!-- Coronary Artery ByPass scritping for display and hide, enable and disable End -->
+    <script>
+        document.getElementById("proCoroartSelect").addEventListener("change", function() {
+            let selectedValue = this.value;
+            if (selectedValue.includes("Yes")) {
+                $("#yesModal").modal("show"); // Open Bootstrap Modal
+            }
+        });
+    </script>
+    <script>
+        document.querySelectorAll("input[name='valve_surgery']").forEach(function(radio) {
+            radio.addEventListener("change", function() {
+                if (this.value === "yes") {
+                    $("#valveModal").modal("show"); // Open Bootstrap Modal
+                }
+            });
+        });
+        $("#valveModal").on("hidden.bs.modal", function() {
+            document.getElementById("valve_no").checked = true;
+        });
+    </script>
+    <script>
+        document.getElementById("noncardic_yes").addEventListener("change", function() {
+            if (this.checked) {
+                $("#noncardic").modal("show"); // Open Bootstrap Modal
+                document.getElementById("noncardic_no").checked = false; // Uncheck "No"
+            }
+        });
+        $("#noncardic").on("hidden.bs.modal", function() {
+            document.getElementById("noncardic_no").checked = true;
+        });
+    </script>
+    <script>
+        document.getElementById("implant_yes").addEventListener("change", function() {
+            if (this.checked) {
+                $("#cardicAssist").modal("show");
+                document.getElementById("implant_no").checked = false;
+            }
+        });
+        $("#cardicAssist").on("hidden.bs.modal", function() {
+            document.getElementById("implant_no").checked = true;
+        });
+    </script>
+    <script>
+        document.getElementById("cardiac_yes").addEventListener("change", function() {
+            if (this.checked) {
+                $("#otherCardic").modal("show"); // Modal open karein
+                document.getElementById("cardiac_no").checked = false; // "No" ko uncheck karein
             }
         });
 
-        // Initial check in case of pre-filled value
-        $('#radialArteriesInput').trigger('input');
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        var primaryReasonDiv = $('#primaryReasonSelect').closest('.custom-border-box-text');
-        var imaDetailsDiv = $('#imaDetailsDiv');
-        var distalAnastomosesInput = imaDetailsDiv.find('input'); // "Total # of Distal Anastomoses done using IMA grafts"
-        var harvestTechniqueSelect = imaDetailsDiv.find('select'); // "IMA Harvest Technique"
-        var primaryReasonSelect = $('#primaryReasonSelect');
-
-        // Initially hide both sections and disable fields
-        primaryReasonDiv.hide();
-        imaDetailsDiv.hide();
-        distalAnastomosesInput.prop('disabled', true);
-        harvestTechniqueSelect.prop('disabled', true);
-        primaryReasonSelect.prop('disabled', true);
-
-        $('#imaSelect').on('change', function() {
-            var selectedValue = $(this).val();
-
-            // If No IMA condition
-            if (selectedValue === "No IMA") {
-                primaryReasonDiv.stop(true, true).slideDown();
-                primaryReasonSelect.prop('disabled', false);
-            } else {
-                primaryReasonDiv.stop(true, true).slideUp();
-                primaryReasonSelect.prop('disabled', true);
-            }
-
-            // If Left, Right, or Both IMAs condition
-            if (selectedValue === "Left IMA" || selectedValue === "Right IMA" || selectedValue === "Both IMAS") {
-                imaDetailsDiv.stop(true, true).slideDown();
-                distalAnastomosesInput.prop('disabled', false);
-                harvestTechniqueSelect.prop('disabled', false);
-            } else {
-                imaDetailsDiv.stop(true, true).slideUp();
-                distalAnastomosesInput.prop('disabled', true);
-                harvestTechniqueSelect.prop('disabled', true);
+        $("#otherCardic").on("hidden.bs.modal", function() {
+            document.getElementById("cardiac_no").checked = true; // Modal close hone par "No" ko select karein
+        });
+    </script>
+    <script>
+        document.getElementById("cardiacfib_yes").addEventListener("change", function() {
+            if (this.checked) {
+                $("#atrailFilrilate").modal("show"); // Modal open karein
+                document.getElementById("cardiacfib_no").checked = false; // "No" ko uncheck karein
             }
         });
 
-        // Initial check in case of pre-selected value
-        $('#imaSelect').trigger('change');
-    });
-</script>
-<!-- Coronary Artery ByPass scritping for display and hide, enable and disable End -->
+        $("#atrailFilrilate").on("hidden.bs.modal", function() {
+            document.getElementById("cardiacfib_no").checked = true; // Modal close hone par "No" select karein
+        });
+    </script>
+    <script>
+        document.querySelector("select[name='aortic_proce']").addEventListener("change", function() {
+            if (this.value.startsWith("Yes")) { // Yes se start hone wale options check karega
+                $("#aorticModal").modal("show"); // Modal open karega
+            }
+        });
+    </script>
+
+
 
 @endsection

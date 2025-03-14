@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AtrialFibrillation;
+use App\Models\CardicAssistDevice;
 use App\Models\CaseEquipment;
+use App\Models\CaseProcedures;
 use App\Models\CaseStaff;
 use App\Models\CaseSupply;
 use App\Models\CoronaryArteryBypass;
 use App\Models\Equipment;
 use App\Models\EquipmentGroup;
 use App\Models\Hospital;
+use App\Models\NonCardic;
+use App\Models\OtherAorticLocation;
+use App\Models\OtherCardiacProcedure;
 use App\Models\Patient;
 use App\Models\PatientHistory;
 use App\Models\Procedures;
 use App\Models\Staff;
 use App\Models\SupplyGroup;
+use App\Models\ValveSurgery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +29,7 @@ class CaseController extends Controller
     public function viewCase()
     {
         $hospital = Hospital::where('status', '1')->where('close', '1')->get();
+        $patients = Patient::where('status', '1')->where('close', '1')->get();
         $patient = Patient::where('status', '1')->where('close', '1')->get();
         $staffs = Staff::where('status', '1')->where('close', '1')->get();
         $equipmentGroups = EquipmentGroup::where('status', '1')->where('close', '1')->get();
@@ -48,7 +56,7 @@ class CaseController extends Controller
             ->where('close', '1')
             ->get();
 
-        return view('cases.case', compact('hospital', 'patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys', 'procedure', 'del_cabs'));
+        return view('cases.case', compact('hospital', 'patients','patient', 'staffs', 'caseStaffs', 'equipmentGroups', 'equipments', 'caseEquipments', 'supplyGroups', 'caseSupplys', 'procedure', 'del_cabs'));
     }
     public function caseProcedure()
     {
@@ -113,6 +121,7 @@ class CaseController extends Controller
         $patient->discharge_date = $request->discharge_date;
         $patient->pat_insertby = Auth::user()->name;
         $patient->save();
+        session(['pat_id' => $patient->pat_id]);
         return redirect()->back()->with('success', 'Patient Added Successfully!');
     }
 
@@ -145,6 +154,7 @@ class CaseController extends Controller
         // return $request->all();
         try {
             $addcs = new CaseStaff();
+            $addcs->pet_id = $request->pet_id;
             $addcs->surgeon = $request->surgeon;
             $addcs->second_surgeon = $request->second_surgeon;
             $addcs->pa_first_assistant = $request->pa_first_assistant;
@@ -171,6 +181,7 @@ class CaseController extends Controller
         $id = $request->cs_id;
         $addcs = CaseStaff::find($id);
         try {
+            $addcs->pet_id = $request->pet_id;
             $addcs->surgeon = $request->surgeon;
             $addcs->second_surgeon = $request->second_surgeon;
             $addcs->pa_first_assistant = $request->pa_first_assistant;
@@ -213,6 +224,7 @@ class CaseController extends Controller
     {
         try {
             $addce = new CaseEquipment();
+            $addce->pet_id = $request->pet_id;
             $addce->e_group = $request->e_group;
             $addce->e_configure = $request->e_configure;
             $addce->e_type = $request->e_type;
@@ -246,7 +258,7 @@ class CaseController extends Controller
         $id = $request->ce_id;
         $addce = CaseEquipment::find($id);
         try {
-            $addce = new CaseEquipment();
+            $addce->pet_id = $request->pet_id;
             $addce->e_group = $request->e_group;
             $addce->e_configure = $request->e_configure;
             $addce->e_type = $request->e_type;
@@ -282,6 +294,7 @@ class CaseController extends Controller
             'csu_note' => 'nullable|string|max:255',
         ]);
         $cs_supply = new CaseSupply();
+        $cs_supply->pet_id = $request->pet_id;
         $cs_supply->csu_group = $request->csu_group;
         $cs_supply->csu_type = $request->csu_type;
         $cs_supply->csu_manufacturer = $request->csu_manufacturer;
@@ -302,6 +315,7 @@ class CaseController extends Controller
         $id = $request->csu_id;
         $edit_csu = CaseSupply::find($id);
         try {
+            $edit_csu->pet_id = $request->pet_id;
             $edit_csu->csu_group = $request->csu_group;
             $edit_csu->csu_type = $request->csu_type;
             $edit_csu->csu_manufacturer = $request->csu_manufacturer;
@@ -339,7 +353,6 @@ class CaseController extends Controller
 
         $cab_bypass = new CoronaryArteryBypass();
         $cab_bypass->pet_id = $request->pet_id;
-
         $cab_bypass->cab_arterial = $request->cab_arterial;
         $cab_bypass->cab_venous = $request->cab_venous;
         $cab_bypass->cab_htechniques = $request->cab_htechniques;
@@ -372,5 +385,189 @@ class CaseController extends Controller
         $del_cab->status = '0';
         $del_cab->save();
         return redirect()->back()->with('success', 'Coronary Artery Bypass deleted Successfully!');
+    }
+
+
+    /* -------------------- case procedure insertion function ------------------- */
+
+    public function addcaseProcedure(Request $request)
+    {
+        // return $request->all();
+        $case = CaseProcedures::create([
+            'casep_insertby' => Auth::user()->name, // Assign logged-in user's name
+        ] + $request->all());
+        return redirect()->back()->with('success','Procedure added successfully!');
+    }
+
+    public function addvalveProcedure(Request $request)
+    {
+        $case = ValveSurgery::create($request->all());
+        return redirect()->back()->with('success','Valve Surgery added successfully!');
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Valve Surgery added successfully!',
+        //     'data' => $case
+        // ]);
+    }
+
+    public function addNoncardicProcedure(Request $request)
+    {
+        // return $request->all();
+        NonCardic::create($request->all());
+        return redirect()->back()->with('success','Non Cardic added successfully!');
+
+    }
+
+    public function addOtherCarPro(Request $request)
+    {
+        $request->validate([
+            'pat_id' => 'required'
+        ]);
+
+        $add_ocp = new OtherCardiacProcedure();
+        $add_ocp->pat_id = $request->pat_id;
+        $add_ocp->afib_el = $request->afib_el;
+        $add_ocp->asd_pfo = $request->asd_pfo;
+        $add_ocp->aap_raa = $request->aap_raa;
+        $add_ocp->arr_dev_sur = $request->arr_dev_sur;
+        $add_ocp->lead_in = $request->lead_in;
+        $add_ocp->msc_therapy = $request->msc_therapy;
+        $add_ocp->tl_rev = $request->tl_rev;
+        $add_ocp->afib_il = $request->afib_il;
+        $add_ocp->asd_sv = $request->asd_sv;
+        $add_ocp->arr_correction_ext = $request->arr_correction_ext;
+        $add_ocp->lva = $request->lva;
+        $add_ocp->pt_acute = $request->pt_acute;
+        $add_ocp->ss_res = $request->ss_res;
+        $add_ocp->ssr_type = $request->ssr_type;
+        $add_ocp->sv_res = $request->sv_res;
+        $add_ocp->tumor_select = $request->tumor_select;
+        $add_ocp->card_tx = $request->card_tx;
+        $add_ocp->cardiac_t = $request->cardiac_t;
+        $add_ocp->p_congenital = $request->p_congenital;
+        $add_ocp->p_other = $request->p_other;
+        $add_ocp->vsd_con = $request->vsd_con;
+        $add_ocp->ocp_insertby = Auth::user()->name;
+        $add_ocp->save();
+        return redirect()->back()->with('success', 'Other Cardiac Procedure Added Successfully!');
+    }
+
+    public function addAtrialFibrillation(Request $request)
+    {
+        $request->validate([
+            'pat_id' => 'required'
+        ]);
+
+        $add_af = new AtrialFibrillation();
+        $add_af->pat_id = $request->pat_id;
+
+        $add_af->epicardial_radio = $request->epicardial_radio;
+        $add_af->mlc_doc = $request->mlc_doc;
+        $add_af->radio_frequency = $request->radio_frequency;
+        $add_af->rf_bipolar = $request->rf_bipolar;
+        $add_af->cut_sew = $request->cut_sew;
+        $add_af->cryo = $request->cryo;
+        $add_af->procedures = $request->procedures;
+
+        $add_af->af_insertby = Auth::user()->name;
+        $add_af->save();
+        return redirect()->back()->with('success', 'Atrial Fibrillation Added Successfully!');
+    }
+
+    public function addAorticProcedure(Request $request)
+    {
+        $request->validate([
+            'pat_id' => 'required'
+        ]);
+
+        $add_oal = new OtherAorticLocation();
+        $add_oal->pat_id = $request->pat_id;
+
+        $add_oal->root = $request->root;
+        $add_oal->ascending = $request->ascending;
+        $add_oal->hemi_arch = $request->hemi_arch;
+        $add_oal->total_arch = $request->total_arch;
+        $add_oal->descending_proximal = $request->descending_proximal;
+        $add_oal->descending_mid = $request->descending_mid;
+        $add_oal->thoracoabdominal = $request->thoracoabdominal;
+        $add_oal->apsg_use = $request->apsg_use;
+        $add_oal->iv_ri = $request->iv_ri;
+        $add_oal->csf_du = $request->csf_du;
+        $add_oal->el_trunk = $request->el_trunk;
+        $add_oal->ceaf_lumen = $request->ceaf_lumen;
+        $add_oal->ap_other = $request->ap_other;
+        $add_oal->ap_tevar = $request->ap_tevar;
+
+        $add_oal->oal_insertby = Auth::user()->name;
+        $add_oal->save();
+        return redirect()->back()->with('success', 'Atrial Fibrillation Added Successfully!');
+    }
+
+    public function addCardicAssistDev(Request $request)
+    {
+        $request->validate([
+            'pat_id' => 'required'
+        ]);
+        $ca_dev = new CardicAssistDevice();
+        $ca_dev->pat_id = $request->pat_id;
+
+        $ca_dev->iab_pump = $request->iab_pump;
+        $ca_dev->iabp_insertion = $request->iabp_insertion;
+        $ca_dev->iabp_reason = $request->iabp_reason;
+        $ca_dev->cbad_use = $request->cbad_use;
+        $ca_dev->cbad_type = $request->cbad_type;
+        $ca_dev->cbad_inserted = $request->cbad_inserted;
+        $ca_dev->cbad_reason = $request->cbad_reason;
+        $ca_dev->ecmo_sel = $request->ecmo_sel;
+        $ca_dev->ecmo_initiated = $request->ecmo_initiated;
+        $ca_dev->ecmo_clinical = $request->ecmo_clinical;
+        $ca_dev->wpa_vad = $request->wpa_vad;
+        $ca_dev->piaf_vad = $request->piaf_vad;
+        $ca_dev->vad_date_ins = $request->vad_date_ins;
+        $ca_dev->vad_dev_model = $request->vad_dev_model;
+        $ca_dev->vad_udi = $request->vad_udi;
+        $ca_dev->vad_indication = $request->vad_indication;
+        $ca_dev->vad_type = $request->vad_type;
+        $ca_dev->peda_vad = $request->peda_vad;
+        $ca_dev->vad_timing = $request->vad_timing;
+        $ca_dev->vad_date = $request->vad_date;
+        $ca_dev->vadid_hos = $request->vadid_hos;
+        $ca_dev->vadidh_timing = $request->vadidh_timing;
+        $ca_dev->vadidh_indication = $request->vadidh_indication;
+        $ca_dev->vadidh_type = $request->vadidh_type;
+        $ca_dev->vadidh_device = $request->vadidh_device;
+        $ca_dev->vadidh_initial_date = $request->vadidh_initial_date;
+        $ca_dev->vadidh_udi = $request->vadidh_udi;
+        $ca_dev->vadidh_vad_exp = $request->vadidh_vad_exp;
+        $ca_dev->vadidh_reason = $request->vadidh_reason;
+        $ca_dev->vadidh_date = $request->vadidh_date;
+        $ca_dev->sec_di = $request->sec_di;
+        $ca_dev->sec_timing = $request->sec_timing;
+        $ca_dev->sec_indication = $request->sec_indication;
+        $ca_dev->sec_type = $request->sec_type;
+        $ca_dev->sec_device = $request->sec_device;
+        $ca_dev->sec_implant_date = $request->sec_implant_date;
+        $ca_dev->sec_udi = $request->sec_udi;
+        $ca_dev->sec_vad_expl = $request->sec_vad_expl;
+        $ca_dev->sec_reason = $request->sec_reason;
+        $ca_dev->sec_date = $request->sec_date;
+        $ca_dev->th_dev_imp = $request->th_dev_imp;
+        $ca_dev->th_timing = $request->th_timing;
+        $ca_dev->th_indication = $request->th_indication;
+        $ca_dev->th_type = $request->th_type;
+        $ca_dev->th_device = $request->th_device;
+        $ca_dev->th_implant_date = $request->th_implant_date;
+        $ca_dev->th_udi = $request->th_udi;
+        $ca_dev->th_vad_expla = $request->th_vad_expla;
+        $ca_dev->th_reason = $request->th_reason;
+        $ca_dev->th_date = $request->th_date;
+        $ca_dev->crma_dev = $request->crma_dev;
+        $ca_dev->first_complication = $request->first_complication;
+        $ca_dev->second_complication = $request->second_complication;
+        $ca_dev->third_complication = $request->third_complication;
+
+        $ca_dev->cad_insertby = Auth::user()->name;
+        $ca_dev->save();
+        return redirect()->back()->with('success', 'Cardic Assist Devices Added Successfully!');
     }
 }

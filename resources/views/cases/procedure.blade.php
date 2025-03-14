@@ -1,6 +1,20 @@
 <div class="row p-4">
+   <form action="{{ route('add-case-procedure') }}" method="post">
+    @csrf
     <div class="col-lg-12">
         <div class="row">
+            <label for="pet_id">Select Patient</label>
+           <div class="col-lg-12 form-group mb-2">
+            <select name="propat_id" id="pat_id" class="form-control" required>
+                <option value="">Select Patient</option>
+                @foreach ($patient as $item)
+                <option value="{{ $item->pat_id }}"
+                    {{ session('pat_id') == $item->pat_id ? 'selected' : '' }}>
+                    {{ $item->first_name }}
+                </option>
+            @endforeach
+            </select>
+           </div>
             <div class="col-md-12 form-group mb-2">
                 <label for="">Procedure Selection</label>
                 <select name="pro_casetype" id="" class="form-select">
@@ -47,7 +61,7 @@
                 </select>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-lg-5">
@@ -55,33 +69,23 @@
                             Approach converted during procedure
                         </label>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="approach_type" value="planned"
-                                        id="planned" {{ old('approach_type') == 'planned' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="planned">Yes,
-                                        Planned</label>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="approach_type"
-                                        value="unplanned" id="unplanned"
-                                        {{ old('approach_type') == 'unplanned' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="unplanned">Yes,
-                                        Unplanned</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="approach_type" value="no"
-                                        id="no" {{ old('approach_type') == 'no' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="no">No</label>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-lg-7 d-lg-flex">
+                        <label class="me-2">
+                            <input type="radio" name="approach_type" value="planned"
+                                {{ old('approach_type') == 'planned' ? 'checked' : '' }} />
+                            <span>Yes, Planned</span>
+                        </label>
+                        <label class="me-2">
+                            <input type="radio" name="approach_type" value="unplanned"
+                                {{ old('approach_type') == 'unplanned' ? 'checked' : '' }} />
+                            <span>Yes, Unplanned</span>
+                        </label>
+                        <label class="">
+                            <input type="radio" name="approach_type" value="no"
+                                {{ old('approach_type') == 'no' ? 'checked' : '' }} checked />
+                            <span>No</span>
+                        </label>
+
                     </div>
                 </div>
             </div>
@@ -92,23 +96,17 @@
                     <div class="col-lg-5">
                         <label for="">Robot Use</label>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input yes" name="robot_use" value="yes"
-                                        id="robot_yes" {{ old('robot_use') == 'yes' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="robot_yes">Yes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input no" name="robot_use" value="no"
-                                        id="robot_no" {{ old('robot_use') == 'no' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="robot_no">No</label>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-lg-7 d-lg-flex">
+                        <label class="me-2">
+                            <input type="radio" name="robot_use" value="yes" id="robot_yes"
+                                {{ old('robot_use') == 'yes' ? 'checked' : '' }} />
+                            <span>Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="robot_use" value="no" id="robot_no"
+                                {{ old('robot_use') == 'no' ? 'checked' : '' }} checked />
+                            <span>No</span>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -126,19 +124,18 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="robot_use"
-                                            value="entire" id="robot_entire">
-                                        <label class="form-check-label" for="robot_entire">Entire
-                                            operation</label>
+                                        <input type="radio" class="form-check-input" name="robot_useop" value="entire"
+                                            id="robot_entire" {{ old('robot_use') == 'entire' ? 'checked' : '' }}
+                                            checked>
+                                        <label class="form-check-label" for="robot_entire">Entire operation</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="robot_use"
-                                            value="part" id="robot_part">
-                                        <label class="form-check-label" for="robot_part">Part
-                                            of
-                                            the operation</label>
+                                        <input type="radio" class="form-check-input" name="robot_useop"
+                                            value="part" id="robot_part"
+                                            {{ old('robot_use') == 'part' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="robot_part">Part of the operation</label>
                                     </div>
                                 </div>
                             </div>
@@ -151,26 +148,19 @@
             <div class="col-lg-12 mb-3">
                 <div class="form-group ">
                     <label for="">Coronary Artery Bypass</label>
-                    <select name="pro_coroart" id="" class="form-control">
+                    <select name="pro_coroart" id="proCoroartSelect" class="form-control">
                         <option value="">Select coronary artery bypass</option>
                         <option value="Yes, planned">Yes, planned</option>
-                        <option value="Yes , unplanned due to surgical complication">Yes ,
-                            unplanned due to surgical complication</option>
+                        <option value="Yes , unplanned due to surgical complication">Yes, unplanned due to surgical
+                            complication</option>
                         <option value="Yes , unplanned due to unsuspected disease or anatomy">
-                            Yes , unplanned due to unsuspected disease or anatomy</option>
+                            Yes, unplanned due to unsuspected disease or anatomy
+                        </option>
                         <option value="No">No</option>
                     </select>
                 </div>
             </div>
 
-            <div class="col-lg-12 mt-2 mb-3">
-                <div class="title-box text-center">
-                    <span class="title-label">If Yes</span>
-                    <button type="button" disabled class="btn btn-dark">
-                        Coronary Artery Bypass
-                    </button>
-                </div>
-            </div>
         </div>
         <div class="row">
             <div class="col-lg-12 mb-3">
@@ -178,35 +168,19 @@
                     <div class="col-lg-5">
                         <label for="">Valve Surgery</label>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="valve_surgery"
-                                        value="yes" id="valve_yes"
-                                        {{ old('valve_surgery') == 'yes' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="valve_yes">Yes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="valve_surgery"
-                                        value="no" id="valve_no"
-                                        {{ old('valve_surgery') == 'no' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="valve_no">No</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="col-lg-7 d-md-flex">
+                        <label class="me-3">
+                            <input type="radio" name="valve_surgery" value="yes" id="valve_yes"
+                                {{ old('valve_surgery') == 'yes' ? 'checked' : '' }} >
+                            <span>Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="valve_surgery" value="no" id="valve_no"
+                                {{ old('valve_surgery') == 'no' ? 'checked' : '' }} checked>
+                            <span>No</span>
+                        </label>
 
-            <div class="col-lg-12 mt-2 mb-3">
-                <div class="title-box text-center">
-                    <span class="title-label">If Yes</span>
-                    <button type="button" disabled class="btn btn-dark">
-                        Valve Surgery
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -216,33 +190,20 @@
                     <div class="col-lg-5">
                         <label for="">VAD Implanted or Removed</label>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="vad_implant" value="yes"
-                                        id="implant_yes" {{ old('vad_implant') == 'yes' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="implant_yes">Yes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="vad_implant" value="no"
-                                        id="implant_no" {{ old('vad_implant') == 'no' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="implant_no">No</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="col-lg-7 d-md-flex">
 
-            <div class="col-lg-12 mt-2 mb-3">
-                <div class="title-box text-center">
-                    <span class="title-label">If Yes</span>
-                    <button type="button" disabled class="btn btn-dark">
-                        Cardiac Assist Device
-                    </button>
+                        <label class="me-3">
+                            <input type="radio" name="vad_implant" value="yes" id="implant_yes"
+                                {{ old('vad_implant') == 'yes' ? 'checked' : '' }}>
+                            <span>Yes</span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="vad_implant" value="no" id="implant_no"
+                                {{ old('vad_implant') == 'no' ? 'checked' : '' }} checked>
+                            <span>No</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,34 +213,20 @@
                     <div class="col-lg-5">
                         <label for="">Other Cardiac Procedure</label>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="other_cardiac"
-                                        value="yes" id="cardiac_yes"
-                                        {{ old('other_cardiac') == 'yes' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="cardiac_yes">Yes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="other_cardiac"
-                                        value="no" id="cardiac_no"
-                                        {{ old('other_cardiac') == 'no' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="cardiac_no">No</label>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-lg-7 d-md-flex">
+
+                        <label class="me-3">
+                            <input type="radio" name="other_cardiac" value="yes" id="cardiac_yes"
+                                {{ old('other_cardiac') == 'yes' ? 'checked' : '' }}>
+                            <span>Yes</span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="other_cardiac" value="no" id="cardiac_no"
+                                {{ old('other_cardiac') == 'no' ? 'checked' : '' }} checked>
+                            <span>No</span>
+                        </label>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-12 mt-2 mb-3">
-                <div class="title-box text-center">
-                    <span class="title-label">If Yes</span>
-                    <button type="button" disabled class="btn btn-dark">
-                        Other Cardiac Procedure
-                    </button>
                 </div>
             </div>
         </div>
@@ -289,34 +236,22 @@
                     <div class="col-lg-5">
                         <label for="">Other Cardiac Procedure, AFib</label>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="cardiac_fib" value="yes"
-                                        id="cardiacfib_yes" {{ old('cardiac_fib') == 'yes' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="cardiacfib_yes">Yes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="cardiac_fib" value="no"
-                                        id="cardiacfib_no" {{ old('cardiac_fib') == 'no' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="cardiacfib_no">No</label>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-lg-7 d-md-flex">
+                        <label class="me-3">
+                            <input type="radio" name="cardiac_fib" value="yes" id="cardiacfib_yes"
+                                {{ old('cardiac_fib') == 'yes' ? 'checked' : '' }}>
+                            <span>Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="cardiac_fib" value="no" id="cardiacfib_no"
+                                {{ old('cardiac_fib') == 'no' ? 'checked' : '' }} checked>
+                            <span>No</span>
+                        </label>
+
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 mt-2 mb-3">
-                <div class="title-box text-center">
-                    <span class="title-label">If Yes</span>
-                    <button type="button" disabled class="btn btn-dark">
-                        Atrial Fibrillation
-                    </button>
-                </div>
-            </div>
+
         </div>
         <div class="row">
             <div class="col-lg-12 mb-3">
@@ -334,14 +269,7 @@
                 </select>
 
             </div>
-            <div class="col-lg-12 mt-2 mb-3">
-                <div class="title-box text-center">
-                    <span class="title-label">If Yes</span>
-                    <button type="button" disabled class="btn btn-dark">
-                        Other Arotic Procedure
-                    </button>
-                </div>
-            </div>
+
         </div>
         <div class="row">
             <div class="col-lg-12 mb-3">
@@ -349,32 +277,18 @@
                     <div class="col-lg-5">
                         <label for="">Other Non-Cardiac Procedure</label>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="non_cardic" value="yes"
-                                        id="noncardic_yes" {{ old('non_cardic') == 'yes' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="noncardic_yes">Yes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="non_cardic" value="no"
-                                        id="noncardic_no" {{ old('non_cardic') == 'no' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="noncardic_no">No</label>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-lg-7 d-lg-flex">
+                        <label class="me-3">
+                            <input type="radio" name="non_cardic" value="yes" id="noncardic_yes"
+                                {{ old('non_cardic') == 'yes' ? 'checked' : '' }}>
+                            <span>Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="non_cardic" value="no" id="noncardic_no"
+                                {{ old('non_cardic') == 'no' ? 'checked' : '' }} checked>
+                            <span>No</span>
+                        </label>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-12 mt-2 mb-3">
-                <div class="title-box text-center">
-                    <span class="title-label">If Yes</span>
-                    <button type="button" disabled class="btn btn-dark">
-                        Other Non-Cardic Procedure
-                    </button>
                 </div>
             </div>
         </div>
@@ -509,57 +423,59 @@
             <label for="">
                 Appropriate Antibiotic selection
             </label>
-            <div class="row  mb-3 mt-3">
-                <div class="col-md-4 ">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="antibiotic" value="Yes"
-                            id="antibiotic_yes">
-                        <label class="form-check-label" for="antibiotic_yes">Yes</label>
-                    </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-md-4">
+                    <label class="me-3">
+                        <input type="radio" name="antibiotic" value="Yes" id="antibiotic_yes"
+                            {{ old('antibiotic') == 'Yes' ? 'checked' : '' }}>
+                        <span>Yes</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="antibiotic" value="Yes"
-                            id="antibiotic_no">
-                        <label class="form-check-label" for="antibiotic_no">No</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="antibiotic" value="No" id="antibiotic_no"
+                            {{ old('antibiotic') == 'No' ? 'checked' : '' }} checked>
+                        <span>No</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="antibiotic" value="Yes"
-                            id="antibiotic_ex">
-                        <label class="form-check-label" for="antibiotic_ex">Exclusion</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="antibiotic" value="Exclusion" id="antibiotic_ex"
+                            {{ old('antibiotic') == 'Exclusion' ? 'checked' : '' }}>
+                        <span>Exclusion</span>
+                    </label>
                 </div>
             </div>
+
         </div>
         <div class="row">
             <label for="">
                 Appropriate Antibiotic Adminintration Timing
             </label>
-            <div class="row  mb-3 mt-3">
+            <div class="row mb-3 mt-3">
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="antiadmin" value="Yes"
-                            id="antiadmin_yes">
-                        <label class="form-check-label" for="antiadmin_yes">Yes</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="antiadmin" value="Yes" id="antiadmin_yes"
+                            {{ old('antiadmin') == 'Yes' ? 'checked' : '' }}>
+                        <span>Yes</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="antiadmin" value="Yes"
-                            id="antiadmin_no">
-                        <label class="form-check-label" for="antiadmin_no">No</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="antiadmin" value="No" id="antiadmin_no"
+                            {{ old('antiadmin') == 'No' ? 'checked' : '' }} checked>
+                        <span>No</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="antiadmin" value="Yes"
-                            id="antiadmin_ex">
-                        <label class="form-check-label" for="antiadmin_ex">Exclusion</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="antiadmin" value="Exclusion" id="antiadmin_ex"
+                            {{ old('antiadmin') == 'Exclusion' ? 'checked' : '' }}>
+                        <span>Exclusion</span>
+                    </label>
                 </div>
             </div>
+
 
         </div>
         <div class="row">
@@ -568,49 +484,49 @@
             </label>
             <div class="row mb-3 mt-3">
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="antidiscon" value="Yes"
-                            id="antidiscon_yes">
-                        <label class="form-check-label" for="antidiscon_yes">Yes</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="antidiscon" value="yes" id="antidiscon_yes"
+                            {{ old('antidiscon') == 'yes' ? 'checked' : '' }}>
+                        <span>Yes</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="antidiscon" value="Yes"
-                            id="antidiscon_no">
-                        <label class="form-check-label" for="antidiscon_no">No</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="antidiscon" value="no" id="antidiscon_no"
+                            {{ old('antidiscon') == 'no' ? 'checked' : '' }} checked>
+                        <span>No</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="antidiscon" value="Yes"
-                            id="antidiscon_ex">
-                        <label class="form-check-label" for="antidiscon_ex">Exclusion</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="antidiscon" value="exclusion" id="antidiscon_ex"
+                            {{ old('antidiscon') == 'exclusion' ? 'checked' : '' }}>
+                        <span>Exclusion</span>
+                    </label>
                 </div>
             </div>
+
         </div>
         <div class="row">
             <label for="">
                 Additional intraoperative prophylactic antibiotic dose
             </label>
             <div class="row mb-3 mt-3">
-                <div class="col-md-4 ">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="addintra" value="Yes"
-                            id="addintra_yes">
-                        <label class="form-check-label" for="addintra_yes">Yes</label>
-                    </div>
+                <div class="col-md-4">
+                    <label class="me-3">
+                        <input type="radio" name="addintra" value="yes" id="addintra_yes"
+                            {{ old('addintra') == 'yes' ? 'checked' : '' }}>
+                        <span>Yes</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="addintra" value="Yes"
-                            id="addintra_no">
-                        <label class="form-check-label" for="addintra_no">No</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="addintra" value="no" id="addintra_no"
+                            {{ old('addintra') == 'no' ? 'checked' : '' }} checked>
+                        <span>No</span>
+                    </label>
                 </div>
             </div>
-
         </div>
         <hr>
         <div class="row">
@@ -715,18 +631,18 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannulation"
-                                            value="no" id="can_no">
-                                        <label class="form-check-label" for="can_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannulation" value="no" id="can_no"
+                                            {{ old('cannulation') == 'no' ? 'checked' : '' }} checked>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannulation"
-                                            value="yes" id="can_yes">
-                                        <label class="form-check-label" for="can_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannulation" value="yes" id="can_yes"
+                                            {{ old('cannulation') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -739,20 +655,21 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannul_femo"
-                                            value="no" id="canfemo_no">
-                                        <label class="form-check-label" for="canfemo_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannul_femo" value="no" id="canfemo_no"
+                                            {{ old('cannul_femo') == 'no' ? 'checked' : '' }} checked>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannul_femo"
-                                            value="yes" id="canfemo_yes">
-                                        <label class="form-check-label" for="canfemo_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannul_femo" value="yes" id="canfemo_yes"
+                                            {{ old('cannul_femo') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -763,20 +680,21 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannul_axil"
-                                            value="no" id="canaxil_no">
-                                        <label class="form-check-label" for="canaxil_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannul_axil" value="no" id="canaxil_no"
+                                            {{ old('cannul_axil') == 'no' ? 'checked' : '' }} checked>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannul_axil"
-                                            value="yes" id="canaxil_yes">
-                                        <label class="form-check-label" for="canaxil_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannul_axil" value="yes" id="canaxil_yes"
+                                            {{ old('cannul_axil') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -787,21 +705,22 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannul_inno"
-                                            value="no" id="caninno_no">
-                                        <label class="form-check-label" for="caninno_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannul_inno" value="no" id="caninno_no"
+                                            {{ old('cannul_inno') == 'no' ? 'checked' : '' }} checked>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannul_inno"
-                                            value="yes" id="caninno_yes">
-                                        <label class="form-check-label" for="caninno_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannul_inno" value="yes" id="caninno_yes"
+                                            {{ old('cannul_inno') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <div class="row mb-2">
                         <div class="col-lg-8">
@@ -810,20 +729,21 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannul_other"
-                                            value="no" id="canother_no">
-                                        <label class="form-check-label" for="canother_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannul_other" value="no" id="canother_no"
+                                            {{ old('cannul_other') == 'no' ? 'checked' : '' }} checked>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="cannul_other"
-                                            value="yes" id="canother_yes">
-                                        <label class="form-check-label" for="canother_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="cannul_other" value="yes" id="canother_yes"
+                                            {{ old('cannul_other') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -833,20 +753,21 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="venous_femo"
-                                            value="no" id="venousfemo_no">
-                                        <label class="form-check-label" for="venousfemo_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="venous_femo" value="no" id="venousfemo_no"
+                                            {{ old('venous_femo') == 'no' ? 'checked' : '' }} checked>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="venous_femo"
-                                            value="yes" id="venousfemo_yes">
-                                        <label class="form-check-label" for="venousfemo_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="venous_femo" value="yes" id="venousfemo_yes"
+                                            {{ old('venous_femo') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -856,20 +777,22 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="venous_jugular"
-                                            value="no" id="venousjugu_no">
-                                        <label class="form-check-label" for="venousjugu_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="venous_jugular" value="no"
+                                            id="venousjugu_no" {{ old('venous_jugular') == 'no' ? 'checked' : '' }}
+                                            checked>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="venous_jugular"
-                                            value="yes" id="venousjugu_yes">
-                                        <label class="form-check-label" for="venousjugu_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="venous_jugular" value="yes"
+                                            id="venousjugu_yes" {{ old('venous_jugular') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -880,20 +803,24 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_right_artial"
-                                            value="no" id="venoright_no">
-                                        <label class="form-check-label" for="venoright_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_right_artial" value="no"
+                                            id="venoright_no"
+                                            {{ old('veno_right_artial', 'no') == 'no' ? 'checked' : '' }}>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_right_artial"
-                                            value="yes" id="venoright_yes">
-                                        <label class="form-check-label" for="venoright_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_right_artial" value="yes"
+                                            id="venoright_yes"
+                                            {{ old('veno_right_artial') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -904,18 +831,19 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_left_artial"
-                                            value="no" id="venoleft_no">
-                                        <label class="form-check-label" for="venoleft_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_left_artial" value="no"
+                                            id="venoleft_no"
+                                            {{ old('veno_left_artial', 'no') == 'no' ? 'checked' : '' }}>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_left_artial"
-                                            value="yes" id="venoleft_yes">
-                                        <label class="form-check-label" for="venoleft_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_left_artial" value="yes"
+                                            id="venoleft_yes" {{ old('veno_left_artial') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -928,20 +856,22 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_pulmu"
-                                            value="no" id="pulmo_no">
-                                        <label class="form-check-label" for="pulmo_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_pulmu" value="no" id="pulmo_no"
+                                            {{ old('veno_pulmu', 'no') == 'no' ? 'checked' : '' }}>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_pulmu"
-                                            value="yes" id="pulmo_yes">
-                                        <label class="form-check-label" for="pulmo_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_pulmu" value="yes" id="pulmo_yes"
+                                            {{ old('veno_pulmu') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -952,20 +882,22 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_cav"
-                                            value="no" id="venocav_no">
-                                        <label class="form-check-label" for="venocav_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_cav" value="no" id="venocav_no"
+                                            {{ old('veno_cav', 'no') == 'no' ? 'checked' : '' }}>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_cav"
-                                            value="yes" id="venocav_yes">
-                                        <label class="form-check-label" for="venocav_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_cav" value="yes" id="venocav_yes"
+                                            {{ old('veno_cav') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -975,20 +907,21 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_other"
-                                            value="no" id="venoother_no">
-                                        <label class="form-check-label" for="venoother_no">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_other" value="no" id="venoother_no"
+                                            {{ old('veno_other', 'no') == 'no' ? 'checked' : '' }}>
+                                        <span>No</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="veno_other"
-                                            value="yes" id="venoother_yes">
-                                        <label class="form-check-label" for="venoother_yes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="veno_other" value="yes" id="venoother_yes"
+                                            {{ old('veno_other') == 'yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <label for="">Cardiopulmonary Bypass Time (min)</label>
@@ -1005,21 +938,21 @@
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="circular_arrest"
-                                        value="Yes" id="arrest_yes">
-                                    <label class="form-check-label" for="arrest_yes">Yes</label>
-                                </div>
+                                <label class="me-3">
+                                    <input type="radio" name="circular_arrest" value="Yes" id="arrest_yes"
+                                        {{ old('circular_arrest', 'No') == 'Yes' ? 'checked' : '' }}>
+                                    <span>Yes</span>
+                                </label>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="circular_arrest"
-                                        value="No" id="arrest_no">
-                                    <label class="form-check-label" for="arrest_no">No</label>
-                                </div>
+                                <label class="me-3">
+                                    <input type="radio" name="circular_arrest" value="No" id="arrest_no"
+                                        {{ old('circular_arrest', 'No') == 'No' ? 'checked' : '' }}>
+                                    <span>No</span>
+                                </label>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -1047,21 +980,23 @@
                         <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="arrest_with_cerebral"
-                                            value="Yes" id="withyes">
-                                        <label class="form-check-label" for="withyes">Yes</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="arrest_with_cerebral" value="Yes"
+                                            id="withyes"
+                                            {{ old('arrest_with_cerebral', 'No') == 'Yes' ? 'checked' : '' }}>
+                                        <span>Yes</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="arrest_with_cerebral"
-                                            value="No" id="withno">
-                                        <label class="form-check-label" for="withno">No</label>
-                                    </div>
+                                    <label class="me-3">
+                                        <input type="radio" name="arrest_with_cerebral" value="No"
+                                            id="withno"
+                                            {{ old('arrest_with_cerebral', 'No') == 'No' ? 'checked' : '' }}>
+                                        <span>No</span>
+                                    </label>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
 
@@ -1081,32 +1016,35 @@
                                     Type (min)</label>
                                 <div class="row mt-2">
                                     <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input"
-                                                name="cerebral_perfus_type" value="Retrograde" id="perfutypere">
-                                            <label class="form-check-label" for="perfutypere">Retrograte</label>
-                                        </div>
+                                        <label class="me-3">
+                                            <input type="radio" name="cerebral_perfus_type" value="Retrograde"
+                                                id="perfutypere"
+                                                {{ old('cerebral_perfus_type', 'Retrograde') == 'Retrograde' ? 'checked' : '' }}>
+                                            <span>Retrograde</span>
+                                        </label>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input"
-                                                name="cerebral_perfus_type" value="Antegrade" id="perfutypean">
-                                            <label class="form-check-label" for="perfutypean">Antegrade</label>
-                                        </div>
+                                        <label class="me-3">
+                                            <input type="radio" name="cerebral_perfus_type" value="Antegrade"
+                                                id="perfutypean"
+                                                {{ old('cerebral_perfus_type') == 'Antegrade' ? 'checked' : '' }}>
+                                            <span>Antegrade</span>
+                                        </label>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input"
-                                                name="cerebral_perfus_type" value="Both" id="perfutypebo">
-                                            <label class="form-check-label" for="perfutypebo">Both</label>
-                                        </div>
+                                        <label class="me-3">
+                                            <input type="radio" name="cerebral_perfus_type" value="Both"
+                                                id="perfutypebo"
+                                                {{ old('cerebral_perfus_type') == 'Both' ? 'checked' : '' }}>
+                                            <span>Both</span>
+                                        </label>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="col-lg-12 form-group mb-3">
                                 <label for="">Total Circulatory Arrest Time</label>
-                                <input type="text" name="circulat_arrest" id=""
-                                    class="form-control">
+                                <input type="text" name="circulat_arrest" id="" class="form-control">
                             </div>
 
                         </div>
@@ -1169,72 +1107,71 @@
             <label for="">
                 Cerebral Oximetry Used
             </label>
-            <div class="row  mb-3 mt-3">
-                <div class="col-md-4 ">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="oximetry" value="Yes"
-                            id="oximetry_yes">
-                        <label class="form-check-label" for="oximetry_yes">Yes</label>
-                    </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-md-4">
+                    <label class="me-3">
+                        <input type="radio" name="oximetry" value="Yes" id="oximetry_yes"
+                            {{ old('oximetry', 'Yes') == 'Yes' ? 'checked' : '' }}>
+                        <span>Yes</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="oximetry" value="Yes"
-                            id="oximetry_no">
-                        <label class="form-check-label" for="oximetry_no">No</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="oximetry" value="No" id="oximetry_no"
+                            {{ old('oximetry') == 'No' ? 'checked' : '' }}>
+                        <span>No</span>
+                    </label>
                 </div>
-
             </div>
+
         </div>
         <div class="row form-group">
             <label for="">
                 Diffuse Aortic Calcification
             </label>
-            <div class="row  mb-3 mt-3">
-                <div class="col-md-4 ">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="diffuse_aort" value="Yes"
-                            id="diffuse_aort_yes">
-                        <label class="form-check-label" for="diffuse_aort_yes">Yes</label>
-                    </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-md-4">
+                    <label class="me-3">
+                        <input type="radio" name="diffuse_aort" value="Yes" id="diffuse_aort_yes"
+                            {{ old('diffuse_aort', 'Yes') == 'Yes' ? 'checked' : '' }}>
+                        <span>Yes</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="diffuse_aort" value="Yes"
-                            id="diffuse_aort_no">
-                        <label class="form-check-label" for="diffuse_aort_no">No</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="diffuse_aort" value="No" id="diffuse_aort_no"
+                            {{ old('diffuse_aort') == 'No' ? 'checked' : '' }}>
+                        <span>No</span>
+                    </label>
                 </div>
-
             </div>
+
         </div>
         <div class="row form-group">
             <label for="">
                 Assessment of Ascending Aorta/Arch for atheroma/plaque
             </label>
-            <div class="row  mb-3 mt-3">
-                <div class="col-md-4 ">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="ascesnding" value="Yes"
-                            id="ascesnding_yes">
-                        <label class="form-check-label" for="ascesnding_yes">Yes</label>
-                    </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-md-4">
+                    <label class="me-3">
+                        <input type="radio" name="ascending" value="Yes" id="ascending_yes"
+                            {{ old('ascending') == 'Yes' ? 'checked' : '' }} checked>
+                        <span>Yes</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="ascesnding" value="Yes"
-                            id="ascesnding_no">
-                        <label class="form-check-label" for="ascesnding_no">No</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="ascending" value="No" id="ascending_no"
+                            {{ old('ascending') == 'No' ? 'checked' : '' }}>
+                        <span>No</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="ascesnding" value="Not Reported"
-                            id="ascesnding_ex">
-                        <label class="form-check-label" for="ascesnding_ex">Not
-                            Reported</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="ascending" value="Not Reported" id="ascending_ex"
+                            {{ old('ascending') == 'Not Reported' ? 'checked' : '' }}>
+                        <span>Not Reported</span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -1263,45 +1200,45 @@
             <label for="">
                 Aortic Condition Altered Plan
             </label>
-            <div class="row  mb-3 mt-3">
-                <div class="col-md-4 ">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="alterplan" value="Yes"
-                            id="alterplan_yes">
-                        <label class="form-check-label" for="alterplan_yes">Yes</label>
-                    </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-md-4">
+                    <label class="me-3">
+                        <input type="radio" name="alterplan" value="Yes" id="alterplan_yes"
+                            {{ old('alterplan') == 'Yes' ? 'checked' : '' }}>
+                        <span>Yes</span>
+                    </label>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="alterplan" value="Yes"
-                            id="alterplan_no">
-                        <label class="form-check-label" for="alterplan_no">No</label>
-                    </div>
+                    <label class="me-3">
+                        <input type="radio" name="alterplan" value="No" id="alterplan_no"
+                            {{ old('alterplan') == 'No' ? 'checked' : '' }} checked>
+                        <span>No</span>
+                    </label>
                 </div>
-
             </div>
+
         </div>
         <div class="row form-group">
             <label for="">
                 Intraop Blood Products Refused
             </label>
-            <div class="row  mb-3 mt-3">
-                <div class="col-md-4 ">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="intraop" value="Yes"
-                            id="intraop_yes">
-                        <label class="form-check-label" for="intraop_yes">Yes</label>
-                    </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-md-4">
+                    <label for="intraop_yes">
+                        <input type="radio" name="intraop" value="Yes" id="intraop_yes"
+                            {{ old('intraop') == 'Yes' ? 'checked' : '' }} checked>
+                        <span>Yes</span></label>
+
                 </div>
                 <div class="col-md-4">
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="intraop" value="No"
-                            id="intraop_no">
-                        <label class="form-check-label" for="intraop_no">No</label>
-                    </div>
-                </div>
+                    <label for="intraop_no">
+                        <input type="radio" name="intraop" value="No" id="intraop_no"
+                            {{ old('intraop') == 'No' ? 'checked' : '' }}>
+                        <span>No</span></label>
 
+                </div>
             </div>
+
         </div>
         <div class="row form-group mb-2" id="intrapo-no" style="display: none;">
             <div class="col-lg-12 mt-2 mb-3">
@@ -1418,55 +1355,55 @@
                     <div class="row form-group mb-3">
                         <div class="col-lg-12">
                             <label for="">High level aortic insufficient found</label>
-                        <select name="aortic_insufi" id="" class="form-select">
-                            <option value="">Select high level aortic insufficient found</option>
-                            <option value="None">None</option>
-                            <option value="Trace/Trivial">Trace/Trivial</option>
-                            <option value="Mild">Mild</option>
-                            <option value="Moderate">Moderate</option>
-                            <option value="Severe">Severe</option>
-                            <option value="Not Reported">Not Reported</option>
-                        </select>
+                            <select name="aortic_insufi" id="" class="form-select">
+                                <option value="">Select high level aortic insufficient found</option>
+                                <option value="None">None</option>
+                                <option value="Trace/Trivial">Trace/Trivial</option>
+                                <option value="Mild">Mild</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Severe">Severe</option>
+                                <option value="Not Reported">Not Reported</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row form-group mb-3">
-                       <div class="col-lg-12">
-                        <label for="">High level mitral insufficient found</label>
-                        <select name="mitral_insufi" id="" class="form-select">
-                            <option value="">Select high level mitral insufficient found</option>
-                            <option value="None">None</option>
-                            <option value="Trace/Trivial">Trace/Trivial</option>
-                            <option value="Mild">Mild</option>
-                            <option value="Moderate">Moderate</option>
-                            <option value="Severe">Severe</option>
-                            <option value="Not Reported">Not Reported</option>
-                        </select>
-                       </div>
+                        <div class="col-lg-12">
+                            <label for="">High level mitral insufficient found</label>
+                            <select name="mitral_insufi" id="" class="form-select">
+                                <option value="">Select high level mitral insufficient found</option>
+                                <option value="None">None</option>
+                                <option value="Trace/Trivial">Trace/Trivial</option>
+                                <option value="Mild">Mild</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Severe">Severe</option>
+                                <option value="Not Reported">Not Reported</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="row form-group mb-3">
                         <div class="col-lg-12">
                             <label for="">High level tricuspid insufficient found</label>
-                        <select name="tricuspid_insufi" id="" class="form-select">
-                            <option value="">Select high level tricuspid insufficient found</option>
-                            <option value="None">None</option>
-                            <option value="Trace/Trivial">Trace/Trivial</option>
-                            <option value="Mild">Mild</option>
-                            <option value="Moderate">Moderate</option>
-                            <option value="Severe">Severe</option>
-                            <option value="Not Reported">Not Reported</option>
-                        </select>
+                            <select name="tricuspid_insufi" id="" class="form-select">
+                                <option value="">Select high level tricuspid insufficient found</option>
+                                <option value="None">None</option>
+                                <option value="Trace/Trivial">Trace/Trivial</option>
+                                <option value="Mild">Mild</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Severe">Severe</option>
+                                <option value="Not Reported">Not Reported</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row form-group mb-3">
                         <div class="col-lg-12">
                             <label for="">Ejection Fraction post procedure</label>
-                        <select name="ejection_fract" id="" class="form-select">
-                            <option value="">Select ejection fraction post procedure</option>
-                            <option value="Unchanged">Unchanged</option>
-                            <option value="Increased">Increased</option>
-                            <option value="Decreased">Decreased</option>
-                            <option value="Not Reported">Not Reported</option>
-                        </select>
+                            <select name="ejection_fract" id="" class="form-select">
+                                <option value="">Select ejection fraction post procedure</option>
+                                <option value="Unchanged">Unchanged</option>
+                                <option value="Increased">Increased</option>
+                                <option value="Decreased">Decreased</option>
+                                <option value="Not Reported">Not Reported</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -1500,35 +1437,36 @@
                     <div class="row form-group mb-3">
                         <div class="col-lg-12">
                             <label for="">Combined Procedures</label>
-                        <select name="combine_pro" id="" class="form-select">
-                            <option value="">Select combined procedures</option>
-                            <option value="PCI + CAD">PCI + CAD</option>
-                            <option value="PCI + Valve">PCI + Valve</option>
-                            <option value="PCI + Aortic">PCI + Aortic</option>
-                            <option value="PCI + Other">PCI + Other</option>
-                        </select>
+                            <select name="combine_pro" id="" class="form-select">
+                                <option value="">Select combined procedures</option>
+                                <option value="PCI + CAD">PCI + CAD</option>
+                                <option value="PCI + Valve">PCI + Valve</option>
+                                <option value="PCI + Aortic">PCI + Aortic</option>
+                                <option value="PCI + Other">PCI + Other</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row form-group mb-3">
-                       <div class="col-lg-12">
-                        <label for="">Status</label>
-                        <select name="proced_status" id="" class="form-select">
-                            <option value="">Select Status</option>
-                            <option value="Conurrent - same setting">Concurrent - same setting</option>
-                            <option value="Staged - PCI followed by surgery">Staged - PCI followed by surgery</option>
-                            <option value="Staged - surgery followed by PCI"></option>
-                        </select>
-                       </div>
+                        <div class="col-lg-12">
+                            <label for="">Status</label>
+                            <select name="proced_status" id="" class="form-select">
+                                <option value="">Select Status</option>
+                                <option value="Conurrent - same setting">Concurrent - same setting</option>
+                                <option value="Staged - PCI followed by surgery">Staged - PCI followed by surgery
+                                </option>
+                                <option value="Staged - surgery followed by PCI"></option>
+                            </select>
+                        </div>
                     </div>
                     <div class="row form-group mb-3">
                         <div class="col-lg-12">
                             <label for="">PCI procedure</label>
-                        <select name="pci_procedure" id="" class="form-select">
-                            <option value="">Select PCI procedure</option>
-                            <option value="Stent">Stent</option>
-                            <option value="Angioplasty and stent">Angioplasty and stent</option>
-                            <option value="Attempted PCI">Attempted PCI</option>
-                        </select>
+                            <select name="pci_procedure" id="" class="form-select">
+                                <option value="">Select PCI procedure</option>
+                                <option value="Stent">Stent</option>
+                                <option value="Angioplasty and stent">Angioplasty and stent</option>
+                                <option value="Attempted PCI">Attempted PCI</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row form-group mb-3">
@@ -1548,6 +1486,144 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    <button type="submit" class="btn btn-dark" style="float: right;">Submit</button>
+
+    </div>
+
+
+   </form>
+</div>
+
+
+{{-- /* --------------------------------- modals --------------------------------- */ --}}
+
+<div id="yesModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center mt-2 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                        <h4 class="mb-0"><b>Add Coronary Artery ByPasses</b></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                @include('cases.coronary')
+            </div>
+        </div>
+    </div>
+</div>
+{{-- /* ---------------------------------- valve --------------------------------- */ --}}
+<div id="valveModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center mt-2 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                        <h4 class="mb-0"><b>Valve Surgery</b></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                @include('cases.valve-surgery')
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- /* ------------------------------- non cardic ------------------------------- */ --}}
+
+<div id="noncardic" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center mt-2 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                        <h4 class="mb-0"><b>Other Non-Cardic Procedure</b></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                @include('cases.non-cardic')
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- /* ------------------------------ aortic modal ------------------------------ */ --}}
+
+<div id="aorticModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center mt-2 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                        <h4 class="mb-0"><b>Other Aortic Procedure</b></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                @include('cases.aortic')
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{-- /* --------------------------- atrial fibrilation --------------------------- */ --}}
+<div id="atrailFilrilate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center mt-2 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                        <h4 class="mb-0"><b>Atrial Fibrilation</b></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                @include('cases.atrial-fibrilat')
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- /* -------------------------- cardic assist device -------------------------- */ --}}
+
+
+<div id="cardicAssist" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center mt-2 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                        <h4 class="mb-0"><b>Cardic Assist Devices</b></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                @include('cases.cardic-assist-device')
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- /* ------------------------------ other cardic ------------------------------ */ --}}
+
+<div id="otherCardic" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center mt-2 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                        <h4 class="mb-0"><b>Other Cardic Procedure</b></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                @include('cases.other-cardic')
             </div>
         </div>
     </div>

@@ -220,6 +220,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/add-patient-history', 'addPatientHistory')->name('add-patient-history');
         Route::get('/procedure', 'caseProcedure')->name('case-procedure');
 
+        Route::post('/add-case-procedure', 'addcaseProcedure')->name('add-case-procedure');
+        Route::post('/add-valve-procedure', 'addvalveProcedure')->name('add-valve-procedure');
+        Route::post('/add-noncardic-procedure', 'addNoncardicProcedure')->name('add-noncardic-procedure');
+
+
+
         /* ------------------------------- case staff ------------------------------- */
 
         Route::get('/case-staff', 'viewCstaff')->name('case-staff');
@@ -244,6 +250,12 @@ Route::middleware('auth')->group(function () {
         route::post('/add-cabypasses', 'addCABypasses')->name('add-cabypasses');
         route::post('/edit-cabypasses', 'editCABypasses')->name('edit-cabypasses');
         route::post('/delete-cabypasses/{id}', 'deleteCABypasses')->name('delete-cabypasses');
+
+        Route::get('/othercp', 'viewothercps')->name('othercps');
+        route::post('/add-other-cardiac-pro', 'addOtherCarPro')->name('add-other-cardiac-pro');
+        route::post('/add-atrial-fibrillation', 'addAtrialFibrillation')->name('add-atrial-fibrillation');
+        route::post('/add-aortic-procedure', 'addAorticProcedure')->name('add-aortic-procedure');
+        route::post('/add-cardic-dev', 'addCardicAssistDev')->name('add-cardic-dev');
 
     });
 

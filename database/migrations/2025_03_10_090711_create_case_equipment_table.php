@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pet_id')->nullable();
             $table->unsignedBigInteger('e_group')->nullable();
             $table->unsignedBigInteger('e_configure')->nullable();
-            $table->unsignedBigInteger('e_type')->nullable();
+            $table->string('e_type')->nullable();
 
             $table->string('e_manufacturer', 100)->nullable()->collation('utf8mb4_general_ci');
             $table->string('e_name', 100)->nullable()->collation('utf8mb4_general_ci');
