@@ -76,8 +76,10 @@
                             class="hide-menu"> Fluid / Drugs</span></a></li>
                 <li class="sidebar-item"><a href="{{ route('check-list') }}" class="sidebar-link"><span
                             class="hide-menu"> Check List </span></a></li>
-                            <li class="sidebar-item"><a href="{{ route('coronary-perfusion-log') }}" class="sidebar-link"><span
-                                class="hide-menu"> Coronary Perfusion Log </span></a></li>
+                <li class="sidebar-item"><a href="{{ route('coronary-perfusion-log') }}" class="sidebar-link"><span
+                            class="hide-menu"> Coronary Perfusion Log </span></a></li>
+                <li class="sidebar-item"><a href="{{ route('data-device-log') }}" class="sidebar-link"><span
+                            class="hide-menu"> Data Device Log </span></a></li>
                 <li class="sidebar-item"><a href="{{ route('case-sts') }}" class="sidebar-link"><span
                             class="hide-menu"> STS </span></a></li>
 

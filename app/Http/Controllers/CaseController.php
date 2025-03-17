@@ -742,6 +742,8 @@ class CaseController extends Controller
         return view('cases.coronary-perfusion-log',compact('log'));
     }
 
+    /* -------------------- coronary perfusion log functions -------------------- */
+
     public function addCornaryFusionLog(Request $request)
     {
         // return $request->all();
@@ -772,4 +774,17 @@ class CaseController extends Controller
 
         return redirect()->back()->with('success','Coronary perfusion log updated successfully!');
     }
+
+    /* ------------------------ data device log functions ----------------------- */
+
+    public function viewDataDeviceLog()
+    {
+        return view('cases.data-device-log');
+    }
+
+    public function addDataDeviceLog(Request $request)
+    {
+        return $request->all();
+    }
+
 }

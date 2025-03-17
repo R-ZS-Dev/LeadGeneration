@@ -287,6 +287,11 @@ Route::middleware('auth')->group(function () {
 
     route::post('/edit-coronary-perfusion-log', 'editCornaryFusionLog')->name('edit-coronary-perfusion-log');
 
+    /* ----------------------------- data device log ---------------------------- */
+
+    route::get('/data-device-log', 'viewDataDeviceLog')->name('data-device-log');
+
+    route::post('/add-data-device-log', 'addDataDeviceLog')->name('add-data-device-log');
         /* ------------------------------- sts routes ------------------------------- */
 
     });

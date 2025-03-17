@@ -126,7 +126,7 @@
                                                     <option value="Note 2">Note 2</option>
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-dark w-100 mt-2">Submit</button>
+                                            <button type="submit" class="btn btn-dark w-100 mt-2">Add Coronary Perfusion Log</button>
                                         </div>
                                     </div>
                                 </form>
