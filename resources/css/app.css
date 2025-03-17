@@ -264,124 +264,34 @@ input[name='gender']:checked:after {
     background: white;
     padding: 0 10px;
 }
-/*
-.box {
-
-
-    color:#fff;
-    text-align:center;
-
-}
-.box:before,
-.box:after {
-    background:blue;
-    color:blue;
-    border-color:blue;
-    box-shadow: inset 0 0 10px blue;
-    content:'';
-    width: 100%;
-    height: 100%;
-    position:absolute;
-    top:0;
-    left:0;
-    background:blue;
-    z-index:-1;
-    filter: blur(250px);
-}
-.box:before {
-    content:'';
-    position:absolute;
-    top:0;
-    left:-50%;
-    width:100%;
-    height:100%;
-    transform:skewX(-3deg);
-    pointer-events:none;
-}
-
-.box label input {
-    display:none;
-}
-.box label span {
-    position: relative;
+#myTab {
+    white-space: nowrap;
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 10px;
-    padding: 5px;
-    width: 30px;
-    height: 30px;
-
-    background: #7a3269;
-    border: 1px solid #444;
-    color: #fff;
-    border-radius: 50%;
+    overflow-x: hidden; /* Initially hidden */
+    scrollbar-width: thin;
+    scrollbar-color: #d1d1d1 transparent;
+    transition: overflow 0.3s ease-in-out;
 }
-
-.box label input:checked ~ span {
-    color:#fff;
-    border: 1px solid #008eff;
+#myTab:hover {
+    overflow-x: auto;
 }
-.box label input:checked ~ span:before {
-    content:'';
-    width: 100%;
-    height: 100%;
-    position:absolute;
-    top:0;
-    left:0;
-    background:#008eff;
-    z-index:-1;
-    filter: blur(10px);
+#myTab::-webkit-scrollbar {
+    height: 6px; /* Thin scrollbar */
+    background: transparent; /* Hide by default */
 }
-.box label input:checked ~ span:after {
-    content:'';
-    width: 100%;
-    height: 100%;
-    position:absolute;
-    top:0;
-    left:0;
-    background:#008eff;
-    z-index:-1;
-    filter: blur(15px);
+#myTab::-webkit-scrollbar-thumb {
+    background: #d1d1d1;
+    border-radius: 10px;
 }
-.box label input:checked ~ span.yes {
-    color:#5fae2e;
-    border-color:#5fae2e;
-    box-shadow: inset 0 0 10px #5fae2e;
+#myTab::-webkit-scrollbar-thumb:hover {
+    background: #d1d1d1;
 }
-
-.box label input:checked ~ span.yes:before,
-.box label input:checked ~ span.yes:after {
-    background:#5fae2e;
-}
-
-.box label input:checked ~ span.no {
-    color:#ff0000;
-    border-color:#ff0000;
-    box-shadow: inset 0 0 10px #ff0000;
-}
-
-.box label input:checked ~ span.no:before,
-.box label input:checked ~ span.no:after {
-    background:#ff0000;
-}
-
-
-
- */
-
-
-/* Accessible outline (optional) */
-/* Uncomment if needed */
-/*
-label:focus-within {
-    outline: 0.125em solid var(--primary-color);
-}
-*/
 
 .ft{
     float: right;
+}
+.fs-10{
+    font-size: 10px;
 }
 
 :root {

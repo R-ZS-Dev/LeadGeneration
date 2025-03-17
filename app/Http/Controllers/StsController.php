@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class StsController extends Controller
@@ -9,5 +10,46 @@ class StsController extends Controller
     public function viewSts()
     {
         return view('cases.sts');
+    }
+
+    public function addPatientMedication(Request $request)
+    {
+        // return $request->all();
+        $pat_id = session('pat_id');
+        $pat = Patient::find($pat_id);
+        if ($pat) {
+            // Update the new columns
+            $pat->update([
+                'aceorarb' => $request->aceorarb,
+                'inhibitor' => $request->inhibitor,
+                'inhibitor_no' => $request->inhibitor_no,
+                'amiod' => $request->amiod,
+                'anticoagulant' => $request->anticoagulant,
+                'medicat' => $request->medicat,
+                'antiplaletes' => $request->antiplaletes,
+                'aspirin' => $request->aspirin,
+                'beta_blocker' => $request->beta_blocker,
+                'blocker_prior' => $request->blocker_prior,
+                'calcium_prior' => $request->calcium_prior,
+                'coumadin' => $request->coumadin,
+                'factorxa' => $request->factorxa,
+                'glycoprotein' => $request->glycoprotein,
+                'med_name' => $request->med_name,
+                'ointravanous' => $request->ointravanous,
+                'lipid' => $request->lipid,
+                'med_type' => $request->med_type,
+                'long_acting' => $request->long_acting,
+                'nitrates' => $request->nitrates,
+                'antianginal' => $request->antianginal,
+                'steroids' => $request->steroids,
+                'thrombin' => $request->thrombin,
+                'thrombolytics' => $request->thrombolytics,
+            ]);
+
+            return redirect()->back()->with('success','Patient medication added successfully.');
+        } else {
+            return redirect()->back()->with('error','An error occur while updating medications.');
+
+        }
     }
 }

@@ -300,6 +300,8 @@ Route::middleware('auth')->group(function () {
 
     route::get('/sts', 'viewSts')->name('case-sts');
 
+    route::post('/add-patient-medication','addPatientMedication')->name('add-patient-medication');
+
     });
 
 });

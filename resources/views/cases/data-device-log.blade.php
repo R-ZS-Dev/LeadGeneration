@@ -1,5 +1,5 @@
 @extends('sitemaster.master-layout')
-@section('title', 'Coronary Perfusion Log')
+@section('title', 'Data Device Log')
 @section('content')
     <div class="container-fluid">
         <div class="row">
