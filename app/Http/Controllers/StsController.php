@@ -18,7 +18,6 @@ class StsController extends Controller
         $pat_id = session('pat_id');
         $pat = Patient::find($pat_id);
         if ($pat) {
-            // Update the new columns
             $pat->update([
                 'aceorarb' => $request->aceorarb,
                 'inhibitor' => $request->inhibitor,
