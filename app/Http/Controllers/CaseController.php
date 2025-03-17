@@ -6,15 +6,19 @@ use App\Models\AtrialFibrillation;
 use App\Models\CardicAssistDevice;
 use App\Models\CaseEquipment;
 use App\Models\Casefluiddrugs;
+use Illuminate\Support\Str;
+use App\Models\FluidDrugs;
+use App\Models\FluidLocations;
+use App\Models\CaseGeneralEvent;
 use App\Models\CaseProcedures;
 use App\Models\CaseStaff;
 use App\Models\CaseSupply;
-use Illuminate\Support\Str;
+use App\Models\Checklist;
+use App\Models\ChecklistGroup;
 use App\Models\CoronaryArteryBypass;
 use App\Models\Equipment;
 use App\Models\EquipmentGroup;
-use App\Models\FluidDrugs;
-use App\Models\FluidLocations;
+use App\Models\GeneralEvent;
 use App\Models\Hospital;
 use App\Models\NonCardic;
 use App\Models\OtherAorticLocation;
@@ -65,6 +69,7 @@ class CaseController extends Controller
     public function caseProcedure()
     {
         $procedure = Procedures::where('status', '1')->where('close', '1')->get();
+
         return view('cases.procedure-modals', compact('procedure'));
     }
     /* -------------------------- add pateint function -------------------------- */
@@ -346,10 +351,9 @@ class CaseController extends Controller
         return redirect()->back()->with('success', 'Case supply deleted Successfully!');
     }
     /* ---------------- Coronary Artery ByPasses module functions --------------- */
+
     public function addCABypasses(Request $request)
     {
-        // dd($request->all());
-
         $request->validate([
             'pet_id' => 'required',
             'cab_arterial' => 'required|string|max:255',
@@ -375,10 +379,14 @@ class CaseController extends Controller
         $cab_bypass->cab_ins_conduit = $request->cab_ins_conduit;
         $cab_bypass->cab_ins_position = $request->cab_ins_position;
         $cab_bypass->cab_ins_end = $request->cab_ins_end;
-
         $cab_bypass->note = $request->note;
         $cab_bypass->cab_insertby = Auth::user()->name;
         $cab_bypass->save();
+
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Coronary Artery Bypass Added Successfully!'
+        // ]);
         return redirect()->back()->with('success', 'Coronary Artery Bypass Added Successfully!');
     }
 
@@ -423,36 +431,41 @@ class CaseController extends Controller
 
     public function addOtherCarPro(Request $request)
     {
-        $request->validate([
-            'pat_id' => 'required'
-        ]);
-
-        $add_ocp = new OtherCardiacProcedure();
-        $add_ocp->pat_id = $request->pat_id;
-        $add_ocp->afib_el = $request->afib_el;
-        $add_ocp->asd_pfo = $request->asd_pfo;
-        $add_ocp->aap_raa = $request->aap_raa;
-        $add_ocp->arr_dev_sur = $request->arr_dev_sur;
-        $add_ocp->lead_in = $request->lead_in;
-        $add_ocp->msc_therapy = $request->msc_therapy;
-        $add_ocp->tl_rev = $request->tl_rev;
-        $add_ocp->afib_il = $request->afib_il;
-        $add_ocp->asd_sv = $request->asd_sv;
-        $add_ocp->arr_correction_ext = $request->arr_correction_ext;
-        $add_ocp->lva = $request->lva;
-        $add_ocp->pt_acute = $request->pt_acute;
-        $add_ocp->ss_res = $request->ss_res;
-        $add_ocp->ssr_type = $request->ssr_type;
-        $add_ocp->sv_res = $request->sv_res;
-        $add_ocp->tumor_select = $request->tumor_select;
-        $add_ocp->card_tx = $request->card_tx;
-        $add_ocp->cardiac_t = $request->cardiac_t;
-        $add_ocp->p_congenital = $request->p_congenital;
-        $add_ocp->p_other = $request->p_other;
-        $add_ocp->vsd_con = $request->vsd_con;
-        $add_ocp->ocp_insertby = Auth::user()->name;
-        $add_ocp->save();
+        OtherCardiacProcedure::create([
+            'ocp_insertby' => Auth::user()->name,
+        ] + $request->all());
         return redirect()->back()->with('success', 'Other Cardiac Procedure Added Successfully!');
+
+        // $request->validate([
+        //     'pat_id' => 'required'
+        // ]);
+
+        // $add_ocp = new OtherCardiacProcedure();
+        // $add_ocp->pat_id = $request->pat_id;
+        // $add_ocp->afib_el = $request->afib_el;
+        // $add_ocp->asd_pfo = $request->asd_pfo;
+        // $add_ocp->aap_raa = $request->aap_raa;
+        // $add_ocp->arr_dev_sur = $request->arr_dev_sur;
+        // $add_ocp->lead_in = $request->lead_in;
+        // $add_ocp->msc_therapy = $request->msc_therapy;
+        // $add_ocp->tl_rev = $request->tl_rev;
+        // $add_ocp->afib_il = $request->afib_il;
+        // $add_ocp->asd_sv = $request->asd_sv;
+        // $add_ocp->arr_correction_ext = $request->arr_correction_ext;
+        // $add_ocp->lva = $request->lva;
+        // $add_ocp->pt_acute = $request->pt_acute;
+        // $add_ocp->ss_res = $request->ss_res;
+        // $add_ocp->ssr_type = $request->ssr_type;
+        // $add_ocp->sv_res = $request->sv_res;
+        // $add_ocp->tumor_select = $request->tumor_select;
+        // $add_ocp->card_tx = $request->card_tx;
+        // $add_ocp->cardiac_t = $request->cardiac_t;
+        // $add_ocp->p_congenital = $request->p_congenital;
+        // $add_ocp->p_other = $request->p_other;
+        // $add_ocp->vsd_con = $request->vsd_con;
+        // $add_ocp->ocp_insertby = Auth::user()->name;
+        // $add_ocp->save();
+        // return redirect()->back()->with('success', 'Other Cardiac Procedure Added Successfully!');
     }
 
     public function addAtrialFibrillation(Request $request)
@@ -479,99 +492,211 @@ class CaseController extends Controller
 
     public function addAorticProcedure(Request $request)
     {
-        $request->validate([
-            'pat_id' => 'required'
-        ]);
+        OtherAorticLocation::create([
+            'oal_insertby' => Auth::user()->name,
+        ] + $request->all());
+        return redirect()->back()->with('success', 'Other Aortic Procedure Added Successfully!');
 
-        $add_oal = new OtherAorticLocation();
-        $add_oal->pat_id = $request->pat_id;
+        // $request->validate([
+        //     'pat_id' => 'required'
+        // ]);
 
-        $add_oal->root = $request->root;
-        $add_oal->ascending = $request->ascending;
-        $add_oal->hemi_arch = $request->hemi_arch;
-        $add_oal->total_arch = $request->total_arch;
-        $add_oal->descending_proximal = $request->descending_proximal;
-        $add_oal->descending_mid = $request->descending_mid;
-        $add_oal->thoracoabdominal = $request->thoracoabdominal;
-        $add_oal->apsg_use = $request->apsg_use;
-        $add_oal->iv_ri = $request->iv_ri;
-        $add_oal->csf_du = $request->csf_du;
-        $add_oal->el_trunk = $request->el_trunk;
-        $add_oal->ceaf_lumen = $request->ceaf_lumen;
-        $add_oal->ap_other = $request->ap_other;
-        $add_oal->ap_tevar = $request->ap_tevar;
+        // $add_oal = new OtherAorticLocation();
+        // $add_oal->pat_id = $request->pat_id;
 
-        $add_oal->oal_insertby = Auth::user()->name;
-        $add_oal->save();
-        return redirect()->back()->with('success', 'Atrial Fibrillation Added Successfully!');
+        // $add_oal->root = $request->root;
+        // $add_oal->ascending = $request->ascending;
+        // $add_oal->hemi_arch = $request->hemi_arch;
+        // $add_oal->total_arch = $request->total_arch;
+        // $add_oal->descending_proximal = $request->descending_proximal;
+        // $add_oal->descending_mid = $request->descending_mid;
+        // $add_oal->thoracoabdominal = $request->thoracoabdominal;
+        // $add_oal->apsg_use = $request->apsg_use;
+        // $add_oal->iv_ri = $request->iv_ri;
+        // $add_oal->csf_du = $request->csf_du;
+        // $add_oal->el_trunk = $request->el_trunk;
+        // $add_oal->ceaf_lumen = $request->ceaf_lumen;
+        // $add_oal->ap_other = $request->ap_other;
+        // $add_oal->ap_tevar = $request->ap_tevar;
+
+        // $add_oal->oal_insertby = Auth::user()->name;
+        // $add_oal->save();
+        // return redirect()->back()->with('success', 'Atrial Fibrillation Added Successfully!');
     }
 
     public function addCardicAssistDev(Request $request)
     {
+        CardicAssistDevice::create([
+            'cad_insertby' => Auth::user()->name,
+        ] + $request->all());
+        return redirect()->back()->with('success', 'Cardic Assist Devices Added Successfully!');
+
+        // $request->validate([
+        //     'pat_id' => 'required'
+        // ]);
+        // $ca_dev = new CardicAssistDevice();
+        // $ca_dev->pat_id = $request->pat_id;
+
+        // $ca_dev->iab_pump = $request->iab_pump;
+        // $ca_dev->iabp_insertion = $request->iabp_insertion;
+        // $ca_dev->iabp_reason = $request->iabp_reason;
+        // $ca_dev->cbad_use = $request->cbad_use;
+        // $ca_dev->cbad_type = $request->cbad_type;
+        // $ca_dev->cbad_inserted = $request->cbad_inserted;
+        // $ca_dev->cbad_reason = $request->cbad_reason;
+        // $ca_dev->ecmo_sel = $request->ecmo_sel;
+        // $ca_dev->ecmo_initiated = $request->ecmo_initiated;
+        // $ca_dev->ecmo_clinical = $request->ecmo_clinical;
+        // $ca_dev->wpa_vad = $request->wpa_vad;
+        // $ca_dev->piaf_vad = $request->piaf_vad;
+        // $ca_dev->vad_date_ins = $request->vad_date_ins;
+        // $ca_dev->vad_dev_model = $request->vad_dev_model;
+        // $ca_dev->vad_udi = $request->vad_udi;
+        // $ca_dev->vad_indication = $request->vad_indication;
+        // $ca_dev->vad_type = $request->vad_type;
+        // $ca_dev->peda_vad = $request->peda_vad;
+        // $ca_dev->vad_timing = $request->vad_timing;
+        // $ca_dev->vad_date = $request->vad_date;
+        // $ca_dev->vadid_hos = $request->vadid_hos;
+        // $ca_dev->vadidh_timing = $request->vadidh_timing;
+        // $ca_dev->vadidh_indication = $request->vadidh_indication;
+        // $ca_dev->vadidh_type = $request->vadidh_type;
+        // $ca_dev->vadidh_device = $request->vadidh_device;
+        // $ca_dev->vadidh_initial_date = $request->vadidh_initial_date;
+        // $ca_dev->vadidh_udi = $request->vadidh_udi;
+        // $ca_dev->vadidh_vad_exp = $request->vadidh_vad_exp;
+        // $ca_dev->vadidh_reason = $request->vadidh_reason;
+        // $ca_dev->vadidh_date = $request->vadidh_date;
+        // $ca_dev->sec_di = $request->sec_di;
+        // $ca_dev->sec_timing = $request->sec_timing;
+        // $ca_dev->sec_indication = $request->sec_indication;
+        // $ca_dev->sec_type = $request->sec_type;
+        // $ca_dev->sec_device = $request->sec_device;
+        // $ca_dev->sec_implant_date = $request->sec_implant_date;
+        // $ca_dev->sec_udi = $request->sec_udi;
+        // $ca_dev->sec_vad_expl = $request->sec_vad_expl;
+        // $ca_dev->sec_reason = $request->sec_reason;
+        // $ca_dev->sec_date = $request->sec_date;
+        // $ca_dev->th_dev_imp = $request->th_dev_imp;
+        // $ca_dev->th_timing = $request->th_timing;
+        // $ca_dev->th_indication = $request->th_indication;
+        // $ca_dev->th_type = $request->th_type;
+        // $ca_dev->th_device = $request->th_device;
+        // $ca_dev->th_implant_date = $request->th_implant_date;
+        // $ca_dev->th_udi = $request->th_udi;
+        // $ca_dev->th_vad_expla = $request->th_vad_expla;
+        // $ca_dev->th_reason = $request->th_reason;
+        // $ca_dev->th_date = $request->th_date;
+        // $ca_dev->crma_dev = $request->crma_dev;
+        // $ca_dev->first_complication = $request->first_complication;
+        // $ca_dev->second_complication = $request->second_complication;
+        // $ca_dev->third_complication = $request->third_complication;
+
+        // $ca_dev->cad_insertby = Auth::user()->name;
+        // $ca_dev->save();
+        // return redirect()->back()->with('success', 'Cardic Assist Devices Added Successfully!');
+    }
+
+    // Case General Event
+    public function viewCGEvent()
+    {
+        $patients = Patient::where('status', '1')->where('close', '1')->get();
+        $cgevents = GeneralEvent::where('status', '1')->where('close', '1')->get();
+        $caseGeneralEvents = CaseGeneralEvent::where('status', '1')->where('close', '1')->with('note')->get();
+
+        return view('cases.general-events', compact('patients', 'cgevents', 'caseGeneralEvents'));
+    }
+
+    public function addCGEvent(Request $request)
+    {
         $request->validate([
             'pat_id' => 'required'
         ]);
-        $ca_dev = new CardicAssistDevice();
-        $ca_dev->pat_id = $request->pat_id;
+        $case_ge = new CaseGeneralEvent();
+        $case_ge->pat_id = $request->pat_id;
+        $case_ge->cge_date = $request->cge_date;
+        $case_ge->cge_time = $request->cge_time;
+        $case_ge->cge_note = $request->cge_note;
+        $case_ge->cge_insertby = Auth::user()->name;
+        $case_ge->save();
+        return redirect()->back()->with('success', 'Case General Event Added Successfully!');
+    }
 
-        $ca_dev->iab_pump = $request->iab_pump;
-        $ca_dev->iabp_insertion = $request->iabp_insertion;
-        $ca_dev->iabp_reason = $request->iabp_reason;
-        $ca_dev->cbad_use = $request->cbad_use;
-        $ca_dev->cbad_type = $request->cbad_type;
-        $ca_dev->cbad_inserted = $request->cbad_inserted;
-        $ca_dev->cbad_reason = $request->cbad_reason;
-        $ca_dev->ecmo_sel = $request->ecmo_sel;
-        $ca_dev->ecmo_initiated = $request->ecmo_initiated;
-        $ca_dev->ecmo_clinical = $request->ecmo_clinical;
-        $ca_dev->wpa_vad = $request->wpa_vad;
-        $ca_dev->piaf_vad = $request->piaf_vad;
-        $ca_dev->vad_date_ins = $request->vad_date_ins;
-        $ca_dev->vad_dev_model = $request->vad_dev_model;
-        $ca_dev->vad_udi = $request->vad_udi;
-        $ca_dev->vad_indication = $request->vad_indication;
-        $ca_dev->vad_type = $request->vad_type;
-        $ca_dev->peda_vad = $request->peda_vad;
-        $ca_dev->vad_timing = $request->vad_timing;
-        $ca_dev->vad_date = $request->vad_date;
-        $ca_dev->vadid_hos = $request->vadid_hos;
-        $ca_dev->vadidh_timing = $request->vadidh_timing;
-        $ca_dev->vadidh_indication = $request->vadidh_indication;
-        $ca_dev->vadidh_type = $request->vadidh_type;
-        $ca_dev->vadidh_device = $request->vadidh_device;
-        $ca_dev->vadidh_initial_date = $request->vadidh_initial_date;
-        $ca_dev->vadidh_udi = $request->vadidh_udi;
-        $ca_dev->vadidh_vad_exp = $request->vadidh_vad_exp;
-        $ca_dev->vadidh_reason = $request->vadidh_reason;
-        $ca_dev->vadidh_date = $request->vadidh_date;
-        $ca_dev->sec_di = $request->sec_di;
-        $ca_dev->sec_timing = $request->sec_timing;
-        $ca_dev->sec_indication = $request->sec_indication;
-        $ca_dev->sec_type = $request->sec_type;
-        $ca_dev->sec_device = $request->sec_device;
-        $ca_dev->sec_implant_date = $request->sec_implant_date;
-        $ca_dev->sec_udi = $request->sec_udi;
-        $ca_dev->sec_vad_expl = $request->sec_vad_expl;
-        $ca_dev->sec_reason = $request->sec_reason;
-        $ca_dev->sec_date = $request->sec_date;
-        $ca_dev->th_dev_imp = $request->th_dev_imp;
-        $ca_dev->th_timing = $request->th_timing;
-        $ca_dev->th_indication = $request->th_indication;
-        $ca_dev->th_type = $request->th_type;
-        $ca_dev->th_device = $request->th_device;
-        $ca_dev->th_implant_date = $request->th_implant_date;
-        $ca_dev->th_udi = $request->th_udi;
-        $ca_dev->th_vad_expla = $request->th_vad_expla;
-        $ca_dev->th_reason = $request->th_reason;
-        $ca_dev->th_date = $request->th_date;
-        $ca_dev->crma_dev = $request->crma_dev;
-        $ca_dev->first_complication = $request->first_complication;
-        $ca_dev->second_complication = $request->second_complication;
-        $ca_dev->third_complication = $request->third_complication;
+    public function deleteCGEvent($id)
+    {
+        $del_cge = CaseGeneralEvent::find($id);
+        $del_cge->close = '0';
+        $del_cge->status = '0';
+        $del_cge->save();
+        return redirect()->back()->with('success', 'Case General Event deleted Successfully!');
+    }
 
-        $ca_dev->cad_insertby = Auth::user()->name;
-        $ca_dev->save();
-        return redirect()->back()->with('success', 'Cardic Assist Devices Added Successfully!');
+    public function editCGEvent(Request $request)
+    {
+        $id = $request->cge_id;
+        $ed_cge = CaseGeneralEvent::find($id);
+        try {
+            $ed_cge->pat_id = $request->pat_id;
+            $ed_cge->cge_date = $request->cge_date;
+            $ed_cge->cge_time = $request->cge_time;
+            $ed_cge->cge_note = $request->cge_note;
+            $ed_cge->save();
+            return redirect()->back()->with('success', 'Case General Event updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+    // Case CheckList
+    public function viewCList()
+    {
+        $patients = Patient::where('status', '1')->where('close', '1')->get();
+        $cchecklists = Checklist::where('status', '1')->where('close', '1')->get();
+        $ccheckgroup = ChecklistGroup::where('status', '1')->where('close', '1')->get();
+
+        return view('cases.check-list', compact('patients', 'cchecklists', 'ccheckgroup'));
+    }
+
+    public function getRowboxesWithGroups(Request $request)
+    {
+        // ✅ Check if Checklist ID is provided
+        if (!$request->has('c_id')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Checklist ID is required'
+            ]);
+        }
+
+        // ✅ Find the selected checklist
+        $checklist = Checklist::find($request->c_id);
+
+        if (!$checklist) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Checklist not found'
+            ]);
+        }
+
+        // ✅ Fetch only related ChecklistGroups where status = 1 and close = 1
+        $groups = ChecklistGroup::where('status', '1')
+            ->where('close', '1')
+            ->where('clg_id', $request->c_id) // 🔥 Fetch groups related to selected checklist
+            ->get();
+
+        $formattedGroups = [];
+
+        foreach ($groups as $group) {
+            $formattedGroups[] = [
+                'clg_name' => $group->clg_name,
+                'rowboxes' => json_decode($group->rowboxes, true) ?? []
+            ];
+        }
+
+        return response()->json([
+            'success' => true,
+            'rowboxes' => json_decode($checklist->rowboxes, true) ?? [], // ✅ Correct rowboxes
+            'groups' => $formattedGroups // ✅ Filtered groups
+        ]);
     }
 
     /* ----------------------- case fluid drugs functions ----------------------- */

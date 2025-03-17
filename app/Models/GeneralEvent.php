@@ -17,4 +17,9 @@ class GeneralEvent extends Model
         'close',
         'status',
     ];
+
+    public function caseGeneralEvents()
+    {
+        return $this->hasMany(CaseGeneralEvent::class, 'cge_note', 'g_id');
+    }
 }
