@@ -149,10 +149,6 @@
                                     <td>{{ ++$i }}</td>
 
                                     <td>
-                                        <a onclick="editGeneralEvent()" href="javascript:void(0);">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-
                                         <a href="javascript:void(0);"
                                             onclick="confirmDelete()"
                                             class="edit-icon delete-user-btn text-danger">
@@ -167,28 +163,8 @@
             </div>
         </div>
     </div>
-
-    {{-- /* --------------------------- edit Check List modal -------------------------- */ --}}
-    <div id="editCLModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content ">
-                <div class="modal-body ">
-                    <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
-                        <h4 class="mb-0"><b>Edit Check List</b></h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-
-                    <form method="POST" action="" class="mt-4">
-                        @csrf
-                        <input type="hidden" name="cl_id" id="cl_id">
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
     @endsection
+
     @section('script')
     <script>
         function editCLEvent(CList) {
@@ -239,72 +215,89 @@
         });
     </script>
 
-<script>
-    $(document).ready(function() {
-        $('#config_checklist').change(function() {
-            var c_id = $(this).val(); // Get selected checklist ID
+    <script>
+        $(document).ready(function() {
+            $('#config_checklist').change(function() {
+                var c_id = $(this).val(); 
 
-            if (c_id) {
-                $.ajax({
-                    url: "{{ route('get.rowboxes.groups') }}",
-                    type: "GET",
-                    data: { c_id: c_id },
-                    success: function(response) {
-                        console.log(response);
-                        if (response.success) {
-                            var accordionHtml = "";
-                            var rowboxes = response.rowboxes || [];
+                if (c_id) {
+                    $.ajax({
+                        url: "{{ route('get.rowboxes.groups') }}",
+                        type: "GET",
+                        data: {
+                            c_id: c_id
+                        },
+                        success: function(response) {
+                            // console.log(response);
+                            if (response.success) {
+                                var accordionHtml = "";
+                                var groups = response.groups || []; 
 
-                            if (rowboxes.length > 0) {
-                                rowboxes.forEach(function(box, index) {
-                                    var collapseId = "collapse" + index;
+                                if (groups.length > 0) {
+                                    groups.forEach(function(group, groupIndex) {
+                                        var groupCollapseId = "groupCollapse" + groupIndex;
 
-                                    accordionHtml += `
-                                    <div class="accordion-item border rounded-0 mb-3">
-                                        <h2 class="accordion-header" id="heading${index}">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="true" aria-controls="${collapseId}">
-                                                <div class="col-md-8">${box}</div>
-                                            </button>
-                                        </h2>
-                                        <div id="${collapseId}" class="accordion-collapse collapse" aria-labelledby="heading${index}" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <form>
-                                                    <div class="row mb-2 align-items-center">
-                                                        <div class="col-md-8 fw-bold">${box}</div>
-                                                        <div class="col-md-2">
-                                                            <label>
-                                                                <input type="radio" name="response_${index}" value="1" />
-                                                                <span>Yes</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <label>
-                                                                <input type="radio" name="response_${index}" value="0" checked />
-                                                                <span>No</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                        accordionHtml += `
+                                <div class="accordion-item border rounded-0 mb-3">
+                                    <h2 class="accordion-header" id="heading${groupIndex}">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#${groupCollapseId}" aria-expanded="true" aria-controls="${groupCollapseId}">
+                                            <div class="col-md-8 fw-bold">${group.clg_name}</div>
+                                        </button>
+                                    </h2>
+                                    <div id="${groupCollapseId}" class="accordion-collapse collapse" aria-labelledby="heading${groupIndex}" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            ${generateRowboxes(group.rowboxes, groupIndex)}
                                         </div>
-                                    </div>`;
-                                });
-                            } else {
-                                accordionHtml = `<div class="text-danger">No rowboxes found</div>`;
-                            }
+                                    </div>
+                                </div>`;
+                                    });
+                                } else {
+                                    accordionHtml = `<div class="text-danger">No groups found</div>`;
+                                }
 
-                            $('#accordionExample').html(accordionHtml);
-                        } else {
-                            $('#accordionExample').html('<div class="text-danger">Error fetching data</div>');
+                                $('#accordionExample').html(accordionHtml);
+                            } else {
+                                $('#accordionExample').html('<div class="text-danger">Error fetching data</div>');
+                            }
                         }
-                    }
+                    });
+                } else {
+                    $('#accordionExample').html('');
+                }
+            });
+
+            function generateRowboxes(rowboxes, groupIndex) {
+                if (!rowboxes || rowboxes.length === 0) {
+                    return '<div class="text-danger">No rowboxes available in this group</div>';
+                }
+
+                var rowboxesHtml = "<form>";
+
+                rowboxes.forEach(function(box, boxIndex) {
+                    rowboxesHtml += `
+            <div class="row mb-2 align-items-center">
+                <div class="col-md-8 fw-bold">${box}</div>
+                <div class="col-md-2">
+                    <label>
+                        <input type="radio" name="response_${groupIndex}_${boxIndex}" value="1" />
+                        <span>Yes</span>
+                    </label>
+                </div>
+                <div class="col-md-2">
+                    <label>
+                        <input type="radio" name="response_${groupIndex}_${boxIndex}" value="0" checked />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>`;
                 });
-            } else {
-                $('#accordionExample').html('');
+
+                rowboxesHtml += "</form>";
+
+                return rowboxesHtml;
             }
         });
-    });
-</script>
+    </script>
 
 
 

@@ -1,4 +1,4 @@
-<form action="{{ route('add-cabypasses') }}" method="POST" enctype="multipart/form-data">
+<form id="cabypassForm" action="{{ route('add-cabypasses') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-lg-12 form-group mb-3">
@@ -17,7 +17,7 @@
             <div class="mb-3">
                 <label class="form-label">Number of Distal Anastomoses with Arterial
                     Conduits</label>
-                <input type="text" name="cab_arterial" class="form-control">
+                <input type="text" name="cab_arterial" class="form-control" required>
             </div>
         </div>
 

@@ -1,4 +1,4 @@
-<form action="{{ route('add-other-cardiac-pro') }}" method="post">
+<form id="other-cardiacpro-form" action="{{ route('add-other-cardiac-pro') }}" method="post">
     @csrf
     <div class="row form-group mb-3">
         <div class="col-lg-12 form-group mb-3">
@@ -17,13 +17,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-6 p-0">
                             <label>
                                 <input type="radio" name="afib_el" value="1" id="afib_el_yes" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-6 p-0">
                             <label>
                                 <input type="radio" name="afib_el" value="0" id="afib_elno" checked />
                                 <span>No</span>
@@ -41,13 +41,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="asd_pfo" value="1" id="asd_pfo_yes" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="asd_pfo" value="0" id="asd_pfo_no" checked />
                                 <span>No</span>
@@ -117,13 +117,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="lead_in" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="lead_in" value="0" id="" checked />
                                 <span>No</span>
@@ -140,13 +140,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="msc_therapy" value="1" id="" checked />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="msc_therapy" value="0" id="" checked />
                                 <span>No</span>
@@ -166,13 +166,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="tl_rev" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="tl_rev" value="0" id="" checked />
                                 <span>No</span>
@@ -189,13 +189,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="afib_il" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="afib_il" value="0" id="" checked />
                                 <span>No</span>
@@ -215,13 +215,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="asd_sv" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="asd_sv" value="0" id="" checked />
                                 <span>No</span>
@@ -251,13 +251,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="lva" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="lva" value="0" id="" checked />
                                 <span>No</span>
@@ -274,19 +274,19 @@
                 </div>
                 <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 p-0">
                             <label>
                                 <input type="radio" name="pt_acute" value="Yes, Acute" id="" />
                                 <span>Yes, Acute</span>
                             </label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 p-0">
                             <label>
                                 <input type="radio" name="pt_acute" value="Yes, Chronic" id="" />
                                 <span>Yes, Chronic</span>
                             </label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 p-0">
                             <label>
                                 <input type="radio" name="pt_acute" value="No" id="" checked />
                                 <span>No</span>
@@ -306,13 +306,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="ss_res" value="1" id="ss_res" />
                                 <span>yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="ss_res" value="0" id="ss_resno" checked />
                                 <span>No</span>
@@ -349,13 +349,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="sv_res" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="sv_res" value="0" id="" checked />
                                 <span>No</span>
@@ -387,13 +387,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="card_tx" value="1" id="" />
                                 <span>yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="card_tx" value="0" id="" checked />
                                 <span>No</span>
@@ -410,13 +410,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="cardiac_t" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="cardiac_t" value="0" id="" checked />
                                 <span>No</span>
@@ -436,13 +436,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="p_congenital" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="p_congenital" value="0" id="" checked />
                                 <span>No</span>
@@ -459,13 +459,13 @@
                 </div>
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="p_other" value="1" id="" checked />
                                 <span>yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 p-0">
                             <label>
                                 <input type="radio" name="p_other" value="0" id="" checked />
                                 <span>No</span>

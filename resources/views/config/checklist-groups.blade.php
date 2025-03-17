@@ -50,13 +50,13 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group mb-2">
+                                        @foreach($viewClitems as $item)
+                                        @php $checkboxId = 'checkbox_' . $item->cl_name; @endphp
                                         <div class="form-check mb-1">
-                                            @foreach($viewClitems as $item)
-                                            @php $checkboxId = 'checkbox_' . $item->cl_name; @endphp
                                             <input type="checkbox" id="{{ $checkboxId }}" name="rowboxes[]" value="{{ $item->cl_name }}" class="form-check-input">
                                             <label class="form-check-label" for="{{ $checkboxId }}">{{ $item->cl_name }}</label>
-                                            @endforeach
                                         </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

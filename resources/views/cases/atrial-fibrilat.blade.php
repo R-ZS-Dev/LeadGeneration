@@ -1,4 +1,4 @@
-<form action="{{ route('add-atrial-fibrillation') }}" method="post">
+<form id="atrial-fibrillationForm" action="{{ route('add-atrial-fibrillation') }}" method="post">
     @csrf
     <div class="col-lg-12 form-group mb-3">
         <label for="pat_id">Select Patient</label>
