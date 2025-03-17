@@ -70,12 +70,17 @@
             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                 <li class="sidebar-item"><a href="{{ route('view-case') }}" class="sidebar-link"><span
                             class="hide-menu"> Case </span></a></li>
-                <li class="sidebar-item"><a href="{{ route('case-procedure') }}" class="sidebar-link"><span
-                            class="hide-menu"> Case Procedure </span></a></li>
                 <li class="sidebar-item"><a href="{{ route('general-event') }}" class="sidebar-link"><span
                             class="hide-menu"> General Event </span></a></li>
+                <li class="sidebar-item"><a href="{{ route('case-fluid-drugs') }}" class="sidebar-link"><span
+                            class="hide-menu"> Fluid / Drugs</span></a></li>
                 <li class="sidebar-item"><a href="{{ route('check-list') }}" class="sidebar-link"><span
                             class="hide-menu"> Check List </span></a></li>
+                            <li class="sidebar-item"><a href="{{ route('coronary-perfusion-log') }}" class="sidebar-link"><span
+                                class="hide-menu"> Coronary Perfusion Log </span></a></li>
+                <li class="sidebar-item"><a href="{{ route('case-sts') }}" class="sidebar-link"><span
+                            class="hide-menu"> STS </span></a></li>
+
             </ul>
         </li>
 

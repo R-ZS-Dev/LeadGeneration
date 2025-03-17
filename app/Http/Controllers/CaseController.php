@@ -16,6 +16,7 @@ use App\Models\CaseSupply;
 use App\Models\Checklist;
 use App\Models\ChecklistGroup;
 use App\Models\CoronaryArteryBypass;
+use App\Models\CoronaryPersuionLog;
 use App\Models\Equipment;
 use App\Models\EquipmentGroup;
 use App\Models\GeneralEvent;
@@ -732,5 +733,43 @@ class CaseController extends Controller
             'cfluid_insertby' => Auth::user()->name,
         ] + $request->all());
         return redirect()->back()->with('success', 'Fluid/Drugs added successfully!');
+    }
+
+    public function viewCornaryFusionLog()
+    {
+        $pat_id = session('pat_id');
+        $log = CoronaryPersuionLog::where('cpl_userid',$pat_id)->where('cpl_status','1')->where('cpl_close','1')->get();
+        return view('cases.coronary-perfusion-log',compact('log'));
+    }
+
+    public function addCornaryFusionLog(Request $request)
+    {
+        // return $request->all();
+        $pat_id = session('pat_id');
+        CoronaryPersuionLog::create([
+            'cpl_userid' =>$pat_id,
+            'cpl_insertby' => Auth::user()->name,
+        ] + $request->all());
+        return redirect()->back()->with('success','Coronary perfuion log added successfully!');
+    }
+
+    public function editCornaryFusionLog(Request $request)
+    {
+        $id = $request->cpl_id;
+        $log = CoronaryPersuionLog::find($id);
+        $log->update([
+            'cpl_date' => $request->cpl_date,
+            'cpl_time' => $request->cpl_time,
+            'cpl_cpgtype' => $request->cpl_cpgtype, // Required field
+            'cpl_dose' => $request->cpl_dose,
+            'cpl_temp' => $request->cpl_temp,
+            'transfusion_time' => $request->transfusion_time,
+            'ischemic_time' => $request->ischemic_time,
+            'cpl_mixture' => $request->cpl_mixture,
+            'svgperfcount' => $request->svgperfcount,
+            'cpl_note' => $request->cpl_note
+        ]);
+
+        return redirect()->back()->with('success','Coronary perfusion log updated successfully!');
     }
 }

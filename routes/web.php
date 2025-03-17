@@ -14,6 +14,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\StsController;
 use App\Http\Controllers\UserController;
 use App\Models\EmailSetting;
 use Illuminate\Support\Facades\Route;
@@ -262,8 +263,6 @@ Route::middleware('auth')->group(function () {
         route::get('/case-fluid-drugs', 'viewCaseFluidDrugs')->name('case-fluid-drugs');
         route::post('/add-case-fluiddrugs', 'addCaseFluiddrugs')->name('add-case-fluiddrugs');
 
-
-
         /* ---------------------- Case General Events module routes ---------------------- */
         route::get('/general-event', 'viewCGEvent')->name('general-event');
         route::post('/add-general-event', 'addCGEvent')->name('add-general-event');
@@ -280,8 +279,23 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/get-rowboxes-groups', 'getRowboxesWithGroups')->name('get.rowboxes.groups');
 
+        /* --------------------------- coronray fusion log -------------------------- */
+
+    route::get('/coronary-perfusion-log', 'viewCornaryFusionLog')->name('coronary-perfusion-log');
+
+    route::post('/add-coronary-perfusion-log', 'addCornaryFusionLog')->name('add-coronary-perfusion-log');
+
+    route::post('/edit-coronary-perfusion-log', 'editCornaryFusionLog')->name('edit-coronary-perfusion-log');
+
+        /* ------------------------------- sts routes ------------------------------- */
+
     });
 
+    Route::controller(StsController::class)->group(function () {
+
+    route::get('/sts', 'viewSts')->name('case-sts');
+
+    });
 
 });
 
