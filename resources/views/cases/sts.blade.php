@@ -1860,395 +1860,896 @@
 
                         </section>
 
-                        <section id="tab4" class="tab-pane fade show active">
+                        <section id="tab4" class="tab-pane fade show">
                             <div class="row p-2 mb-3">
                                 <center>
                                     <h2><b>Add Patient Cardic Status</b></h2>
                                 </center>
                                 <hr>
                             </div>
-                          <form action="{{ route('add-cardic-status') }}" method="post">
-                            @csrf
+                            <form action="{{ route('add-cardic-status') }}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row mb-3 mt-2">
+                                            <div class="col-lg-6">
+                                                <label for="">Prior Myocardial Infarction: </label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="myocardial" value="1"
+                                                            id="myocardialyes" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="myocardial" value="0"
+                                                            checked />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="myocardial" value="2" />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group mb-3" id="myocardial-yes">
+                                            <div class="col-lg-12">
+                                                <div class="title-box">
+                                                    <span class="title-label">If Yes</span>
+                                                    <div class="row">
+                                                        <div class="col-md-11 mx-auto">
+                                                            <label for="">MI When:</label>
+                                                            <select name="mi_when" class="form-select" id="">
+                                                                <option value="">Select MI When</option>
+                                                                <option value="<= 6 Hours">
+                                                                    <= 6 Hours</option>
+                                                                <option value=">6 Hours but <24 Hours"> &gt; 6 Hours but
+                                                                    &lt;
+                                                                    24 Hours</option>
+                                                                <option value="1 to 7 Days">1 to 7 Days</option>
+                                                                <option value="8 to 21 Days">8 to 21 Days</option>
+                                                                <option value=">21 Days">&gt; 21 Days</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group mb-3">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="">Cardiac Symptoms at Time of
+                                                            admission:</label>
+                                                        <select name="cardic_sympadmin" class="form-select"
+                                                            id="">
+                                                            <option value="">Select Cardic Symptoms</option>
+                                                            <option value="No symptoms">No symptoms</option>
+                                                            <option value="Stable Angina">stable Angina</option>
+                                                            <option value="Unstable Angina">Unstable Angina</option>
+                                                            <option value="Non-ST Elevation MI (Non-STEMI)">Non-ST
+                                                                Elevation
+                                                                MI (Non-STEMI)</option>
+                                                            <option value="ST Elevation MI (STEMI)">ST Elevation MI
+                                                                (STEMI)
+                                                            </option>
+                                                            <option value="Angina equivalent">Angina equivalent</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="">Cardiac Symptoms at Time of surgery:</label>
+                                                        <select name="cardic_sympsurg" class="form-select"
+                                                            id="">
+                                                            <option value="">Select Cardic Symptoms</option>
+                                                            <option value="No symptoms">No symptoms</option>
+                                                            <option value="Stable Angina">stable Angina</option>
+                                                            <option value="Unstable Angina">Unstable Angina</option>
+                                                            <option value="Non-ST Elevation MI (Non-STEMI)">Non-ST
+                                                                Elevation
+                                                                MI (Non-STEMI)</option>
+                                                            <option value="ST Elevation MI (STEMI)">ST Elevation MI
+                                                                (STEMI)
+                                                            </option>
+                                                            <option value="Angina equivalent">Angina equivalent</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-12 mb-3">
+                                                        <label for="">Anginal Classification:</label>
+                                                        <select name="anginal_class" class="form-select"
+                                                            id="">
+                                                            <option value="">Select Anginal Classification</option>
+                                                            <option value="CCS Class 0">CCS Class 0</option>
+                                                            <option value="CCS Class I">CCS Class I</option>
+                                                            <option value="CCS Class II">CCS Class II</option>
+                                                            <option value="CCS Class III">CCS Class III</option>
+                                                            <option value="CCS Class IV">CCS Class IV</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3 mt-2">
+                                                    <div class="col-lg-6">
+                                                        <label for="">Heart Failure Within 2 weeks: </label>
+                                                    </div>
+                                                    <div class="col-lg-6 d-md-flex">
+                                                        <div>
+                                                            <label class="me-2">
+                                                                <input type="radio" name="heartfail2w"
+                                                                    value="1" id="heartfail2wyes" />
+                                                                <span>Yes</span>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label class="me-2">
+                                                                <input type="radio" name="heartfail2w"
+                                                                    value="0" checked />
+                                                                <span>No</span>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label class="me-2">
+                                                                <input type="radio" name="heartfail2w"
+                                                                    value="2" />
+                                                                <span>Unknown</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group mb-3" id="heartfail2w-yes">
+                                                    <div class="col-lg-12">
+                                                        <div class="title-box">
+                                                            <span class="title-label">If Yes</span>
+                                                            <div class="row">
+                                                                <div class="col-md-11 mx-auto">
+                                                                    <label for="">Classification-NYHA:</label>
+                                                                    <select name="class_nyha" class="form-select"
+                                                                        id="">
+                                                                        <option value="">Select Classification-NYHA
+                                                                        </option>
+                                                                        <option value="Class I">Class I</option>
+                                                                        <option value="Class II">Class II</option>
+                                                                        <option value="Class III">Class III</option>
+                                                                        <option value="Class IV">Class IV</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3 mt-2">
+                                                    <div class="col-lg-6">
+                                                        <label for="">Prior Heart Failure:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 d-md-flex">
+                                                        <div>
+                                                            <label class="me-2">
+                                                                <input type="radio" name="priorheartf"
+                                                                    value="1" id="priorheartfyes" />
+                                                                <span>Yes</span>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label class="me-2">
+                                                                <input type="radio" name="priorheartf"
+                                                                    value="0" checked />
+                                                                <span>No</span>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label class="me-2">
+                                                                <input type="radio" name="priorheartf"
+                                                                    value="2" />
+                                                                <span>Unknown</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group mb-3">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Cardiogenic Shock:</label>
+                                                                <select name="cardio_shock" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Cardiohenic Shock
+                                                                    </option>
+                                                                    <option value="Yes, At the time of procedure">Yes, at
+                                                                        the
+                                                                        time of procedure</option>
+                                                                    <option
+                                                                        value="Yes, Not at the time of procedure but within prior 24 hours">
+                                                                        Yes, Not at the time of procedure but within prior
+                                                                        24
+                                                                        hours</option>
+                                                                    <option value="No">No</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Resuscitation:</label>
+                                                                <select name="resuscit" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Resuscitation</option>
+                                                                    <option
+                                                                        value="Yes, Within one hour of the start of the procedure">
+                                                                        Yes, Within one hour of the start of the procedure
+                                                                    </option>
+                                                                    <option
+                                                                        value="Yes, More then one hour but less then 24 hours of the start of the procedure">
+                                                                        Yes, More then one hour but less then 24 hours of
+                                                                        the
+                                                                        start of the procedure</option>
+                                                                    <option value="No">No</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3 mt-2">
+                                                    <div class="col-lg-6">
+                                                        <label for="">Arrhythmia:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 d-md-flex">
+                                                        <div>
+                                                            <label class="me-2">
+                                                                <input type="radio" name="arrhythmia" value="1"
+                                                                    id="arrhythmiayes" />
+                                                                <span>Yes</span>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label class="me-2">
+                                                                <input type="radio" name="arrhythmia" value="0"
+                                                                    checked />
+                                                                <span>No</span>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label class="me-2">
+                                                                <input type="radio" name="arrhythmia"
+                                                                    value="2" />
+                                                                <span>Unknown</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group mb-3" id="arrhythmia-yes">
+                                                    <div class="col-lg-12">
+                                                        <div class="title-box">
+                                                            <span class="title-label">If Yes</span>
+                                                            <div class="row">
+                                                                <div class="col-md-11 mx-auto">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4 mb-3">
+                                                                            <label for="">VTach/VFib:</label>
+                                                                            <select name="vtachfib" class="form-control"
+                                                                                id="">
+                                                                                <option value="">Select VTach/VFib
+                                                                                </option>
+                                                                                <option value="None">None</option>
+                                                                                <option value="Remote">Remote</option>
+                                                                                <option value="Recent">Recent</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-4 mb-3">
+                                                                            <label for="">Sick Sinus
+                                                                                Syndrome:</label>
+                                                                            <select name="sick_sinus"
+                                                                                class="form-control" id="">
+                                                                                <option value="">Select Sick Sinus
+                                                                                    Syndrome</option>
+                                                                                <option value="None">None</option>
+                                                                                <option value="Remote">Remote</option>
+                                                                                <option value="Recent">Recent</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-4 mb-3">
+                                                                            <label for="">AFlutter:</label>
+                                                                            <select name="aflutter" class="form-control"
+                                                                                id="">
+                                                                                <option value="">Select AFlutter
+                                                                                </option>
+                                                                                <option value="None">None</option>
+                                                                                <option value="Remote">Remote</option>
+                                                                                <option value="Recent">Recent</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-6 mb-3">
+                                                                            <label for="">Second Degree Heart
+                                                                                Block:</label>
+                                                                            <select name="sec_heartblock"
+                                                                                class="form-control" id="">
+                                                                                <option value="">Select Second
+                                                                                    Degree
+                                                                                    Heart Block</option>
+                                                                                <option value="None">None</option>
+                                                                                <option value="Remote">Remote</option>
+                                                                                <option value="Recent">Recent</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-6 mb-3">
+                                                                            <label for="">Third Degree Heart
+                                                                                Block:</label>
+                                                                            <select name="third_heartblock"
+                                                                                class="form-control" id="">
+                                                                                <option value="">Select Third Degree
+                                                                                    Heart Block</option>
+                                                                                <option value="None">None</option>
+                                                                                <option value="Remote">Remote</option>
+                                                                                <option value="Recent">Recent</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-3 mt-2">
+                                                                        <div class="col-lg-6">
+                                                                            <label for="">Permanently Paced
+                                                                                Rhythm:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6 d-md-flex">
+                                                                            <div>
+                                                                                <label class="me-2">
+                                                                                    <input type="radio"
+                                                                                        name="paced_rhythm"
+                                                                                        value="1"
+                                                                                        id="paced_rhythmyes" />
+                                                                                    <span>Yes</span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div>
+                                                                                <label class="me-2">
+                                                                                    <input type="radio"
+                                                                                        name="paced_rhythm"
+                                                                                        value="0" checked />
+                                                                                    <span>No</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row mb-3 mt-2">
+                                                                        <div class="col-lg-6">
+                                                                            <label for="">Atrial
+                                                                                Fibrillation:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6 d-md-flex">
+                                                                            <div>
+                                                                                <label class="me-2">
+                                                                                    <input type="radio"
+                                                                                        name="atrialfib" value="None"
+                                                                                        checked />
+                                                                                    <span>None</span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div>
+                                                                                <label class="me-2">
+                                                                                    <input type="radio"
+                                                                                        name="atrialfib"
+                                                                                        value="Paroxysmal" />
+                                                                                    <span>Paroxysmal</span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div>
+                                                                                <label class="me-2">
+                                                                                    <input type="radio"
+                                                                                        name="atrialfib"
+                                                                                        id="atrialfibyes"
+                                                                                        value="Continuous/Persistent" />
+                                                                                    <span>Continuous/Persistent</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row form-group mb-3" id="atrialfib-yes">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="title-box">
+                                                                                <span class="title-label">If
+                                                                                    Continuous/Persistent</span>
+                                                                                <label for="">Atrial Fibrillation
+                                                                                    Duration:</label>
+                                                                                <select name="fib_durate"
+                                                                                    class="form-select" id="">
+                                                                                    <option value="">Select Atrial
+                                                                                        Fibrillation Duration</option>
+                                                                                    <option
+                                                                                        value="Less then or equal to 1 year">
+                                                                                        Less then or equal to 1 year
+                                                                                    </option>
+                                                                                    <option value="More then one year">
+                                                                                        More then one year</option>
+                                                                                    <option value="Unknown">Unknown
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-dark ft"> Add Cardiac Status </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
+
+                        <section id="tab5" class="tab-pane fade show active">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row mb-3 mt-2">
                                         <div class="col-lg-6">
-                                            <label for="">Prior Myocardial Infarction: </label>
+                                            <label for="">Cardiac Catheterization Performed:</label>
                                         </div>
                                         <div class="col-lg-6 d-md-flex">
                                             <div>
                                                 <label class="me-2">
-                                                    <input type="radio" name="myocardial" value="1"
-                                                        id="myocardialyes" />
+                                                    <input type="radio" name="cardiac_catheter" value="1"
+                                                        id="cardiac_catheteryes" />
                                                     <span>Yes</span>
                                                 </label>
                                             </div>
                                             <div>
                                                 <label class="me-2">
-                                                    <input type="radio" name="myocardial" value="0" checked />
+                                                    <input type="radio" name="cardiac_catheter" value="0"
+                                                        checked />
                                                     <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="myocardial" value="2" />
-                                                    <span>Unknown</span>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row form-group mb-3" id="myocardial-yes">
+                                    <div class="row form-group mb-3" id="cardiac_catheter-yes">
                                         <div class="col-lg-12">
                                             <div class="title-box">
                                                 <span class="title-label">If Yes</span>
                                                 <div class="row">
                                                     <div class="col-md-11 mx-auto">
-                                                        <label for="">MI When:</label>
-                                                        <select name="mi_when" class="form-select" id="">
-                                                            <option value="">Select MI When</option>
-                                                            <option value="<= 6 Hours">
-                                                                <= 6 Hours</option>
-                                                            <option value=">6 Hours but <24 Hours"> &gt; 6 Hours but &lt;
-                                                                24 Hours</option>
-                                                            <option value="1 to 7 Days">1 to 7 Days</option>
-                                                            <option value="8 to 21 Days">8 to 21 Days</option>
-                                                            <option value=">21 Days">&gt; 21 Days</option>
-                                                        </select>
+                                                        <label for="">Cardiac Catheterization date:</label>
+                                                        <input type="date" name="cathterize_date"
+                                                            class="form-control" id="">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row form-group mb-3">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="">Cardiac Symptoms at Time of admission:</label>
-                                                    <select name="cardic_sympadmin" class="form-select"
-                                                        id="">
-                                                        <option value="">Select Cardic Symptoms</option>
-                                                        <option value="No symptoms">No symptoms</option>
-                                                        <option value="Stable Angina">stable Angina</option>
-                                                        <option value="Unstable Angina">Unstable Angina</option>
-                                                        <option value="Non-ST Elevation MI (Non-STEMI)">Non-ST Elevation
-                                                            MI (Non-STEMI)</option>
-                                                        <option value="ST Elevation MI (STEMI)">ST Elevation MI (STEMI)
-                                                        </option>
-                                                        <option value="Angina equivalent">Angina equivalent</option>
-                                                        <option value="Other">Other</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="">Cardiac Symptoms at Time of surgery:</label>
-                                                    <select name="cardic_sympsurg" class="form-select" id="">
-                                                        <option value="">Select Cardic Symptoms</option>
-                                                        <option value="No symptoms">No symptoms</option>
-                                                        <option value="Stable Angina">stable Angina</option>
-                                                        <option value="Unstable Angina">Unstable Angina</option>
-                                                        <option value="Non-ST Elevation MI (Non-STEMI)">Non-ST Elevation
-                                                            MI (Non-STEMI)</option>
-                                                        <option value="ST Elevation MI (STEMI)">ST Elevation MI (STEMI)
-                                                        </option>
-                                                        <option value="Angina equivalent">Angina equivalent</option>
-                                                        <option value="Other">Other</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-12 mb-3">
-                                                    <label for="">Anginal Classification:</label>
-                                                    <select name="anginal_class" class="form-select" id="">
-                                                        <option value="">Select Anginal Classification</option>
-                                                        <option value="CCS Class 0">CCS Class 0</option>
-                                                        <option value="CCS Class I">CCS Class I</option>
-                                                        <option value="CCS Class II">CCS Class II</option>
-                                                        <option value="CCS Class III">CCS Class III</option>
-                                                        <option value="CCS Class IV">CCS Class IV</option>
-                                                    </select>
-                                                </div>
+                                    <div class="row mb-3 mt-2">
+                                        <div class="col-lg-6">
+                                            <label for="">Coronary Anatomy/Disease Known:</label>
+                                        </div>
+                                        <div class="col-lg-6 d-md-flex">
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="coronaryKnwn" value="1"
+                                                        id="coronaryKnwnyes" />
+                                                    <span>Yes</span>
+                                                </label>
                                             </div>
-                                            <div class="row mb-3 mt-2">
-                                                <div class="col-lg-6">
-                                                    <label for="">Heart Failure Within 2 weeks: </label>
-                                                </div>
-                                                <div class="col-lg-6 d-md-flex">
-                                                    <div>
-                                                        <label class="me-2">
-                                                            <input type="radio" name="heartfail2w" value="1"
-                                                                id="heartfail2wyes" />
-                                                            <span>Yes</span>
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label class="me-2">
-                                                            <input type="radio" name="heartfail2w" value="0"
-                                                                checked />
-                                                            <span>No</span>
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label class="me-2">
-                                                            <input type="radio" name="heartfail2w" value="2" />
-                                                            <span>Unknown</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="coronaryKnwn" value="0"
+                                                        checked />
+                                                    <span>No</span>
+                                                </label>
                                             </div>
-                                            <div class="row form-group mb-3" id="heartfail2w-yes">
-                                                <div class="col-lg-12">
-                                                    <div class="title-box">
-                                                        <span class="title-label">If Yes</span>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3" id="coronaryKnwn-yes">
+                                        <div class="col-lg-12">
+                                            <div class="title-box">
+                                                <span class="title-label">If Yes</span>
+                                                <div class="row">
+                                                    <div class="col-md-11 mx-auto">
                                                         <div class="row">
-                                                            <div class="col-md-11 mx-auto">
-                                                                <label for="">Classification-NYHA:</label>
-                                                                <select name="class_nyha" class="form-select"
-                                                                    id="">
-                                                                    <option value="">Select Classification-NYHA
-                                                                    </option>
-                                                                    <option value="Class I">Class I</option>
-                                                                    <option value="Class II">Class II</option>
-                                                                    <option value="Class III">Class III</option>
-                                                                    <option value="Class IV">Class IV</option>
+                                                            <div class="col-md-12 mb-3">
+                                                                <label for="">Source(s) used to quantify stenosis:</label>
+                                                                <select name="quantify_stanosis" class="form-select" id="">
+                                                                    <option value="">Select source used to qunatify stenosis</option>
+                                                                    <option value="Angiogram">Angiogram</option>
+                                                                    <option value="CT">CT</option>
+                                                                    <option value="IVUS">IVUS</option>
+                                                                    <option value="Progress/OP Note">Progress/OP Note</option>
+                                                                    <option value="Other">Other</option>
+                                                                    <option value="Multiple">Multiple</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Dominance:</label>
+                                                               <select name="dominance" class="form-select" id="">
+                                                                <option value="">Select Dominance</option>
+                                                                <option value="Left">Left</option>
+                                                                <option value="Right">Right</option>
+                                                                <option value="Co-dominant">Co-dominant</option>
+                                                                <option value="Not documented">Not Documented</option>
+                                                               </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Number Diseased Vessels:</label>
+                                                                <select name="disease_vessel" class="form-select" id="diseaseVessel">
+                                                                    <option value="">select Disease Vessels</option>
+                                                                    <option value="None">None</option>
+                                                                    <option value="One">One</option>
+                                                                    <option value="Two">Two</option>
+                                                                    <option value="Three">Three</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group mb-3 mt-2" id="diseaseVessel-yes" style="display: none;">
+                                                            <div class="col-lg-12">
+                                                                <div class="title-box">
+                                                                    <span class="title-label">If One, Two and Three</span>
+                                                                    <div class="row">
+                                                                        <div class="col-md-11 mx-auto">
+                                                                            <div class="row mb-3 mt-2">
+                                                                                <div class="col-lg-6">
+                                                                                    <label for="">Native % Stenosis Known:</label>
+                                                                                </div>
+                                                                                <div class="col-lg-6 d-md-flex">
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio" name="native_stenosis" value="1"
+                                                                                                id="native_stenosisyes" />
+                                                                                            <span>Yes</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio" name="native_stenosis" value="0"
+                                                                                                checked />
+                                                                                            <span>No</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row mb-3 mt-2">
+                                                                                <div class="col-lg-6">
+                                                                                    <label for="">Graft(s) Present:</label>
+                                                                                </div>
+                                                                                <div class="col-lg-6 d-md-flex">
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio" name="graft_present" value="1"
+                                                                                                id="graft_presentyes" />
+                                                                                            <span>Yes</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio" name="graft_present" value="0"
+                                                                                                checked />
+                                                                                            <span>No</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row mb-3 mt-2">
+                                                                                <div class="col-lg-6">
+                                                                                    <label for="">Stent(s) Known:</label>
+                                                                                </div>
+                                                                                <div class="col-lg-6 d-md-flex">
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio" name="stentknown" value="1"
+                                                                                                id="stentknownyes" />
+                                                                                            <span>Yes</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio" name="stentknown" value="0"
+                                                                                                checked />
+                                                                                            <span>No</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row mb-3 mt-2">
+                                                                                <div class="col-lg-6">
+                                                                                    <label for="">Fractional Flow Reserveed Performed:</label>
+                                                                                </div>
+                                                                                <div class="col-lg-6 d-md-flex">
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio" name="flow_reserve" value="1"
+                                                                                                id="flow_reserveyes" />
+                                                                                            <span>Yes</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio" name="flow_reserve" value="0"
+                                                                                                checked />
+                                                                                            <span>No</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group mb-3 mt-2" id="oneorgreater" style="display: none;">
+                                                            <div class="col-lg-12">
+                                                                <div class="title-box">
+                                                                    <span class="title-label">If One or Greater</span>
+                                                                    <div class="row">
+                                                                        <div class="col-md-11 mx-auto">
+                                                                            <label for="">Diseased Location 1:</label>
+                                                                            <select name="loc1_disease" class="form-select mb-3" id="">
+                                                                                <option value="">Select Diseased Location 1</option>
+                                                                                <option value="Left Main">Left Main</option>
+                                                                                <option value="Proximal LAD">Proximal LAD</option>
+                                                                                <option value="Mid LAD">Mid LAD</option>
+                                                                                <option value="Distal LAD">Distal LAD</option>
+                                                                                <option value="Diagonal 1">Diagonal 1</option>
+                                                                                <option value="Diagonal 2">Diagonal 2</option>
+                                                                                <option value="Diagonal 3">Diagonal 3</option>
+                                                                                <option value="Circumflex">Circmflex</option>
+                                                                                <option value="Obtuse Marginal1">Obtuse Marginal1</option>
+                                                                                <option value="Obtuse Marginal2">Obtuse Marginal2</option>
+                                                                                <option value="Obtuse Marginal3">Obtuse Marginal3</option>
+                                                                                <option value="Ramus">Ramus</option>
+                                                                                <option value="RCA">RCA</option>
+                                                                                <option value="Acute Marginal">Acute Marginal</option>
+                                                                                <option value="Posterior Descending">Posterior Descending</option>
+                                                                                <option value="Posterolateral">Posterolateral</option>
+                                                                            </select>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">% Stenosis:</label>
+                                                                                    <input type="text" class="form-control" name="perstenosis" id="">
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">FFR:</label>
+                                                                                    <input type="text" class="form-control" name="ffr" id="">
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">Graft:</label>
+                                                                                    <select name="graft" class="form-select" id="">
+                                                                                        <option value="">Select Graft</option>
+                                                                                        <option value="Patent">Patent</option>
+                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
+                                                                                        <option value="100% occlusion">100% occlusion</option>
+                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">Stent:</label>
+                                                                                    <select name="stent" class="form-select" id="">
+                                                                                        <option value="">Select Stent</option>
+                                                                                        <option value="Patent">Patent</option>
+                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
+                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group mb-3 mt-2" id="twoorgreater" style="display: none;">
+                                                            <div class="col-lg-12">
+                                                                <div class="title-box">
+                                                                    <span class="title-label">If Two or Greater</span>
+                                                                    <div class="row">
+                                                                        <div class="col-md-11 mx-auto">
+                                                                            <label for="">Diseased Location 2:</label>
+                                                                            <select name="loc2_disease" class="form-select mb-3" id="">
+                                                                                <option value="">Select Diseased Location 2</option>
+                                                                                <option value="Left Main">Left Main</option>
+                                                                                <option value="Proximal LAD">Proximal LAD</option>
+                                                                                <option value="Mid LAD">Mid LAD</option>
+                                                                                <option value="Distal LAD">Distal LAD</option>
+                                                                                <option value="Diagonal 1">Diagonal 1</option>
+                                                                                <option value="Diagonal 2">Diagonal 2</option>
+                                                                                <option value="Diagonal 3">Diagonal 3</option>
+                                                                                <option value="Circumflex">Circmflex</option>
+                                                                                <option value="Obtuse Marginal1">Obtuse Marginal1</option>
+                                                                                <option value="Obtuse Marginal2">Obtuse Marginal2</option>
+                                                                                <option value="Obtuse Marginal3">Obtuse Marginal3</option>
+                                                                                <option value="Ramus">Ramus</option>
+                                                                                <option value="RCA">RCA</option>
+                                                                                <option value="Acute Marginal">Acute Marginal</option>
+                                                                                <option value="Posterior Descending">Posterior Descending</option>
+                                                                                <option value="Posterolateral">Posterolateral</option>
+                                                                            </select>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">% Stenosis:</label>
+                                                                                    <input type="text" class="form-control" name="perstenosis2" id="">
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">FFR:</label>
+                                                                                    <input type="text" class="form-control" name="ffr2" id="">
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">Graft:</label>
+                                                                                    <select name="graft2" class="form-select" id="">
+                                                                                        <option value="">Select Graft</option>
+                                                                                        <option value="Patent">Patent</option>
+                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
+                                                                                        <option value="100% occlusion">100% occlusion</option>
+                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">Stent:</label>
+                                                                                    <select name="stent2" class="form-select" id="">
+                                                                                        <option value="">Select Stent</option>
+                                                                                        <option value="Patent">Patent</option>
+                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
+                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group mb-3 mt-2" id="three" style="display: none;">
+                                                            <div class="col-lg-12">
+                                                                <div class="title-box">
+                                                                    <span class="title-label">If Three</span>
+                                                                    <div class="row">
+                                                                        <div class="col-md-11 mx-auto">
+                                                                            <label for="">Diseased Location 3:</label>
+                                                                            <select name="loc1_disease3" class="form-select mb-3" id="">
+                                                                                <option value="">Select Diseased Location 3</option>
+                                                                                <option value="Left Main">Left Main</option>
+                                                                                <option value="Proximal LAD">Proximal LAD</option>
+                                                                                <option value="Mid LAD">Mid LAD</option>
+                                                                                <option value="Distal LAD">Distal LAD</option>
+                                                                                <option value="Diagonal 1">Diagonal 1</option>
+                                                                                <option value="Diagonal 2">Diagonal 2</option>
+                                                                                <option value="Diagonal 3">Diagonal 3</option>
+                                                                                <option value="Circumflex">Circmflex</option>
+                                                                                <option value="Obtuse Marginal1">Obtuse Marginal1</option>
+                                                                                <option value="Obtuse Marginal2">Obtuse Marginal2</option>
+                                                                                <option value="Obtuse Marginal3">Obtuse Marginal3</option>
+                                                                                <option value="Ramus">Ramus</option>
+                                                                                <option value="RCA">RCA</option>
+                                                                                <option value="Acute Marginal">Acute Marginal</option>
+                                                                                <option value="Posterior Descending">Posterior Descending</option>
+                                                                                <option value="Posterolateral">Posterolateral</option>
+                                                                            </select>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">% Stenosis:</label>
+                                                                                    <input type="text" class="form-control" name="perstenosis3" id="">
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">FFR:</label>
+                                                                                    <input type="text" class="form-control" name="ffr3" id="">
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">Graft:</label>
+                                                                                    <select name="graft3" class="form-select" id="">
+                                                                                        <option value="">Select Graft</option>
+                                                                                        <option value="Patent">Patent</option>
+                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
+                                                                                        <option value="100% occlusion">100% occlusion</option>
+                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="">Stent:</label>
+                                                                                    <select name="stent3" class="form-select" id="">
+                                                                                        <option value="">Select Stent</option>
+                                                                                        <option value="Patent">Patent</option>
+                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
+                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 mt-2">
+                                        <div class="col-lg-6">
+                                            <label for="">Syntax score known:</label>
+                                        </div>
+                                        <div class="col-lg-6 d-md-flex">
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="syntax_score" value="1"
+                                                        id="syntax_scoreyes" />
+                                                    <span>Yes</span>
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="syntax_score" value="0"
+                                                        checked />
+                                                    <span>No</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3 mt-2" id="syntax_score-yes">
+                                        <div class="col-lg-12">
+                                            <div class="title-box">
+                                                <span class="title-label">If Yes</span>
+                                                <div class="row">
+                                                    <div class="col-md-11 mx-auto">
+                                                        <label for="">Syntax Score</label>
+                                                        <input type="text" class="form-control" name="syntx_scoreval" id="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 mt-2">
+                                        <div class="col-lg-6">
+                                            <label for="">Stress Test:</label>
+                                        </div>
+                                        <div class="col-lg-6 d-md-flex">
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="stresstest" value="1"
+                                                        id="stresstestyes" />
+                                                    <span>Yes</span>
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="stresstest" value="0"
+                                                        checked />
+                                                    <span>No</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3 mt-2" id="cardiac_catheter-yes">
+                                        <div class="col-lg-12">
+                                            <div class="title-box">
+                                                <span class="title-label">If Yes</span>
+                                                <div class="row">
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Result</label>
+                                                                <select name="stress_result" class="form-select" id="">
+                                                                    <option value="">Select Result</option>
+                                                                    <option value="Normal">Normal</option>
+                                                                    <option value="Abnormal">Abnormal</option>
+                                                                    <option value="Unavailable">Unavailable</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Risk/Extent of ischemia</label>
+                                                                <select name="risk_ischemia" class="form-select" id="">
+                                                                    <option value="">Select Risk/Extent of ischemia</option>
+                                                                    <option value="Low Risk">Low Risk</option>
+                                                                    <option value="Intermediate Risk">Intermediate Risk</option>
+                                                                    <option value="High Risk">High Risk</option>
+                                                                    <option value="Unavailable">Unavailable</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row mb-3 mt-2">
-                                                <div class="col-lg-6">
-                                                    <label for="">Prior Heart Failure:</label>
-                                                </div>
-                                                <div class="col-lg-6 d-md-flex">
-                                                    <div>
-                                                        <label class="me-2">
-                                                            <input type="radio" name="priorheartf" value="1"
-                                                                id="priorheartfyes" />
-                                                            <span>Yes</span>
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label class="me-2">
-                                                            <input type="radio" name="priorheartf" value="0"
-                                                                checked />
-                                                            <span>No</span>
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label class="me-2">
-                                                            <input type="radio" name="priorheartf" value="2" />
-                                                            <span>Unknown</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group mb-3">
-                                                <div class="col-md-12">
-                                                    <div class="row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="">Cardiogenic Shock:</label>
-                                                            <select name="cardio_shock" class="form-select"
-                                                                id="">
-                                                                <option value="">Select Cardiohenic Shock</option>
-                                                                <option value="Yes, At the time of procedure">Yes, at the
-                                                                    time of procedure</option>
-                                                                <option
-                                                                    value="Yes, Not at the time of procedure but within prior 24 hours">
-                                                                    Yes, Not at the time of procedure but within prior 24
-                                                                    hours</option>
-                                                                <option value="No">No</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="">Resuscitation:</label>
-                                                            <select name="resuscit" class="form-select"
-                                                                id="">
-                                                                <option value="">Select Resuscitation</option>
-                                                                <option
-                                                                    value="Yes, Within one hour of the start of the procedure">
-                                                                    Yes, Within one hour of the start of the procedure
-                                                                </option>
-                                                                <option
-                                                                    value="Yes, More then one hour but less then 24 hours of the start of the procedure">
-                                                                    Yes, More then one hour but less then 24 hours of the
-                                                                    start of the procedure</option>
-                                                                <option value="No">No</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3 mt-2">
-                                                <div class="col-lg-6">
-                                                    <label for="">Arrhythmia:</label>
-                                                </div>
-                                                <div class="col-lg-6 d-md-flex">
-                                                    <div>
-                                                        <label class="me-2">
-                                                            <input type="radio" name="arrhythmia" value="1"
-                                                                id="arrhythmiayes" />
-                                                            <span>Yes</span>
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label class="me-2">
-                                                            <input type="radio" name="arrhythmia" value="0"
-                                                                checked />
-                                                            <span>No</span>
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label class="me-2">
-                                                            <input type="radio" name="arrhythmia" value="2" />
-                                                            <span>Unknown</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group mb-3" id="arrhythmia-yes">
-                                                <div class="col-lg-12">
-                                                    <div class="title-box">
-                                                        <span class="title-label">If Yes</span>
-                                                        <div class="row">
-                                                            <div class="col-md-11 mx-auto">
-                                                                <div class="row">
-                                                                    <div class="col-md-4 mb-3">
-                                                                        <label for="">VTach/VFib:</label>
-                                                                        <select name="vtachfib" class="form-control"
-                                                                            id="">
-                                                                            <option value="">Select VTach/VFib
-                                                                            </option>
-                                                                            <option value="None">None</option>
-                                                                            <option value="Remote">Remote</option>
-                                                                            <option value="Recent">Recent</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-4 mb-3">
-                                                                        <label for="">Sick Sinus Syndrome:</label>
-                                                                        <select name="sick_sinus" class="form-control"
-                                                                            id="">
-                                                                            <option value="">Select Sick Sinus
-                                                                                Syndrome</option>
-                                                                            <option value="None">None</option>
-                                                                            <option value="Remote">Remote</option>
-                                                                            <option value="Recent">Recent</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-4 mb-3">
-                                                                        <label for="">AFlutter:</label>
-                                                                        <select name="aflutter" class="form-control"
-                                                                            id="">
-                                                                            <option value="">Select AFlutter
-                                                                            </option>
-                                                                            <option value="None">None</option>
-                                                                            <option value="Remote">Remote</option>
-                                                                            <option value="Recent">Recent</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-6 mb-3">
-                                                                        <label for="">Second Degree Heart
-                                                                            Block:</label>
-                                                                        <select name="sec_heartblock"
-                                                                            class="form-control" id="">
-                                                                            <option value="">Select Second Degree
-                                                                                Heart Block</option>
-                                                                            <option value="None">None</option>
-                                                                            <option value="Remote">Remote</option>
-                                                                            <option value="Recent">Recent</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-6 mb-3">
-                                                                        <label for="">Third Degree Heart
-                                                                            Block:</label>
-                                                                        <select name="third_heartblock"
-                                                                            class="form-control" id="">
-                                                                            <option value="">Select Third Degree
-                                                                                Heart Block</option>
-                                                                            <option value="None">None</option>
-                                                                            <option value="Remote">Remote</option>
-                                                                            <option value="Recent">Recent</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mb-3 mt-2">
-                                                                    <div class="col-lg-6">
-                                                                        <label for="">Permanently Paced
-                                                                            Rhythm:</label>
-                                                                    </div>
-                                                                    <div class="col-lg-6 d-md-flex">
-                                                                        <div>
-                                                                            <label class="me-2">
-                                                                                <input type="radio"
-                                                                                    name="paced_rhythm" value="1"
-                                                                                    id="paced_rhythmyes" />
-                                                                                <span>Yes</span>
-                                                                            </label>
-                                                                        </div>
-                                                                        <div>
-                                                                            <label class="me-2">
-                                                                                <input type="radio"
-                                                                                    name="paced_rhythm" value="0"
-                                                                                    checked />
-                                                                                <span>No</span>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row mb-3 mt-2">
-                                                                    <div class="col-lg-6">
-                                                                        <label for="">Atrial Fibrillation:</label>
-                                                                    </div>
-                                                                    <div class="col-lg-6 d-md-flex">
-                                                                        <div>
-                                                                            <label class="me-2">
-                                                                                <input type="radio"
-                                                                                    name="atrialfib" value="None"
-                                                                                    checked />
-                                                                                <span>None</span>
-                                                                            </label>
-                                                                        </div>
-                                                                        <div>
-                                                                            <label class="me-2">
-                                                                                <input type="radio"
-                                                                                    name="atrialfib" value="Paroxysmal"
-                                                                                     />
-                                                                                <span>Paroxysmal</span>
-                                                                            </label>
-                                                                        </div>
-                                                                        <div>
-                                                                            <label class="me-2">
-                                                                                <input type="radio"
-                                                                                    name="atrialfib"  id="atrialfibyes" value="Continuous/Persistent"
-                                                                                    />
-                                                                                <span>Continuous/Persistent</span>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row form-group mb-3" id="atrialfib-yes">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="title-box">
-                                                                            <span class="title-label">If Continuous/Persistent</span>
-                                                                            <label for="">Atrial Fibrillation Duration:</label>
-                                                                            <select name="fib_durate" class="form-select" id="">
-                                                                                <option value="">Select Atrial Fibrillation Duration</option>
-                                                                                <option value="Less then or equal to 1 year">Less then or equal to 1 year</option>
-                                                                                <option value="More then one year">More then one year</option>
-                                                                                <option value="Unknown">Unknown</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-dark ft"> Add Cardiac Status </button>
                                 </div>
                             </div>
-                          </form>
                         </section>
                     </div>
                 </div>

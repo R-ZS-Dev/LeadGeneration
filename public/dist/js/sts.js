@@ -206,7 +206,83 @@ $("input[name='atrialfib']").change(function () {
     toggleatrialfib();
 });
 
+/* -------------------------- hemodynamics function ------------------------- */
 
+function togglecardiaccatheter() {
+    if ($("#cardiac_catheteryes").is(":checked")) {
+        $("#cardiac_catheter-yes").slideDown();
+    } else {
+        $("#cardiac_catheter-yes").slideUp();
+    }
+}
+togglecardiaccatheter();
+
+$("input[name='cardiac_catheter']").change(function () {
+    togglecardiaccatheter();
+});
+
+function togglecoronaryKnwn() {
+    if ($("#coronaryKnwnyes").is(":checked")) {
+        $("#coronaryKnwn-yes").slideDown();
+    } else {
+        $("#coronaryKnwn-yes").slideUp();
+    }
+}
+togglecoronaryKnwn();
+
+$("input[name='coronaryKnwn']").change(function () {
+    togglecoronaryKnwn();
+});
+
+function togglesyntax() {
+    if ($("#syntax_scoreyes").is(":checked")) {
+        $("#syntax_score-yes").slideDown();
+    } else {
+        $("#syntax_score-yes").slideUp();
+    }
+}
+togglesyntax();
+
+$("input[name='syntax_score']").change(function () {
+    togglesyntax();
+});
+
+function togglestress() {
+    if ($("#stress_scoreyes").is(":checked")) {
+        $("#stress_score-yes").slideDown();
+    } else {
+        $("#stress_score-yes").slideUp();
+    }
+}
+togglestress();
+
+$("input[name='stress_score']").change(function () {
+    togglestress();
+});
+
+$("#diseaseVessel").change(function () {
+    var selectedValue = $(this).val();
+    if (
+        selectedValue === "One" ||
+        selectedValue === "Two" ||
+        selectedValue === "Three"
+    ) {
+        if (selectedValue === "One") {
+            $("#diseaseVessel-yes, #oneorgreater").slideDown();
+        } else if (selectedValue === "Two") {
+            $("#twoorgreater").slideDown();
+        } else if (selectedValue === "Three") {
+            $(
+                "#diseaseVessel-yes, #oneorgreater, #twoorgreater, #three"
+            ).slideDown();
+        } else {
+            $("#diseaseVessel-yes").slideUp();
+            $("#oneorgreater").slideUp();
+            $("#twoorgreater").slideUp();
+            $("#three").slideDown();
+        }
+    }
+});
 
 $("#cvd_stenosis").change(function () {
     var selectedValue = $(this).val();
