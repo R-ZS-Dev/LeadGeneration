@@ -292,7 +292,7 @@ Route::middleware('auth')->group(function () {
     route::get('/data-device-log', 'viewDataDeviceLog')->name('data-device-log');
 
     route::post('/add-data-device-log', 'addDataDeviceLog')->name('add-data-device-log');
-        /* ------------------------------- sts routes ------------------------------- */
+    /* ------------------------------- sts routes ------------------------------- */
 
     });
 
@@ -301,6 +301,8 @@ Route::middleware('auth')->group(function () {
     route::get('/sts', 'viewSts')->name('case-sts');
 
     route::post('/add-patient-medication','addPatientMedication')->name('add-patient-medication');
+    route::post('/add-risk-factor','addRiskFactor')->name('add-risk-factor');
+
 
     });
 

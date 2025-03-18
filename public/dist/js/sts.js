@@ -1,6 +1,5 @@
 function toggleInhib() {
     if ($("#inhibitoryes").is(":checked")) {
-
         $("#inhibitor-yes").slideDown();
     } else {
         $("#inhibitor-yes").slideUp();
@@ -8,13 +7,12 @@ function toggleInhib() {
 }
 toggleInhib();
 
-$("input[name='inhibitor']").change(function() {
+$("input[name='inhibitor']").change(function () {
     toggleInhib();
 });
 
 function toggleAntico() {
     if ($("#anticoyes").is(":checked")) {
-
         $("#antico-yes").slideDown();
     } else {
         $("#antico-yes").slideUp();
@@ -22,13 +20,12 @@ function toggleAntico() {
 }
 toggleAntico();
 
-$("input[name='anticoagulant']").change(function() {
+$("input[name='anticoagulant']").change(function () {
     toggleAntico();
 });
 
 function toggleGlyco() {
     if ($("#glycoyes").is(":checked")) {
-
         $("#glyco-yes").slideDown();
     } else {
         $("#glyco-yes").slideUp();
@@ -36,13 +33,12 @@ function toggleGlyco() {
 }
 toggleGlyco();
 
-$("input[name='glycoprotein']").change(function() {
+$("input[name='glycoprotein']").change(function () {
     toggleGlyco();
 });
 
 function togglelipid() {
     if ($("#lipidyes").is(":checked")) {
-
         $("#lipid-yes").slideDown();
     } else {
         $("#lipid-yes").slideUp();
@@ -50,13 +46,12 @@ function togglelipid() {
 }
 togglelipid();
 
-$("input[name='lipid']").change(function() {
+$("input[name='lipid']").change(function () {
     togglelipid();
 });
 
 function togglediabetes() {
     if ($("#diabetesyes").is(":checked")) {
-
         $("#diabetes-yes").slideDown();
     } else {
         $("#diabetes-yes").slideUp();
@@ -64,13 +59,12 @@ function togglediabetes() {
 }
 togglediabetes();
 
-$("input[name='diabetes']").change(function() {
+$("input[name='diabetes']").change(function () {
     togglediabetes();
 });
 
 function toggleendocarditis() {
     if ($("#endocarditisyes").is(":checked")) {
-
         $("#endocarditis-yes").slideDown();
     } else {
         $("#endocarditis-yes").slideUp();
@@ -78,14 +72,12 @@ function toggleendocarditis() {
 }
 toggleendocarditis();
 
-$("input[name='endocarditis']").change(function() {
+$("input[name='endocarditis']").change(function () {
     toggleendocarditis();
 });
 
-
 function toggleendopulomonary() {
     if ($("#pulomnarytestyes").is(":checked")) {
-
         $("#pulomonarytest-yes").slideDown();
     } else {
         $("#pulomonarytest-yes").slideUp();
@@ -93,13 +85,12 @@ function toggleendopulomonary() {
 }
 toggleendopulomonary();
 
-$("input[name='pulomnary_test']").change(function() {
+$("input[name='pulomnary_test']").change(function () {
     toggleendopulomonary();
 });
 
 function toggledlco() {
     if ($("#dlcoyes").is(":checked")) {
-
         $("#dlco-yes").slideDown();
     } else {
         $("#dlco-yes").slideUp();
@@ -107,14 +98,12 @@ function toggledlco() {
 }
 toggledlco();
 
-$("input[name='dlco_test']").change(function() {
+$("input[name='dlco_test']").change(function () {
     toggledlco();
 });
 
-
 function toggleabg() {
     if ($("#abgyes").is(":checked")) {
-
         $("#abg-yes").slideDown();
     } else {
         $("#abg-yes").slideUp();
@@ -122,13 +111,12 @@ function toggleabg() {
 }
 toggleabg();
 
-$("input[name='roomair_abg']").change(function() {
+$("input[name='roomair_abg']").change(function () {
     toggleabg();
 });
 
 function togglecere() {
     if ($("#cerebrovascularyes").is(":checked")) {
-
         $("#cerebrovascular-yes").slideDown();
     } else {
         $("#cerebrovascular-yes").slideUp();
@@ -136,13 +124,12 @@ function togglecere() {
 }
 togglecere();
 
-$("input[name='cerebrovascular']").change(function() {
+$("input[name='cerebrovascular']").change(function () {
     togglecere();
 });
 
 function toggleprior() {
     if ($("#priorcvayes").is(":checked")) {
-
         $("#priorcva-yes").slideDown();
     } else {
         $("#priorcva-yes").slideUp();
@@ -150,14 +137,61 @@ function toggleprior() {
 }
 toggleprior();
 
-$("input[name='priorcva']").change(function() {
+$("input[name='priorcva']").change(function () {
     toggleprior();
+});
+function togglewalkdoneyes() {
+    if ($("#walkdoneyes").is(":checked")) {
+        $("#walkdone-yes").slideDown();
+    } else {
+        $("#walkdone-yes").slideUp();
+    }
+}
+togglewalkdoneyes();
+
+$("input[name='walkdone']").change(function () {
+    togglewalkdoneyes();
+});
+
+/* -------------------------- patient cardic status ------------------------- */
+function togglemyocardial() {
+    if ($("#myocardialyes").is(":checked")) {
+        $("#myocardial-yes").slideDown();
+    } else {
+        $("#myocardial-yes").slideUp();
+    }
+}
+togglemyocardial();
+
+$("input[name='myocardial']").change(function () {
+    togglemyocardial();
 });
 
 
+$("#cvd_stenosis").change(function () {
+    var selectedValue = $(this).val();
+    if (selectedValue === "Both") {
+        $("#hiddenDiv").slideDown();
+        $("#hiddenleftDiv").slideDown();
+    } else if (selectedValue === "Right") {
+        $("#hiddenDiv").slideDown();
+        $("#hiddenleftDiv").slideUp();
+    } else if (selectedValue === "Left") {
+        $("#hiddenleftDiv").slideDown();
+        $("#hiddenDiv").slideUp();
+    } else {
+        $("#hiddenDiv").slideUp();
+        $("#hiddenleftDiv").slideUp();
+    }
+});
+
 function toggleLungDiseaseDetails() {
     let selectedValue = $("#lung_disease").val();
-    if (selectedValue === "Mild" || selectedValue === "Moderate" || selectedValue === "Severe") {
+    if (
+        selectedValue === "Mild" ||
+        selectedValue === "Moderate" ||
+        selectedValue === "Severe"
+    ) {
         $("#lungdisease-yes").slideDown();
     } else {
         $("#lungdisease-yes").slideUp();

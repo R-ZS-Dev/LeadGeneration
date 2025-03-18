@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\RiskFactor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StsController extends Controller
 {
@@ -19,6 +21,7 @@ class StsController extends Controller
         $pat = Patient::find($pat_id);
         if ($pat) {
             $pat->update([
+
                 'aceorarb' => $request->aceorarb,
                 'inhibitor' => $request->inhibitor,
                 'inhibitor_no' => $request->inhibitor_no,
@@ -50,5 +53,17 @@ class StsController extends Controller
             return redirect()->back()->with('error','An error occur while updating medications.');
 
         }
+    }
+
+    public function addRiskFactor(Request $request)
+    {
+        // return $request->all();
+
+        $pat_id = session('pat_id');
+        RiskFactor::create([
+            'fr_userid' =>$pat_id,
+            'rf_insertby' => Auth::user()->name,
+        ] + $request->all());
+        return redirect()->back()->with('success','Risk Factor added successfully!');
     }
 }

@@ -31,7 +31,7 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <ul class="nav p-3" id="myTab" role="tablist">
+                    <ul class="nav" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="btn tabButton active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1"
                                 type="button" role="tab" aria-controls="tab1" aria-selected="true">
@@ -83,9 +83,14 @@
                             </button>
                         </li>
                     </ul>
-
                     <div class="tab-content mt-4">
-                        <section id="tab1" class="tab-pane fade show ">
+                        <section id="tab1" class="tab-pane fade show">
+                           <div class="row p-2 mb-3">
+                           <center>
+                            <h2><b>Add Patient Medications</b></h2>
+                           </center>
+                           <hr>
+                           </div>
                             <form action="{{ route('add-patient-medication') }}" method="post">
                                 @csrf
                                 <div class="row mb-3">
@@ -744,815 +749,1126 @@
                             </form>
                         </section>
 
-                        <section id="tab2" class="tab-pane fade show active">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row mb-3">
-                                        <div class="col-lg-4">
-                                            <label for="">Family History of Premature CAD</label>
-                                        </div>
-                                        <div class="col-lg-8 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="premature" value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
+                        <section id="tab2" class="tab-pane fade show ">
+                            <div class="row p-2 mb-3">
+                                <center>
+                                 <h2><b>Add Patient Risk Factor</b></h2>
+                                </center>
+                                <hr>
+                                </div>
+                            <form action="{{ route('add-risk-factor') }}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="">Family History of Premature CAD</label>
                                             </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="premature" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label>
-                                                    <input type="radio" name="premature" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-4">
-                                            <label for="">Diabetes</label>
-                                        </div>
-                                        <div class="col-lg-8 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="diabetes" id="diabetesyes"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="diabetes" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label>
-                                                    <input type="radio" name="diabetes" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group mb-3" id="diabetes-yes">
-                                        <div class="col-lg-12">
-                                            <div class="title-box">
-                                                <span class="title-label">If Yes</span>
-                                                <div class="col-md-11 mx-auto">
-                                                    <label for="">
-                                                        Diabetes-Control
+                                            <div class="col-lg-8 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="premature" value="1" />
+                                                        <span>Yes</span>
                                                     </label>
-                                                    <select name="diabetes-control" id="" class="form-select">
-                                                        <option value="">Select diabetes control</option>
-                                                        <option value="None">None</option>
-                                                        <option value="Diet">Diet</option>
-                                                        <option value="Oral">Oral</option>
-                                                        <option value="Insulin">Insulin</option>
-                                                        <option value="Other subcutaneous medication">Other subcutaneous
-                                                            medication</option>
-                                                        <option value="Other">Other</option>
-                                                        <option value="Unknown">Unknown</option>
-                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="premature" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label>
+                                                        <input type="radio" name="premature" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-4">
-                                            <label for="">Dyslipidemia</label>
-                                        </div>
-                                        <div class="col-lg-8 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="dyslipidemia" value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="">Diabetes</label>
                                             </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="dyslipidemia" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label>
-                                                    <input type="radio" name="dyslipidemia" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-4">
-                                            <label for="">Dialysis</label>
-                                        </div>
-                                        <div class="col-lg-8 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="dialysis" value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="dialysis" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label>
-                                                    <input type="radio" name="dialysis" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
+                                            <div class="col-lg-8 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="diabetes" id="diabetesyes"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="diabetes" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label>
+                                                        <input type="radio" name="diabetes" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-4">
-                                            <label for="">Hypertension</label>
-                                        </div>
-                                        <div class="col-lg-8 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="hypertension" value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="hypertension" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label>
-                                                    <input type="radio" name="hypertension" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-4">
-                                            <label for="">Endocarditis</label>
-                                        </div>
-                                        <div class="col-lg-8 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="endocarditis" id="endocarditisyes"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="endocarditis" value="No" checked />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group mb-3" id="endocarditis-yes">
-                                        <div class="col-lg-12">
-                                            <div class="title-box">
-                                                <span class="title-label">If Yes</span>
-                                                <div class="col-md-11 mx-auto">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <label for="">
-                                                                Infected Endocard Type
-                                                            </label>
-                                                            <select name="infect_endocard_type" id=""
-                                                                class="form-select">
-                                                                <option value="">Select Infected Endocard Type
-                                                                </option>
-                                                                <option value="Treated">Treated</option>
-                                                                <option value="Active">Active</option>
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="">
-                                                                Diabetes-Control
-                                                            </label>
-                                                            <select name="infect_endocard_culture" id=""
-                                                                class="form-select">
-                                                                <option value="">Select Infected Endocard Culture
-                                                                </option>
-                                                                <option value="Culture Negative">Culture Negative</option>
-                                                                <option value="Staphylococcus aureus">Staphylococcus aureus
-                                                                </option>
-                                                                <option value="Streptococcus species">Streptococcus species
-                                                                </option>
-                                                                <option value="Coagulase negative staphylococcus">Coagulase
-                                                                    negative staphylococcus</option>
-                                                                <option value="Enterococcus species">Enterococcus species
-                                                                </option>
-                                                                <option value="Fungal">Fungal</option>
-                                                                <option value="Other">Other</option>
-                                                                <option value="Unknown">Unknown</option>
-                                                            </select>
-                                                        </div>
+                                        <div class="row form-group mb-3" id="diabetes-yes">
+                                            <div class="col-lg-12">
+                                                <div class="title-box">
+                                                    <span class="title-label">If Yes</span>
+                                                    <div class="col-md-11 mx-auto">
+                                                        <label for="">
+                                                            Diabetes-Control
+                                                        </label>
+                                                        <select name="diabetes-control" id="" class="form-select">
+                                                            <option value="">Select diabetes control</option>
+                                                            <option value="None">None</option>
+                                                            <option value="Diet">Diet</option>
+                                                            <option value="Oral">Oral</option>
+                                                            <option value="Insulin">Insulin</option>
+                                                            <option value="Other subcutaneous medication">Other subcutaneous
+                                                                medication</option>
+                                                            <option value="Other">Other</option>
+                                                            <option value="2">Unknown</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row form-group mb-3">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label for="">Tobacco use</label>
-                                                    <select name="tobacco" id="" class="form-select">
-                                                        <option value="">Select tobacco use</option>
-                                                        <option value="Never Smoker">Never Smoker</option>
-                                                        <option value="Current every day smoker">Current every day smoker
-                                                        </option>
-                                                        <option value="Current some day smoker">Current some day smoker
-                                                        </option>
-                                                        <option value="Smoker, current state (frequency) unknown">Smoker,
-                                                            current state (frequency) unknown</option>
-                                                        <option value="Former smoker">Former smoker</option>
-                                                        <option value="Smoking status unknown">Smoking status unknown
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="">Chronic Lung Disease</label>
-                                                    <select name="lung_disease" id="lung_disease" class="form-select">
-                                                        <option value="">Select chronic lung disease</option>
-                                                        <option value="No">No</option>
-                                                        <option value="Mild">Mild</option>
-                                                        <option value="Moderate">Moderate</option>
-                                                        <option value="Severe">Severe</option>
-                                                        <option value="Lung disease documented, severity unknown">Lung
-                                                            disease documented, severity unknown</option>
-                                                        <option value="Unknown">Unknown</option>
-                                                    </select>
-                                                </div>
-
-
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="">Dyslipidemia</label>
                                             </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row form-group mb-3" id="lungdisease-yes">
-                                        <div class="col-lg-12">
-                                            <div class="title-box">
-                                                <span class="title-label">If Mild , Moderate or Severe</span>
-                                                <div class="col-md-11 mx-auto">
-                                                    <label for="">
-                                                        Chronic Lung Disease - Type
+                                            <div class="col-lg-8 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="dyslipidemia" value="1" />
+                                                        <span>Yes</span>
                                                     </label>
-                                                    <select name="lung_disease_type" class="form-select">
-                                                        <option value="">Select Lung Disease Type
-                                                        </option>
-                                                        <option value="Obstructive">Obstructive</option>
-                                                        <option value="Reactive">Reactive</option>
-                                                        <option value="Interstitial Fibrosis">Interstitial Fibrosis
-                                                        </option>
-                                                        <option value="Other">Other</option>
-                                                        <option value="Multiple">Multiple</option>
-                                                        <option value="Not Documented">Not Documented</option>
-                                                    </select>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-4">
-                                            <label for="">Pulmonary Function Test Done</label>
-                                        </div>
-                                        <div class="col-lg-8 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="pulomnary_test" id="pulomnarytestyes"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="pulomnary_test" value="No" checked />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group mb-3" id="pulomonarytest-yes">
-                                        <div class="col-lg-12">
-                                            <div class="title-box">
-                                                <span class="title-label">If Yes</span>
-                                                <div class="col-md-11 mx-auto">
-                                                    <label for="">
-                                                        Forced Expiratory Volume Predicted
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="dyslipidemia" value="0" />
+                                                        <span>No</span>
                                                     </label>
-                                                    <input type="number" name="volumn_predict" class="form-control"
-                                                        id="">
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-4">
-                                            <label for="">DLCO Test Performed</label>
-                                        </div>
-                                        <div class="col-lg-8 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="dlco_test" id="dlcoyes"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="dlco_test" value="No" checked />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group mb-3" id="dlco-yes">
-                                        <div class="col-lg-12">
-                                            <div class="title-box">
-                                                <span class="title-label">If Yes</span>
-                                                <div class="col-md-11 mx-auto">
-                                                    <label for="">
-                                                        DLCO Predicted
+                                                <div>
+                                                    <label>
+                                                        <input type="radio" name="dyslipidemia" value="2" checked />
+                                                        <span>Unknown</span>
                                                     </label>
-                                                    <input type="text" name="dlco_predict" class="form-control"
-                                                        id="">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-4">
-                                            <label for="">Room Air ABG Performed</label>
-                                        </div>
-                                        <div class="col-lg-8 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="roomair_abg" id="abgyes"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="">Dialysis</label>
                                             </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="roomair_abg" value="No" checked />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group mb-3" id="abg-yes">
-                                        <div class="col-lg-12">
-                                            <div class="title-box">
-                                                <span class="title-label">If Yes</span>
-                                                <div class="col-md-11 mx-auto">
-                                                    <div class="row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="">Carbon dioxide level</label>
-                                                            <input type="text" name="cd_level" class="form-control"
-                                                                id="">
-                                                        </div>
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="">Oxygen level</label>
-                                                            <input type="text" name="oxy_level" class="form-control"
-                                                                id="">
-                                                        </div>
-                                                    </div>
+                                            <div class="col-lg-8 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="dialysis" value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="dialysis" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label>
+                                                        <input type="radio" name="dialysis" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label for="">Home Oxygen</label>
-                                            <select name="home_oxy" id="" class="form-select">
-                                                <option value="">Select Oxygen Level</option>
-                                                <option value="Yes, PRN">Yes, PRN</option>
-                                                <option value="Yes, Oxygen dependent">Yes Oxygen dependent</option>
-                                                <option value="No">No</option>
-                                                <option value="Unknown">Unknown</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Inhaled Medication or Oral Bronchodilator Therapy</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="inhaled_therapy"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="">Hypertension</label>
                                             </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="inhaled_therapy" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="inhaled_therapy" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Sleep Apnea</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="sleep_apnea"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="sleep_apnea" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="sleep_apnea" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="">Pneumonia</label>
-                                                    <select name="pneumonia" class="form-control" id="">
-                                                        <option value="">Select Pneumonia</option>
-                                                        <option value="Recent">Recent</option>
-                                                        <option value="Remote">Remote</option>
-                                                        <option value="No">No</option>
-                                                        <option value="Unknown">Unknown</option>
-                                                    </select>
+                                            <div class="col-lg-8 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="hypertension" value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
                                                 </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <label for="">Illicit drug use</label>
-                                                    <select name="illicit_drug" class="form-control" id="">
-                                                        <option value="">Select Illicit Drug Use</option>
-                                                        <option value="Recent">Recent</option>
-                                                        <option value="Remote">Remote</option>
-                                                        <option value="No">No</option>
-                                                        <option value="Unknown">Unknown</option>
-                                                    </select>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="hypertension" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label>
+                                                        <input type="radio" name="hypertension" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Depression</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="Depression"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="">Endocarditis</label>
                                             </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="Depression" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="Depression" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
+                                            <div class="col-lg-8 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="endocarditis" id="endocarditisyes"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="endocarditis" value="0" checked />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                       <div class="col-md-12">
-                                        <label for="">Alcohol Use</label>
-                                        <select name="alco_use" class="form-select" id="">
-                                            <option value="">Select Alcohol Use</option>
-                                            <option value="<= 1 Drink/Week"><= 1 Drink/Week</option>
-                                            <option value="2-7 Drinks/Week">2-7 Drinks/Week</option>
-                                            <option value=">= 8 Drinks/week">>= 8 Drinks/Week</option>
-                                            <option value="None">None</option>
-                                            <option value="Unknown">Unknown</option>
-                                        </select>
-                                       </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Liver Disease</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="liver_disease"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="liver_disease" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="liver_disease" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Immunocompromise Present</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="immuno_present"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="immuno_present" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="immuno_present" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Mediastinal Radiation</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="mediastinal"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="mediastinal" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="mediastinal" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Cancer Within 5 Year</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="cancer_within"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="cancer_within" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="cancer_within" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Peripheral Artery Disease</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="peripheral_artery"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="peripheral_artery" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="peripheral_artery" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Thoracic Aorta Disease </label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="Thoracic_aorta"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="Thoracic_aorta" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="Thoracic_aorta" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Syncope</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="synocope"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="synocope" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="synocope" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Unresponsive State</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="unresponsive_state"
-                                                        value="Yes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="unresponsive_state" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="unresponsive_state" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="">Cerebrovascular Disease</label>
-                                        </div>
-                                        <div class="col-lg-6 d-md-flex">
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="cerebrovascular"
-                                                        value="Yes" id="cerebrovascularyes" />
-                                                    <span>Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="cerebrovascular" value="No" />
-                                                    <span>No</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="me-2">
-                                                    <input type="radio" name="cerebrovascular" value="Unknown" checked />
-                                                    <span>Unknown</span>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row form-group mb-3" id="cerebrovascular-yes" style="display: none;">
-                                        <div class="col-lg-12">
-                                            <div class="title-box">
-                                                <span class="title-label">If Yes</span>
-                                                <div class="col-md-11 mx-auto">
-                                                    <div class="row mb-3">
-                                                        <div class="col-lg-6">
-                                                            <label for="">Prior CVA</label>
-                                                        </div>
-                                                        <div class="col-lg-6 d-md-flex">
-                                                            <div>
-                                                                <label class="me-2">
-                                                                    <input type="radio" name="priorcva"
-                                                                        value="Yes" id="priorcvayes" />
-                                                                    <span>Yes</span>
+                                        <div class="row form-group mb-3" id="endocarditis-yes">
+                                            <div class="col-lg-12">
+                                                <div class="title-box">
+                                                    <span class="title-label">If Yes</span>
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label for="">
+                                                                    Infected Endocard Type
                                                                 </label>
-                                                            </div>
-                                                            <div>
-                                                                <label class="me-2">
-                                                                    <input type="radio" name="priorcva" value="No" />
-                                                                    <span>No</span>
-                                                                </label>
-                                                            </div>
-                                                            <div>
-                                                                <label class="me-2">
-                                                                    <input type="radio" name="priorcva" value="Unknown" checked />
-                                                                    <span>Unknown</span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
+                                                                <select name="infect_endocard_type" id=""
+                                                                    class="form-select">
+                                                                    <option value="">Select Infected Endocard Type
+                                                                    </option>
+                                                                    <option value="Treated">Treated</option>
+                                                                    <option value="Active">Active</option>
 
-                                                    </div>
-                                                    <div class="row form-group mb-3" id="priorcva-yes" style="display: none;">
-                                                        <div class="col-lg-12">
-                                                            <div class="title-box">
-                                                                <span class="title-label">If Yes</span>
-                                                                <label for="">Prior CVA-When</label>
-                                                                <select name="priorcva_when" class="form-select" id="">
-                                                                    <option value="">Select Prior CVA-When</option>
-                                                                    <option value="<= 30 Days"><= 30 Days</option>
-                                                                    <option value="> 30 Days">> 30 Days</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="">
+                                                                    Diabetes-Control
+                                                                </label>
+                                                                <select name="infect_endocard_culture" id=""
+                                                                    class="form-select">
+                                                                    <option value="">Select Infected Endocard Culture
+                                                                    </option>
+                                                                    <option value="Culture Negative">Culture Negative</option>
+                                                                    <option value="Staphylococcus aureus">Staphylococcus aureus
+                                                                    </option>
+                                                                    <option value="Streptococcus species">Streptococcus species
+                                                                    </option>
+                                                                    <option value="Coagulase negative staphylococcus">Coagulase
+                                                                        negative staphylococcus</option>
+                                                                    <option value="Enterococcus species">Enterococcus species
+                                                                    </option>
+                                                                    <option value="Fungal">Fungal</option>
+                                                                    <option value="Other">Other</option>
+                                                                    <option value="2">Unknown</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
+                                        <div class="row form-group mb-3">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="">Tobacco use</label>
+                                                        <select name="tobacco" id="" class="form-select">
+                                                            <option value="">Select tobacco use</option>
+                                                            <option value="Never Smoker">Never Smoker</option>
+                                                            <option value="Current every day smoker">Current every day smoker
+                                                            </option>
+                                                            <option value="Current some day smoker">Current some day smoker
+                                                            </option>
+                                                            <option value="Smoker, current state (frequency) unknown">Smoker,
+                                                                current state (frequency) unknown</option>
+                                                            <option value="Former smoker">Former smoker</option>
+                                                            <option value="Smoking status unknown">Smoking status unknown
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="">Chronic Lung Disease</label>
+                                                        <select name="lung_disease" id="lung_disease" class="form-select">
+                                                            <option value="">Select chronic lung disease</option>
+                                                            <option value="0">No</option>
+                                                            <option value="Mild">Mild</option>
+                                                            <option value="Moderate">Moderate</option>
+                                                            <option value="Severe">Severe</option>
+                                                            <option value="Lung disease documented, severity unknown">Lung
+                                                                disease documented, severity unknown</option>
+                                                            <option value="2">Unknown</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row form-group mb-3" id="lungdisease-yes">
+                                            <div class="col-lg-12">
+                                                <div class="title-box">
+                                                    <span class="title-label">If Mild , Moderate or Severe</span>
+                                                    <div class="col-md-11 mx-auto">
+                                                        <label for="">
+                                                            Chronic Lung Disease - Type
+                                                        </label>
+                                                        <select name="lung_disease_type" class="form-select">
+                                                            <option value="">Select Lung Disease Type
+                                                            </option>
+                                                            <option value="Obstructive">Obstructive</option>
+                                                            <option value="Reactive">Reactive</option>
+                                                            <option value="Interstitial Fibrosis">Interstitial Fibrosis
+                                                            </option>
+                                                            <option value="Other">Other</option>
+                                                            <option value="Multiple">Multiple</option>
+                                                            <option value="Not Documented">Not Documented</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="">Pulmonary Function Test Done</label>
+                                            </div>
+                                            <div class="col-lg-8 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="pulomnary_test" id="pulomnarytestyes"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="pulomnary_test" value="0" checked />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group mb-3" id="pulomonarytest-yes">
+                                            <div class="col-lg-12">
+                                                <div class="title-box">
+                                                    <span class="title-label">If Yes</span>
+                                                    <div class="col-md-11 mx-auto">
+                                                        <label for="">
+                                                            Forced Expiratory Volume Predicted
+                                                        </label>
+                                                        <input type="number" name="volumn_predict" class="form-control"
+                                                            id="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="">DLCO Test Performed</label>
+                                            </div>
+                                            <div class="col-lg-8 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="dlco_test" id="dlcoyes"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="dlco_test" value="0" checked />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group mb-3" id="dlco-yes">
+                                            <div class="col-lg-12">
+                                                <div class="title-box">
+                                                    <span class="title-label">If Yes</span>
+                                                    <div class="col-md-11 mx-auto">
+                                                        <label for="">
+                                                            DLCO Predicted
+                                                        </label>
+                                                        <input type="text" name="dlco_predict" class="form-control"
+                                                            id="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="">Room Air ABG Performed</label>
+                                            </div>
+                                            <div class="col-lg-8 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="roomair_abg" id="abgyes"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="roomair_abg" value="0" checked />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group mb-3" id="abg-yes">
+                                            <div class="col-lg-12">
+                                                <div class="title-box">
+                                                    <span class="title-label">If Yes</span>
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Carbon dioxide level</label>
+                                                                <input type="text" name="cd_level" class="form-control"
+                                                                    id="">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Oxygen level</label>
+                                                                <input type="text" name="oxy_level" class="form-control"
+                                                                    id="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <label for="">Home Oxygen</label>
+                                                <select name="home_oxy" id="" class="form-select">
+                                                    <option value="">Select Oxygen Level</option>
+                                                    <option value="Yes, PRN">Yes, PRN</option>
+                                                    <option value="Yes, Oxygen dependent">Yes Oxygen dependent</option>
+                                                    <option value="0">No</option>
+                                                    <option value="2">Unknown</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Inhaled Medication or Oral Bronchodilator Therapy</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="inhaled_therapy"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="inhaled_therapy" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="inhaled_therapy" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Sleep Apnea</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="sleep_apnea"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="sleep_apnea" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="sleep_apnea" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="">Pneumonia</label>
+                                                        <select name="pneumonia" class="form-control" id="">
+                                                            <option value="">Select Pneumonia</option>
+                                                            <option value="Recent">Recent</option>
+                                                            <option value="Remote">Remote</option>
+                                                            <option value="0">No</option>
+                                                            <option value="2">Unknown</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="">Illicit drug use</label>
+                                                        <select name="illicit_drug" class="form-control" id="">
+                                                            <option value="">Select Illicit Drug Use</option>
+                                                            <option value="Recent">Recent</option>
+                                                            <option value="Remote">Remote</option>
+                                                            <option value="0">No</option>
+                                                            <option value="2">Unknown</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Depression</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="Depression"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="Depression" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="Depression" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                           <div class="col-md-12">
+                                            <label for="">Alcohol Use</label>
+                                            <select name="alco_use" class="form-select" id="">
+                                                <option value="">Select Alcohol Use</option>
+                                                <option value="<= 1 Drink/Week"><= 1 Drink/Week</option>
+                                                <option value="2-7 Drinks/Week">2-7 Drinks/Week</option>
+                                                <option value=">= 8 Drinks/week">>= 8 Drinks/Week</option>
+                                                <option value="None">None</option>
+                                                <option value="2">Unknown</option>
+                                            </select>
+                                           </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Liver Disease</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="liver_disease"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="liver_disease" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="liver_disease" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Immunocompromise Present</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="immuno_present"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="immuno_present" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="immuno_present" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Mediastinal Radiation</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="mediastinal"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="mediastinal" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="mediastinal" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Cancer Within 5 Year</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="cancer_within"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="cancer_within" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="cancer_within" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Peripheral Artery Disease</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="peripheral_artery"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="peripheral_artery" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="peripheral_artery" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Thoracic Aorta Disease </label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="Thoracic_aorta"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="Thoracic_aorta" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="Thoracic_aorta" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Syncope</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="synocope"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="synocope" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="synocope" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Unresponsive State</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="unresponsive_state"
+                                                            value="1" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="unresponsive_state" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="unresponsive_state" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <label for="">Cerebrovascular Disease</label>
+                                            </div>
+                                            <div class="col-lg-6 d-md-flex">
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="cerebrovascular"
+                                                            value="1" id="cerebrovascularyes" />
+                                                        <span>Yes</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="cerebrovascular" value="0" />
+                                                        <span>No</span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label class="me-2">
+                                                        <input type="radio" name="cerebrovascular" value="2" checked />
+                                                        <span>Unknown</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row form-group mb-3" id="cerebrovascular-yes" style="display: none;">
+                                            <div class="col-lg-12">
+                                                <div class="title-box">
+                                                    <span class="title-label">If Yes</span>
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row mb-3">
+                                                            <div class="col-lg-6">
+                                                                <label for="">Prior CVA</label>
+                                                            </div>
+                                                            <div class="col-lg-6 d-md-flex">
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="priorcva"
+                                                                            value="1" id="priorcvayes" />
+                                                                        <span>Yes</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="priorcva" value="0" />
+                                                                        <span>No</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="priorcva" value="2" checked />
+                                                                        <span>Unknown</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row form-group mb-3" id="priorcva-yes" style="display: none;">
+                                                            <div class="col-lg-12">
+                                                                <div class="title-box">
+                                                                    <span class="title-label">If Yes</span>
+                                                                    <label for="">Prior CVA-When</label>
+                                                                    <select name="priorcva_when" class="form-select" id="">
+                                                                        <option value="">Select Prior CVA-When</option>
+                                                                        <option value="<= 30 Days"><= 30 Days</option>
+                                                                        <option value="> 30 Days">> 30 Days</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col-lg-6">
+                                                                <label for="">CVD TIA</label>
+                                                            </div>
+                                                            <div class="col-lg-6 d-md-flex">
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="cvdtia"
+                                                                            value="1" id="cvdtiayes" />
+                                                                        <span>Yes</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="cvdtia" value="0" />
+                                                                        <span>No</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="cvdtia" value="2" checked />
+                                                                        <span>Unknown</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-12">
+                                                                <label for="">CVD Carotid Stenosis </label>
+                                                                <select name="cvd_stenosis" id="cvd_stenosis" class="form-select">
+                                                                    <option value="">Select CVD Carotid Stenosis</option>
+                                                                    <option value="Right">Right</option>
+                                                                    <option value="Left">Left</option>
+                                                                    <option value="Both">Both</option>
+                                                                    <option value="None">None</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group mb-3" id="hiddenDiv" style="display: none;">
+                                                            <div class="col-lg-12">
+                                                                <div class="title-box">
+                                                                    <span class="title-label">If Right or Both</span>
+                                                                    <label for="">Severity of stenosis on the right carotid artrey </label>
+                                                                    <select name="stenosis_right" class="form-select" id="">
+                                                                        <option value="">Select Severity of stenosis</option>
+                                                                        <option value="50% to 79%">50% to 79%</option>
+                                                                        <option value="80% to 99%">80% to 99%</option>
+                                                                        <option value="100%">100%</option>
+                                                                        <option value="Not documented">Not Documented</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group mb-3" id="hiddenleftDiv" style="display: none;">
+                                                            <div class="col-lg-12">
+                                                                <div class="title-box">
+                                                                    <span class="title-label">If Left or Both</span>
+                                                                    <label for="">Severity of stenosis on the left carotid artrey </label>
+                                                                    <select name="stanosis_left" class="form-select" id="">
+                                                                        <option value="">Select Severity of stenosis</option>
+                                                                        <option value="50% to 79%">50% to 79%</option>
+                                                                        <option value="80% to 99%">80% to 99%</option>
+                                                                        <option value="100%">100%</option>
+                                                                        <option value="Not documented">Not Documented</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col-lg-8">
+                                                                <label for="">History of previous carotid artery surgery and/or stenting </label>
+                                                            </div>
+                                                            <div class="col-lg-4 d-md-flex">
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="pre_carotid"
+                                                                            value="1" id="pre_carotidyes" />
+                                                                        <span>Yes</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="pre_carotid" value="0"  checked/>
+                                                                        <span>No</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">WBC count</label>
+                                                        <input type="number" class="form-control" name="wbc_count">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">Hemoglobin</label>
+                                                        <input type="text" class="form-control" name="hemoglobin">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">Hematocrit</label>
+                                                        <input type="text" class="form-control" name="hematocrit">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">Platelet Count</label>
+                                                        <input type="text" class="form-control" name="platelet_count">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">Last Creatinine Level</label>
+                                                        <input type="text" class="form-control" name="lst_creatine_lvl">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">Total Albumin</label>
+                                                        <input type="text" class="form-control" name="total_albumin">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">Total Bilirubin</label>
+                                                        <input type="text" class="form-control" name="total_bilirubin">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">A 1 c Level</label>
+                                                        <input type="text" class="form-control" name="aclevel">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">INR</label>
+                                                        <input type="text" class="form-control" name="inr">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">Meld Score</label>
+                                                        <input type="text" class="form-control" name="meld_score">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-2">
+                                                        <label for="">BNP</label>
+                                                        <input type="text" class="form-control" name="bnp">
+                                                    </div>
+                                                    <div class="col-md-4 mb-2">
+                                                        <label for="">High-Sensitivity Troponin T</label>
+                                                        <input type="text" class="form-control" name="high_sensitive">
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="">N-Terminal Prohormone of Brain NeuTriuretic Peptide</label>
+                                                        <input type="text" class="form-control" name="nterminal">
+                                                    </div>
+
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="">High Sensitive CRP or Ultra-sensitive CRP</label>
+                                                        <input type="text" class="form-control" name="highultra_sensitive">
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="">Growth Differentiation Factor 15</label>
+                                                        <input type="text" class="form-control" name="growth_diff">
+                                                    </div>
+
+                                                    <div class="row mb-3 mt-2">
+                                                        <div class="col-lg-6">
+                                                            <label for="">HIT Antibodies </label>
+                                                        </div>
+                                                        <div class="col-lg-6 d-md-flex">
+                                                            <div>
+                                                                <label class="me-2">
+                                                                    <input type="radio" name="antibody"
+                                                                        value="Yes" id="antibodyyes" />
+                                                                    <span>Yes</span>
+                                                                </label>
+                                                            </div>
+                                                            <div>
+                                                                <label class="me-2">
+                                                                    <input type="radio" name="antibody" value="No"  checked/>
+                                                                    <span>No</span>
+                                                                </label>
+                                                            </div>
+                                                            <div>
+                                                                <label class="me-2">
+                                                                    <input type="radio" name="antibody" value="Not Applicable"/>
+                                                                    <span>Not Applicable</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3 mt-2">
+                                                        <div class="col-lg-6">
+                                                            <label for="">Five Meter Walk Test Done </label>
+                                                        </div>
+                                                        <div class="col-lg-6 d-md-flex">
+                                                            <div>
+                                                                <label class="me-2">
+                                                                    <input type="radio" name="walkdone"
+                                                                        value="Yes" id="walkdoneyes" />
+                                                                    <span>Yes</span>
+                                                                </label>
+                                                            </div>
+                                                            <div>
+                                                                <label class="me-2">
+                                                                    <input type="radio" name="walkdone" value="No"  checked/>
+                                                                    <span>No</span>
+                                                                </label>
+                                                            </div>
+                                                            <div>
+                                                                <label class="me-2">
+                                                                    <input type="radio" name="walkdone" value="Non-ambulatory patient"/>
+                                                                    <span>Non-ambulatory patient</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group mb-3" id="walkdone-yes">
+                                                        <div class="col-lg-12">
+                                                            <div class="title-box">
+                                                                <span class="title-label">If Yes</span>
+                                                                <div class="row">
+                                                                    <div class="col-md-4 mb-2">
+                                                                        <label for="">Time 1 (Seconds)</label>
+                                                                        <input type="text" name="time1sec" class="form-control" id="">
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-2">
+                                                                        <label for="">Time 2 (Seconds)</label>
+                                                                        <input type="text" name="time2sec" class="form-control" id="">
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-2">
+                                                                        <label for="">Time 3 (Seconds)</label>
+                                                                        <input type="text" name="time3sec" class="form-control" id="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-dark ft">Add Risk Factor</button>
+                                    </div>
+                                </div>
+                               </form>
+                        </section>
+
+                        <section id="tab3" class="tab-pane fade show">
+
+                        </section>
+
+                        <section id="tab4" class="tab-pane fade show active">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="row mb-3 mt-2">
+                                        <div class="col-lg-6">
+                                            <label for="">Prior Myocardial Infarction </label>
+                                        </div>
+                                        <div class="col-lg-6 d-md-flex">
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="myocardial"
+                                                        value="1" id="myocardialyes" />
+                                                    <span>Yes</span>
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="myocardial" value="0"  checked/>
+                                                    <span>No</span>
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="myocardial" value="Unknown"/>
+                                                    <span>Unknown</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3" id="myocardial-yes">
+                                        <div class="col-lg-12">
+                                            <div class="title-box">
+                                                <span class="title-label">If Yes</span>
+                                                <div class="row">
+                                                    <div class="col-md-11 mx-auto">
+                                                        <label for="">MI When</label>
+                                                        <select name="mi_when" class="form-select" id="">
+                                                            <option value="">Select MI When</option>
+                                                            <option value="<= 6 Hours"><= 6 Hours</option>
+                                                            <option value=">6 Hours but <24 Hours"> &gt; 6 Hours but &lt; 24 Hours</option>
+                                                                <option value="1 to 7 Days">1 to 7 Days</option>
+                                                                <option value="8 to 21 Days">8 to 21 Days</option>
+                                                                <option value=">21 Days">&gt; 21 Days</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="">Cardiac Symptoms at Time of admission:</label>
+                                                    <select name="cardic_symp" class="form-select" id="">
+                                                        <option value="">Select Cardic Symptoms</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
+
                     </div>
                 </div>
             </div>
