@@ -85,12 +85,12 @@
                     </ul>
                     <div class="tab-content mt-4">
                         <section id="tab1" class="tab-pane fade show">
-                           <div class="row p-2 mb-3">
-                           <center>
-                            <h2><b>Add Patient Medications</b></h2>
-                           </center>
-                           <hr>
-                           </div>
+                            <div class="row p-2 mb-3">
+                                <center>
+                                    <h2><b>Add Patient Medications</b></h2>
+                                </center>
+                                <hr>
+                            </div>
                             <form action="{{ route('add-patient-medication') }}" method="post">
                                 @csrf
                                 <div class="row mb-3">
@@ -752,10 +752,10 @@
                         <section id="tab2" class="tab-pane fade show ">
                             <div class="row p-2 mb-3">
                                 <center>
-                                 <h2><b>Add Patient Risk Factor</b></h2>
+                                    <h2><b>Add Patient Risk Factor</b></h2>
                                 </center>
                                 <hr>
-                                </div>
+                            </div>
                             <form action="{{ route('add-risk-factor') }}" method="post">
                                 @csrf
                                 <div class="row">
@@ -819,13 +819,15 @@
                                                         <label for="">
                                                             Diabetes-Control
                                                         </label>
-                                                        <select name="diabetes-control" id="" class="form-select">
+                                                        <select name="diabetes-control" id=""
+                                                            class="form-select">
                                                             <option value="">Select diabetes control</option>
                                                             <option value="None">None</option>
                                                             <option value="Diet">Diet</option>
                                                             <option value="Oral">Oral</option>
                                                             <option value="Insulin">Insulin</option>
-                                                            <option value="Other subcutaneous medication">Other subcutaneous
+                                                            <option value="Other subcutaneous medication">Other
+                                                                subcutaneous
                                                                 medication</option>
                                                             <option value="Other">Other</option>
                                                             <option value="2">Unknown</option>
@@ -853,7 +855,8 @@
                                                 </div>
                                                 <div>
                                                     <label>
-                                                        <input type="radio" name="dyslipidemia" value="2" checked />
+                                                        <input type="radio" name="dyslipidemia" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -903,7 +906,8 @@
                                                 </div>
                                                 <div>
                                                     <label>
-                                                        <input type="radio" name="hypertension" value="2" checked />
+                                                        <input type="radio" name="hypertension" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -923,7 +927,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="endocarditis" value="0" checked />
+                                                        <input type="radio" name="endocarditis" value="0"
+                                                            checked />
                                                         <span>No</span>
                                                     </label>
                                                 </div>
@@ -956,14 +961,19 @@
                                                                     class="form-select">
                                                                     <option value="">Select Infected Endocard Culture
                                                                     </option>
-                                                                    <option value="Culture Negative">Culture Negative</option>
-                                                                    <option value="Staphylococcus aureus">Staphylococcus aureus
+                                                                    <option value="Culture Negative">Culture Negative
                                                                     </option>
-                                                                    <option value="Streptococcus species">Streptococcus species
+                                                                    <option value="Staphylococcus aureus">Staphylococcus
+                                                                        aureus
                                                                     </option>
-                                                                    <option value="Coagulase negative staphylococcus">Coagulase
+                                                                    <option value="Streptococcus species">Streptococcus
+                                                                        species
+                                                                    </option>
+                                                                    <option value="Coagulase negative staphylococcus">
+                                                                        Coagulase
                                                                         negative staphylococcus</option>
-                                                                    <option value="Enterococcus species">Enterococcus species
+                                                                    <option value="Enterococcus species">Enterococcus
+                                                                        species
                                                                     </option>
                                                                     <option value="Fungal">Fungal</option>
                                                                     <option value="Other">Other</option>
@@ -984,11 +994,13 @@
                                                         <select name="tobacco" id="" class="form-select">
                                                             <option value="">Select tobacco use</option>
                                                             <option value="Never Smoker">Never Smoker</option>
-                                                            <option value="Current every day smoker">Current every day smoker
+                                                            <option value="Current every day smoker">Current every day
+                                                                smoker
                                                             </option>
                                                             <option value="Current some day smoker">Current some day smoker
                                                             </option>
-                                                            <option value="Smoker, current state (frequency) unknown">Smoker,
+                                                            <option value="Smoker, current state (frequency) unknown">
+                                                                Smoker,
                                                                 current state (frequency) unknown</option>
                                                             <option value="Former smoker">Former smoker</option>
                                                             <option value="Smoking status unknown">Smoking status unknown
@@ -997,7 +1009,8 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="">Chronic Lung Disease</label>
-                                                        <select name="lung_disease" id="lung_disease" class="form-select">
+                                                        <select name="lung_disease" id="lung_disease"
+                                                            class="form-select">
                                                             <option value="">Select chronic lung disease</option>
                                                             <option value="0">No</option>
                                                             <option value="Mild">Mild</option>
@@ -1051,7 +1064,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="pulomnary_test" value="0" checked />
+                                                        <input type="radio" name="pulomnary_test" value="0"
+                                                            checked />
                                                         <span>No</span>
                                                     </label>
                                                 </div>
@@ -1119,7 +1133,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="roomair_abg" value="0" checked />
+                                                        <input type="radio" name="roomair_abg" value="0"
+                                                            checked />
                                                         <span>No</span>
                                                     </label>
                                                 </div>
@@ -1133,13 +1148,13 @@
                                                         <div class="row">
                                                             <div class="col-md-6 mb-3">
                                                                 <label for="">Carbon dioxide level</label>
-                                                                <input type="text" name="cd_level" class="form-control"
-                                                                    id="">
+                                                                <input type="text" name="cd_level"
+                                                                    class="form-control" id="">
                                                             </div>
                                                             <div class="col-md-6 mb-3">
                                                                 <label for="">Oxygen level</label>
-                                                                <input type="text" name="oxy_level" class="form-control"
-                                                                    id="">
+                                                                <input type="text" name="oxy_level"
+                                                                    class="form-control" id="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1160,13 +1175,13 @@
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-lg-6">
-                                                <label for="">Inhaled Medication or Oral Bronchodilator Therapy</label>
+                                                <label for="">Inhaled Medication or Oral Bronchodilator
+                                                    Therapy</label>
                                             </div>
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="inhaled_therapy"
-                                                            value="1" />
+                                                        <input type="radio" name="inhaled_therapy" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1178,7 +1193,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="inhaled_therapy" value="2" checked />
+                                                        <input type="radio" name="inhaled_therapy" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1191,8 +1207,7 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="sleep_apnea"
-                                                            value="1" />
+                                                        <input type="radio" name="sleep_apnea" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1204,7 +1219,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="sleep_apnea" value="2" checked />
+                                                        <input type="radio" name="sleep_apnea" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1243,8 +1259,7 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="Depression"
-                                                            value="1" />
+                                                        <input type="radio" name="Depression" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1264,17 +1279,18 @@
                                         </div>
 
                                         <div class="row mb-3">
-                                           <div class="col-md-12">
-                                            <label for="">Alcohol Use</label>
-                                            <select name="alco_use" class="form-select" id="">
-                                                <option value="">Select Alcohol Use</option>
-                                                <option value="<= 1 Drink/Week"><= 1 Drink/Week</option>
-                                                <option value="2-7 Drinks/Week">2-7 Drinks/Week</option>
-                                                <option value=">= 8 Drinks/week">>= 8 Drinks/Week</option>
-                                                <option value="None">None</option>
-                                                <option value="2">Unknown</option>
-                                            </select>
-                                           </div>
+                                            <div class="col-md-12">
+                                                <label for="">Alcohol Use</label>
+                                                <select name="alco_use" class="form-select" id="">
+                                                    <option value="">Select Alcohol Use</option>
+                                                    <option value="<= 1 Drink/Week">
+                                                        <= 1 Drink/Week</option>
+                                                    <option value="2-7 Drinks/Week">2-7 Drinks/Week</option>
+                                                    <option value=">= 8 Drinks/week">>= 8 Drinks/Week</option>
+                                                    <option value="None">None</option>
+                                                    <option value="2">Unknown</option>
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <div class="row mb-3">
@@ -1284,8 +1300,7 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="liver_disease"
-                                                            value="1" />
+                                                        <input type="radio" name="liver_disease" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1297,7 +1312,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="liver_disease" value="2" checked />
+                                                        <input type="radio" name="liver_disease" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1310,8 +1326,7 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="immuno_present"
-                                                            value="1" />
+                                                        <input type="radio" name="immuno_present" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1323,7 +1338,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="immuno_present" value="2" checked />
+                                                        <input type="radio" name="immuno_present" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1336,8 +1352,7 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="mediastinal"
-                                                            value="1" />
+                                                        <input type="radio" name="mediastinal" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1349,7 +1364,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="mediastinal" value="2" checked />
+                                                        <input type="radio" name="mediastinal" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1363,8 +1379,7 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="cancer_within"
-                                                            value="1" />
+                                                        <input type="radio" name="cancer_within" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1376,7 +1391,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="cancer_within" value="2" checked />
+                                                        <input type="radio" name="cancer_within" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1389,8 +1405,7 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="peripheral_artery"
-                                                            value="1" />
+                                                        <input type="radio" name="peripheral_artery" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1402,7 +1417,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="peripheral_artery" value="2" checked />
+                                                        <input type="radio" name="peripheral_artery" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1415,8 +1431,7 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="Thoracic_aorta"
-                                                            value="1" />
+                                                        <input type="radio" name="Thoracic_aorta" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1428,7 +1443,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="Thoracic_aorta" value="2" checked />
+                                                        <input type="radio" name="Thoracic_aorta" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1441,8 +1457,7 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="synocope"
-                                                            value="1" />
+                                                        <input type="radio" name="synocope" value="1" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1454,7 +1469,8 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="synocope" value="2" checked />
+                                                        <input type="radio" name="synocope" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1474,13 +1490,15 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="unresponsive_state" value="0" />
+                                                        <input type="radio" name="unresponsive_state"
+                                                            value="0" />
                                                         <span>No</span>
                                                     </label>
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="unresponsive_state" value="2" checked />
+                                                        <input type="radio" name="unresponsive_state" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
@@ -1493,8 +1511,8 @@
                                             <div class="col-lg-6 d-md-flex">
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="cerebrovascular"
-                                                            value="1" id="cerebrovascularyes" />
+                                                        <input type="radio" name="cerebrovascular" value="1"
+                                                            id="cerebrovascularyes" />
                                                         <span>Yes</span>
                                                     </label>
                                                 </div>
@@ -1506,14 +1524,16 @@
                                                 </div>
                                                 <div>
                                                     <label class="me-2">
-                                                        <input type="radio" name="cerebrovascular" value="2" checked />
+                                                        <input type="radio" name="cerebrovascular" value="2"
+                                                            checked />
                                                         <span>Unknown</span>
                                                     </label>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div class="row form-group mb-3" id="cerebrovascular-yes" style="display: none;">
+                                        <div class="row form-group mb-3" id="cerebrovascular-yes"
+                                            style="display: none;">
                                             <div class="col-lg-12">
                                                 <div class="title-box">
                                                     <span class="title-label">If Yes</span>
@@ -1532,27 +1552,33 @@
                                                                 </div>
                                                                 <div>
                                                                     <label class="me-2">
-                                                                        <input type="radio" name="priorcva" value="0" />
+                                                                        <input type="radio" name="priorcva"
+                                                                            value="0" />
                                                                         <span>No</span>
                                                                     </label>
                                                                 </div>
                                                                 <div>
                                                                     <label class="me-2">
-                                                                        <input type="radio" name="priorcva" value="2" checked />
+                                                                        <input type="radio" name="priorcva"
+                                                                            value="2" checked />
                                                                         <span>Unknown</span>
                                                                     </label>
                                                                 </div>
                                                             </div>
 
                                                         </div>
-                                                        <div class="row form-group mb-3" id="priorcva-yes" style="display: none;">
+                                                        <div class="row form-group mb-3" id="priorcva-yes"
+                                                            style="display: none;">
                                                             <div class="col-lg-12">
                                                                 <div class="title-box">
                                                                     <span class="title-label">If Yes</span>
                                                                     <label for="">Prior CVA-When</label>
-                                                                    <select name="priorcva_when" class="form-select" id="">
-                                                                        <option value="">Select Prior CVA-When</option>
-                                                                        <option value="<= 30 Days"><= 30 Days</option>
+                                                                    <select name="priorcva_when" class="form-select"
+                                                                        id="">
+                                                                        <option value="">Select Prior CVA-When
+                                                                        </option>
+                                                                        <option value="<= 30 Days">
+                                                                            <= 30 Days</option>
                                                                         <option value="> 30 Days">> 30 Days</option>
                                                                     </select>
                                                                 </div>
@@ -1572,13 +1598,15 @@
                                                                 </div>
                                                                 <div>
                                                                     <label class="me-2">
-                                                                        <input type="radio" name="cvdtia" value="0" />
+                                                                        <input type="radio" name="cvdtia"
+                                                                            value="0" />
                                                                         <span>No</span>
                                                                     </label>
                                                                 </div>
                                                                 <div>
                                                                     <label class="me-2">
-                                                                        <input type="radio" name="cvdtia" value="2" checked />
+                                                                        <input type="radio" name="cvdtia"
+                                                                            value="2" checked />
                                                                         <span>Unknown</span>
                                                                     </label>
                                                                 </div>
@@ -1588,8 +1616,10 @@
                                                         <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label for="">CVD Carotid Stenosis </label>
-                                                                <select name="cvd_stenosis" id="cvd_stenosis" class="form-select">
-                                                                    <option value="">Select CVD Carotid Stenosis</option>
+                                                                <select name="cvd_stenosis" id="cvd_stenosis"
+                                                                    class="form-select">
+                                                                    <option value="">Select CVD Carotid Stenosis
+                                                                    </option>
                                                                     <option value="Right">Right</option>
                                                                     <option value="Left">Left</option>
                                                                     <option value="Both">Both</option>
@@ -1597,39 +1627,50 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="row form-group mb-3" id="hiddenDiv" style="display: none;">
+                                                        <div class="row form-group mb-3" id="hiddenDiv"
+                                                            style="display: none;">
                                                             <div class="col-lg-12">
                                                                 <div class="title-box">
                                                                     <span class="title-label">If Right or Both</span>
-                                                                    <label for="">Severity of stenosis on the right carotid artrey </label>
-                                                                    <select name="stenosis_right" class="form-select" id="">
-                                                                        <option value="">Select Severity of stenosis</option>
+                                                                    <label for="">Severity of stenosis on the
+                                                                        right carotid artrey </label>
+                                                                    <select name="stenosis_right" class="form-select"
+                                                                        id="">
+                                                                        <option value="">Select Severity of stenosis
+                                                                        </option>
                                                                         <option value="50% to 79%">50% to 79%</option>
                                                                         <option value="80% to 99%">80% to 99%</option>
                                                                         <option value="100%">100%</option>
-                                                                        <option value="Not documented">Not Documented</option>
+                                                                        <option value="Not documented">Not Documented
+                                                                        </option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row form-group mb-3" id="hiddenleftDiv" style="display: none;">
+                                                        <div class="row form-group mb-3" id="hiddenleftDiv"
+                                                            style="display: none;">
                                                             <div class="col-lg-12">
                                                                 <div class="title-box">
                                                                     <span class="title-label">If Left or Both</span>
-                                                                    <label for="">Severity of stenosis on the left carotid artrey </label>
-                                                                    <select name="stanosis_left" class="form-select" id="">
-                                                                        <option value="">Select Severity of stenosis</option>
+                                                                    <label for="">Severity of stenosis on the left
+                                                                        carotid artrey </label>
+                                                                    <select name="stanosis_left" class="form-select"
+                                                                        id="">
+                                                                        <option value="">Select Severity of stenosis
+                                                                        </option>
                                                                         <option value="50% to 79%">50% to 79%</option>
                                                                         <option value="80% to 99%">80% to 99%</option>
                                                                         <option value="100%">100%</option>
-                                                                        <option value="Not documented">Not Documented</option>
+                                                                        <option value="Not documented">Not Documented
+                                                                        </option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-lg-8">
-                                                                <label for="">History of previous carotid artery surgery and/or stenting </label>
+                                                                <label for="">History of previous carotid artery
+                                                                    surgery and/or stenting </label>
                                                             </div>
                                                             <div class="col-lg-4 d-md-flex">
                                                                 <div>
@@ -1641,7 +1682,8 @@
                                                                 </div>
                                                                 <div>
                                                                     <label class="me-2">
-                                                                        <input type="radio" name="pre_carotid" value="0"  checked/>
+                                                                        <input type="radio" name="pre_carotid"
+                                                                            value="0" checked />
                                                                         <span>No</span>
                                                                     </label>
                                                                 </div>
@@ -1668,19 +1710,23 @@
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 mb-2">
                                                         <label for="">Platelet Count</label>
-                                                        <input type="text" class="form-control" name="platelet_count">
+                                                        <input type="text" class="form-control"
+                                                            name="platelet_count">
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 mb-2">
                                                         <label for="">Last Creatinine Level</label>
-                                                        <input type="text" class="form-control" name="lst_creatine_lvl">
+                                                        <input type="text" class="form-control"
+                                                            name="lst_creatine_lvl">
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 mb-2">
                                                         <label for="">Total Albumin</label>
-                                                        <input type="text" class="form-control" name="total_albumin">
+                                                        <input type="text" class="form-control"
+                                                            name="total_albumin">
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 mb-2">
                                                         <label for="">Total Bilirubin</label>
-                                                        <input type="text" class="form-control" name="total_bilirubin">
+                                                        <input type="text" class="form-control"
+                                                            name="total_bilirubin">
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 mb-2">
                                                         <label for="">A 1 c Level</label>
@@ -1700,16 +1746,20 @@
                                                     </div>
                                                     <div class="col-md-4 mb-2">
                                                         <label for="">High-Sensitivity Troponin T</label>
-                                                        <input type="text" class="form-control" name="high_sensitive">
+                                                        <input type="text" class="form-control"
+                                                            name="high_sensitive">
                                                     </div>
                                                     <div class="col-md-6 mb-2">
-                                                        <label for="">N-Terminal Prohormone of Brain NeuTriuretic Peptide</label>
+                                                        <label for="">N-Terminal Prohormone of Brain NeuTriuretic
+                                                            Peptide</label>
                                                         <input type="text" class="form-control" name="nterminal">
                                                     </div>
 
                                                     <div class="col-md-6 mb-2">
-                                                        <label for="">High Sensitive CRP or Ultra-sensitive CRP</label>
-                                                        <input type="text" class="form-control" name="highultra_sensitive">
+                                                        <label for="">High Sensitive CRP or Ultra-sensitive
+                                                            CRP</label>
+                                                        <input type="text" class="form-control"
+                                                            name="highultra_sensitive">
                                                     </div>
                                                     <div class="col-md-6 mb-2">
                                                         <label for="">Growth Differentiation Factor 15</label>
@@ -1730,13 +1780,15 @@
                                                             </div>
                                                             <div>
                                                                 <label class="me-2">
-                                                                    <input type="radio" name="antibody" value="No"  checked/>
+                                                                    <input type="radio" name="antibody"
+                                                                        value="No" checked />
                                                                     <span>No</span>
                                                                 </label>
                                                             </div>
                                                             <div>
                                                                 <label class="me-2">
-                                                                    <input type="radio" name="antibody" value="Not Applicable"/>
+                                                                    <input type="radio" name="antibody"
+                                                                        value="Not Applicable" />
                                                                     <span>Not Applicable</span>
                                                                 </label>
                                                             </div>
@@ -1757,13 +1809,15 @@
                                                             </div>
                                                             <div>
                                                                 <label class="me-2">
-                                                                    <input type="radio" name="walkdone" value="No"  checked/>
+                                                                    <input type="radio" name="walkdone"
+                                                                        value="No" checked />
                                                                     <span>No</span>
                                                                 </label>
                                                             </div>
                                                             <div>
                                                                 <label class="me-2">
-                                                                    <input type="radio" name="walkdone" value="Non-ambulatory patient"/>
+                                                                    <input type="radio" name="walkdone"
+                                                                        value="Non-ambulatory patient" />
                                                                     <span>Non-ambulatory patient</span>
                                                                 </label>
                                                             </div>
@@ -1776,15 +1830,18 @@
                                                                 <div class="row">
                                                                     <div class="col-md-4 mb-2">
                                                                         <label for="">Time 1 (Seconds)</label>
-                                                                        <input type="text" name="time1sec" class="form-control" id="">
+                                                                        <input type="text" name="time1sec"
+                                                                            class="form-control" id="">
                                                                     </div>
                                                                     <div class="col-md-4 mb-2">
                                                                         <label for="">Time 2 (Seconds)</label>
-                                                                        <input type="text" name="time2sec" class="form-control" id="">
+                                                                        <input type="text" name="time2sec"
+                                                                            class="form-control" id="">
                                                                     </div>
                                                                     <div class="col-md-4 mb-2">
                                                                         <label for="">Time 3 (Seconds)</label>
-                                                                        <input type="text" name="time3sec" class="form-control" id="">
+                                                                        <input type="text" name="time3sec"
+                                                                            class="form-control" id="">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1796,7 +1853,7 @@
                                         <button type="submit" class="btn btn-dark ft">Add Risk Factor</button>
                                     </div>
                                 </div>
-                               </form>
+                            </form>
                         </section>
 
                         <section id="tab3" class="tab-pane fade show">
@@ -1804,30 +1861,37 @@
                         </section>
 
                         <section id="tab4" class="tab-pane fade show active">
+                            <div class="row p-2 mb-3">
+                                <center>
+                                    <h2><b>Add Patient Cardic Status</b></h2>
+                                </center>
+                                <hr>
+                            </div>
+                          <form action="{{ route('add-cardic-status') }}" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-12">
-
                                     <div class="row mb-3 mt-2">
                                         <div class="col-lg-6">
-                                            <label for="">Prior Myocardial Infarction </label>
+                                            <label for="">Prior Myocardial Infarction: </label>
                                         </div>
                                         <div class="col-lg-6 d-md-flex">
                                             <div>
                                                 <label class="me-2">
-                                                    <input type="radio" name="myocardial"
-                                                        value="1" id="myocardialyes" />
+                                                    <input type="radio" name="myocardial" value="1"
+                                                        id="myocardialyes" />
                                                     <span>Yes</span>
                                                 </label>
                                             </div>
                                             <div>
                                                 <label class="me-2">
-                                                    <input type="radio" name="myocardial" value="0"  checked/>
+                                                    <input type="radio" name="myocardial" value="0" checked />
                                                     <span>No</span>
                                                 </label>
                                             </div>
                                             <div>
                                                 <label class="me-2">
-                                                    <input type="radio" name="myocardial" value="Unknown"/>
+                                                    <input type="radio" name="myocardial" value="2" />
                                                     <span>Unknown</span>
                                                 </label>
                                             </div>
@@ -1839,14 +1903,16 @@
                                                 <span class="title-label">If Yes</span>
                                                 <div class="row">
                                                     <div class="col-md-11 mx-auto">
-                                                        <label for="">MI When</label>
+                                                        <label for="">MI When:</label>
                                                         <select name="mi_when" class="form-select" id="">
                                                             <option value="">Select MI When</option>
-                                                            <option value="<= 6 Hours"><= 6 Hours</option>
-                                                            <option value=">6 Hours but <24 Hours"> &gt; 6 Hours but &lt; 24 Hours</option>
-                                                                <option value="1 to 7 Days">1 to 7 Days</option>
-                                                                <option value="8 to 21 Days">8 to 21 Days</option>
-                                                                <option value=">21 Days">&gt; 21 Days</option>
+                                                            <option value="<= 6 Hours">
+                                                                <= 6 Hours</option>
+                                                            <option value=">6 Hours but <24 Hours"> &gt; 6 Hours but &lt;
+                                                                24 Hours</option>
+                                                            <option value="1 to 7 Days">1 to 7 Days</option>
+                                                            <option value="8 to 21 Days">8 to 21 Days</option>
+                                                            <option value=">21 Days">&gt; 21 Days</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -1858,17 +1924,332 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="">Cardiac Symptoms at Time of admission:</label>
-                                                    <select name="cardic_symp" class="form-select" id="">
+                                                    <select name="cardic_sympadmin" class="form-select"
+                                                        id="">
                                                         <option value="">Select Cardic Symptoms</option>
+                                                        <option value="No symptoms">No symptoms</option>
+                                                        <option value="Stable Angina">stable Angina</option>
+                                                        <option value="Unstable Angina">Unstable Angina</option>
+                                                        <option value="Non-ST Elevation MI (Non-STEMI)">Non-ST Elevation
+                                                            MI (Non-STEMI)</option>
+                                                        <option value="ST Elevation MI (STEMI)">ST Elevation MI (STEMI)
+                                                        </option>
+                                                        <option value="Angina equivalent">Angina equivalent</option>
+                                                        <option value="Other">Other</option>
                                                     </select>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="">Cardiac Symptoms at Time of surgery:</label>
+                                                    <select name="cardic_sympsurg" class="form-select" id="">
+                                                        <option value="">Select Cardic Symptoms</option>
+                                                        <option value="No symptoms">No symptoms</option>
+                                                        <option value="Stable Angina">stable Angina</option>
+                                                        <option value="Unstable Angina">Unstable Angina</option>
+                                                        <option value="Non-ST Elevation MI (Non-STEMI)">Non-ST Elevation
+                                                            MI (Non-STEMI)</option>
+                                                        <option value="ST Elevation MI (STEMI)">ST Elevation MI (STEMI)
+                                                        </option>
+                                                        <option value="Angina equivalent">Angina equivalent</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="">Anginal Classification:</label>
+                                                    <select name="anginal_class" class="form-select" id="">
+                                                        <option value="">Select Anginal Classification</option>
+                                                        <option value="CCS Class 0">CCS Class 0</option>
+                                                        <option value="CCS Class I">CCS Class I</option>
+                                                        <option value="CCS Class II">CCS Class II</option>
+                                                        <option value="CCS Class III">CCS Class III</option>
+                                                        <option value="CCS Class IV">CCS Class IV</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3 mt-2">
+                                                <div class="col-lg-6">
+                                                    <label for="">Heart Failure Within 2 weeks: </label>
+                                                </div>
+                                                <div class="col-lg-6 d-md-flex">
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="heartfail2w" value="1"
+                                                                id="heartfail2wyes" />
+                                                            <span>Yes</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="heartfail2w" value="0"
+                                                                checked />
+                                                            <span>No</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="heartfail2w" value="2" />
+                                                            <span>Unknown</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group mb-3" id="heartfail2w-yes">
+                                                <div class="col-lg-12">
+                                                    <div class="title-box">
+                                                        <span class="title-label">If Yes</span>
+                                                        <div class="row">
+                                                            <div class="col-md-11 mx-auto">
+                                                                <label for="">Classification-NYHA:</label>
+                                                                <select name="class_nyha" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Classification-NYHA
+                                                                    </option>
+                                                                    <option value="Class I">Class I</option>
+                                                                    <option value="Class II">Class II</option>
+                                                                    <option value="Class III">Class III</option>
+                                                                    <option value="Class IV">Class IV</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3 mt-2">
+                                                <div class="col-lg-6">
+                                                    <label for="">Prior Heart Failure:</label>
+                                                </div>
+                                                <div class="col-lg-6 d-md-flex">
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="priorheartf" value="1"
+                                                                id="priorheartfyes" />
+                                                            <span>Yes</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="priorheartf" value="0"
+                                                                checked />
+                                                            <span>No</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="priorheartf" value="2" />
+                                                            <span>Unknown</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="">Cardiogenic Shock:</label>
+                                                            <select name="cardio_shock" class="form-select"
+                                                                id="">
+                                                                <option value="">Select Cardiohenic Shock</option>
+                                                                <option value="Yes, At the time of procedure">Yes, at the
+                                                                    time of procedure</option>
+                                                                <option
+                                                                    value="Yes, Not at the time of procedure but within prior 24 hours">
+                                                                    Yes, Not at the time of procedure but within prior 24
+                                                                    hours</option>
+                                                                <option value="No">No</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="">Resuscitation:</label>
+                                                            <select name="resuscit" class="form-select"
+                                                                id="">
+                                                                <option value="">Select Resuscitation</option>
+                                                                <option
+                                                                    value="Yes, Within one hour of the start of the procedure">
+                                                                    Yes, Within one hour of the start of the procedure
+                                                                </option>
+                                                                <option
+                                                                    value="Yes, More then one hour but less then 24 hours of the start of the procedure">
+                                                                    Yes, More then one hour but less then 24 hours of the
+                                                                    start of the procedure</option>
+                                                                <option value="No">No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3 mt-2">
+                                                <div class="col-lg-6">
+                                                    <label for="">Arrhythmia:</label>
+                                                </div>
+                                                <div class="col-lg-6 d-md-flex">
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="arrhythmia" value="1"
+                                                                id="arrhythmiayes" />
+                                                            <span>Yes</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="arrhythmia" value="0"
+                                                                checked />
+                                                            <span>No</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="arrhythmia" value="2" />
+                                                            <span>Unknown</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group mb-3" id="arrhythmia-yes">
+                                                <div class="col-lg-12">
+                                                    <div class="title-box">
+                                                        <span class="title-label">If Yes</span>
+                                                        <div class="row">
+                                                            <div class="col-md-11 mx-auto">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 mb-3">
+                                                                        <label for="">VTach/VFib:</label>
+                                                                        <select name="vtachfib" class="form-control"
+                                                                            id="">
+                                                                            <option value="">Select VTach/VFib
+                                                                            </option>
+                                                                            <option value="None">None</option>
+                                                                            <option value="Remote">Remote</option>
+                                                                            <option value="Recent">Recent</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-3">
+                                                                        <label for="">Sick Sinus Syndrome:</label>
+                                                                        <select name="sick_sinus" class="form-control"
+                                                                            id="">
+                                                                            <option value="">Select Sick Sinus
+                                                                                Syndrome</option>
+                                                                            <option value="None">None</option>
+                                                                            <option value="Remote">Remote</option>
+                                                                            <option value="Recent">Recent</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-3">
+                                                                        <label for="">AFlutter:</label>
+                                                                        <select name="aflutter" class="form-control"
+                                                                            id="">
+                                                                            <option value="">Select AFlutter
+                                                                            </option>
+                                                                            <option value="None">None</option>
+                                                                            <option value="Remote">Remote</option>
+                                                                            <option value="Recent">Recent</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-3">
+                                                                        <label for="">Second Degree Heart
+                                                                            Block:</label>
+                                                                        <select name="sec_heartblock"
+                                                                            class="form-control" id="">
+                                                                            <option value="">Select Second Degree
+                                                                                Heart Block</option>
+                                                                            <option value="None">None</option>
+                                                                            <option value="Remote">Remote</option>
+                                                                            <option value="Recent">Recent</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-3">
+                                                                        <label for="">Third Degree Heart
+                                                                            Block:</label>
+                                                                        <select name="third_heartblock"
+                                                                            class="form-control" id="">
+                                                                            <option value="">Select Third Degree
+                                                                                Heart Block</option>
+                                                                            <option value="None">None</option>
+                                                                            <option value="Remote">Remote</option>
+                                                                            <option value="Recent">Recent</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3 mt-2">
+                                                                    <div class="col-lg-6">
+                                                                        <label for="">Permanently Paced
+                                                                            Rhythm:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6 d-md-flex">
+                                                                        <div>
+                                                                            <label class="me-2">
+                                                                                <input type="radio"
+                                                                                    name="paced_rhythm" value="1"
+                                                                                    id="paced_rhythmyes" />
+                                                                                <span>Yes</span>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <label class="me-2">
+                                                                                <input type="radio"
+                                                                                    name="paced_rhythm" value="0"
+                                                                                    checked />
+                                                                                <span>No</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row mb-3 mt-2">
+                                                                    <div class="col-lg-6">
+                                                                        <label for="">Atrial Fibrillation:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6 d-md-flex">
+                                                                        <div>
+                                                                            <label class="me-2">
+                                                                                <input type="radio"
+                                                                                    name="atrialfib" value="None"
+                                                                                    checked />
+                                                                                <span>None</span>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <label class="me-2">
+                                                                                <input type="radio"
+                                                                                    name="atrialfib" value="Paroxysmal"
+                                                                                     />
+                                                                                <span>Paroxysmal</span>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <label class="me-2">
+                                                                                <input type="radio"
+                                                                                    name="atrialfib"  id="atrialfibyes" value="Continuous/Persistent"
+                                                                                    />
+                                                                                <span>Continuous/Persistent</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row form-group mb-3" id="atrialfib-yes">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="title-box">
+                                                                            <span class="title-label">If Continuous/Persistent</span>
+                                                                            <label for="">Atrial Fibrillation Duration:</label>
+                                                                            <select name="fib_durate" class="form-select" id="">
+                                                                                <option value="">Select Atrial Fibrillation Duration</option>
+                                                                                <option value="Less then or equal to 1 year">Less then or equal to 1 year</option>
+                                                                                <option value="More then one year">More then one year</option>
+                                                                                <option value="Unknown">Unknown</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="submit" class="btn btn-dark ft"> Add Cardiac Status </button>
                                 </div>
                             </div>
+                          </form>
                         </section>
-
                     </div>
                 </div>
             </div>

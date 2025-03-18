@@ -78,6 +78,9 @@ return new class extends Migration
             $table->integer('time2sec')->nullable()->collation('utf8mb4_general_ci');
             $table->integer('time3sec')->nullable()->collation('utf8mb4_general_ci');
             $table->string('rf_insertby',50)->collation('utf8mb4_general_ci');
+            $table->enum('status', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
+            $table->enum('close', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
+
 
             $table->timestamps();
         });

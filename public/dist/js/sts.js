@@ -167,6 +167,46 @@ $("input[name='myocardial']").change(function () {
     togglemyocardial();
 });
 
+function toggleheartfail2w() {
+    if ($("#heartfail2wyes").is(":checked")) {
+        $("#heartfail2w-yes").slideDown();
+    } else {
+        $("#heartfail2w-yes").slideUp();
+    }
+}
+toggleheartfail2w();
+
+$("input[name='heartfail2w']").change(function () {
+    toggleheartfail2w();
+});
+
+function togglearrhythmia() {
+    if ($("#arrhythmiayes").is(":checked")) {
+        $("#arrhythmia-yes").slideDown();
+    } else {
+        $("#arrhythmia-yes").slideUp();
+    }
+}
+togglearrhythmia();
+
+$("input[name='arrhythmia']").change(function () {
+    togglearrhythmia();
+});
+
+function toggleatrialfib() {
+    if ($("#atrialfibyes").is(":checked")) {
+        $("#atrialfib-yes").slideDown();
+    } else {
+        $("#atrialfib-yes").slideUp();
+    }
+}
+toggleatrialfib();
+
+$("input[name='atrialfib']").change(function () {
+    toggleatrialfib();
+});
+
+
 
 $("#cvd_stenosis").change(function () {
     var selectedValue = $(this).val();

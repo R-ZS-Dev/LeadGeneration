@@ -75,5 +75,7 @@ class RiskFactor extends Model
         'time2sec',
         'time3sec',
         'rf_insertby',
+        'status',
+        'close'
     ];
 }

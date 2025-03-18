@@ -302,6 +302,8 @@ Route::middleware('auth')->group(function () {
 
     route::post('/add-patient-medication','addPatientMedication')->name('add-patient-medication');
     route::post('/add-risk-factor','addRiskFactor')->name('add-risk-factor');
+    route::post('/add-cardic-status','addCardicStatus')->name('add-cardic-status');
+
 
 
     });

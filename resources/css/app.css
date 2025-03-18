@@ -267,13 +267,13 @@ input[name='gender']:checked:after {
 #myTab {
     white-space: nowrap;
     display: flex;
-    overflow-x: hidden; /* Initially hidden */
-    scrollbar-width: thin;
-    scrollbar-color: #d1d1d1 transparent;
-    transition: overflow 0.3s ease-in-out;
+    overflow-x: auto; /* Allow scrolling */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
 }
-#myTab:hover {
-    overflow-x: auto;
+
+#myTab::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari */
 }
 #myTab::-webkit-scrollbar {
     height: 6px; /* Thin scrollbar */
