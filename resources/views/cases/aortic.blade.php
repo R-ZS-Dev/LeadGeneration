@@ -1,8 +1,10 @@
-<form id="aortic-pro-form" action="{{ route('add-aortic-procedure') }}" method="post">
+<!-- <form id="aortic-pro-form" action="{{ route('add-aortic-procedure') }}" method="post"> -->
+<form id="aortic-pro-form">
     @csrf
+
     <div class="col-lg-12 form-group mb-3">
         <label for="pat_id">Select Patient</label>
-        <select name="pat_id" id="pat_id" class="form-control" required>
+        <select name="pat_id" id="pat_id" class="form-select" required>
             <option value="">Select Patient</option>
             @foreach ($patients as $item)
             <option value="{{ $item->pat_id }}">{{ $item->first_name }}</option>
@@ -15,10 +17,10 @@
         <div class="row form-group mb-3">
             <div class="col-lg-6 col-md-6">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <label for="" class="mb-2"> Root </label>
                     </div>
-                    <div class="col-lg-5 p-0 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>
@@ -38,10 +40,10 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <label for="" class="mb-2"> Ascending </label>
                     </div>
-                    <div class="col-lg-5 p-0 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>
@@ -64,10 +66,10 @@
         <div class="row form-group mb-3">
             <div class="col-lg-6 col-md-6">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <label for="" class="mb-2"> Hemi-Arch </label>
                     </div>
-                    <div class="col-lg-5 p-0 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>
@@ -87,10 +89,10 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <label for="" class="mb-2"> Total Arch </label>
                     </div>
-                    <div class="col-lg-5 p-0 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>
@@ -113,10 +115,10 @@
         <div class="row form-group mb-3">
             <div class="col-lg-6 col-md-6">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <label for="" class="mb-2"> Descending Proximal </label>
                     </div>
-                    <div class="col-lg-5 p-0 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>
@@ -136,10 +138,10 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <label for="" class="mb-2"> Descending - Mid </label>
                     </div>
-                    <div class="col-lg-5 p-0 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>
@@ -162,10 +164,10 @@
         <div class="row form-group mb-3">
             <div class="col-lg-6 col-md-6">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <label for="" class="mb-2"> Descending Distal </label>
                     </div>
-                    <div class="col-lg-5 p-0 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>
@@ -185,10 +187,10 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <label for="" class="mb-2"> Thoracoabdominal </label>
                     </div>
-                    <div class="col-lg-5 p-0 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>
@@ -209,11 +211,11 @@
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-lg-7 col-md-12">
+    <div class="row form-group mb-3">
+        <div class="col-lg-6 col-md-12">
             <label for="" class="mb-2"> Aortic Procedure Synthetic Graft Used </label>
         </div>
-        <div class="col-lg-5 p-0 col-md-12">
+        <div class="col-lg-6 col-md-12">
             <div class="row">
                 <div class="col-md-6">
                     <label>
@@ -232,64 +234,66 @@
     </div>
 
     <div class="row" id="apsg-use" style="display: none;">
-        <div class="title-box mb-3">
-            <span class="title-label">If yes</span>
-            <div class="row form-group mb-2">
-                <div class="col-lg-4">
-                    <label for=""> Intercostal Vessels Re-implanted </label>
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" name="iv_ri" value="1" id="iv_ri" />
-                                    <span>Yes</span>
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" name="iv_ri" value="0" id="iv_rino" checked />
-                                    <span>No</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <label for=""> CSF Drainage Utilized </label>
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" name="csf_du" value="1" id="csf_du" />
-                                    <span>Yes</span>
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" name="csf_du" value="0" id="csf_duno" checked />
-                                    <span>No</span>
-                                </label>
+        <div class="col-lg-12">
+            <div class="title-box mb-3">
+                <span class="title-label">If yes</span>
+                <div class="row form-group mb-2">
+                    <div class="col-lg-4">
+                        <label for=""> Intercostal Vessels Re-implanted </label>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="iv_ri" value="1" id="iv_ri" />
+                                        <span>Yes</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="iv_ri" value="0" id="iv_rino" checked />
+                                        <span>No</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-4">
-                    <label for=""> Elephant Trunk </label>
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" name="el_trunk" value="1" id="el_trunk" />
-                                    <span>Yes</span>
-                                </label>
+                    <div class="col-lg-4">
+                        <label for=""> CSF Drainage Utilized </label>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="csf_du" value="1" id="csf_du" />
+                                        <span>Yes</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="csf_du" value="0" id="csf_duno" checked />
+                                        <span>No</span>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" name="el_trunk" value="0" id="el_trunkno" checked />
-                                    <span>No</span>
-                                </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <label for=""> Elephant Trunk </label>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="el_trunk" value="1" id="el_trunk" />
+                                        <span>Yes</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="el_trunk" value="0" id="el_trunkno" checked />
+                                        <span>No</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -301,10 +305,10 @@
     <div class="row form-group mb-3">
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Coil Embolization of Aortic False Lumen </label>
                 </div>
-                <div class="col-lg-5 p-0 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
                         <div class="col-md-6">
                             <label>
@@ -323,11 +327,10 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-6">
-            <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Aortic Procedure - Other </label>
                 </div>
-                <div class="col-lg-5 p-0 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
                         <div class="col-md-6">
                             <label>
@@ -343,14 +346,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 
     <div class="row form-group mb-2">
         <div class="col-lg-12">
             <label for=""> Aortic Procedure TEVAR </label>
-            <div class="row  mb-3">
+            <div class="row mb-3">
                 <div class="col-lg-4 col-md-6">
                     <label>
                         <input type="radio" name="ap_tevar" value="Yes, with debranching" id="ap_tevar" />
@@ -373,6 +375,6 @@
         </div>
     </div>
     <div class="col-lg-12 text-end">
-        <button type="submit" class="btn btn-dark" id="submitBtn">Add Other Aortic Procedure</button>
+        <button type="submit" class="btn btn-dark" id="aroticbtn">Add Other Aortic Procedure</button>
     </div>
 </form>

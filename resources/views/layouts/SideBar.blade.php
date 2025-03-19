@@ -83,6 +83,8 @@
                 <li class="sidebar-item"><a href="{{ route('case-sts') }}" class="sidebar-link"><span
                             class="hide-menu"> STS </span></a></li>
 
+                <li class="sidebar-item"><a href="{{ route('patient-lab-result') }}" class="sidebar-link"><span
+                            class="hide-menu"> Patient Lab Result </span></a></li>
             </ul>
         </li>
 

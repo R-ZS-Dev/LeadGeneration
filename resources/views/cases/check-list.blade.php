@@ -5,7 +5,7 @@
     <div class="row">
         <div id="successMessage" class="alert alert-success" style="display: none;"></div>
         <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="text-center mt-2 mb-4">
@@ -15,7 +15,7 @@
                             </div>
                         </div>
 
-                        <form method="POST" action="" class="mt-4">
+                        <form method="POST" action="{{ route('add-check-list') }}" class="mt-4">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12 mb-2">
@@ -30,7 +30,7 @@
 
                                 <div class="col-lg-12 mb-2">
                                     <label for="">Select List</label>
-                                    <select name="config_checklist" id="config_checklist" class="form-control" required>
+                                    <select name="cl_id" id="config_checklist" class="form-control" required>
                                         <option value="">Select List</option>
                                         @foreach ($cchecklists as $cchecklist)
                                         <option value="{{ $cchecklist->c_id }}">{{ $cchecklist->l_name }}</option>
@@ -44,65 +44,6 @@
                                         <!-- Dynamic content will be injected here -->
                                     </div>
                                 </div>
-
-
-                                <!-- 
-                                <div class="col-lg-12 mb-2">
-                                    <label for="">Select List</label>
-                                    <select name="config_checklist" id="" class="form-control" required>
-                                        <option value="">Select List</option>
-                                        @foreach ($cchecklists as $cchecklist)
-                                        <option value="{{ $cchecklist->c_id }}">{{ $cchecklist->l_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>                              
-                                
-                                <div class="mt-4">
-                                    <div class="accordion" id="accordionExample">
-                                        @foreach($ccheckgroup as $gIndex => $group)
-                                        <div class="accordion-item border rounded-0 mb-3">
-                                            <div class="row align-items-center">
-                                                <h2 class="accordion-header" id="heading{{ $gIndex }}">
-                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $gIndex }}" aria-expanded="true" aria-controls="collapse{{ $gIndex }}">
-                                                        <div class="col-md-8"> {{ $group->clg_name }} </div>
-                                                    </button>
-                                                </h2>
-                                            </div>
-                                            <div id="collapse{{ $gIndex }}" class="accordion-collapse collapse {{ $gIndex == 0 ? 'show' : '' }}" aria-labelledby="heading{{ $gIndex }}" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    @php
-                                                    $rowboxes = json_decode($group->rowboxes, true); // JSON ko decode karna
-                                                    @endphp
-
-                                                    @if(!empty($rowboxes))
-                                                    <form>
-                                                        @foreach($rowboxes as $key => $rowbox)
-                                                        <div class="row mb-2 align-items-center">
-                                                            <div class="col-md-8 fw-bold">{{ $rowbox }}</div>
-                                                            <div class="col-md-2">
-                                                                <label>
-                                                                    <input type="radio" name="rowbox_{{ $gIndex }}_{{ $key }}" value="1" id="rowbox_{{ $gIndex }}_{{ $key }}_yes" />
-                                                                    <span>Yes</span>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <label>
-                                                                    <input type="radio" name="rowbox_{{ $gIndex }}_{{ $key }}" value="0" id="rowbox_{{ $gIndex }}_{{ $key }}_no" checked />
-                                                                    <span>No</span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        @endforeach
-                                                    </form>
-                                                    @else
-                                                    <p>No items available.</p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                </div> -->
 
                                 <div class="col-lg-12 text-center">
                                     <button type="submit" class="btn w-100 btn-dark" id="submitBtn">
@@ -137,27 +78,64 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Note</th>
+                                    <th>Patient Name</th>
+                                    <th>Checklist</th>
+                                    <th>Checklist Group</th>
+                                    <th>Checklist Items</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $i = 0; @endphp
-                                <tr id="">
+                                @foreach ($viewCListrecords as $record)
+                                <tr id="row-{{ $record->ccl_id }}">
                                     <td>{{ ++$i }}</td>
+                                    <td>{{ $record->patient->first_name ?? 'N/A' }}</td>
+                                    <td>{{ $record->checklist->l_name ?? 'N/A' }}</td>
+                                    <td>{{ $record->checklistGroup->clg_name ?? 'N/A' }}</td>
+                                    <td id="truncated-text"
+                                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; cursor: pointer;"
+                                        onclick="expandText(this)">
+
+                                        @php
+                                        $formattedItems = [];
+
+                                        if (!empty($record->cl_items)) {
+                                        // Decode the first level (array of JSON strings)
+                                        $items = json_decode($record->cl_items, true);
+
+                                        // Ensure $items is an array and decode the first element if necessary
+                                        if (is_array($items) && isset($items[0]) && is_string($items[0])) {
+                                        $decodedItems = json_decode($items[0], true);
+
+                                        // If decoding was successful and resulted in an array
+                                        if (is_array($decodedItems)) {
+                                        foreach ($decodedItems as $key => $value) {
+                                        $formattedItems[] = $key . ': ' . ($value ? 'Yes' : 'No');
+                                        }
+                                        }
+                                        }
+                                        }
+                                        @endphp
+
+                                        {{ $formattedItems ? implode(', ', $formattedItems) : 'N/A' }}
+                                    </td>
+
+
 
                                     <td>
                                         <a href="javascript:void(0);"
-                                            onclick="confirmDelete()"
+                                            onclick="confirmDelete('{{ route('delete-check-list', $record->ccl_id) }}', '{{ $record->ccl_id }}')"
                                             class="edit-icon delete-user-btn text-danger">
                                             <i class="fa-solid fa-trash-can-arrow-up"></i>
                                         </a>
                                     </td>
+
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -166,15 +144,6 @@
     @endsection
 
     @section('script')
-    <script>
-        function editCLEvent(CList) {
-            // console.log(CList);
-            document.getElementById("cl_id").value = CList.cl_id;
-
-            var editModal = new bootstrap.Modal(document.getElementById("editCLModal"));
-            editModal.show();
-        }
-    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -218,7 +187,7 @@
     <script>
         $(document).ready(function() {
             $('#config_checklist').change(function() {
-                var c_id = $(this).val(); 
+                var c_id = $(this).val();
 
                 if (c_id) {
                     $.ajax({
@@ -228,38 +197,49 @@
                             c_id: c_id
                         },
                         success: function(response) {
-                            // console.log(response);
+                            console.log(response);
                             if (response.success) {
                                 var accordionHtml = "";
-                                var groups = response.groups || []; 
+                                var cgIdInputs = ""; // ✅ Store hidden inputs separately
+                                var groups = response.groups || [];
 
                                 if (groups.length > 0) {
                                     groups.forEach(function(group, groupIndex) {
                                         var groupCollapseId = "groupCollapse" + groupIndex;
 
-                                        accordionHtml += `
-                                <div class="accordion-item border rounded-0 mb-3">
-                                    <h2 class="accordion-header" id="heading${groupIndex}">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#${groupCollapseId}" aria-expanded="true" aria-controls="${groupCollapseId}">
-                                            <div class="col-md-8 fw-bold">${group.clg_name}</div>
-                                        </button>
-                                    </h2>
-                                    <div id="${groupCollapseId}" class="accordion-collapse collapse" aria-labelledby="heading${groupIndex}" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            ${generateRowboxes(group.rowboxes, groupIndex)}
-                                        </div>
-                                    </div>
-                                </div>`;
-                                    });
-                                } else {
-                                    accordionHtml = `<div class="text-danger">No groups found</div>`;
-                                }
+                                        // ✅ Add hidden input (but don't append yet)
+                                        cgIdInputs += `<input type="hidden" name="cg_id" value="${group.clg_id}">`;
 
-                                $('#accordionExample').html(accordionHtml);
+                                        accordionHtml += `
+                                        <div class="accordion-item border rounded-0 mb-3">
+                                            <h2 class="accordion-header" id="heading${groupIndex}">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#${groupCollapseId}" aria-expanded="true"
+                                                    aria-controls="${groupCollapseId}">
+                                                    <div class="col-md-8 fw-bold">${group.clg_name}</div>
+                                                </button>
+                                            </h2>
+                                            <div id="${groupCollapseId}" class="accordion-collapse collapse"
+                                                aria-labelledby="heading${groupIndex}" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    ${generateRowboxes(group.rowboxes, groupIndex)}
+                                                </div>
+                                            </div>
+                                        </div>`;
+                                    });
+
+                                    // ✅ Append hidden inputs INSIDE the form
+                                    $('form').append(cgIdInputs);
+
+                                    $('#accordionExample').html(accordionHtml);
+                                } else {
+                                    $('#accordionExample').html(`<div class="text-danger">No groups found</div>`);
+                                }
                             } else {
                                 $('#accordionExample').html('<div class="text-danger">Error fetching data</div>');
                             }
                         }
+
                     });
                 } else {
                     $('#accordionExample').html('');
@@ -271,31 +251,61 @@
                     return '<div class="text-danger">No rowboxes available in this group</div>';
                 }
 
-                var rowboxesHtml = "<form>";
+                var rowboxesHtml = `<form id="rowboxForm_${groupIndex}">`;
+
+                // ✅ Correct JSON structure (store values as strings)
+                var formattedData = {};
 
                 rowboxes.forEach(function(box, boxIndex) {
+                    formattedData[box] = "0"; // Default response as string "0"
+
                     rowboxesHtml += `
-            <div class="row mb-2 align-items-center">
-                <div class="col-md-8 fw-bold">${box}</div>
-                <div class="col-md-2">
-                    <label>
-                        <input type="radio" name="response_${groupIndex}_${boxIndex}" value="1" />
-                        <span>Yes</span>
-                    </label>
-                </div>
-                <div class="col-md-2">
-                    <label>
-                        <input type="radio" name="response_${groupIndex}_${boxIndex}" value="0" checked />
-                        <span>No</span>
-                    </label>
-                </div>
-            </div>`;
+                    <div class="row mb-2 align-items-center">
+                        <div class="col-md-8 fw-bold">${box}</div>
+                        <div class="col-md-2">
+                            <label>
+                                <input type="radio" name="response_${groupIndex}_${boxIndex}" value="1" data-group="${groupIndex}" data-box="${box}" />
+                                <span>Yes</span>
+                            </label>
+                        </div>
+                        <div class="col-md-2">
+                            <label>
+                                <input type="radio" name="response_${groupIndex}_${boxIndex}" value="0" checked data-group="${groupIndex}" data-box="${box}" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>`;
                 });
 
-                rowboxesHtml += "</form>";
+                // ✅ Convert JSON properly
+                var formattedJson = JSON.stringify(formattedData);
+
+                // ✅ Store formatted JSON inside hidden input
+                rowboxesHtml += `<input type="hidden" name="cl_items[]" id="cl_items_${groupIndex}" value='${formattedJson}'>`;
+                rowboxesHtml += `</form>`;
 
                 return rowboxesHtml;
             }
+
+
+
+            $(document).on('change', 'input[type=radio]', function() {
+                var groupIndex = $(this).data('group');
+                var boxName = $(this).data('box');
+                var response = $(this).val();
+
+                // ✅ Get existing JSON object
+                var jsonData = JSON.parse($(`#cl_items_${groupIndex}`).val() || "{}");
+
+                // ✅ Update only the relevant checkbox response
+                jsonData[boxName] = parseInt(response);
+
+                // ✅ Store updated JSON object
+                $(`#cl_items_${groupIndex}`).val(JSON.stringify(jsonData));
+            });
+
+
+
         });
     </script>
 
