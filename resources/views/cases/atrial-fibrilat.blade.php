@@ -1,8 +1,9 @@
-<form id="atrial-fibrillationForm" action="{{ route('add-atrial-fibrillation') }}" method="post">
+<!-- <form id="atrial-fibrillationForm" action="{{ route('add-atrial-fibrillation') }}" method="post"> -->
+<form id="atrial-fibrillationForm">
     @csrf
     <div class="col-lg-12 form-group mb-3">
         <label for="pat_id">Select Patient</label>
-        <select name="pat_id" id="pat_id" class="form-control" required>
+        <select name="pat_id" id="pat_id" class="form-select" required>
             <option value="">Select Patient</option>
             @foreach ($patients as $item)
             <option value="{{ $item->pat_id }}">{{ $item->first_name }}</option>
@@ -194,6 +195,6 @@
         </div>
     </div>
     <div class="col-lg-12 text-end">
-        <button type="submit" class="btn btn-dark" id="submitBtn">Add Atrial Fibrillation</button>
+        <button type="submit" class="btn btn-dark" id="atrialBtn">Add Atrial Fibrillation</button>
     </div>
 </form>

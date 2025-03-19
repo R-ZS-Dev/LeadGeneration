@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AtrialFibrillation;
 use App\Models\CardicAssistDevice;
+use App\Models\CaseCheckList;
 use App\Models\CaseEquipment;
 use App\Models\CaseGeneralEvent;
 use App\Models\CaseProcedures;
@@ -16,11 +17,14 @@ use App\Models\Equipment;
 use App\Models\EquipmentGroup;
 use App\Models\GeneralEvent;
 use App\Models\Hospital;
+use App\Models\Lab;
 use App\Models\NonCardic;
 use App\Models\OtherAorticLocation;
 use App\Models\OtherCardiacProcedure;
 use App\Models\Patient;
 use App\Models\PatientHistory;
+use App\Models\PatientLabResult;
+use App\Models\PreviousIntervention;
 use App\Models\Procedures;
 use App\Models\Staff;
 use App\Models\SupplyGroup;
@@ -379,11 +383,11 @@ class CaseController extends Controller
         $cab_bypass->cab_insertby = Auth::user()->name;
         $cab_bypass->save();
 
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'Coronary Artery Bypass Added Successfully!'
-        // ]);
-        return redirect()->back()->with('success', 'Coronary Artery Bypass Added Successfully!');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Coronary Artery Bypass Added Successfully!'
+        ]);
+        // return redirect()->back()->with('success', 'Coronary Artery Bypass Added Successfully!');
     }
 
     public function deleteCABypasses($id)
@@ -491,7 +495,10 @@ class CaseController extends Controller
         OtherAorticLocation::create([
             'oal_insertby' => Auth::user()->name,
         ] + $request->all());
-        return redirect()->back()->with('success', 'Other Aortic Procedure Added Successfully!');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Aortic Procedure Added Successfully!'
+        ]);
 
         // $request->validate([
         //     'pat_id' => 'required'
@@ -649,8 +656,18 @@ class CaseController extends Controller
         $patients = Patient::where('status', '1')->where('close', '1')->get();
         $cchecklists = Checklist::where('status', '1')->where('close', '1')->get();
         $ccheckgroup = ChecklistGroup::where('status', '1')->where('close', '1')->get();
+        $viewCListrecords = CaseCheckList::where('status', '1')->where('close', '1')->get();
 
-        return view('cases.check-list', compact('patients', 'cchecklists', 'ccheckgroup'));
+        return view('cases.check-list', compact('patients', 'cchecklists', 'ccheckgroup', 'viewCListrecords'));
+    }
+
+    public function deleteCCList($id)
+    {
+        $del_ccl = CaseCheckList::find($id);
+        $del_ccl->close = '0';
+        $del_ccl->status = '0';
+        $del_ccl->save();
+        return redirect()->back()->with('success', 'Case Check List deleted Successfully!');
     }
 
     public function getRowboxesWithGroups(Request $request)
@@ -683,6 +700,7 @@ class CaseController extends Controller
 
         foreach ($groups as $group) {
             $formattedGroups[] = [
+                'clg_id' => $group->clg_id,
                 'clg_name' => $group->clg_name,
                 'rowboxes' => json_decode($group->rowboxes, true) ?? []
             ];
@@ -693,5 +711,245 @@ class CaseController extends Controller
             'rowboxes' => json_decode($checklist->rowboxes, true) ?? [], // ✅ Correct rowboxes
             'groups' => $formattedGroups // ✅ Filtered groups
         ]);
+    }
+
+    public function addCClist(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'pat_id' => 'required',
+        ]);
+
+        CaseCheckList::create([
+            'pat_id' => $validated['pat_id'],
+            'cl_id' => $request['cl_id'],
+            'cg_id' => $request['cg_id'],
+            'cl_items' => json_encode($request['cl_items'] ?? []),
+
+            'cl_insertby' => Auth::user()->name,
+        ]);
+
+        return redirect()->back()->with('success', 'Check list item saved successfully!');
+    }
+
+    // Patient Lab Results
+    public function viewPLResults()
+    {
+        $patients = Patient::where('status', '1')->where('close', '1')->get();
+        $viewLabs = Lab::where('status', '1')->where('close', '1')->get();
+        $viewPLRs = PatientLabResult::where('status', '1')->where('close', '1')->get();
+
+        return view('cases.patient-lab-result', compact('patients', 'viewLabs', 'viewPLRs'));
+    }
+
+    public function addPLResults(Request $request)
+    {
+        PatientLabResult::create([
+            'plr_insertby' => Auth::user()->name,
+        ] + $request->all());
+        return redirect()->back()->with('success', 'Other Aortic Procedure Added Successfully!');
+    }
+
+    public function deletePLResult($id)
+    {
+        $del_plr = PatientLabResult::find($id);
+        $del_plr->close = '0';
+        $del_plr->status = '0';
+        $del_plr->save();
+        return redirect()->back()->with('success', 'Case General Event deleted Successfully!');
+    }
+
+    public function editPLResults(Request $request)
+    {
+        // return $request->all();
+        $id = $request->plr_id;
+        $e_plr = PatientLabResult::find($id);
+        try {
+            $e_plr->pat_id = $request->pat_id;
+            $e_plr->lab_id = $request->lab_id;
+            $e_plr->c_arterial = $request->c_arterial;
+            $e_plr->c_temp = $request->c_temp;
+            $e_plr->draw_date = $request->draw_date;
+            $e_plr->draw_time = $request->draw_time;
+            $e_plr->result_date = $request->result_date;
+            $e_plr->result_time = $request->result_time;
+            $e_plr->billing_code = $request->billing_code;
+            $e_plr->note = $request->note;
+
+            // ✅ Updating Section 1 fields
+            $e_plr->act_act = $request->act_act;
+            $e_plr->act_hep_test_conc = $request->act_hep_test_conc;
+            $e_plr->act_hep_bolus_indic = $request->act_hep_bolus_indic;
+            $e_plr->act_hep_maint_indic = $request->act_hep_maint_indic;
+            $e_plr->act_prot_indic = $request->act_prot_indic;
+
+            // ✅ Updating Section 2 fields
+            $e_plr->bg_ph = $request->bg_ph;
+            $e_plr->bg_p02 = $request->bg_p02;
+            $e_plr->bg_pco2 = $request->bg_pco2;
+            $e_plr->bg_ca = $request->bg_ca;
+            $e_plr->bg_k = $request->bg_k;
+            $e_plr->bg_thb = $request->bg_thb;
+            $e_plr->bg_so2 = $request->bg_so2;
+            $e_plr->bg_lactate = $request->bg_lactate;
+            $e_plr->bg_hct = $request->bg_hct;
+
+            // ✅ Updating Section 3 field
+            $e_plr->bs_gluc = $request->bs_gluc;
+
+            // ✅ Updating Section 4 fields
+            $e_plr->cbc_wbc = $request->cbc_wbc;
+            $e_plr->cbc_hgb = $request->cbc_hgb;
+            $e_plr->cbc_hct = $request->cbc_hct;
+            $e_plr->cbc_mcv = $request->cbc_mcv;
+            $e_plr->cbc_mch = $request->cbc_mch;
+            $e_plr->cbc_mchc = $request->cbc_mchc;
+            $e_plr->cbc_rdw = $request->cbc_rdw;
+            $e_plr->cbc_plt = $request->cbc_plt;
+            $e_plr->cbc_mpv = $request->cbc_mpv;
+            $e_plr->cbc_rbc = $request->cbc_rbc;
+
+            // ✅ Updating Section 5 fields
+            $e_plr->cdi_ph = $request->cdi_ph;
+            $e_plr->cdi_paco2 = $request->cdi_paco2;
+            $e_plr->cdi_pao2 = $request->cdi_pao2;
+            $e_plr->cdi_t = $request->cdi_t;
+            $e_plr->cdi_hco3 = $request->cdi_hco3;
+            $e_plr->cdi_be = $request->cdi_be;
+            $e_plr->cdi_sao2 = $request->cdi_sao2;
+            $e_plr->cdi_k = $request->cdi_k;
+            $e_plr->cdi_so2 = $request->cdi_so2;
+            $e_plr->cdi_hct = $request->cdi_hct;
+            $e_plr->cdi_hgb = $request->cdi_hgb;
+
+            // ✅ Updating Section 6 fields
+            $e_plr->cp_alt = $request->cp_alt;
+            $e_plr->cp_albumin = $request->cp_albumin;
+            $e_plr->cp_ag_ratio = $request->cp_ag_ratio;
+            $e_plr->cp_alp = $request->cp_alp;
+            $e_plr->cp_ast = $request->cp_ast;
+            $e_plr->cp_tbi = $request->cp_tbi;
+            $e_plr->cp_bun = $request->cp_bun;
+            $e_plr->cp_bun_crea = $request->cp_bun_crea;
+            $e_plr->cp_ca = $request->cp_ca;
+            $e_plr->cp_cl = $request->cp_cl;
+            $e_plr->cp_creatinine = $request->cp_creatinine;
+            $e_plr->cp_gluc = $request->cp_gluc;
+            $e_plr->cp_phosphorus = $request->cp_phosphorus;
+            $e_plr->cp_k = $request->cp_k;
+            $e_plr->cp_na = $request->cp_na;
+
+            // ✅ Updating Section 7 fields
+            $e_plr->cbcr_Hct = $request->cbcr_Hct;
+            $e_plr->cbcr_Hgb = $request->cbcr_Hgb;
+            $e_plr->cbcr_MCV = $request->cbcr_MCV;
+            $e_plr->cbcr_MCHC = $request->cbcr_MCHC;
+            $e_plr->cbcr_RDW = $request->cbcr_RDW;
+            $e_plr->cbcr_PLT = $request->cbcr_PLT;
+            $e_plr->cbcr_MPV = $request->cbcr_MPV;
+            $e_plr->cbcr_WBC_leukocyte = $request->cbcr_WBC_leukocyte;
+            $e_plr->cbcr_WBC_differential_Monocytes = $request->cbcr_WBC_differential_Monocytes;
+            $e_plr->cbcr_WBC_differential_Eosinophils = $request->cbcr_WBC_differential_Eosinophils;
+            $e_plr->cbcr_WBC_differential_Basophils = $request->cbcr_WBC_differential_Basophils;
+            $e_plr->cbcr_WBC_differential_Neutrophils = $request->cbcr_WBC_differential_Neutrophils;
+            $e_plr->cbcr_WBC_differential_Lymphocytes = $request->cbcr_WBC_differential_Lymphocytes;
+            $e_plr->cbcr_RBC_erythrocyte_count = $request->cbcr_RBC_erythrocyte_count;
+
+            // ✅ Updating Section 8 fields
+            $e_plr->cmp_gluc = $request->cmp_gluc;
+            $e_plr->cmp_bun = $request->cmp_bun;
+            $e_plr->cmp_creatinine = $request->cmp_creatinine;
+            $e_plr->cmp_ca = $request->cmp_ca;
+            $e_plr->cmp_tbi = $request->cmp_tbi;
+            $e_plr->cmp_alp = $request->cmp_alp;
+            $e_plr->cmp_tp = $request->cmp_tp;
+            $e_plr->cmp_alt = $request->cmp_alt;
+            $e_plr->cmp_ast = $request->cmp_ast;
+            $e_plr->cmp_a_g_ratio = $request->cmp_a_g_ratio;
+            $e_plr->cmp_bun_crea = $request->cmp_bun_crea;
+            $e_plr->cmp_glob = $request->cmp_glob;
+            $e_plr->cmp_na = $request->cmp_na;
+            $e_plr->cmp_k = $request->cmp_k;
+            $e_plr->cmp_cl = $request->cmp_cl;
+            $e_plr->cmp_eco2 = $request->cmp_eco2;
+            $e_plr->cmp_a_gap = $request->cmp_a_gap;
+            $e_plr->cmp_egfr = $request->cmp_egfr;
+
+            // ✅ Updating Section 9 fields
+            $e_plr->lp_cholesterol = $request->lp_cholesterol;
+            $e_plr->lp_hdl = $request->lp_hdl;
+            $e_plr->lp_ldl = $request->lp_ldl;
+            $e_plr->lp_trigyl_tot = $request->lp_trigyl_tot;
+            $e_plr->lp_ast = $request->lp_ast;
+            $e_plr->lp_alt = $request->lp_alt;
+
+            // ✅ Updating Section 10 fields
+            $e_plr->lpr_cholesterol = $request->lpr_cholesterol;
+            $e_plr->lpr_trigyl_tot = $request->lpr_trigyl_tot;
+            $e_plr->lpr_hdl = $request->lpr_hdl;
+            $e_plr->lpr_ldl = $request->lpr_ldl;
+            $e_plr->lpr_total_cholesterol_hdl_ratio = $request->lpr_total_cholesterol_hdl_ratio;
+
+            // ✅ Updating Section 11 fields
+            $e_plr->nbg_ph = $request->nbg_ph;
+            $e_plr->nbg_pao2 = $request->nbg_pao2;
+            $e_plr->nbg_hco3 = $request->nbg_hco3;
+            $e_plr->nbg_paco2 = $request->nbg_paco2;
+            $e_plr->nbg_be = $request->nbg_be;
+            $e_plr->nbg_sao2 = $request->nbg_sao2;
+
+            // ✅ Updating Section 12 fields
+            $e_plr->ract_ph = $request->ract_ph;
+            $e_plr->ract_pco2 = $request->ract_pco2;
+            $e_plr->ract_po2 = $request->ract_po2;
+            $e_plr->ract_hco3 = $request->ract_hco3;
+            $e_plr->ract_be_b = $request->ract_be_b;
+            $e_plr->ract_hct = $request->ract_hct;
+            $e_plr->ract_thb = $request->ract_thb;
+            $e_plr->ract_so2 = $request->ract_so2;
+            $e_plr->ract_na = $request->ract_na;
+            $e_plr->ract_k = $request->ract_k;
+            $e_plr->ract_ca = $request->ract_ca;
+            $e_plr->ract_glu = $request->ract_glu;
+
+            // ✅ Updating Section 13 fields
+            $e_plr->ract_glu = $request->ract_glu;
+            $e_plr->ract_pH = $request->ract_pH;
+            $e_plr->ract_pCO2 = $request->ract_pCO2;
+            $e_plr->ract_pO2 = $request->ract_pO2;
+            $e_plr->ract_HCO3 = $request->ract_HCO3;
+
+            // ✅ Updating Section 14 fields
+            $e_plr->thy_TSH = $request->thy_TSH;
+            $e_plr->thy_TotalT4 = $request->thy_TotalT4;
+            $e_plr->thy_FreeT4 = $request->thy_FreeT4;
+            $e_plr->thy_TotalT3 = $request->thy_TotalT3;
+            $e_plr->thy_FreeT3 = $request->thy_FreeT3;
+
+            // ✅ Updating Section 15 fields
+            $e_plr->vitamin_d = $request->vitamin_d;
+
+            $e_plr->save();
+            return redirect()->back()->with('success', 'Patient Lab Result updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+    // 
+    public function viewPreInv()
+    {
+        $patients = Patient::where('status', '1')->where('close', '1')->get();
+        $cprocedures = CaseProcedures::where('status', '1')->where('close', '1')->get();
+
+        return view('cases.previous-intervention', compact('patients', 'cprocedures'));
+    }
+
+    public function addPreInv(Request $request)
+    {
+        PreviousIntervention::create([
+            'pi_insertby' => Auth::user()->name,
+        ] + $request->all());
+        return redirect()->back()->with('success', 'Previous Intervention Added Successfully!');
     }
 }

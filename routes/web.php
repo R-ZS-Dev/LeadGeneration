@@ -264,15 +264,24 @@ Route::middleware('auth')->group(function () {
         route::post('/edit-general-event', 'editCGEvent')->name('edit-general-event');
 
         /* ---------------------- Case General Events module routes ---------------------- */
-        route::get('/check-list', 'viewCList')->name('check-list');
-        route::post('/add-check-list', 'addCList')->name('add-check-list');
-        route::post('/delete-check-list/{id}', 'deleteCList')->name('delete-check-list');
-        route::post('/edit-check-list', 'editCList')->name('edit-check-list');
-
-        // Route::get('/get-rowboxes', 'getRowboxes')->name('get.rowboxes');
-
-        Route::get('/get-rowboxes-groups', 'getRowboxesWithGroups')->name('get.rowboxes.groups');
+        // route::post('/add-check-list', 'addCList')->name('add-check-list');
+        // route::post('/edit-check-list', 'editCList')->name('edit-check-list');
         
+        /* ---------------------- Case checklist module routes ---------------------- */
+        route::get('/check-list', 'viewCList')->name('check-list');
+        Route::post('/add-check-list', 'addCClist')->name('add-check-list');
+        Route::get('/get-rowboxes-groups', 'getRowboxesWithGroups')->name('get.rowboxes.groups');
+        route::post('/delete-check-list/{id}', 'deleteCCList')->name('delete-check-list');
+        
+        /* ---------------------- Case Patient Lab Results module routes ---------------------- */
+        route::get('/patient-lab-result', 'viewPLResults')->name('patient-lab-result');
+        route::post('/add-patient-lab-result', 'addPLResults')->name('add-patient-lab-result');
+        route::post('/delete-patient-lab-result/{id}', 'deletePLResult')->name('delete-patient-lab-result');
+        route::post('/edit-patient-lab-result', 'editPLResults')->name('edit-patient-lab-result');
+        
+        /* ---------------------- Case Patient Lab Results module routes ---------------------- */
+        route::get('/previous-intervention', 'viewPreInv')->name('previous-intervention');
+        route::post('/add-previous-intervention', 'addPreInv')->name('add-previous-intervention');
     });
 
 

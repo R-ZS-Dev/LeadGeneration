@@ -1,29 +1,31 @@
-<form id="other-cardiacpro-form" action="{{ route('add-other-cardiac-pro') }}" method="post">
+<!-- <form id="other-cardiacpro-form" action="{{ route('add-other-cardiac-pro') }}" method="post"> -->
+<form id="other-cardiacpro-form">
     @csrf
     <div class="row form-group mb-3">
         <div class="col-lg-12 form-group mb-3">
             <label for="pat_id">Select Patient</label>
-            <select name="pat_id" id="pat_id" class="form-control" required>
+            <select name="pat_id" id="pat_id" class="form-select" required>
                 <option value="">Select Patient</option>
                 @foreach ($patients as $item)
                 <option value="{{ $item->pat_id }}">{{ $item->first_name }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="col-lg-6 col-md-6">
+
+        <div class="col-lg-6 form-group col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> AFib Epicardial Lesions </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-6 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="afib_el" value="1" id="afib_el_yes" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-6 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="afib_el" value="0" id="afib_elno" checked />
                                 <span>No</span>
@@ -36,18 +38,18 @@
 
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> ASD Repair - PFO Type </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-5">
                             <label>
                                 <input type="radio" name="asd_pfo" value="1" id="asd_pfo_yes" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-5">
                             <label>
                                 <input type="radio" name="asd_pfo" value="0" id="asd_pfo_no" checked />
                                 <span>No</span>
@@ -112,18 +114,18 @@
     <div class="row form-group mb-3">
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Lead Insertion </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="lead_in" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="lead_in" value="0" id="" checked />
                                 <span>No</span>
@@ -135,18 +137,18 @@
         </div>
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Myocardial Stem Cell Therapy </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="msc_therapy" value="1" id="" checked />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="msc_therapy" value="0" id="" checked />
                                 <span>No</span>
@@ -161,18 +163,18 @@
     <div class="row form-group mb-3">
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Transmyocardial Laser Revascularization </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="tl_rev" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="tl_rev" value="0" id="" checked />
                                 <span>No</span>
@@ -184,18 +186,18 @@
         </div>
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> AFib Intracardiac Lesions </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="afib_il" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="afib_il" value="0" id="" checked />
                                 <span>No</span>
@@ -210,18 +212,18 @@
     <div class="row form-group mb-3">
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> ASD Repair-Secundum Or Sinus Venosus </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="asd_sv" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="asd_sv" value="0" id="" checked />
                                 <span>No</span>
@@ -246,18 +248,18 @@
     <div class="row form-group mb-3">
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> LVA </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="lva" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="lva" value="0" id="" checked />
                                 <span>No</span>
@@ -274,19 +276,19 @@
                 </div>
                 <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-4 p-0">
+                        <div class="col-md-4">
                             <label>
                                 <input type="radio" name="pt_acute" value="Yes, Acute" id="" />
                                 <span>Yes, Acute</span>
                             </label>
                         </div>
-                        <div class="col-md-4 p-0">
+                        <div class="col-md-5">
                             <label>
                                 <input type="radio" name="pt_acute" value="Yes, Chronic" id="" />
                                 <span>Yes, Chronic</span>
                             </label>
                         </div>
-                        <div class="col-md-4 p-0">
+                        <div class="col-md-3">
                             <label>
                                 <input type="radio" name="pt_acute" value="No" id="" checked />
                                 <span>No</span>
@@ -301,18 +303,18 @@
     <div class="row form-group mb-3">
         <div class="col-lg-6 col-md-12">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Subaortic Stenosis Resection </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="ss_res" value="1" id="ss_res" />
                                 <span>yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="ss_res" value="0" id="ss_resno" checked />
                                 <span>No</span>
@@ -344,18 +346,18 @@
     <div class="row form-group mb-3">
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Surgical Ventricular Restoration </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="sv_res" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="sv_res" value="0" id="" checked />
                                 <span>No</span>
@@ -382,18 +384,18 @@
     <div class="row form-group mb-3">
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Card Tx </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="card_tx" value="1" id="" />
                                 <span>yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="card_tx" value="0" id="" checked />
                                 <span>No</span>
@@ -405,18 +407,18 @@
         </div>
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Cardiac Trauma </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="cardiac_t" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="cardiac_t" value="0" id="" checked />
                                 <span>No</span>
@@ -431,18 +433,18 @@
     <div class="row form-group mb-3">
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Congenital </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="p_congenital" value="1" id="" />
                                 <span>Yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="p_congenital" value="0" id="" checked />
                                 <span>No</span>
@@ -454,18 +456,18 @@
         </div>
         <div class="col-lg-6 col-md-6">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <label for="" class="mb-2"> Other </label>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="p_other" value="1" id="" checked />
                                 <span>yes</span>
                             </label>
                         </div>
-                        <div class="col-md-5 p-0">
+                        <div class="col-md-6">
                             <label>
                                 <input type="radio" name="p_other" value="0" id="" checked />
                                 <span>No</span>
@@ -506,6 +508,6 @@
         </div>
     </div>
     <div class="col-lg-12 text-end">
-        <button type="submit" class="btn btn-dark" id="submitBtn">Add Other Cardiac Procedure</button>
+        <button type="submit" class="btn btn-dark" id="aocpBtn">Add Other Cardiac Procedure</button>
     </div>
 </form>

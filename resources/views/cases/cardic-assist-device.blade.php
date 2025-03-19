@@ -1,8 +1,11 @@
-<form id="cardic-dev-form" action="{{ route('add-cardic-dev') }}" method="post">
+<!-- <form id="cardic-dev-form" action="{{ route('add-cardic-dev') }}" method="post"> -->
+<form id="cardic-dev-form">
     @csrf
+
+    iiiaab
     <div class="col-lg-12 form-group mb-3">
         <label for="pat_id">Select Patient</label>
-        <select name="pat_id" id="pat_id" class="form-control" required>
+        <select name="pat_id" id="pat_id" class="form-select" required>
             <option value="">Select Patient</option>
             @foreach ($patients as $item)
             <option value="{{ $item->pat_id }}">{{ $item->first_name }}</option>
@@ -811,6 +814,6 @@
         </div>
     </div>
     <div class="col-lg-12 text-end">
-        <button type="submit" class="btn btn-dark" id="submitBtn">Add Cardic Assist Devices</button>
+        <button type="submit" class="btn btn-dark" id="acadBtn">Add Cardic Assist Devices</button>
     </div>
 </form>

@@ -76,6 +76,8 @@
                             class="hide-menu"> General Event </span></a></li>
                 <li class="sidebar-item"><a href="{{ route('check-list') }}" class="sidebar-link"><span
                             class="hide-menu"> Check List </span></a></li>
+                <li class="sidebar-item"><a href="{{ route('patient-lab-result') }}" class="sidebar-link"><span
+                            class="hide-menu"> Patient Lab Result </span></a></li>
             </ul>
         </li>
 

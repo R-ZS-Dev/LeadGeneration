@@ -1,9 +1,10 @@
-<form id="cabypassForm" action="{{ route('add-cabypasses') }}" method="POST" enctype="multipart/form-data">
+<!-- <form id="cabypassForm" action="" method="" enctype="multipart/form-data"> -->
+<form id="cabypassForm">
     @csrf
     <div class="row">
         <div class="col-lg-12 form-group mb-3">
             <label for="pet_id">Select Patient</label>
-            <select name="pet_id" id="pet_id" class="form-control" required>
+            <select name="pet_id" id="pet_id" class="form-select" required>
                 <option value="">Select Patient</option>
                 @foreach ($patient as $item)
                 <option value="{{ $item->pat_id }}"
@@ -15,8 +16,7 @@
         </div>
         <div class="col-lg-12">
             <div class="mb-3">
-                <label class="form-label">Number of Distal Anastomoses with Arterial
-                    Conduits</label>
+                <label class="form-label">Number of Distal Anastomoses with Arterial Conduits</label>
                 <input type="text" name="cab_arterial" class="form-control" required>
             </div>
         </div>
@@ -272,6 +272,6 @@
         </div>
     </div>
     <div class="text-end mt-3">
-        <button type="submit" class="btn btn-dark">Add Coronary Artery ByPasses</button>
+        <button type="submit" class="btn btn-dark" id="acabBtnn">Add Coronary Artery ByPasses</button>
     </div>
 </form>

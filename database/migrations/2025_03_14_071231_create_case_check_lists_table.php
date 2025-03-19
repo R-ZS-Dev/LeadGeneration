@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('case_check_lists', function (Blueprint $table) {
-            $table->id('cl_id');
+            $table->id('ccl_id');
             $table->unsignedBigInteger('pat_id');
-            $table->string('list')->nullable();
-            $table->string('title')->nullable();
-            $table->string('items')->nullable();
+            $table->unsignedBigInteger('cl_id')->nullable();
+            $table->unsignedBigInteger('cg_id')->nullable();
+            $table->json('cl_items')->nullable();
 
             $table->string('cl_insertby', 50)->collation('utf8mb4_general_ci');
             $table->enum('status', ['0', '1'])->default('1')->collation('utf8mb4_general_ci');
