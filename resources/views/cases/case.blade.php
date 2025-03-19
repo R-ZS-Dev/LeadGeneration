@@ -8,6 +8,11 @@
                 /* Prevent wrapping */
             }
 
+            label input {
+                position: absolute;
+                left: -9999px;
+            }
+
             .nav-item {
                 flex-shrink: 0;
                 /* Prevent shrinking */
@@ -651,13 +656,19 @@
                                                                     </td>
                                                                     <td>{{ $caseStaff->perfusionistDetail->st_name ?? 'N/A' }}
                                                                     </td>
-                                                                    <td>{{ $caseStaff->perfusionist_category ?? 'N/A' }}
+                                                                    <td id="truncated-text"
+                                                                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; cursor: pointer;"
+                                                                        onclick="expandText(this)">
+                                                                        {{ $caseStaff->perfusionist_category ?? 'N/A' }}
                                                                     </td>
                                                                     <td>{{ $caseStaff->perfusionistStatusDetail->st_name ?? 'N/A' }}
                                                                     </td>
                                                                     <td>{{ $caseStaff->secondPerfusionistDetail->st_name ?? 'N/A' }}
                                                                     </td>
-                                                                    <td>{{ $caseStaff->second_perfusionist_category ?? 'N/A' }}
+                                                                    <td id="truncated-text"
+                                                                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; cursor: pointer;"
+                                                                        onclick="expandText(this)">
+                                                                        {{ $caseStaff->second_perfusionist_category ?? 'N/A' }}
                                                                     </td>
                                                                     <td>
                                                                         <a onclick="editButtonCstaff({{ json_encode($caseStaff) }})"
@@ -1718,8 +1729,10 @@
                                                 <td>{{ $cab->cab_ins_distal ?? 'N/A' }}</td>
                                                 <td>{{ $cab->cab_ins_proximal ?? 'N/A' }}</td>
                                                 <td>{{ $cab->cab_ins_conduit ?? 'N/A' }}</td>
-                                                <td>{{ $cab->cab_ins_position == 1 ? 'End to Side' : ($cab->cab_ins_position == 0 ? 'Side to Side' : 'N/A') }}</td>
-                                        <td>{{ $cab->cab_ins_end == 1 ? 'Yes' : ($cab->cab_ins_end == 0 ? 'No' : 'N/A') }}</td>
+                                                <td>{{ $cab->cab_ins_position == 1 ? 'End to Side' : ($cab->cab_ins_position == 0 ? 'Side to Side' : 'N/A') }}
+                                                </td>
+                                                <td>{{ $cab->cab_ins_end == 1 ? 'Yes' : ($cab->cab_ins_end == 0 ? 'No' : 'N/A') }}
+                                                </td>
                                                 <td>{{ $cab->note ?? 'N/A' }}</td>
                                                 <td>
                                                     {{-- <a onclick="editCLitem($cab)" href="javascript:void(0);">
@@ -2118,6 +2131,424 @@
         });
     </script>
 
+<!-- coronary artery bypasses -->
+<script>
+    $(document).ready(function() {
+        $("#acabBtnn").click(function(e) {
+            e.preventDefault(); // Prevent default form submission
 
+            let formData = new FormData($("#cabypassForm")[0]);
+
+            $.ajax({
+                url: "{{ route('add-cabypasses') }}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    console.log("Sending AJAX request...");
+                },
+                success: function(response) {
+                    console.log("AJAX Success Response:", response); // Debugging
+
+                    if (response.status === 'success') {
+                        // SweetAlert success notification
+                        Swal.fire({
+                            toast: true,
+                            position: "top-end",
+                            icon: "success",
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+
+                        // Reset the form
+                        $("#cabypassForm")[0].reset();
+                        $("#cabypassForm input[type='file']").val(''); // Clear file inputs
+                    } else {
+                        console.log("Unexpected response:", response);
+
+                        // SweetAlert error notification
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Something went wrong!",
+                            confirmButtonColor: "#d33",
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    console.log("AJAX Error Response:", xhr); // Debugging
+
+                    let errors = xhr.responseJSON?.errors || {};
+                    let errorMessages = "";
+
+                    $.each(errors, function(key, value) {
+                        errorMessages += `${value}\n`;
+                    });
+
+                    // SweetAlert error notification with multiple messages
+                    Swal.fire({
+                        icon: "error",
+                        title: "Validation Error!",
+                        text: errorMessages || "An unknown error occurred!",
+                        confirmButtonColor: "#d33",
+                    });
+                }
+            });
+        });
+    });
+
+    </script>
+
+<script>
+    $(document).ready(function() {
+        $('#aroticbtn').click(function(event) {
+            event.preventDefault(); // Prevent default form submission
+            console.log("Submit button clicked!");
+
+            let form = $('#aortic-pro-form');
+            let formData = new FormData(form[0]); // Create FormData object
+
+            // Ensure CSRF token is included
+            formData.append('_token', '{{ csrf_token() }}');
+
+            $.ajax({
+                url: "{{ route('add-aortic-procedure') }}", // Ensure correct route
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    console.log("Sending AJAX request...");
+                },
+                success: function(response) {
+
+
+                    console.log("Success response:", response);
+                    $('#aorticModal').modal('hide');
+                    // $('#atrailFilrilate').modal('hide'); // Hide modal
+
+                    // SweetAlert success notification
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "Other Aortic Procedure Added Successfully!",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+
+                    form[0].reset(); // Reset the form
+                },
+                error: function(xhr) {
+                    console.log("Error response:", xhr);
+
+                    // SweetAlert error notification
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong! Please try again.",
+                        confirmButtonColor: "#d33",
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+<!-- Other Cardiac Procedure -->
+<script>
+    $(document).ready(function() {
+        $('#aocpBtn').click(function(event) {
+            event.preventDefault(); // Prevent default form submission
+            console.log("Submit button clicked!");
+
+            let form = $('#other-cardiacpro-form');
+            let formData = new FormData(form[0]); // Create FormData object
+
+            // Ensure CSRF token is included
+            formData.append('_token', '{{ csrf_token() }}');
+
+            $.ajax({
+                url: "{{ route('add-other-cardiac-pro') }}", // Ensure correct route
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    console.log("Sending AJAX request...");
+                },
+                success: function(response) {
+
+
+                    console.log("Success response:", response);
+                    $('#otherCardic').modal('hide');
+
+                    // SweetAlert success notification
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "Other Aortic Procedure Added Successfully!",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+
+                    form[0].reset(); // Reset the form
+                },
+                error: function(xhr) {
+                    console.log("Error response:", xhr);
+
+                    // SweetAlert error notification
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong! Please try again.",
+                        confirmButtonColor: "#d33",
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+<!-- VAD Implanted or Removed -->
+<script>
+    $(document).ready(function() {
+        $('#acadBtn').click(function(event) {
+            event.preventDefault(); // Prevent default form submission
+            console.log("Submit button clicked!");
+
+            let form = $('#cardic-dev-form');
+            let formData = new FormData(form[0]); // Create FormData object
+
+            // Ensure CSRF token is included
+            formData.append('_token', '{{ csrf_token() }}');
+
+            $.ajax({
+                url: "{{ route('add-cardic-dev') }}", // Ensure correct route
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    console.log("Sending AJAX request...");
+                },
+                success: function(response) {
+
+
+                    console.log("Success response:", response);
+                    $('#cardicAssist').modal('hide');
+
+                    // SweetAlert success notification
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "Other Aortic Procedure Added Successfully!",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+
+                    form[0].reset(); // Reset the form
+                },
+                error: function(xhr) {
+                    console.log("Error response:", xhr);
+
+                    // SweetAlert error notification
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong! Please try again.",
+                        confirmButtonColor: "#d33",
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#submitBtn').click(function(event) {
+                event.preventDefault(); // Default form submit rokne ke liye
+                console.log("Submit button clicked!");
+
+                let formData = new FormData($('#addother-cardiacpro-form')[0]); // Ensure correct form ID
+
+                $.ajax({
+                    url: "{{ route('add-aortic-procedure') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    },
+                    beforeSend: function() {
+                        console.log("Sending AJAX request..."); // Debugging ke liye
+                    },
+                    success: function(response) {
+                        console.log("Success response:", response);
+                        $('#aorticModal').modal('hide'); // Modal close karein
+                        alert("Other Cardiac Procedure Added Successfully!");
+                        $('#aortic-pro-form')[0].reset();
+                    },
+                    error: function(xhr) {
+                        console.log("Error response:", xhr);
+                        alert("Something went wrong! Check console for details.");
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#submitBtn').click(function(event) {
+                event.preventDefault(); // Default form submit rokne ke liye
+                console.log("Submit button clicked!");
+
+                let formData = new FormData($('#addother-cardiacpro-form')[0]); // Ensure correct form ID
+
+                $.ajax({
+                    url: "{{ route('add-cardic-dev') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    },
+                    beforeSend: function() {
+                        console.log("Sending AJAX request..."); // Debugging ke liye
+                    },
+                    success: function(response) {
+                        console.log("Success response:", response);
+                        $('#cardicAssist').modal('hide'); // Modal close karein
+                        alert("Other Cardiac Procedure Added Successfully!");
+                        $('#cardic-dev-form')[0].reset();
+                    },
+                    error: function(xhr) {
+                        console.log("Error response:", xhr);
+                        alert("Something went wrong! Check console for details.");
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#submitBtn').click(function(event) {
+                event.preventDefault(); // Default form submit rokne ke liye
+                console.log("Submit button clicked!");
+
+                let formData = new FormData($('#addother-cardiacpro-form')[0]); // Ensure correct form ID
+
+                $.ajax({
+                    url: "{{ route('add-atrial-fibrillation') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    },
+                    beforeSend: function() {
+                        console.log("Sending AJAX request..."); // Debugging ke liye
+                    },
+                    success: function(response) {
+                        console.log("Success response:", response);
+                        $('#atrailFilrilate').modal('hide'); // Modal close karein
+                        alert("Other Cardiac Procedure Added Successfully!");
+                        $('#atrial-fibrillationForm')[0].reset();
+                    },
+                    error: function(xhr) {
+                        console.log("Error response:", xhr);
+                        alert("Something went wrong! Check console for details.");
+                    }
+                });
+<script>
+    $(document).ready(function() {
+        $('#atrialBtn').click(function(event) {
+            event.preventDefault(); // Prevent default form submission
+            console.log("Submit button clicked!");
+
+            let form = $('#atrial-fibrillationForm');
+            let formData = new FormData(form[0]); // Create FormData object
+
+            // Ensure CSRF token is included
+            formData.append('_token', '{{ csrf_token() }}');
+
+            $.ajax({
+                url: "{{ route('add-atrial-fibrillation') }}", // Ensure correct route
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    console.log("Sending AJAX request...");
+                },
+                success: function(response) {
+
+
+                    console.log("Success response:", response);
+                    $('#atrailFilrilate').modal('hide');
+
+                    // SweetAlert success notification
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "Other Aortic Procedure Added Successfully!",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+
+                    form[0].reset(); // Reset the form
+                },
+                error: function(xhr) {
+                    console.log("Error response:", xhr);
+
+                    // SweetAlert error notification
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong! Please try again.",
+                        confirmButtonColor: "#d33",
+                    });
+                }
+            });
+        });
+    </script>
 
 @endsection

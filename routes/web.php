@@ -14,6 +14,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\StsController;
 use App\Http\Controllers\UserController;
 use App\Models\EmailSetting;
 use Illuminate\Support\Facades\Route;
@@ -257,8 +258,73 @@ Route::middleware('auth')->group(function () {
         route::post('/add-aortic-procedure', 'addAorticProcedure')->name('add-aortic-procedure');
         route::post('/add-cardic-dev', 'addCardicAssistDev')->name('add-cardic-dev');
 
+        /* ------------------------- fluid and drugs routes ------------------------- */
+
+        route::get('/case-fluid-drugs', 'viewCaseFluidDrugs')->name('case-fluid-drugs');
+        route::post('/add-case-fluiddrugs', 'addCaseFluiddrugs')->name('add-case-fluiddrugs');
+
+        /* ---------------------- Case General Events module routes ---------------------- */
+        route::get('/general-event', 'viewCGEvent')->name('general-event');
+        route::post('/add-general-event', 'addCGEvent')->name('add-general-event');
+        route::post('/delete-general-event/{id}', 'deleteCGEvent')->name('delete-general-event');
+        route::post('/edit-general-event', 'editCGEvent')->name('edit-general-event');
+
+        /* ---------------------- Case General Events module routes ---------------------- */
+        route::get('/check-list', 'viewCList')->name('check-list');
+        route::post('/add-check-list', 'addCList')->name('add-check-list');
+        route::post('/delete-check-list/{id}', 'deleteCList')->name('delete-check-list');
+        route::post('/edit-check-list', 'editCList')->name('edit-check-list');
+
+        // Route::get('/get-rowboxes', 'getRowboxes')->name('get.rowboxes');
+
+        Route::get('/get-rowboxes-groups', 'getRowboxesWithGroups')->name('get.rowboxes.groups');
+
+        /* --------------------------- coronray fusion log -------------------------- */
+
+    route::get('/coronary-perfusion-log', 'viewCornaryFusionLog')->name('coronary-perfusion-log');
+
+    route::post('/add-coronary-perfusion-log', 'addCornaryFusionLog')->name('add-coronary-perfusion-log');
+
+    route::post('/edit-coronary-perfusion-log', 'editCornaryFusionLog')->name('edit-coronary-perfusion-log');
+
+    /* ----------------------------- data device log ---------------------------- */
+
+    route::get('/data-device-log', 'viewDataDeviceLog')->name('data-device-log');
+
+    route::post('/add-data-device-log', 'addDataDeviceLog')->name('add-data-device-log');
+    /* ------------------------------- sts routes ------------------------------- */
+
+        // route::post('/add-check-list', 'addCList')->name('add-check-list');
+        // route::post('/edit-check-list', 'editCList')->name('edit-check-list');
+
+        /* ---------------------- Case checklist module routes ---------------------- */
+        route::get('/check-list', 'viewCList')->name('check-list');
+        Route::post('/add-check-list', 'addCClist')->name('add-check-list');
+        Route::get('/get-rowboxes-groups', 'getRowboxesWithGroups')->name('get.rowboxes.groups');
+        route::post('/delete-check-list/{id}', 'deleteCCList')->name('delete-check-list');
+
+        /* ---------------------- Case Patient Lab Results module routes ---------------------- */
+        route::get('/patient-lab-result', 'viewPLResults')->name('patient-lab-result');
+        route::post('/add-patient-lab-result', 'addPLResults')->name('add-patient-lab-result');
+        route::post('/delete-patient-lab-result/{id}', 'deletePLResult')->name('delete-patient-lab-result');
+        route::post('/edit-patient-lab-result', 'editPLResults')->name('edit-patient-lab-result');
+
+        /* ---------------------- Case Patient Lab Results module routes ---------------------- */
+        route::get('/previous-intervention', 'viewPreInv')->name('previous-intervention');
+        route::post('/add-previous-intervention', 'addPreInv')->name('add-previous-intervention');
     });
 
+    Route::controller(StsController::class)->group(function () {
+
+    route::get('/sts', 'viewSts')->name('case-sts');
+
+    route::post('/add-patient-medication','addPatientMedication')->name('add-patient-medication');
+    route::post('/add-risk-factor','addRiskFactor')->name('add-risk-factor');
+    route::post('/add-cardic-status','addCardicStatus')->name('add-cardic-status');
+
+
+
+    });
 
 });
 

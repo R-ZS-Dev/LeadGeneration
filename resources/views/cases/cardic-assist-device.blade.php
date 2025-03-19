@@ -1,8 +1,11 @@
-<form action="{{ route('add-cardic-dev') }}" method="post">
+<!-- <form id="cardic-dev-form" action="{{ route('add-cardic-dev') }}" method="post"> -->
+<form id="cardic-dev-form">
     @csrf
+
+    iiiaab
     <div class="col-lg-12 form-group mb-3">
         <label for="pat_id">Select Patient</label>
-        <select name="pat_id" id="pat_id" class="form-control" required>
+        <select name="pat_id" id="pat_id" class="form-select" required>
             <option value="">Select Patient</option>
             @foreach ($patients as $item)
             <option value="{{ $item->pat_id }}">{{ $item->first_name }}</option>
@@ -272,7 +275,7 @@
 
             <div class="row form-group mb-2">
                 <div id="if_vad_yes_during" style="display: none;">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="title-box mb-3">
                             <span class="title-label">If yes</span>
                             <label for=""> Timing </label>
@@ -289,7 +292,7 @@
                     </div>
                 </div>
                 <div id="if_vad_yes" style="display: none;">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="title-box mb-3">
                             <span class="title-label">If yes, not during this procedure</span>
                             <label class="form-label">Date</label>
@@ -409,7 +412,7 @@
 
             <div class="row form-group mb-2">
                 <div id="vadidh_if_yes" style="display: none;">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="title-box mb-3">
                             <span class="title-label">If yes</span>
                             <label for=""> Reason </label>
@@ -426,7 +429,7 @@
                     </div>
                 </div>
                 <div id="vadidh_if_no" style="display: none;">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="title-box mb-3">
                             <span class="title-label">If yes, not during this procedure</span>
                             <label class="form-label">Date</label>
@@ -462,119 +465,121 @@
     </div>
 
     <div class="row" id="second_device_fields" style="display: none;">
-        <div class="title-box mb-3">
-            <span class="title-label">If yes</span>
-            <div class="row form-group mb-2">
-                <div class="col-lg-4">
-                    <label for=""> Timing </label>
-                    <select name="sec_timing" id="" class="form-select">
-                        <option value="">Select an option</option>
-                        <option value="Pre-operative (during same hospitalization but not same OR trip as CV surgical procedure)">Pre-operative (during same hospitalization but not same OR trip as CV surgical procedure)</option>
-                        <option value="Stand-alone VAD procedure">Stand-alone VAD procedure</option>
-                        <option value="In conjunction with CV surgical procedure (same trip to the OR) - planned">In conjunction with CV surgical procedure (same trip to the OR) - planned</option>
-                        <option value="In conjunction with CV surgical procedure (same trip to the OR) - unplanned">In conjunction with CV surgical procedure (same trip to the OR) - unplanned</option>
-                        <option value="Post-operative (after surgical procedure during reoperation)">Post-operative (after surgical procedure during reoperation)</option>
-                    </select>
-                </div>
-                <div class="col-lg-4">
-                    <label for=""> Indication </label>
-                    <select name="sec_indication" id="" class="form-select">
-                        <option value="">Select an option</option>
-                        <option value="Bridge to Transplantation">Bridge to Transplantation</option>
-                        <option value="Bridge to Recovery">Bridge to Recovery</option>
-                        <option value="Destination">Destination</option>
-                        <option value="Post Cardiotomy Ventricular Failure">Post Cardiotomy Ventricular Failure</option>
-                        <option value="Device Malfunction">Device Malfunction</option>
-                        <option value="End of (Device) Life">End of (Device) Life</option>
-                        <option value="Salvage">Salvage</option>
-                    </select>
-                </div>
-                <div class="col-lg-4">
-                    <label for=""> Type </label>
-                    <select name="sec_type" id="" class="form-select">
-                        <option value="">Select an option</option>
-                        <option value="Right VAD (RVAD)">Right VAD (RVAD)</option>
-                        <option value="Left VAD (LVAD)">Left VAD (LVAD)</option>
-                        <option value="Biventricular VAD (BIVAD)">Biventricular VAD (BIVAD)</option>
-                        <option value="Total Artificial Heart (TAH)">Total Artificial Heart (TAH)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row form-group mb-2">
-                <div class="col-lg-4 mb-3">
-                    <label for="">Device</label>
-                    <input type="text" name="sec_device" class="form-control" maxlength="50">
+        <div class="col-lg-12">
+            <div class="title-box mb-3">
+                <span class="title-label">If yes</span>
+                <div class="row form-group mb-2">
+                    <div class="col-lg-4">
+                        <label for=""> Timing </label>
+                        <select name="sec_timing" id="" class="form-select">
+                            <option value="">Select an option</option>
+                            <option value="Pre-operative (during same hospitalization but not same OR trip as CV surgical procedure)">Pre-operative (during same hospitalization but not same OR trip as CV surgical procedure)</option>
+                            <option value="Stand-alone VAD procedure">Stand-alone VAD procedure</option>
+                            <option value="In conjunction with CV surgical procedure (same trip to the OR) - planned">In conjunction with CV surgical procedure (same trip to the OR) - planned</option>
+                            <option value="In conjunction with CV surgical procedure (same trip to the OR) - unplanned">In conjunction with CV surgical procedure (same trip to the OR) - unplanned</option>
+                            <option value="Post-operative (after surgical procedure during reoperation)">Post-operative (after surgical procedure during reoperation)</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for=""> Indication </label>
+                        <select name="sec_indication" id="" class="form-select">
+                            <option value="">Select an option</option>
+                            <option value="Bridge to Transplantation">Bridge to Transplantation</option>
+                            <option value="Bridge to Recovery">Bridge to Recovery</option>
+                            <option value="Destination">Destination</option>
+                            <option value="Post Cardiotomy Ventricular Failure">Post Cardiotomy Ventricular Failure</option>
+                            <option value="Device Malfunction">Device Malfunction</option>
+                            <option value="End of (Device) Life">End of (Device) Life</option>
+                            <option value="Salvage">Salvage</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for=""> Type </label>
+                        <select name="sec_type" id="" class="form-select">
+                            <option value="">Select an option</option>
+                            <option value="Right VAD (RVAD)">Right VAD (RVAD)</option>
+                            <option value="Left VAD (LVAD)">Left VAD (LVAD)</option>
+                            <option value="Biventricular VAD (BIVAD)">Biventricular VAD (BIVAD)</option>
+                            <option value="Total Artificial Heart (TAH)">Total Artificial Heart (TAH)</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="col-lg-4 mb-3">
-                    <label for="">2nd device Implant Date</label>
-                    <input type="date" name="sec_implant_date" class="form-control" value="{{ now()->format('Y-m-d') }}">
+                <div class="row form-group mb-2">
+                    <div class="col-lg-4 mb-3">
+                        <label for="">Device</label>
+                        <input type="text" name="sec_device" class="form-control" maxlength="50">
+                    </div>
+
+                    <div class="col-lg-4 mb-3">
+                        <label for="">2nd device Implant Date</label>
+                        <input type="date" name="sec_implant_date" class="form-control" value="{{ now()->format('Y-m-d') }}">
+                    </div>
+
+                    <div class="col-lg-4 mb-3">
+                        <label for="">UDI</label>
+                        <input type="text" name="sec_udi" class="form-control" maxlength="50">
+                    </div>
                 </div>
 
-                <div class="col-lg-4 mb-3">
-                    <label for="">UDI</label>
-                    <input type="text" name="sec_udi" class="form-control" maxlength="50">
-                </div>
-            </div>
 
-
-            <!--  -->
-            <div class="row form-group mb-2">
-                <div class="col-lg-12">
-                    <label for=""> VAD was explanted </label>
-                    <div class="row  mb-3">
-                        <div class="col-lg-4 col-md-6">
-                            <label>
-                                <input type="radio" name="sec_vad_expl" value="Yes, not during this procedure" id="vad_expl" />
-                                <span>Yes, not during this procedure</span>
-                            </label>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <label>
-                                <input type="radio" name="sec_vad_expl" value="Yes, during this procedure" id="vad_explyes" />
-                                <span>Yes, during this procedure</span>
-                            </label>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <label>
-                                <input type="radio" name="sec_vad_expl" value="No" id="vad_explno" checked />
-                                <span>No</span>
-                            </label>
+                <!--  -->
+                <div class="row form-group mb-2">
+                    <div class="col-lg-12">
+                        <label for=""> VAD was explanted </label>
+                        <div class="row  mb-3">
+                            <div class="col-lg-4 col-md-6">
+                                <label>
+                                    <input type="radio" name="sec_vad_expl" value="Yes, not during this procedure" id="vad_expl" />
+                                    <span>Yes, not during this procedure</span>
+                                </label>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <label>
+                                    <input type="radio" name="sec_vad_expl" value="Yes, during this procedure" id="vad_explyes" />
+                                    <span>Yes, during this procedure</span>
+                                </label>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <label>
+                                    <input type="radio" name="sec_vad_expl" value="No" id="vad_explno" checked />
+                                    <span>No</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row form-group mb-2">
-                <div id="sec_if_yes_during" style="display: none;">
-                    <div class="col-lg-6">
-                        <div class="title-box mb-3">
-                            <span class="title-label">If yes</span>
-                            <label for=""> Reason </label>
-                            <select name="sec_reason" id="" class="form-select mb-1">
-                                <option value="">Select an option</option>
-                                <option value="Cardiac transplant">Cardiac transplant</option>
-                                <option value="Recovery">Recovery</option>
-                                <option value="Device transfer">Device transfer</option>
-                                <option value="Device-related infection">Device-related infection</option>
-                                <option value="Device malfunction">Device malfunction</option>
-                                <option value="End of (device) life">End of (device) life</option>
-                            </select>
+                <div class="row form-group mb-2">
+                    <div id="sec_if_yes_during" style="display: none;">
+                        <div class="col-lg-12">
+                            <div class="title-box mb-3">
+                                <span class="title-label">If yes</span>
+                                <label for=""> Reason </label>
+                                <select name="sec_reason" id="" class="form-select mb-1">
+                                    <option value="">Select an option</option>
+                                    <option value="Cardiac transplant">Cardiac transplant</option>
+                                    <option value="Recovery">Recovery</option>
+                                    <option value="Device transfer">Device transfer</option>
+                                    <option value="Device-related infection">Device-related infection</option>
+                                    <option value="Device malfunction">Device malfunction</option>
+                                    <option value="End of (device) life">End of (device) life</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sec_if_yes" style="display: none;">
+                        <div class="col-lg-12">
+                            <div class="title-box mb-3">
+                                <span class="title-label">If yes, not during this procedure</span>
+                                <label class="form-label">Date</label>
+                                <input type="date" name="sec_date" class="form-control" value="{{ now()->format('Y-m-d') }}">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="sec_if_yes" style="display: none;">
-                    <div class="col-lg-6">
-                        <div class="title-box mb-3">
-                            <span class="title-label">If yes, not during this procedure</span>
-                            <label class="form-label">Date</label>
-                            <input type="date" name="sec_date" class="form-control" value="{{ now()->format('Y-m-d') }}">
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+            </div>
         </div>
     </div>
 
@@ -601,119 +606,121 @@
     </div>
 
     <div class="row" id="timing_div" style="display: none;">
-        <div class="title-box mb-3">
-            <span class="title-label">If yes</span>
-            <div class="row form-group mb-2">
-                <div class="col-lg-4">
-                    <label for=""> Timing </label>
-                    <select name="th_timing" id="" class="form-select">
-                        <option value="">Select an option</option>
-                        <option value="Pre-operative (during same hospitalization but not same OR trip as CV surgical procedure)">Pre-operative (during same hospitalization but not same OR trip as CV surgical procedure)</option>
-                        <option value="Stand-alone VAD procedure">Stand-alone VAD procedure</option>
-                        <option value="In conjunction with CV surgical procedure (same trip to the OR) - planned">In conjunction with CV surgical procedure (same trip to the OR) - planned</option>
-                        <option value="In conjunction with CV surgical procedure (same trip to the OR) - unplanned">In conjunction with CV surgical procedure (same trip to the OR) - unplanned</option>
-                        <option value="Post-operative (after surgical procedure during reoperation)">Post-operative (after surgical procedure during reoperation)</option>
-                    </select>
-                </div>
-                <div class="col-lg-4">
-                    <label for=""> Indication </label>
-                    <select name="th_indication" id="" class="form-select">
-                        <option value="">Select an option</option>
-                        <option value="Bridge to Transplantation">Bridge to Transplantation</option>
-                        <option value="Bridge to Recovery">Bridge to Recovery</option>
-                        <option value="Destination">Destination</option>
-                        <option value="Post Cardiotomy Ventricular Failure">Post Cardiotomy Ventricular Failure</option>
-                        <option value="Device Malfunction">Device Malfunction</option>
-                        <option value="End of (Device) Life">End of (Device) Life</option>
-                        <option value="Salvage">Salvage</option>
-                    </select>
-                </div>
-                <div class="col-lg-4">
-                    <label for=""> Type </label>
-                    <select name="th_type" id="" class="form-select">
-                        <option value="">Select an option</option>
-                        <option value="Right VAD (RVAD)">Right VAD (RVAD)</option>
-                        <option value="Left VAD (LVAD)">Left VAD (LVAD)</option>
-                        <option value="Biventricular VAD (BIVAD)">Biventricular VAD (BIVAD)</option>
-                        <option value="Total Artificial Heart (TAH)">Total Artificial Heart (TAH)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row form-group mb-2">
-                <div class="col-lg-4 mb-3">
-                    <label for="">Device</label>
-                    <input type="text" name="th_device" class="form-control" maxlength="50">
+        <div class="col-lg12">
+            <div class="title-box mb-3">
+                <span class="title-label">If yes</span>
+                <div class="row form-group mb-2">
+                    <div class="col-lg-4">
+                        <label for=""> Timing </label>
+                        <select name="th_timing" id="" class="form-select">
+                            <option value="">Select an option</option>
+                            <option value="Pre-operative (during same hospitalization but not same OR trip as CV surgical procedure)">Pre-operative (during same hospitalization but not same OR trip as CV surgical procedure)</option>
+                            <option value="Stand-alone VAD procedure">Stand-alone VAD procedure</option>
+                            <option value="In conjunction with CV surgical procedure (same trip to the OR) - planned">In conjunction with CV surgical procedure (same trip to the OR) - planned</option>
+                            <option value="In conjunction with CV surgical procedure (same trip to the OR) - unplanned">In conjunction with CV surgical procedure (same trip to the OR) - unplanned</option>
+                            <option value="Post-operative (after surgical procedure during reoperation)">Post-operative (after surgical procedure during reoperation)</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for=""> Indication </label>
+                        <select name="th_indication" id="" class="form-select">
+                            <option value="">Select an option</option>
+                            <option value="Bridge to Transplantation">Bridge to Transplantation</option>
+                            <option value="Bridge to Recovery">Bridge to Recovery</option>
+                            <option value="Destination">Destination</option>
+                            <option value="Post Cardiotomy Ventricular Failure">Post Cardiotomy Ventricular Failure</option>
+                            <option value="Device Malfunction">Device Malfunction</option>
+                            <option value="End of (Device) Life">End of (Device) Life</option>
+                            <option value="Salvage">Salvage</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for=""> Type </label>
+                        <select name="th_type" id="" class="form-select">
+                            <option value="">Select an option</option>
+                            <option value="Right VAD (RVAD)">Right VAD (RVAD)</option>
+                            <option value="Left VAD (LVAD)">Left VAD (LVAD)</option>
+                            <option value="Biventricular VAD (BIVAD)">Biventricular VAD (BIVAD)</option>
+                            <option value="Total Artificial Heart (TAH)">Total Artificial Heart (TAH)</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="col-lg-4 mb-3">
-                    <label for="">3nd device Implant Date</label>
-                    <input type="date" name="th_implant_date" class="form-control" value="{{ now()->format('Y-m-d') }}">
+                <div class="row form-group mb-2">
+                    <div class="col-lg-4 mb-3">
+                        <label for="">Device</label>
+                        <input type="text" name="th_device" class="form-control" maxlength="50">
+                    </div>
+
+                    <div class="col-lg-4 mb-3">
+                        <label for="">3nd device Implant Date</label>
+                        <input type="date" name="th_implant_date" class="form-control" value="{{ now()->format('Y-m-d') }}">
+                    </div>
+
+                    <div class="col-lg-4 mb-3">
+                        <label for="">UDI</label>
+                        <input type="text" name="th_udi" class="form-control" maxlength="50">
+                    </div>
                 </div>
 
-                <div class="col-lg-4 mb-3">
-                    <label for="">UDI</label>
-                    <input type="text" name="th_udi" class="form-control" maxlength="50">
-                </div>
-            </div>
 
-
-            <!--  -->
-            <div class="row form-group mb-2">
-                <div class="col-lg-12">
-                    <label for=""> VAD was explanted </label>
-                    <div class="row  mb-3">
-                        <div class="col-lg-4 col-md-6">
-                            <label>
-                                <input type="radio" name="th_vad_expla" value="Yes, not during this procedure" id="vad_expla" />
-                                <span>Yes, not during this procedure</span>
-                            </label>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <label>
-                                <input type="radio" name="th_vad_expla" value="Yes, during this procedure" id="vad_explayes" />
-                                <span>Yes, during this procedure</span>
-                            </label>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <label>
-                                <input type="radio" name="th_vad_expla" value="No" id="vad_explano" checked />
-                                <span>No</span>
-                            </label>
+                <!--  -->
+                <div class="row form-group mb-2">
+                    <div class="col-lg-12">
+                        <label for=""> VAD was explanted </label>
+                        <div class="row  mb-3">
+                            <div class="col-lg-4 col-md-6">
+                                <label>
+                                    <input type="radio" name="th_vad_expla" value="Yes, not during this procedure" id="vad_expla" />
+                                    <span>Yes, not during this procedure</span>
+                                </label>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <label>
+                                    <input type="radio" name="th_vad_expla" value="Yes, during this procedure" id="vad_explayes" />
+                                    <span>Yes, during this procedure</span>
+                                </label>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <label>
+                                    <input type="radio" name="th_vad_expla" value="No" id="vad_explano" checked />
+                                    <span>No</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row form-group mb-2">
-                <div id="if_yes_during" style="display: none;">
-                    <div class="col-lg-6">
-                        <div class="title-box mb-3">
-                            <span class="title-label">If yes</span>
-                            <label for=""> Reason </label>
-                            <select name="th_reason" id="" class="form-select mb-1">
-                                <option value="">Select an option</option>
-                                <option value="Cardiac transplant">Cardiac transplant</option>
-                                <option value="Recovery">Recovery</option>
-                                <option value="Device transfer">Device transfer</option>
-                                <option value="Device-related infection">Device-related infection</option>
-                                <option value="Device malfunction">Device malfunction</option>
-                                <option value="End of (device) life">End of (device) life</option>
-                            </select>
+                <div class="row form-group mb-2">
+                    <div id="if_yes_during" style="display: none;">
+                        <div class="col-lg-12">
+                            <div class="title-box mb-3">
+                                <span class="title-label">If yes</span>
+                                <label for=""> Reason </label>
+                                <select name="th_reason" id="" class="form-select mb-1">
+                                    <option value="">Select an option</option>
+                                    <option value="Cardiac transplant">Cardiac transplant</option>
+                                    <option value="Recovery">Recovery</option>
+                                    <option value="Device transfer">Device transfer</option>
+                                    <option value="Device-related infection">Device-related infection</option>
+                                    <option value="Device malfunction">Device malfunction</option>
+                                    <option value="End of (device) life">End of (device) life</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="if_yes_not_during" style="display: none;">
+                        <div class="col-lg-12">
+                            <div class="title-box mb-3">
+                                <span class="title-label">If yes, not during this procedure</span>
+                                <label class="form-label">Date</label>
+                                <input type="date" name="th_date" class="form-control" value="{{ now()->format('Y-m-d') }}">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row" id="if_yes_not_during" style="display: none;">
-                    <div class="col-lg-6">
-                        <div class="title-box mb-3">
-                            <span class="title-label">If yes, not during this procedure</span>
-                            <label class="form-label">Date</label>
-                            <input type="date" name="th_date" class="form-control" value="{{ now()->format('Y-m-d') }}">
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+            </div>
         </div>
     </div>
 
@@ -746,65 +753,67 @@
     </div>
 
     <div class="row" id="complication_div" style="display: none;">
-        <div class="title-box mb-3">
-            <span class="title-label">If yes</span>
-            <div class="row form-group mb-2">
-                <div class="col-lg-4">
-                    <label for=""> 1st Complication </label>
-                    <select name="first_complication" id="" class="form-select mb-1">
-                        <option value="">Select an option</option>
-                        <option value="Cannula insertion site issue">Cannula insertion site issue</option>
-                        <option value="Cardiac">Cardiac</option>
-                        <option value="GI">GI</option>
-                        <option value="Hemorrhagic">Hemorrhagic</option>
-                        <option value="Hemolytic">Hemolytic</option>
-                        <option value="Infection">Infection</option>
-                        <option value="Metabolic">Metabolic</option>
-                        <option value="Neurologic">Neurologic</option>
-                        <option value="Pulmonary">Pulmonary</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+        <div class="col-lg-12">
+            <div class="title-box mb-3">
+                <span class="title-label">If yes</span>
+                <div class="row form-group mb-2">
+                    <div class="col-lg-4">
+                        <label for=""> 1st Complication </label>
+                        <select name="first_complication" id="" class="form-select mb-1">
+                            <option value="">Select an option</option>
+                            <option value="Cannula insertion site issue">Cannula insertion site issue</option>
+                            <option value="Cardiac">Cardiac</option>
+                            <option value="GI">GI</option>
+                            <option value="Hemorrhagic">Hemorrhagic</option>
+                            <option value="Hemolytic">Hemolytic</option>
+                            <option value="Infection">Infection</option>
+                            <option value="Metabolic">Metabolic</option>
+                            <option value="Neurologic">Neurologic</option>
+                            <option value="Pulmonary">Pulmonary</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
 
-                <div class="col-lg-4">
-                    <label for=""> 2nd Complication </label>
-                    <select name="second_complication" id="" class="form-select mb-1">
-                        <option value="">Select an option</option>
-                        <option value="No additional complications">No additional complications</option>
-                        <option value="Cannula / insertion site issue">Cannula / insertion site issue</option>
-                        <option value="Cardiac">Cardiac</option>
-                        <option value="GI">GI</option>
-                        <option value="Hemorrhagic">Hemorrhagic</option>
-                        <option value="Hemolytic">Hemolytic</option>
-                        <option value="Infection">Infection</option>
-                        <option value="Metabolic">Metabolic</option>
-                        <option value="Neurologic">Neurologic</option>
-                        <option value="Pulmonary">Pulmonary</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+                    <div class="col-lg-4">
+                        <label for=""> 2nd Complication </label>
+                        <select name="second_complication" id="" class="form-select mb-1">
+                            <option value="">Select an option</option>
+                            <option value="No additional complications">No additional complications</option>
+                            <option value="Cannula / insertion site issue">Cannula / insertion site issue</option>
+                            <option value="Cardiac">Cardiac</option>
+                            <option value="GI">GI</option>
+                            <option value="Hemorrhagic">Hemorrhagic</option>
+                            <option value="Hemolytic">Hemolytic</option>
+                            <option value="Infection">Infection</option>
+                            <option value="Metabolic">Metabolic</option>
+                            <option value="Neurologic">Neurologic</option>
+                            <option value="Pulmonary">Pulmonary</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
 
-                <div class="col-lg-4">
-                    <label for=""> 3rd Complication </label>
-                    <select name="third_complication" id="" class="form-select mb-1">
-                        <option value="">Select an option</option>
-                        <option value="No additional complications">No additional complications</option>
-                        <option value="Cannula / insertion site issue">Cannula / insertion site issue</option>
-                        <option value="Cardiac">Cardiac</option>
-                        <option value="GI">GI</option>
-                        <option value="Hemorrhagic">Hemorrhagic</option>
-                        <option value="Hemolytic">Hemolytic</option>
-                        <option value="Infection">Infection</option>
-                        <option value="Metabolic">Metabolic</option>
-                        <option value="Neurologic">Neurologic</option>
-                        <option value="Pulmonary">Pulmonary</option>
-                        <option value="Other">Other</option>
-                    </select>
+                    <div class="col-lg-4">
+                        <label for=""> 3rd Complication </label>
+                        <select name="third_complication" id="" class="form-select mb-1">
+                            <option value="">Select an option</option>
+                            <option value="No additional complications">No additional complications</option>
+                            <option value="Cannula / insertion site issue">Cannula / insertion site issue</option>
+                            <option value="Cardiac">Cardiac</option>
+                            <option value="GI">GI</option>
+                            <option value="Hemorrhagic">Hemorrhagic</option>
+                            <option value="Hemolytic">Hemolytic</option>
+                            <option value="Infection">Infection</option>
+                            <option value="Metabolic">Metabolic</option>
+                            <option value="Neurologic">Neurologic</option>
+                            <option value="Pulmonary">Pulmonary</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-lg-12 text-end">
-        <button type="submit" class="btn btn-dark" id="submitBtn">Add Cardic Assist Devices</button>
+        <button type="submit" class="btn btn-dark" id="acadBtn">Add Cardic Assist Devices</button>
     </div>
 </form>
