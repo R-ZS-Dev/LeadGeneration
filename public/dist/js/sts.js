@@ -248,15 +248,15 @@ $("input[name='syntax_score']").change(function () {
 });
 
 function togglestress() {
-    if ($("#stress_scoreyes").is(":checked")) {
-        $("#stress_score-yes").slideDown();
+    if ($("#stresstestyes").is(":checked")) {
+        $("#stresstest-yes").slideDown();
     } else {
-        $("#stress_score-yes").slideUp();
+        $("#stresstest-yes").slideUp();
     }
 }
 togglestress();
 
-$("input[name='stress_score']").change(function () {
+$("input[name='stresstest']").change(function () {
     togglestress();
 });
 

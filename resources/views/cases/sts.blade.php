@@ -2348,30 +2348,36 @@
                                                     <div class="col-md-11 mx-auto">
                                                         <div class="row">
                                                             <div class="col-md-12 mb-3">
-                                                                <label for="">Source(s) used to quantify stenosis:</label>
-                                                                <select name="quantify_stanosis" class="form-select" id="">
-                                                                    <option value="">Select source used to qunatify stenosis</option>
+                                                                <label for="">Source(s) used to quantify
+                                                                    stenosis:</label>
+                                                                <select name="quantify_stanosis" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select source used to qunatify
+                                                                        stenosis</option>
                                                                     <option value="Angiogram">Angiogram</option>
                                                                     <option value="CT">CT</option>
                                                                     <option value="IVUS">IVUS</option>
-                                                                    <option value="Progress/OP Note">Progress/OP Note</option>
+                                                                    <option value="Progress/OP Note">Progress/OP Note
+                                                                    </option>
                                                                     <option value="Other">Other</option>
                                                                     <option value="Multiple">Multiple</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6 mb-3">
                                                                 <label for="">Dominance:</label>
-                                                               <select name="dominance" class="form-select" id="">
-                                                                <option value="">Select Dominance</option>
-                                                                <option value="Left">Left</option>
-                                                                <option value="Right">Right</option>
-                                                                <option value="Co-dominant">Co-dominant</option>
-                                                                <option value="Not documented">Not Documented</option>
-                                                               </select>
+                                                                <select name="dominance" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Dominance</option>
+                                                                    <option value="Left">Left</option>
+                                                                    <option value="Right">Right</option>
+                                                                    <option value="Co-dominant">Co-dominant</option>
+                                                                    <option value="Not documented">Not Documented</option>
+                                                                </select>
                                                             </div>
                                                             <div class="col-md-6 mb-3">
                                                                 <label for="">Number Diseased Vessels:</label>
-                                                                <select name="disease_vessel" class="form-select" id="diseaseVessel">
+                                                                <select name="disease_vessel" class="form-select"
+                                                                    id="diseaseVessel">
                                                                     <option value="">select Disease Vessels</option>
                                                                     <option value="None">None</option>
                                                                     <option value="One">One</option>
@@ -2380,7 +2386,8 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="row form-group mb-3 mt-2" id="diseaseVessel-yes" style="display: none;">
+                                                        <div class="row form-group mb-3 mt-2" id="diseaseVessel-yes"
+                                                            style="display: none;">
                                                             <div class="col-lg-12">
                                                                 <div class="title-box">
                                                                     <span class="title-label">If One, Two and Three</span>
@@ -2388,20 +2395,24 @@
                                                                         <div class="col-md-11 mx-auto">
                                                                             <div class="row mb-3 mt-2">
                                                                                 <div class="col-lg-6">
-                                                                                    <label for="">Native % Stenosis Known:</label>
+                                                                                    <label for="">Native %
+                                                                                        Stenosis Known:</label>
                                                                                 </div>
                                                                                 <div class="col-lg-6 d-md-flex">
                                                                                     <div>
                                                                                         <label class="me-2">
-                                                                                            <input type="radio" name="native_stenosis" value="1"
+                                                                                            <input type="radio"
+                                                                                                name="native_stenosis"
+                                                                                                value="1"
                                                                                                 id="native_stenosisyes" />
                                                                                             <span>Yes</span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <div>
                                                                                         <label class="me-2">
-                                                                                            <input type="radio" name="native_stenosis" value="0"
-                                                                                                checked />
+                                                                                            <input type="radio"
+                                                                                                name="native_stenosis"
+                                                                                                value="0" checked />
                                                                                             <span>No</span>
                                                                                         </label>
                                                                                     </div>
@@ -2409,20 +2420,24 @@
                                                                             </div>
                                                                             <div class="row mb-3 mt-2">
                                                                                 <div class="col-lg-6">
-                                                                                    <label for="">Graft(s) Present:</label>
+                                                                                    <label for="">Graft(s)
+                                                                                        Present:</label>
                                                                                 </div>
                                                                                 <div class="col-lg-6 d-md-flex">
                                                                                     <div>
                                                                                         <label class="me-2">
-                                                                                            <input type="radio" name="graft_present" value="1"
+                                                                                            <input type="radio"
+                                                                                                name="graft_present"
+                                                                                                value="1"
                                                                                                 id="graft_presentyes" />
                                                                                             <span>Yes</span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <div>
                                                                                         <label class="me-2">
-                                                                                            <input type="radio" name="graft_present" value="0"
-                                                                                                checked />
+                                                                                            <input type="radio"
+                                                                                                name="graft_present"
+                                                                                                value="0" checked />
                                                                                             <span>No</span>
                                                                                         </label>
                                                                                     </div>
@@ -2430,20 +2445,24 @@
                                                                             </div>
                                                                             <div class="row mb-3 mt-2">
                                                                                 <div class="col-lg-6">
-                                                                                    <label for="">Stent(s) Known:</label>
+                                                                                    <label for="">Stent(s)
+                                                                                        Known:</label>
                                                                                 </div>
                                                                                 <div class="col-lg-6 d-md-flex">
                                                                                     <div>
                                                                                         <label class="me-2">
-                                                                                            <input type="radio" name="stentknown" value="1"
+                                                                                            <input type="radio"
+                                                                                                name="stentknown"
+                                                                                                value="1"
                                                                                                 id="stentknownyes" />
                                                                                             <span>Yes</span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <div>
                                                                                         <label class="me-2">
-                                                                                            <input type="radio" name="stentknown" value="0"
-                                                                                                checked />
+                                                                                            <input type="radio"
+                                                                                                name="stentknown"
+                                                                                                value="0" checked />
                                                                                             <span>No</span>
                                                                                         </label>
                                                                                     </div>
@@ -2451,20 +2470,24 @@
                                                                             </div>
                                                                             <div class="row mb-3 mt-2">
                                                                                 <div class="col-lg-6">
-                                                                                    <label for="">Fractional Flow Reserveed Performed:</label>
+                                                                                    <label for="">Fractional Flow
+                                                                                        Reserveed Performed:</label>
                                                                                 </div>
                                                                                 <div class="col-lg-6 d-md-flex">
                                                                                     <div>
                                                                                         <label class="me-2">
-                                                                                            <input type="radio" name="flow_reserve" value="1"
+                                                                                            <input type="radio"
+                                                                                                name="flow_reserve"
+                                                                                                value="1"
                                                                                                 id="flow_reserveyes" />
                                                                                             <span>Yes</span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <div>
                                                                                         <label class="me-2">
-                                                                                            <input type="radio" name="flow_reserve" value="0"
-                                                                                                checked />
+                                                                                            <input type="radio"
+                                                                                                name="flow_reserve"
+                                                                                                value="0" checked />
                                                                                             <span>No</span>
                                                                                         </label>
                                                                                     </div>
@@ -2475,58 +2498,94 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row form-group mb-3 mt-2" id="oneorgreater" style="display: none;">
+                                                        <div class="row form-group mb-3 mt-2" id="oneorgreater"
+                                                            style="display: none;">
                                                             <div class="col-lg-12">
                                                                 <div class="title-box">
                                                                     <span class="title-label">If One or Greater</span>
                                                                     <div class="row">
                                                                         <div class="col-md-11 mx-auto">
-                                                                            <label for="">Diseased Location 1:</label>
-                                                                            <select name="loc1_disease" class="form-select mb-3" id="">
-                                                                                <option value="">Select Diseased Location 1</option>
-                                                                                <option value="Left Main">Left Main</option>
-                                                                                <option value="Proximal LAD">Proximal LAD</option>
+                                                                            <label for="">Diseased Location
+                                                                                1:</label>
+                                                                            <select name="loc1_disease"
+                                                                                class="form-select mb-3" id="">
+                                                                                <option value="">Select Diseased
+                                                                                    Location 1</option>
+                                                                                <option value="Left Main">Left Main
+                                                                                </option>
+                                                                                <option value="Proximal LAD">Proximal LAD
+                                                                                </option>
                                                                                 <option value="Mid LAD">Mid LAD</option>
-                                                                                <option value="Distal LAD">Distal LAD</option>
-                                                                                <option value="Diagonal 1">Diagonal 1</option>
-                                                                                <option value="Diagonal 2">Diagonal 2</option>
-                                                                                <option value="Diagonal 3">Diagonal 3</option>
-                                                                                <option value="Circumflex">Circmflex</option>
-                                                                                <option value="Obtuse Marginal1">Obtuse Marginal1</option>
-                                                                                <option value="Obtuse Marginal2">Obtuse Marginal2</option>
-                                                                                <option value="Obtuse Marginal3">Obtuse Marginal3</option>
+                                                                                <option value="Distal LAD">Distal LAD
+                                                                                </option>
+                                                                                <option value="Diagonal 1">Diagonal 1
+                                                                                </option>
+                                                                                <option value="Diagonal 2">Diagonal 2
+                                                                                </option>
+                                                                                <option value="Diagonal 3">Diagonal 3
+                                                                                </option>
+                                                                                <option value="Circumflex">Circmflex
+                                                                                </option>
+                                                                                <option value="Obtuse Marginal1">Obtuse
+                                                                                    Marginal1</option>
+                                                                                <option value="Obtuse Marginal2">Obtuse
+                                                                                    Marginal2</option>
+                                                                                <option value="Obtuse Marginal3">Obtuse
+                                                                                    Marginal3</option>
                                                                                 <option value="Ramus">Ramus</option>
                                                                                 <option value="RCA">RCA</option>
-                                                                                <option value="Acute Marginal">Acute Marginal</option>
-                                                                                <option value="Posterior Descending">Posterior Descending</option>
-                                                                                <option value="Posterolateral">Posterolateral</option>
+                                                                                <option value="Acute Marginal">Acute
+                                                                                    Marginal</option>
+                                                                                <option value="Posterior Descending">
+                                                                                    Posterior Descending</option>
+                                                                                <option value="Posterolateral">
+                                                                                    Posterolateral</option>
                                                                             </select>
                                                                             <div class="row">
                                                                                 <div class="col-md-6 mb-3">
-                                                                                    <label for="">% Stenosis:</label>
-                                                                                    <input type="text" class="form-control" name="perstenosis" id="">
+                                                                                    <label for="">%
+                                                                                        Stenosis:</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        name="perstenosis"
+                                                                                        id="">
                                                                                 </div>
                                                                                 <div class="col-md-6 mb-3">
                                                                                     <label for="">FFR:</label>
-                                                                                    <input type="text" class="form-control" name="ffr" id="">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        name="ffr" id="">
                                                                                 </div>
                                                                                 <div class="col-md-6 mb-3">
                                                                                     <label for="">Graft:</label>
-                                                                                    <select name="graft" class="form-select" id="">
-                                                                                        <option value="">Select Graft</option>
-                                                                                        <option value="Patent">Patent</option>
-                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
-                                                                                        <option value="100% occlusion">100% occlusion</option>
-                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    <select name="graft"
+                                                                                        class="form-select"
+                                                                                        id="">
+                                                                                        <option value="">Select
+                                                                                            Graft</option>
+                                                                                        <option value="Patent">Patent
+                                                                                        </option>
+                                                                                        <option value="Stenosis > = 50%">
+                                                                                            Stenosis > = 50%</option>
+                                                                                        <option value="100% occlusion">
+                                                                                            100% occlusion</option>
+                                                                                        <option value="Not documented">Not
+                                                                                            Documented</option>
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="col-md-6 mb-3">
                                                                                     <label for="">Stent:</label>
-                                                                                    <select name="stent" class="form-select" id="">
-                                                                                        <option value="">Select Stent</option>
-                                                                                        <option value="Patent">Patent</option>
-                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
-                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    <select name="stent"
+                                                                                        class="form-select"
+                                                                                        id="">
+                                                                                        <option value="">Select
+                                                                                            Stent</option>
+                                                                                        <option value="Patent">Patent
+                                                                                        </option>
+                                                                                        <option value="Stenosis > = 50%">
+                                                                                            Stenosis > = 50%</option>
+                                                                                        <option value="Not documented">Not
+                                                                                            Documented</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -2535,58 +2594,94 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row form-group mb-3 mt-2" id="twoorgreater" style="display: none;">
+                                                        <div class="row form-group mb-3 mt-2" id="twoorgreater"
+                                                            style="display: none;">
                                                             <div class="col-lg-12">
                                                                 <div class="title-box">
                                                                     <span class="title-label">If Two or Greater</span>
                                                                     <div class="row">
                                                                         <div class="col-md-11 mx-auto">
-                                                                            <label for="">Diseased Location 2:</label>
-                                                                            <select name="loc2_disease" class="form-select mb-3" id="">
-                                                                                <option value="">Select Diseased Location 2</option>
-                                                                                <option value="Left Main">Left Main</option>
-                                                                                <option value="Proximal LAD">Proximal LAD</option>
+                                                                            <label for="">Diseased Location
+                                                                                2:</label>
+                                                                            <select name="loc2_disease"
+                                                                                class="form-select mb-3" id="">
+                                                                                <option value="">Select Diseased
+                                                                                    Location 2</option>
+                                                                                <option value="Left Main">Left Main
+                                                                                </option>
+                                                                                <option value="Proximal LAD">Proximal LAD
+                                                                                </option>
                                                                                 <option value="Mid LAD">Mid LAD</option>
-                                                                                <option value="Distal LAD">Distal LAD</option>
-                                                                                <option value="Diagonal 1">Diagonal 1</option>
-                                                                                <option value="Diagonal 2">Diagonal 2</option>
-                                                                                <option value="Diagonal 3">Diagonal 3</option>
-                                                                                <option value="Circumflex">Circmflex</option>
-                                                                                <option value="Obtuse Marginal1">Obtuse Marginal1</option>
-                                                                                <option value="Obtuse Marginal2">Obtuse Marginal2</option>
-                                                                                <option value="Obtuse Marginal3">Obtuse Marginal3</option>
+                                                                                <option value="Distal LAD">Distal LAD
+                                                                                </option>
+                                                                                <option value="Diagonal 1">Diagonal 1
+                                                                                </option>
+                                                                                <option value="Diagonal 2">Diagonal 2
+                                                                                </option>
+                                                                                <option value="Diagonal 3">Diagonal 3
+                                                                                </option>
+                                                                                <option value="Circumflex">Circmflex
+                                                                                </option>
+                                                                                <option value="Obtuse Marginal1">Obtuse
+                                                                                    Marginal1</option>
+                                                                                <option value="Obtuse Marginal2">Obtuse
+                                                                                    Marginal2</option>
+                                                                                <option value="Obtuse Marginal3">Obtuse
+                                                                                    Marginal3</option>
                                                                                 <option value="Ramus">Ramus</option>
                                                                                 <option value="RCA">RCA</option>
-                                                                                <option value="Acute Marginal">Acute Marginal</option>
-                                                                                <option value="Posterior Descending">Posterior Descending</option>
-                                                                                <option value="Posterolateral">Posterolateral</option>
+                                                                                <option value="Acute Marginal">Acute
+                                                                                    Marginal</option>
+                                                                                <option value="Posterior Descending">
+                                                                                    Posterior Descending</option>
+                                                                                <option value="Posterolateral">
+                                                                                    Posterolateral</option>
                                                                             </select>
                                                                             <div class="row">
                                                                                 <div class="col-md-6 mb-3">
-                                                                                    <label for="">% Stenosis:</label>
-                                                                                    <input type="text" class="form-control" name="perstenosis2" id="">
+                                                                                    <label for="">%
+                                                                                        Stenosis:</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        name="perstenosis2"
+                                                                                        id="">
                                                                                 </div>
                                                                                 <div class="col-md-6 mb-3">
                                                                                     <label for="">FFR:</label>
-                                                                                    <input type="text" class="form-control" name="ffr2" id="">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        name="ffr2" id="">
                                                                                 </div>
                                                                                 <div class="col-md-6 mb-3">
                                                                                     <label for="">Graft:</label>
-                                                                                    <select name="graft2" class="form-select" id="">
-                                                                                        <option value="">Select Graft</option>
-                                                                                        <option value="Patent">Patent</option>
-                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
-                                                                                        <option value="100% occlusion">100% occlusion</option>
-                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    <select name="graft2"
+                                                                                        class="form-select"
+                                                                                        id="">
+                                                                                        <option value="">Select
+                                                                                            Graft</option>
+                                                                                        <option value="Patent">Patent
+                                                                                        </option>
+                                                                                        <option value="Stenosis > = 50%">
+                                                                                            Stenosis > = 50%</option>
+                                                                                        <option value="100% occlusion">
+                                                                                            100% occlusion</option>
+                                                                                        <option value="Not documented">Not
+                                                                                            Documented</option>
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="col-md-6 mb-3">
                                                                                     <label for="">Stent:</label>
-                                                                                    <select name="stent2" class="form-select" id="">
-                                                                                        <option value="">Select Stent</option>
-                                                                                        <option value="Patent">Patent</option>
-                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
-                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    <select name="stent2"
+                                                                                        class="form-select"
+                                                                                        id="">
+                                                                                        <option value="">Select
+                                                                                            Stent</option>
+                                                                                        <option value="Patent">Patent
+                                                                                        </option>
+                                                                                        <option value="Stenosis > = 50%">
+                                                                                            Stenosis > = 50%</option>
+                                                                                        <option value="Not documented">Not
+                                                                                            Documented</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -2595,58 +2690,94 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row form-group mb-3 mt-2" id="three" style="display: none;">
+                                                        <div class="row form-group mb-3 mt-2" id="three"
+                                                            style="display: none;">
                                                             <div class="col-lg-12">
                                                                 <div class="title-box">
                                                                     <span class="title-label">If Three</span>
                                                                     <div class="row">
                                                                         <div class="col-md-11 mx-auto">
-                                                                            <label for="">Diseased Location 3:</label>
-                                                                            <select name="loc1_disease3" class="form-select mb-3" id="">
-                                                                                <option value="">Select Diseased Location 3</option>
-                                                                                <option value="Left Main">Left Main</option>
-                                                                                <option value="Proximal LAD">Proximal LAD</option>
+                                                                            <label for="">Diseased Location
+                                                                                3:</label>
+                                                                            <select name="loc1_disease3"
+                                                                                class="form-select mb-3" id="">
+                                                                                <option value="">Select Diseased
+                                                                                    Location 3</option>
+                                                                                <option value="Left Main">Left Main
+                                                                                </option>
+                                                                                <option value="Proximal LAD">Proximal LAD
+                                                                                </option>
                                                                                 <option value="Mid LAD">Mid LAD</option>
-                                                                                <option value="Distal LAD">Distal LAD</option>
-                                                                                <option value="Diagonal 1">Diagonal 1</option>
-                                                                                <option value="Diagonal 2">Diagonal 2</option>
-                                                                                <option value="Diagonal 3">Diagonal 3</option>
-                                                                                <option value="Circumflex">Circmflex</option>
-                                                                                <option value="Obtuse Marginal1">Obtuse Marginal1</option>
-                                                                                <option value="Obtuse Marginal2">Obtuse Marginal2</option>
-                                                                                <option value="Obtuse Marginal3">Obtuse Marginal3</option>
+                                                                                <option value="Distal LAD">Distal LAD
+                                                                                </option>
+                                                                                <option value="Diagonal 1">Diagonal 1
+                                                                                </option>
+                                                                                <option value="Diagonal 2">Diagonal 2
+                                                                                </option>
+                                                                                <option value="Diagonal 3">Diagonal 3
+                                                                                </option>
+                                                                                <option value="Circumflex">Circmflex
+                                                                                </option>
+                                                                                <option value="Obtuse Marginal1">Obtuse
+                                                                                    Marginal1</option>
+                                                                                <option value="Obtuse Marginal2">Obtuse
+                                                                                    Marginal2</option>
+                                                                                <option value="Obtuse Marginal3">Obtuse
+                                                                                    Marginal3</option>
                                                                                 <option value="Ramus">Ramus</option>
                                                                                 <option value="RCA">RCA</option>
-                                                                                <option value="Acute Marginal">Acute Marginal</option>
-                                                                                <option value="Posterior Descending">Posterior Descending</option>
-                                                                                <option value="Posterolateral">Posterolateral</option>
+                                                                                <option value="Acute Marginal">Acute
+                                                                                    Marginal</option>
+                                                                                <option value="Posterior Descending">
+                                                                                    Posterior Descending</option>
+                                                                                <option value="Posterolateral">
+                                                                                    Posterolateral</option>
                                                                             </select>
                                                                             <div class="row">
                                                                                 <div class="col-md-6 mb-3">
-                                                                                    <label for="">% Stenosis:</label>
-                                                                                    <input type="text" class="form-control" name="perstenosis3" id="">
+                                                                                    <label for="">%
+                                                                                        Stenosis:</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        name="perstenosis3"
+                                                                                        id="">
                                                                                 </div>
                                                                                 <div class="col-md-6 mb-3">
                                                                                     <label for="">FFR:</label>
-                                                                                    <input type="text" class="form-control" name="ffr3" id="">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        name="ffr3" id="">
                                                                                 </div>
                                                                                 <div class="col-md-6 mb-3">
                                                                                     <label for="">Graft:</label>
-                                                                                    <select name="graft3" class="form-select" id="">
-                                                                                        <option value="">Select Graft</option>
-                                                                                        <option value="Patent">Patent</option>
-                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
-                                                                                        <option value="100% occlusion">100% occlusion</option>
-                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    <select name="graft3"
+                                                                                        class="form-select"
+                                                                                        id="">
+                                                                                        <option value="">Select
+                                                                                            Graft</option>
+                                                                                        <option value="Patent">Patent
+                                                                                        </option>
+                                                                                        <option value="Stenosis > = 50%">
+                                                                                            Stenosis > = 50%</option>
+                                                                                        <option value="100% occlusion">
+                                                                                            100% occlusion</option>
+                                                                                        <option value="Not documented">Not
+                                                                                            Documented</option>
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="col-md-6 mb-3">
                                                                                     <label for="">Stent:</label>
-                                                                                    <select name="stent3" class="form-select" id="">
-                                                                                        <option value="">Select Stent</option>
-                                                                                        <option value="Patent">Patent</option>
-                                                                                        <option value="Stenosis > = 50%">Stenosis > = 50%</option>
-                                                                                        <option value="Not documented">Not Documented</option>
+                                                                                    <select name="stent3"
+                                                                                        class="form-select"
+                                                                                        id="">
+                                                                                        <option value="">Select
+                                                                                            Stent</option>
+                                                                                        <option value="Patent">Patent
+                                                                                        </option>
+                                                                                        <option value="Stenosis > = 50%">
+                                                                                            Stenosis > = 50%</option>
+                                                                                        <option value="Not documented">Not
+                                                                                            Documented</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -2689,7 +2820,8 @@
                                                 <div class="row">
                                                     <div class="col-md-11 mx-auto">
                                                         <label for="">Syntax Score</label>
-                                                        <input type="text" class="form-control" name="syntx_scoreval" id="">
+                                                        <input type="text" class="form-control"
+                                                            name="syntx_scoreval" id="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -2709,14 +2841,13 @@
                                             </div>
                                             <div>
                                                 <label class="me-2">
-                                                    <input type="radio" name="stresstest" value="0"
-                                                        checked />
+                                                    <input type="radio" name="stresstest" value="0" checked />
                                                     <span>No</span>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row form-group mb-3 mt-2" id="cardiac_catheter-yes">
+                                    <div class="row form-group mb-3 mt-2" id="stresstest-yes">
                                         <div class="col-lg-12">
                                             <div class="title-box">
                                                 <span class="title-label">If Yes</span>
@@ -2725,7 +2856,8 @@
                                                         <div class="row">
                                                             <div class="col-md-6 mb-3">
                                                                 <label for="">Result</label>
-                                                                <select name="stress_result" class="form-select" id="">
+                                                                <select name="stress_result" class="form-select"
+                                                                    id="">
                                                                     <option value="">Select Result</option>
                                                                     <option value="Normal">Normal</option>
                                                                     <option value="Abnormal">Abnormal</option>
@@ -2734,13 +2866,835 @@
                                                             </div>
                                                             <div class="col-md-6 mb-3">
                                                                 <label for="">Risk/Extent of ischemia</label>
-                                                                <select name="risk_ischemia" class="form-select" id="">
-                                                                    <option value="">Select Risk/Extent of ischemia</option>
+                                                                <select name="risk_ischemia" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Risk/Extent of ischemia
+                                                                    </option>
                                                                     <option value="Low Risk">Low Risk</option>
-                                                                    <option value="Intermediate Risk">Intermediate Risk</option>
+                                                                    <option value="Intermediate Risk">Intermediate Risk
+                                                                    </option>
                                                                     <option value="High Risk">High Risk</option>
                                                                     <option value="Unavailable">Unavailable</option>
                                                                 </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 mt-2">
+                                        <div class="col-lg-6">
+                                            <label for="">Ejection Fraction Done:</label>
+                                        </div>
+                                        <div class="col-lg-6 d-md-flex">
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="eject_fraction" value="1"
+                                                        id="ejectfractionyes" />
+                                                    <span>Yes</span>
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="eject_fraction" value="0"
+                                                        checked />
+                                                    <span>No</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3 mt-2" id="ejectfraction-yes">
+                                        <div class="col-lg-12">
+                                            <div class="title-box">
+                                                <span class="title-label">If Yes</span>
+                                                <div class="row">
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row">
+                                                            <div class="col-md-12 mb-3">
+                                                                <label for="">Ejection Fraction % :</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="ejectpercent" id="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 mt-2">
+                                        <div class="col-lg-6">
+                                            <label for="">Dimensions Available :</label>
+                                        </div>
+                                        <div class="col-lg-6 d-md-flex">
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="dimension_avail" value="1"
+                                                        id="dimensionavailyes" />
+                                                    <span>Yes</span>
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="dimension_avail" value="0"
+                                                        checked />
+                                                    <span>No</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3 mt-2" id="dimensionavail-yes">
+                                        <div class="col-lg-12">
+                                            <div class="title-box">
+                                                <span class="title-label">If Yes</span>
+                                                <div class="row">
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">LV End-Systolic Dimension mm
+                                                                    :</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="lvsystolic" id="">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">LV End-Diastolic Dimension mm
+                                                                    :</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="lvdiastolic" id="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 mt-2">
+                                        <div class="col-lg-6">
+                                            <label for="">PA Systolic Pressure Measured:</label>
+                                        </div>
+                                        <div class="col-lg-6 d-md-flex">
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="systolic_press" value="1"
+                                                        id="systolicpressyes" />
+                                                    <span>Yes</span>
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="systolic_press" value="0"
+                                                        checked />
+                                                    <span>No</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3 mt-2" id="systolicpress-yes">
+                                        <div class="col-lg-12">
+                                            <div class="title-box">
+                                                <span class="title-label">If Yes</span>
+                                                <div class="row">
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row">
+                                                            <div class="col-md-12 mb-3">
+                                                                <label for="">PA Systolic Pressure mmHg :</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="systolicmm" id="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mn-3 mt-2">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="">Aortic Valve Insufficiency :</label>
+
+                                            <select name="aortic_insuficient" class="form-select" id="">
+                                                <option value="">Select Aortic Valve Insufficiency</option>
+                                                <option value="None">None</option>
+                                                <option value="Trivial">Trivial/Trace</option>
+                                                <option value="Mild">Mild</option>
+                                                <option value="Moderate">Moderate</option>
+                                                <option value="Severe">Severe</option>
+                                                <option value="Not Documented">Not Documented</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label for="">Aortic Valve Disease :</label>
+                                                </div>
+                                                <div class="col-lg-6 d-md-flex">
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="aortvaldisease" value="1"
+                                                                id="aortvaldiseaseyes" />
+                                                            <span>Yes</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label class="me-2">
+                                                            <input type="radio" name="aortvaldisease" value="0"
+                                                                checked />
+                                                            <span>No</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3 mt-2" id="systolicpress-yes">
+                                        <div class="col-lg-12">
+                                            <div class="title-box">
+                                                <span class="title-label">If Yes</span>
+                                                <div class="row">
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row">
+                                                            <div class="col-md-12 mb-3">
+                                                                <div class="row mb-3 mt-2">
+                                                                    <div class="col-lg-6">
+                                                                        <label for="">Aortic Stenosis:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6 d-md-flex">
+                                                                        <div>
+                                                                            <label class="me-2">
+                                                                                <input type="radio"
+                                                                                    name="aortic_stenosis"
+                                                                                    value="1"
+                                                                                    id="aorticstenosisyes" />
+                                                                                <span>Yes</span>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <label class="me-2">
+                                                                                <input type="radio"
+                                                                                    name="aortic_stenosis"
+                                                                                    value="0" checked />
+                                                                                <span>No</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group mb-3" id="systolicpress-yes">
+                                                            <div class="col-lg-12">
+                                                                <div class="title-box">
+                                                                    <span class="title-label">If Yes</span>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 mb-3">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6">
+                                                                                    <label for="">Hemodynamic/Echo
+                                                                                        data available:</label>
+                                                                                </div>
+                                                                                <div class="col-lg-6 d-md-flex">
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio"
+                                                                                                name="hemoecho"
+                                                                                                value="1"
+                                                                                                id="hemoechoyes" />
+                                                                                            <span>Yes</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <label class="me-2">
+                                                                                            <input type="radio"
+                                                                                                name="hemoecho"
+                                                                                                value="0" checked />
+                                                                                            <span>No</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row form-group mb-3 mt-2"
+                                                                        id="systolicpress-yes">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="title-box">
+                                                                                <span class="title-label">If Yes</span>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-6 mb-3">
+                                                                                        <label for="">Smallest
+                                                                                            Aortic Valve Area cm2</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            name="small_aortic"
+                                                                                            id="">
+                                                                                    </div>
+                                                                                    <div class="col-md-6 mb-3">
+                                                                                        <label for="">Highest Mean
+                                                                                            Gradient mmHg</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            name="high_mean"
+                                                                                            id="">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row form-group mb-3">
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Aortic Valve Etiology 1:</label>
+                                                                <select name="etiology1" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Aortic Valve Etiology 1
+                                                                    </option>
+                                                                    <option value="Unknown">Unknown</option>
+                                                                    <option value="Bicuspid valve disease">Bicuspid valve
+                                                                        disease</option>
+                                                                    <option value="Congential (other than bicuspid)">
+                                                                        Congential (other than bicuspid)</option>
+                                                                    <option value="Degenerative- Calcified">Degenerative-
+                                                                        Calcified</option>
+                                                                    <option
+                                                                        value="Degenerative- Leaflet prolapse with or without annular dilation">
+                                                                        Degenerative- Leaflet prolapse with or without
+                                                                        annular dilation</option>
+                                                                    <option
+                                                                        value="Degenerative- Pure annular dilation without leaflet prolapse">
+                                                                        Degenerative- Pure annular dilation without leaflet
+                                                                        prolapse</option>
+                                                                    <option value="Endocarditis with root abscess">
+                                                                        Endocarditis with root abscess</option>
+                                                                    <option value="Endocarditis without root abscess">
+                                                                        Endocarditis without root abscess</option>
+                                                                    <option value="LV Outflow Tract Pathology, HOCM">LV
+                                                                        Outflow Tract Pathology</option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic membrance">
+                                                                        LV Outflow Tract Pathology, Sub-aortic membrance
+                                                                    </option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic Tunnel">
+                                                                        LV Outflow Tract Pathology, Sub-aortic Tunnel
+                                                                    </option>
+                                                                    <option value="LV Outflow Tract Pathology, Other">LV
+                                                                        Outflow Tract Pathology, Other</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Aortic Dissection">
+                                                                        Primary Aortic Disease, Aortic Dissection</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Atherosclerotic Aneurysm">
+                                                                        Primary Aortic Disease, Atherosclerotic Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Ehler-Danlos Syndrome">
+                                                                        Primary Aortic Disease, Ehler-Danlos Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Hypertensive Aneurysm">
+                                                                        Primary Aortic Disease, Hypertensive Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Idiopathic Root Dilation">
+                                                                        Primary Aortic Disease, Idiopathic Root Dilation
+                                                                    </option>
+                                                                    <option value="Primary Aortic Disease, Inflammatory">
+                                                                        Primary Aortic Disease, Inflammatory</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Loeys-Dietz Syndrome">
+                                                                        Primary Aortic Disease, Loeys-Dietz Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Marfan Syndrome">
+                                                                        Primary Aortic Disease, Marfan Syndrome</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Other Connective Tissue Disorder">
+                                                                        Primary Aortic Disease, Other Connective Tissue
+                                                                        Disorder</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Etiology Unknown">
+                                                                        Primary Aortic Disease, Etiology Unknown</option>
+                                                                    <option value="Rheumatic">Rheumatic</option>
+                                                                    <option value="Supravalvular Aortic stenosis">
+                                                                        Supravalvular Aortic stenosis</option>
+                                                                    <option value="Trauma">Trauma</option>
+                                                                    <option value="Tumor, Carcinoid">Tumor, Carcinoid
+                                                                    </option>
+                                                                    <option value="Tumor, Myxoma">Tumor, Myxoma</option>
+                                                                    <option value="Tumor, Papillary Fibroelastoma">Tumor,
+                                                                        Papillary Fibroelastoma</option>
+                                                                    <option value="Tumor, Other">Tumor, Other</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Aortic Valve Etiology 2:</label>
+                                                                <select name="etiology2" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Aortic Valve Etiology 2
+                                                                    </option>
+                                                                    <option value="No additional etiology">No additional
+                                                                        etiology</option>
+                                                                    <option value="Bicuspid valve disease">Bicuspid valve
+                                                                        disease</option>
+                                                                    <option value="Congential (other than bicuspid)">
+                                                                        Congential (other than bicuspid)</option>
+                                                                    <option value="Degenerative- Calcified">Degenerative-
+                                                                        Calcified</option>
+                                                                    <option
+                                                                        value="Degenerative- Leaflet prolapse with or without annular dilation">
+                                                                        Degenerative- Leaflet prolapse with or without
+                                                                        annular dilation</option>
+                                                                    <option
+                                                                        value="Degenerative- Pure annular dilation without leaflet prolapse">
+                                                                        Degenerative- Pure annular dilation without leaflet
+                                                                        prolapse</option>
+                                                                    <option value="Endocarditis with root abscess">
+                                                                        Endocarditis with root abscess</option>
+                                                                    <option value="Endocarditis without root abscess">
+                                                                        Endocarditis without root abscess</option>
+                                                                    <option value="LV Outflow Tract Pathology, HOCM">LV
+                                                                        Outflow Tract Pathology</option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic membrance">
+                                                                        LV Outflow Tract Pathology, Sub-aortic membrance
+                                                                    </option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic Tunnel">
+                                                                        LV Outflow Tract Pathology, Sub-aortic Tunnel
+                                                                    </option>
+                                                                    <option value="LV Outflow Tract Pathology, Other">LV
+                                                                        Outflow Tract Pathology, Other</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Aortic Dissection">
+                                                                        Primary Aortic Disease, Aortic Dissection</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Atherosclerotic Aneurysm">
+                                                                        Primary Aortic Disease, Atherosclerotic Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Ehler-Danlos Syndrome">
+                                                                        Primary Aortic Disease, Ehler-Danlos Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Hypertensive Aneurysm">
+                                                                        Primary Aortic Disease, Hypertensive Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Idiopathic Root Dilation">
+                                                                        Primary Aortic Disease, Idiopathic Root Dilation
+                                                                    </option>
+                                                                    <option value="Primary Aortic Disease, Inflammatory">
+                                                                        Primary Aortic Disease, Inflammatory</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Loeys-Dietz Syndrome">
+                                                                        Primary Aortic Disease, Loeys-Dietz Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Marfan Syndrome">
+                                                                        Primary Aortic Disease, Marfan Syndrome</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Other Connective Tissue Disorder">
+                                                                        Primary Aortic Disease, Other Connective Tissue
+                                                                        Disorder</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Etiology Unknown">
+                                                                        Primary Aortic Disease, Etiology Unknown</option>
+                                                                    <option value="Rheumatic">Rheumatic</option>
+                                                                    <option value="Supravalvular Aortic stenosis">
+                                                                        Supravalvular Aortic stenosis</option>
+                                                                    <option value="Trauma">Trauma</option>
+                                                                    <option value="Tumor, Carcinoid">Tumor, Carcinoid
+                                                                    </option>
+                                                                    <option value="Tumor, Myxoma">Tumor, Myxoma</option>
+                                                                    <option value="Tumor, Papillary Fibroelastoma">Tumor,
+                                                                        Papillary Fibroelastoma</option>
+                                                                    <option value="Tumor, Other">Tumor, Other</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Aortic Valve Etiology 3:</label>
+                                                                <select name="etiology3" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Aortic Valve Etiology 3
+                                                                    </option>
+                                                                    <option value="No additional etiology">No additional
+                                                                        etiology</option>
+                                                                    <option value="Bicuspid valve disease">Bicuspid valve
+                                                                        disease</option>
+                                                                    <option value="Congential (other than bicuspid)">
+                                                                        Congential (other than bicuspid)</option>
+                                                                    <option value="Degenerative- Calcified">Degenerative-
+                                                                        Calcified</option>
+                                                                    <option
+                                                                        value="Degenerative- Leaflet prolapse with or without annular dilation">
+                                                                        Degenerative- Leaflet prolapse with or without
+                                                                        annular dilation</option>
+                                                                    <option
+                                                                        value="Degenerative- Pure annular dilation without leaflet prolapse">
+                                                                        Degenerative- Pure annular dilation without leaflet
+                                                                        prolapse</option>
+                                                                    <option value="Endocarditis with root abscess">
+                                                                        Endocarditis with root abscess</option>
+                                                                    <option value="Endocarditis without root abscess">
+                                                                        Endocarditis without root abscess</option>
+                                                                    <option value="LV Outflow Tract Pathology, HOCM">LV
+                                                                        Outflow Tract Pathology</option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic membrance">
+                                                                        LV Outflow Tract Pathology, Sub-aortic membrance
+                                                                    </option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic Tunnel">
+                                                                        LV Outflow Tract Pathology, Sub-aortic Tunnel
+                                                                    </option>
+                                                                    <option value="LV Outflow Tract Pathology, Other">LV
+                                                                        Outflow Tract Pathology, Other</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Aortic Dissection">
+                                                                        Primary Aortic Disease, Aortic Dissection</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Atherosclerotic Aneurysm">
+                                                                        Primary Aortic Disease, Atherosclerotic Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Ehler-Danlos Syndrome">
+                                                                        Primary Aortic Disease, Ehler-Danlos Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Hypertensive Aneurysm">
+                                                                        Primary Aortic Disease, Hypertensive Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Idiopathic Root Dilation">
+                                                                        Primary Aortic Disease, Idiopathic Root Dilation
+                                                                    </option>
+                                                                    <option value="Primary Aortic Disease, Inflammatory">
+                                                                        Primary Aortic Disease, Inflammatory</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Loeys-Dietz Syndrome">
+                                                                        Primary Aortic Disease, Loeys-Dietz Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Marfan Syndrome">
+                                                                        Primary Aortic Disease, Marfan Syndrome</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Other Connective Tissue Disorder">
+                                                                        Primary Aortic Disease, Other Connective Tissue
+                                                                        Disorder</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Etiology Unknown">
+                                                                        Primary Aortic Disease, Etiology Unknown</option>
+                                                                    <option value="Rheumatic">Rheumatic</option>
+                                                                    <option value="Supravalvular Aortic stenosis">
+                                                                        Supravalvular Aortic stenosis</option>
+                                                                    <option value="Trauma">Trauma</option>
+                                                                    <option value="Tumor, Carcinoid">Tumor, Carcinoid
+                                                                    </option>
+                                                                    <option value="Tumor, Myxoma">Tumor, Myxoma</option>
+                                                                    <option value="Tumor, Papillary Fibroelastoma">Tumor,
+                                                                        Papillary Fibroelastoma</option>
+                                                                    <option value="Tumor, Other">Tumor, Other</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Aortic Valve Etiology 4:</label>
+                                                                <select name="etiology4" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Aortic Valve Etiology 4
+                                                                    </option>
+                                                                    <option value="No additional etiology">No additional
+                                                                        etiology</option>
+                                                                    <option value="Bicuspid valve disease">Bicuspid valve
+                                                                        disease</option>
+                                                                    <option value="Congential (other than bicuspid)">
+                                                                        Congential (other than bicuspid)</option>
+                                                                    <option value="Degenerative- Calcified">Degenerative-
+                                                                        Calcified</option>
+                                                                    <option
+                                                                        value="Degenerative- Leaflet prolapse with or without annular dilation">
+                                                                        Degenerative- Leaflet prolapse with or without
+                                                                        annular dilation</option>
+                                                                    <option
+                                                                        value="Degenerative- Pure annular dilation without leaflet prolapse">
+                                                                        Degenerative- Pure annular dilation without leaflet
+                                                                        prolapse</option>
+                                                                    <option value="Endocarditis with root abscess">
+                                                                        Endocarditis with root abscess</option>
+                                                                    <option value="Endocarditis without root abscess">
+                                                                        Endocarditis without root abscess</option>
+                                                                    <option value="LV Outflow Tract Pathology, HOCM">LV
+                                                                        Outflow Tract Pathology</option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic membrance">
+                                                                        LV Outflow Tract Pathology, Sub-aortic membrance
+                                                                    </option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic Tunnel">
+                                                                        LV Outflow Tract Pathology, Sub-aortic Tunnel
+                                                                    </option>
+                                                                    <option value="LV Outflow Tract Pathology, Other">LV
+                                                                        Outflow Tract Pathology, Other</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Aortic Dissection">
+                                                                        Primary Aortic Disease, Aortic Dissection</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Atherosclerotic Aneurysm">
+                                                                        Primary Aortic Disease, Atherosclerotic Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Ehler-Danlos Syndrome">
+                                                                        Primary Aortic Disease, Ehler-Danlos Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Hypertensive Aneurysm">
+                                                                        Primary Aortic Disease, Hypertensive Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Idiopathic Root Dilation">
+                                                                        Primary Aortic Disease, Idiopathic Root Dilation
+                                                                    </option>
+                                                                    <option value="Primary Aortic Disease, Inflammatory">
+                                                                        Primary Aortic Disease, Inflammatory</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Loeys-Dietz Syndrome">
+                                                                        Primary Aortic Disease, Loeys-Dietz Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Marfan Syndrome">
+                                                                        Primary Aortic Disease, Marfan Syndrome</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Other Connective Tissue Disorder">
+                                                                        Primary Aortic Disease, Other Connective Tissue
+                                                                        Disorder</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Etiology Unknown">
+                                                                        Primary Aortic Disease, Etiology Unknown</option>
+                                                                    <option value="Rheumatic">Rheumatic</option>
+                                                                    <option value="Supravalvular Aortic stenosis">
+                                                                        Supravalvular Aortic stenosis</option>
+                                                                    <option value="Trauma">Trauma</option>
+                                                                    <option value="Tumor, Carcinoid">Tumor, Carcinoid
+                                                                    </option>
+                                                                    <option value="Tumor, Myxoma">Tumor, Myxoma</option>
+                                                                    <option value="Tumor, Papillary Fibroelastoma">Tumor,
+                                                                        Papillary Fibroelastoma</option>
+                                                                    <option value="Tumor, Other">Tumor, Other</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-12 mb-3">
+                                                                <label for="">Aortic Valve Etiology 5:</label>
+                                                                <select name="etiology5" class="form-select"
+                                                                    id="">
+                                                                    <option value="">Select Aortic Valve Etiology 5
+                                                                    </option>
+                                                                    <option value="No additional etiology">No additional
+                                                                        etiology</option>
+                                                                    <option value="Bicuspid valve disease">Bicuspid valve
+                                                                        disease</option>
+                                                                    <option value="Congential (other than bicuspid)">
+                                                                        Congential (other than bicuspid)</option>
+                                                                    <option value="Degenerative- Calcified">Degenerative-
+                                                                        Calcified</option>
+                                                                    <option
+                                                                        value="Degenerative- Leaflet prolapse with or without annular dilation">
+                                                                        Degenerative- Leaflet prolapse with or without
+                                                                        annular dilation</option>
+                                                                    <option
+                                                                        value="Degenerative- Pure annular dilation without leaflet prolapse">
+                                                                        Degenerative- Pure annular dilation without leaflet
+                                                                        prolapse</option>
+                                                                    <option value="Endocarditis with root abscess">
+                                                                        Endocarditis with root abscess</option>
+                                                                    <option value="Endocarditis without root abscess">
+                                                                        Endocarditis without root abscess</option>
+                                                                    <option value="LV Outflow Tract Pathology, HOCM">LV
+                                                                        Outflow Tract Pathology</option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic membrance">
+                                                                        LV Outflow Tract Pathology, Sub-aortic membrance
+                                                                    </option>
+                                                                    <option
+                                                                        value="LV Outflow Tract Pathology, Sub-aortic Tunnel">
+                                                                        LV Outflow Tract Pathology, Sub-aortic Tunnel
+                                                                    </option>
+                                                                    <option value="LV Outflow Tract Pathology, Other">LV
+                                                                        Outflow Tract Pathology, Other</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Aortic Dissection">
+                                                                        Primary Aortic Disease, Aortic Dissection</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Atherosclerotic Aneurysm">
+                                                                        Primary Aortic Disease, Atherosclerotic Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Ehler-Danlos Syndrome">
+                                                                        Primary Aortic Disease, Ehler-Danlos Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Hypertensive Aneurysm">
+                                                                        Primary Aortic Disease, Hypertensive Aneurysm
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Idiopathic Root Dilation">
+                                                                        Primary Aortic Disease, Idiopathic Root Dilation
+                                                                    </option>
+                                                                    <option value="Primary Aortic Disease, Inflammatory">
+                                                                        Primary Aortic Disease, Inflammatory</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Loeys-Dietz Syndrome">
+                                                                        Primary Aortic Disease, Loeys-Dietz Syndrome
+                                                                    </option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Marfan Syndrome">
+                                                                        Primary Aortic Disease, Marfan Syndrome</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Other Connective Tissue Disorder">
+                                                                        Primary Aortic Disease, Other Connective Tissue
+                                                                        Disorder</option>
+                                                                    <option
+                                                                        value="Primary Aortic Disease, Etiology Unknown">
+                                                                        Primary Aortic Disease, Etiology Unknown</option>
+                                                                    <option value="Rheumatic">Rheumatic</option>
+                                                                    <option value="Supravalvular Aortic stenosis">
+                                                                        Supravalvular Aortic stenosis</option>
+                                                                    <option value="Trauma">Trauma</option>
+                                                                    <option value="Tumor, Carcinoid">Tumor, Carcinoid
+                                                                    </option>
+                                                                    <option value="Tumor, Myxoma">Tumor, Myxoma</option>
+                                                                    <option value="Tumor, Papillary Fibroelastoma">Tumor,
+                                                                        Papillary Fibroelastoma</option>
+                                                                    <option value="Tumor, Other">Tumor, Other</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3">
+                                        <div class="col-md-12 mb-2">
+                                            <label for="">Mitral Insufficiency</label>
+                                            <select name="mitral_insuff" class="form-select" id="">
+                                                <option value="">Select Mitral Insufficiency</option>
+                                                <option value="None">None</option>
+                                                <option value="Trivial/Trace">Trivial/Trace</option>
+                                                <option value="Mild">Mild</option>
+                                                <option value="Moderate">Moderate</option>
+                                                <option value="Severe">Severe</option>
+                                                <option value="Not Documented">Not Documented</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3">
+                                        <div class="col-lg-6">
+                                            <label for="">Mitral Valve Disease :</label>
+                                        </div>
+                                        <div class="col-lg-6 d-md-flex">
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="mirtal_valve" value="1"
+                                                        id="mirtalvalveyes" />
+                                                    <span>Yes</span>
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label class="me-2">
+                                                    <input type="radio" name="mirtal_valve" value="0"
+                                                        checked />
+                                                    <span>No</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-3 mt-2" id="systolicpress-yes">
+                                        <div class="col-lg-12">
+                                            <div class="title-box">
+                                                <span class="title-label">If Yes</span>
+                                                <div class="row">
+                                                    <div class="col-md-11 mx-auto">
+                                                        <div class="row form-group mb-3">
+                                                            <div class="col-lg-6">
+                                                                <label for="">Mitral stenosis :</label>
+                                                            </div>
+                                                            <div class="col-lg-6 d-md-flex">
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="mitral_stenosis"
+                                                                            value="1" id="mitralstenosisyes" />
+                                                                        <span>Yes</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div>
+                                                                    <label class="me-2">
+                                                                        <input type="radio" name="mitral_stenosis"
+                                                                            value="0" checked />
+                                                                        <span>No</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group mb-3 mt-2" id="systolicpress-yes">
+                                                            <div class="col-lg-12">
+                                                                <div class="title-box">
+                                                                    <span class="title-label">If Yes</span>
+                                                                    <div class="row form-group mb-3">
+                                                                        <div class="col-lg-6">
+                                                                            <label for="">Hemodynamic/ Echo data
+                                                                                available :</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6 d-md-flex">
+                                                                            <div>
+                                                                                <label class="me-2">
+                                                                                    <input type="radio"
+                                                                                        name="hemodata" value="1"
+                                                                                        id="hemodatayes" />
+                                                                                    <span>Yes</span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div>
+                                                                                <label class="me-2">
+                                                                                    <input type="radio"
+                                                                                        name="hemodata" value="0"
+                                                                                        checked />
+                                                                                    <span>No</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row form-group mb-3 mt-2"
+                                                                        id="systolicpress-yes">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="title-box">
+                                                                                <span class="title-label">If Yes</span>
+                                                                                <div class="row form-group">
+                                                                                    <div class="col-md-6 mb-3">
+                                                                                        <label for="">Small Valve
+                                                                                            Area cm2 :</label>
+                                                                                        <input type="text"
+                                                                                            name="smallvalve2"
+                                                                                            class="form-control"
+                                                                                            id="">
+                                                                                    </div>
+                                                                                    <div class="col-md-6 mb-3">
+                                                                                        <label for="">Highest Mean
+                                                                                            Gradient mmHg :</label>
+                                                                                        <input type="text"
+                                                                                            name="highmean2"
+                                                                                            class="form-control"
+                                                                                            id="">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
